@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="BIG5"?>
+<!-- 法金e-Loan授信明細查詢 上行電文 -->
+<INPUT>
+  <AP_HEADER>
+    <ABEND></ABEND>
+    <FROM_HOST>BELOANE</FROM_HOST>
+    <FROM_SERVICE></FROM_SERVICE>
+    <FROM_DTAQ></FROM_DTAQ>
+    <TO_HOST>900</TO_HOST>
+    <TO_SERVICE></TO_SERVICE>
+    <TO_DTAQ>CGCTL</TO_DTAQ>
+    <MSG_ID>BLN201107261800000101017</MSG_ID>
+    <DATE>20110726</DATE>
+    <TIME>18000001</TIME>
+    <TXCD>EL15</TXCD>
+    <SUBCODE>00</SUBCODE>
+    <PRIORITY>3</PRIORITY>
+    <END_CODE>Y</END_CODE>
+  </AP_HEADER>
+  <!-- AP_DATA上中心後會轉換為固定位置字串，自151位開始 -->
+  <AP_DATA>
+    <!-- 統一編號 -->
+    <ECFI1 type="char" length="11" from="151" to="161">12345678901</ECFI1>
+  </AP_DATA>
+</INPUT>

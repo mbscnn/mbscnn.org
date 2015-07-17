@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SectionInfo version="2.1">
+  <RespMsg Code="0">查詢成功</RespMsg>
+  <Result>
+    <City ID="376570000A" Name="基隆市"/>
+    <City ID="379160000A" Name="臺北市"/>
+    <City ID="376410000A" Name="臺北縣"/>
+    <City ID="376430000A" Name="桃園縣"/>
+    <City ID="376580000A" Name="新竹市"/>
+    <City ID="376440000A" Name="新竹縣"/>
+    <City ID="376450000A" Name="苗栗縣"/>
+    <City ID="376590000A" Name="臺中市"/>
+    <City ID="376460000A" Name="臺中縣"/>
+    <City ID="376470000A" Name="彰化縣"/>
+    <City ID="376480000A" Name="南投縣"/>
+    <City ID="376490000A" Name="雲林縣"/>
+    <City ID="376600000A" Name="嘉義市"/>
+    <City ID="376500000A" Name="嘉義縣"/>
+    <City ID="376610000A" Name="臺南市"/>
+    <City ID="376510000A" Name="臺南縣"/>
+    <City ID="383160000A" Name="高雄市"/>
+    <City ID="376520000A" Name="高雄縣"/>
+    <City ID="376530000A" Name="屏東縣"/>
+    <City ID="376420000A" Name="宜蘭縣"/>
+    <City ID="376550000A" Name="花蓮縣"/>
+    <City ID="376540000A" Name="臺東縣"/>
+    <City ID="376560000A" Name="澎湖縣"/>
+    <City ID="371010000A" Name="金門縣"/>
+    <City ID="371030000A" Name="連江縣"/>
+  </Result>
+</SectionInfo>

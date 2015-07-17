@@ -1,0 +1,1325 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+DBUtility
+</name>
+</assembly>
+<members>
+<member name="M:com.Azion.NET.VB.FileUtil.getPathFilebyExet(System.String,System.String[],System.Boolean)">
+	<summary>
+ 取得目錄下副檔名為特定格式的檔案
+ </summary>
+	<param name="sDirPath">起始目錄</param>
+	<param name="sFileExtension">要尋找的副檔名</param>
+	<param name="bRecursive">是否要尋找子目錄(預設值為不尋找子目錄)</param>
+	<returns>List(Of FileInfo)</returns>
+	<remarks></remarks>
+	<permission></permission>
+</member><member name="M:com.Azion.NET.VB.FileUtil.getPathFilebyNaming(System.String,System.String,System.Boolean)">
+	<summary>
+ 取得目錄下相似的檔名檔案
+ </summary>
+	<param name="sDirPath">起始目錄</param>
+	<param name="sNaming">要尋找的副檔名</param>
+	<param name="bRecursive">是否要尋找子目錄(預設值為不尋找子目錄)</param>
+	<returns>List(Of FileInfo)</returns>
+	<remarks></remarks>
+	<permission></permission>
+</member><member name="M:com.Azion.NET.VB.TinyDb.DbTable.InsertUpdate(System.String,com.Azion.NET.VB.TinyDb.CmdParameter[],System.Boolean)">
+	<summary>
+ 若已有記錄，則更新記錄。否則新增記錄。
+ </summary>
+	<param name="tableName"></param>
+	<param name="parameters"></param>
+	<param name="deferredExecute">延後處理，可一次處理多個SQL語法，
+ 要排入佇列時，將deferredExecute設為TRUE
+ 要執行所有的SQL時，將deferredExecute設為FALSE
+ </param>
+	<returns>受影響的資料列數目。</returns>
+	<remarks>會以PK來判斷是否是新記錄還是舊記錄</remarks>
+	<SAMPLE>
+	</SAMPLE>
+</member><member name="M:com.Azion.NET.VB.TinyDb.DbTable.Insert(System.String,com.Azion.NET.VB.TinyDb.CmdParameter[],System.Boolean)">
+	<summary>
+ 新增記錄
+ </summary>
+	<param name="tableName"></param>
+	<param name="parameters"></param>
+	<param name="deferredExecute">延後處理，可一次處理多個SQL語法，
+ 要排入佇列時，將deferredExecute設為TRUE
+ 要執行所有的SQL時，將deferredExecute設為FALSE
+ </param>
+	<returns>受影響的資料列數目</returns>
+	<remarks></remarks>
+</member><member name="M:com.Azion.NET.VB.TinyDb.DbTable.Update(System.String,com.Azion.NET.VB.TinyDb.CmdParameter[],System.Boolean)">
+	<summary>
+ 更新記錄。
+ </summary>
+	<param name="tableName"></param>
+	<param name="parameters"></param>
+	<param name="deferredExecute">延後處理，可一次處理多個SQL語法，
+ 要排入佇列時，將deferredExecute設為TRUE
+ 要執行所有的SQL時，將deferredExecute設為FALSE
+ </param>
+	<returns>受影響的資料列數目。</returns>
+	<remarks></remarks>
+	<SAMPLE>
+	</SAMPLE>
+</member><member name="M:com.Azion.NET.VB.TinyDb.CmdParameter.#ctor(System.String,System.Object,System.Boolean)">
+	<summary>
+ 使用指定的parameterName和parameterValue，初始化 CmdParameter 類別的新執行個體。
+ </summary>
+	<param name="name"></param>
+	<param name="value"></param>
+	<param name="isPK">
+ 可不填,isPK是InsertUpdate()及Update()時使用在判斷哪些筆記錄需更新。
+ 若設為TRUE，InsertUpdate()及Update()內組SQL語法時會將isPK=TRUE的參數加入至 [WHERE] 條件後。
+ 例如，將STAFFID="S123456"記錄的USERNAME設為"S234567"
+ dbTable.Update("USERINFO", New CmdParameter(){ New CmdParameter("STAFFID","S123456", True),
+                                                New CmdParameter("USERNAME","S234567")   });
+ Update()會重組SQL語法為
+ Update USERINFO SET USERNAME="S234567" Where STAFFID="S123456"; 
+ 
+ STAFFID是Where後的條件之一，因此要將isPK設為1
+ </param>
+	<remarks></remarks>
+</member><member name="T:com.Azion.NET.VB.TinyDb.CmdParameter">
+	<summary>
+	</summary>
+	<remarks></remarks>
+</member><member name="M:com.Azion.NET.VB.TinyDb.DbTable.ExecuteReader(System.String,com.Azion.NET.VB.TinyDb.CmdParameter[],System.Data.CommandType)">
+	<summary>
+ 執行查詢，並傳回DataReader
+ </summary>
+	<param name="strSQL"></param>
+	<param name="parameters"></param>
+	<param name="commandType"></param>
+	<returns>傳回IDataReader，需自行釋放傳回的IDataReader物件 (IDataReader.Dispose())</returns>
+	<remarks></remarks>
+</member><member name="M:com.Azion.NET.VB.TinyDb.DbTable.GetDataTable(System.String,com.Azion.NET.VB.TinyDb.CmdParameter[])">
+	<summary>
+ 將查詢的資訊寫入至DataTable內，由DataReader轉入至DataTable
+ </summary>
+	<param name="strSQL"></param>
+	<param name="parameters"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:com.Azion.NET.VB.TinyDb.DbTable.ExecuteScalar(System.String,com.Azion.NET.VB.TinyDb.CmdParameter[],System.Data.CommandType)">
+	<summary>
+ 執行查詢，並傳回查詢所傳回的結果集第一個資料列的第一個資料行。會忽略其他的資料行或資料列。
+ </summary>
+	<param name="strSQL"></param>
+	<param name="parameters"></param>
+	<param name="commandType"></param>
+	<returns>結果集中第一個資料列的第一個資料行；如果結果集是空的，則為 null 參考 (在 Visual Basic 中為 Nothing)。最多傳回 2033 個字元。</returns>
+	<remarks></remarks>
+	<sample>
+ '是否是管理單位
+ '如果是管理單位，則可以設定所有人的密碼
+ Dim dbTable As New DbTable(dbManager.getConnection)
+ Dim objInt As Integer
+ objInt = dbTable.ExecuteScalar( _
+      "SELECT Count(*) from ROLEGROUP_GRANT_BRID where BRID = @BRID@", _
+      New CmdParameter() {New CmdParameter("BRID", Session("BRID"))})
+ 
+ If (objInt = 0) Then
+      '不是管理單位
+ Else
+      '是管理單位
+ End If        ''' 
+ </sample>
+</member><member name="M:com.Azion.NET.VB.TinyDb.DbTable.ExecuteNonQuery(System.String,com.Azion.NET.VB.TinyDb.CmdParameter[],System.Data.CommandType,System.Boolean)">
+	<summary>
+ 針對連接執行陳述式，並傳回受影響的資料列數目。
+ </summary>
+	<param name="strSQL"></param>
+	<param name="parameters"></param>
+	<param name="commandType"></param>
+	<param name="deferredExecute"></param>
+	<returns>受影響的資料列數目。</returns>
+	<remarks></remarks>
+	<SAMPLE>
+ Dim table as new DbTable(dbManager.getConnection)
+ 
+ table.ExecuteNonQuert ("Delete from user where USERID = @USERID@ AND USERNAME = @USERNAME@", 
+                         New CmdParameter(){ New CmdParameter("USERID","S123456"),
+                                             New CmdParameter("USERNAME","S234567")   })
+ </SAMPLE>
+</member><member name="T:com.Azion.NET.VB.TinyDb.DbTable">
+	<summary>
+ 簡易的資料庫存取 
+ </summary>
+	<remarks>
+	</remarks>
+</member><member name="F:com.Azion.NET.VB.BosBase.m_databaseManager">
+	<summary>
+ 連線物件
+ </summary>
+	<remarks></remarks>
+</member><member name="F:com.Azion.NET.VB.BosBase.m_sTableName">
+	<summary>
+ Table Name
+ </summary>
+	<remarks></remarks>
+</member><member name="F:com.Azion.NET.VB.BosBase.m_attributes">
+	<summary>
+ 存放 Column Name 與 BosAttribute Object
+ </summary>
+	<remarks></remarks>
+</member><member name="F:com.Azion.NET.VB.BosBase.m_bosAttributeList">
+	<summary>
+ 存放 BosAttribute Object
+ </summary>
+	<remarks></remarks>
+</member><member name="F:com.Azion.NET.VB.BosBase.m_bIsLoaded">
+	<summary>
+ 物件是否載入
+ </summary>
+	<remarks></remarks>
+</member><member name="F:com.Azion.NET.VB.BosBase.m_hashPrimaryKeys">
+	<summary>
+ 存放 PrimaryKey's Column Name 與 value
+ </summary>
+	<remarks></remarks>
+</member><member name="F:com.Azion.NET.VB.BosBase.m_arrayPrimaryKeys">
+	<summary>
+ 存放 PrimaryKey's Column Name
+ </summary>
+	<remarks></remarks>
+</member><member name="F:com.Azion.NET.VB.BosBase.m_dataSet">
+	<summary>
+ Current DataSet
+ </summary>
+	<remarks></remarks>
+</member><member name="F:com.Azion.NET.VB.BosBase.m_currentIndex">
+	<summary>
+ 目前記錄的指標
+ </summary>
+	<remarks></remarks>
+</member><member name="F:com.Azion.NET.VB.BosBase.m_bloadPk">
+	<summary>
+ 記錄PK是否載入
+ </summary>
+	<remarks></remarks>
+</member><member name="M:com.Azion.NET.VB.BosBase.#ctor">
+	<summary>
+ 初始化 BosBase 類別的新執行個體 (Instance)。
+ </summary>
+	<remarks>建構子
+ </remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosBase.#ctor(System.String,com.Azion.NET.VB.DatabaseManager)">
+	<summary>
+ 初始化 BosBase 類別的新執行個體 (Instance)。
+ </summary>
+	<param name="sTableName">傳入Table Name(大寫)</param>
+	<param name="databaseManager">傳入 DatabaseManager</param>
+	<remarks>建構子
+ </remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosBase.loadBySQL(System.String)">
+	<summary>
+ 使用DataAdatpter.Fill(DataTable)方法，取的相關Table的記錄。
+ </summary>
+	<param name="sSQL">傳入SQL語法。</param>
+	<returns>Integer 傳回記錄的筆數。</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosBase.loadData(System.Data.IDataParameter[])">
+	<summary>
+ 使用DataAdatpter.Fill(DataTable)方法，取的相關Table的記錄。
+ </summary>
+	<param name="commandParameters">傳入IDataParameter陣列。</param>
+	<returns>Integer 傳回記錄的筆數。</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosBase.loadBySQL(System.Data.IDataParameter[])">
+	<summary>
+ 使用DataAdatpter.Fill(DataTable)方法，取的相關Table的記錄。
+ </summary>
+	<param name="commandParameters">傳入IDataParameter陣列。</param>
+	<returns>Integer 傳回記錄的筆數。</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosBase.loadBySQL(System.String,System.Data.IDataParameter[])">
+	<summary>
+ 使用DataAdatpter.Fill(DataTable)方法，取的相關Table的記錄。
+ </summary>
+	<param name="sSQL">傳入SQL語法。</param>
+	<param name="commandParameters">傳入IDataParameter陣列。</param>
+	<returns>Integer 傳回記錄的筆數</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosBase.setTableName(System.String)">
+	<summary>
+ 設定Table Name。
+ </summary>
+	<param name="sTableName">傳入Table Name。</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosBase.getTableName">
+	<summary>
+ 取得Table Name。
+ </summary>
+	<returns>String 傳回Table Name</returns>
+	<remarks>
+ EN_CASEMAIN
+ </remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosBase.getSchemaTableName">
+	<summary>
+ 取得Schema Table Name。
+ </summary>
+	<returns>String 傳回Schema Table Name</returns>
+	<remarks>
+ BOTELOAN.EN_CASEMAIN
+ </remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosBase.getDataSet">
+	<summary>
+ 取得Current DataSet。
+ </summary>
+	<returns>DataSet 傳回物件 Current DataSet</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosBase.setCurrentDataSet(System.Data.DataSet)">
+	<summary>
+ 設定Current DataSet。
+ </summary>
+	<param name="dataSet">傳入DataSet。</param>
+	<remarks>
+ 將物件由memory重新載入
+ </remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosBase.setDatabaseManager(com.Azion.NET.VB.DatabaseManager)">
+	<summary>
+ 設定DatabaseManager Object。
+ </summary>
+	<param name="databaseManager">傳入DatabaseManager。</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosBase.getDatabaseManager">
+	<summary>
+ 取得DatabaseManager。Object
+ </summary>
+	<returns>DatabaseManager 傳回DatabaseManager</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosBase.setPrimaryKeys">
+	<summary>
+ 設定 PrimaryKeys
+ </summary>
+	<remarks> 
+ 如果Table沒有設定欄位，一定需要Overridable這個Function，
+ 否則此物件無作用
+ </remarks>
+</member><member name="M:com.Azion.NET.VB.BosBase.getArrayPrimaryKeys">
+	<summary>
+ get PrimaryKeys
+ </summary>
+	<returns>ArrayList 回傳PrimaryKey's Column Name </returns>
+	<remarks></remarks>
+</member><member name="M:com.Azion.NET.VB.BosBase.getHashPrimaryKeys">
+	<summary>
+ get PrimaryKeys
+ </summary>
+	<returns>Hashtable 回傳PrimaryKey's key and Value </returns>
+	<remarks></remarks>
+</member><member name="M:com.Azion.NET.VB.BosBase.setHashPrimaryKeys(System.Collections.Hashtable)">
+	<summary>
+ set Hash PrimaryKeys
+ </summary>
+	<param name="hashtable">傳入PrimaryKey's key and Value (Hashtable)</param>
+	<remarks></remarks>
+</member><member name="M:com.Azion.NET.VB.BosBase.setIsLoaded(System.Boolean)">
+	<summary>
+ 設定物件是否載入
+ </summary>
+	<param name="bIsLoaded"></param>
+	<remarks></remarks>
+</member><member name="M:com.Azion.NET.VB.BosBase.isLoaded">
+	<summary>
+ 取得物件是否載入
+ </summary>
+	<returns>Boolean True:載入，False:無載入</returns>
+	<remarks></remarks>
+</member><member name="M:com.Azion.NET.VB.BosBase.setAttribute(System.String,System.Object)">
+	<summary>
+ set value of Column
+ </summary>
+	<param name="sAttrName">String 傳入Column Name</param>
+	<param name="value">Object 傳入Column's value</param>
+	<remarks></remarks>
+</member><member name="M:com.Azion.NET.VB.BosBase.getAttribute(System.String)">
+	<summary>
+ get value of Column
+ </summary>
+	<param name="sAttrName">String 傳入Column Name</param>
+	<returns>Object Column's Value</returns>
+	<remarks>回傳資料庫型別</remarks>
+</member><member name="M:com.Azion.NET.VB.BosBase.setLong(System.String,System.Int64)">
+	<summary>
+ set Long value of Column
+ </summary>
+	<param name="sAttrName">String 傳入Column Name</param>
+	<param name="iAttrValue">Long 傳入Column's value</param>
+	<remarks>
+ OleDb.OleDbType.BigInt 
+ </remarks>
+</member><member name="M:com.Azion.NET.VB.BosBase.getLong(System.String)">
+	<summary>
+ get Long value of Column
+ </summary>
+	<param name="sAttrName">String 傳入Column Name</param>
+	<returns>Long Column's Value</returns>
+	<remarks>
+ OleDb.OleDbType.BigInt
+ </remarks>
+</member><member name="M:com.Azion.NET.VB.BosBase.setString(System.String,System.String)">
+	<summary>
+ set String value of Column
+ </summary>
+	<param name="sAttrName">String 傳入Column Name</param>
+	<param name="sAttrValue">String 傳入Column's value</param>
+	<remarks>
+ OleDb.OleDbType.BSTR
+ OleDb.OleDbType.Char
+ OleDb.OleDbType.LongVarChar
+ OleDb.OleDbType.LongVarWChar
+ OleDb.OleDbType.VarChar
+ OleDb.OleDbType.VarWChar
+ OleDb.OleDbType.WChar
+ </remarks>
+</member><member name="M:com.Azion.NET.VB.BosBase.getString(System.String)">
+	<summary>
+ set String value of Column
+ </summary>
+	<param name="sAttrName">String 傳入Column Name</param>
+	<returns>String Column's Value</returns>
+	<remarks>
+ OleDb.OleDbType.BSTR
+ OleDb.OleDbType.Char
+ OleDb.OleDbType.LongVarChar
+ OleDb.OleDbType.LongVarWChar
+ OleDb.OleDbType.VarChar
+ OleDb.OleDbType.VarWChar
+ OleDb.OleDbType.WChar
+ </remarks>
+</member><member name="M:com.Azion.NET.VB.BosBase.setInt(System.String,System.Int32)">
+	<summary>
+ set Integer value of Column
+ </summary>
+	<param name="sAttrName">String 傳入Column Name</param>
+	<param name="iAttrValue">Integer 傳入Column's value</param>
+	<remarks>
+ OleDb.OleDbType.Integer  
+ </remarks>
+</member><member name="M:com.Azion.NET.VB.BosBase.getInt(System.String)">
+	<summary>
+ get Integer value of Column
+ </summary>
+	<param name="sAttrName">String 傳入Column Name</param>
+	<returns>Integer Column's Value</returns>
+	<remarks>
+ OleDb.OleDbType.Integer  
+ </remarks>
+</member><member name="M:com.Azion.NET.VB.BosBase.setDecimal(System.String,System.Decimal)">
+	<summary>
+ set Decimal value of Column
+ </summary>
+	<param name="sAttrName">String 傳入Column Name</param>
+	<param name="decAttrValue">Decimal 傳入Column's value</param>
+	<remarks>
+ OleDb.OleDbType.Numeric 
+ OleDb.OleDbType.Decimal
+ </remarks>
+</member><member name="M:com.Azion.NET.VB.BosBase.getDecimal(System.String)">
+	<summary>
+ get Decimal value of Column
+ </summary>
+	<param name="sAttrName">String 傳入Column Name</param>
+	<returns>Decimal Column's Value</returns>
+	<remarks>
+ OleDb.OleDbType.Numeric 
+ OleDb.OleDbType.Decimal
+ </remarks>
+</member><member name="M:com.Azion.NET.VB.BosBase.setDateTime(System.String,System.DateTime)">
+	<summary>
+ set Date value of Column
+ </summary>
+	<param name="sAttrName">String 傳入Column Name</param>
+	<param name="dAttrValue">DateTime 傳入Column's value</param>
+	<remarks>
+ OleDb.OleDbType.Date
+ OleDb.OleDbType.DBDate
+ OleDb.OleDbType.DBTimeStamp
+ </remarks>
+</member><member name="M:com.Azion.NET.VB.BosBase.getDateTime(System.String)">
+	<summary>
+ get Date value of Column
+ </summary>
+	<param name="sAttrName">String 傳入Column Name</param>
+	<returns>Date Column's Value</returns>
+	<remarks>
+ OleDb.OleDbType.Date
+ OleDb.OleDbType.DBDate
+ OleDb.OleDbType.DBTimeStamp
+ </remarks>
+</member><member name="M:com.Azion.NET.VB.BosBase.setSmallInt(System.String,System.Int16)">
+	<summary>
+ set Int16 value of Column
+ </summary>
+	<param name="sAttrName">String 傳入Column Name</param>
+	<param name="iAttrValue">Int16 傳入Column's value</param>
+	<remarks>
+ OleDb.OleDbType.SmallInt
+ </remarks>
+</member><member name="M:com.Azion.NET.VB.BosBase.getSmallInt(System.String)">
+	<summary>
+ get Int16 value of Column
+ </summary>
+	<param name="sAttrName">String 傳入Column Name</param>
+	<returns>Int16 Column's Value</returns>
+	<remarks>
+ OleDb.OleDbType.SmallInt
+ </remarks>
+</member><member name="M:com.Azion.NET.VB.BosBase.setAttMeta(System.String,System.Data.DbType)">
+	<summary>
+ 提供非此 BosBase 物件之加載欄位屬性值
+ </summary>
+	<param name="sColName">傳入Column Name</param>
+	<param name="DBType">傳入System.Data.DbType</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosBase.addAttribute(com.Azion.NET.VB.BosAttribute)">
+	<summary>
+ 提供非此 BosBase物件之加載欄位屬性值
+ </summary>
+	<param name="attr">傳入BosAttribute</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosBase.addAttribute(System.String,System.Data.DbType)">
+	<summary>
+ 提供非此 BosBase 物件之加載欄位屬性值
+ </summary>
+	<param name="sColName">傳入Column Name</param>
+	<param name="DBType">傳入System.Data.DbType</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosBase.initMetaData(System.String)">
+	<summary>
+ 初始化MetaData
+ </summary>
+	<param name="sTableName">傳入 Table Name</param>
+	<returns>Boolean MetaData是否載入</returns>
+	<remarks>
+ 如果有預先產先DBMeta.dll，則從DBMeta.dll載入
+ 如果沒有則直接從DataBase取得
+ </remarks>
+</member><member name="M:com.Azion.NET.VB.BosBase.loadAttrMeta(com.Azion.NET.VB.DBMetaData)">
+	<summary>
+ 初始化MetaData
+ </summary>
+	<param name="dBMetaData">傳入 DBMetaData</param>
+	<returns>Boolean MetaData是否載入</returns>
+	<remarks>
+ 由DBMeta.dll載入Meta Data
+ </remarks>
+</member><member name="M:com.Azion.NET.VB.BosBase.loadAttrMeta(System.String)">
+	<summary>
+ 初始化MetaData
+ </summary>
+	<param name="sTableName">傳入 Table Name</param>
+	<returns>Boolean MetaData是否載入</returns>
+	<remarks>
+ 直接由DataBase取得
+ </remarks>
+</member><member name="M:com.Azion.NET.VB.BosBase.ExecuteDataset(System.Data.CommandType,System.String,System.Data.IDataParameter[])">
+	<summary>
+ ExecuteDataset
+ </summary>
+	<param name="commandType">傳入CommandType</param>
+	<param name="commandText">傳入commandText</param>
+	<param name="commandParameters">傳入IDataParameter()</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosBase.ExecuteNonQuery(System.Data.CommandType,System.String,System.Data.IDataParameter[])">
+	<summary>
+ ExecuteNonQuery
+ </summary>
+	<param name="commandType">傳入CommandType</param>
+	<param name="commandText">傳入commandText</param>
+	<param name="commandParameters">傳入IDataParameter()</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosBase.ExecuteScalar(System.Data.CommandType,System.String,System.Data.IDataParameter[])">
+	<summary>
+ ExecuteScalar
+ </summary>
+	<param name="commandType">傳入CommandType</param>
+	<param name="commandText">傳入commandText</param>
+	<param name="commandParameters">傳入IDataParameter()</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosBase.ExecuteReader(System.Data.CommandType,System.String,System.Data.IDataParameter[])">
+	<summary>
+ ExecuteReader
+ </summary>
+	<param name="commandType">傳入CommandType</param>
+	<param name="commandText">傳入commandText</param>
+	<param name="commandParameters">傳入IDataParameter()</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosBase.showInsertSQL">
+	<summary>
+ Show Insert SQL。
+ </summary>
+	<returns>String</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/02/25	modify
+</history>
+</member><member name="M:com.Azion.NET.VB.BosBase.showUpdateSQL">
+	<summary>
+ Show Update SQL。
+ </summary>
+	<returns>String</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/02/25	modify
+</history>
+</member><member name="T:com.Azion.NET.VB.BosBase">
+	<summary>
+  The Business objects (BOS)。
+ </summary>
+	<remarks>
+ Bosbase 實作IEnumerator、IEnumerable 介面
+ 所有實作單筆 Table Object物件須繼承Bosbase。
+ 
+ </remarks>
+	<example> This sample shows how to inherits the Bosbase class based on EN_CASEMAIN which has the primary key
+ <code>
+ '請注意命名方法 
+ '----------------------------------------------
+ '|Table Name  | BosBase     |  BosList         |
+ '|------------| ------------|  ----------------|
+ '|EN_CASEMAIN | EN_CASEMAIN |  EN_CASEMAINList |
+ '----------------------------------------------
+ Public Class EN_CASEMAIN Inherits Bosbase
+     '建構子
+     Sub New()
+          MyBase.New()
+          Me.setPrimaryKeys()
+     End Sub
+     Sub New(ByVal dbManager As DatabaseManager)
+         MyBase.new("EN_CASEMAIN", dbManager)
+     End Sub
+ 
+     'must Overrides Function newBos
+     Overrides Function newBos() As BosBase
+          Return New EN_CASEMAIN(MyBase.getDatabaseManager)
+     End Function
+     
+     '案例一:不寫SQL語法，直接給參數
+     '內部運作語法:[select * from en_casemain where CaseID=sCaseID]
+     Function loadByPK(ByVal sCaseID As String) As Integer
+          Try
+               If (Not IsNothing(sCaseID) AndAlso sCaseID.Length &gt; 0) Then
+                    Dim paras(0) As System.Data.IDbDataParameter
+                    paras(0) = ProviderFactory.CreateDataParameter("CaseID", sCaseID)
+                    Return MyBase.loadBySQL(paras)
+               End If
+          Catch ex As ProviderException
+               Throw ex
+          Catch ex As BosException
+               Throw ex
+          Catch ex As Exception
+               Throw ex
+          End Try
+ 
+          Return 0
+     End Function
+ 
+     '案例二:寫SQL語法，並給參數
+     '內部運作語法:[programmer 給的SQL = select * from en_casemain where CaseID=sCaseID]
+     Function loadByPK(ByVal sCaseID As String) As Integer
+          Try
+               If (Not IsNothing(sCaseID) AndAlso sCaseID.Length &gt; 0) Then
+                    Dim sSQL As String="select * from en_casemain where CaseID" + ProviderFactory.PositionPara + "CaseID"
+                    Dim paras(0) As System.Data.IDbDataParameter
+                    paras(0) = ProviderFactory.CreateDataParameter("CaseID", sCaseID)
+                    Return MyBase.loadBySQL(sSQL, paras)
+               End If
+          Catch ex As ProviderException
+               Throw ex
+          Catch ex As BosException
+               Throw ex
+          Catch ex As Exception
+               Throw ex
+          End Try
+ 
+          Return 0
+     End Function
+ 
+    '案例三:寫Join SQL語法，並給參數
+    '內部運作語法:[programmer 給的SQL = select  a.caseid,a.brid,b.caseitemid caseitemid,b.loanitem 授信項目名稱,b.datadate 資料日期 from En_Casemain a ,En_Casedetailcond  b where a.caseid=b.caseid and b.caseid=sCaseID and b.caseitemid=1]
+    '如果是多各不同Table Join在一起時，
+    '在此物件(EN_CASEMAINList)須手動增加欄位屬性，才可取得不同Table(En_Casedetailcond)的欄位(caseitemid、loanitem、datadate)
+     Function loadCaseItem(ByVal sCaseId As String) As Integer
+          Try
+               If (Not IsNothing(sCaseId) AndAlso sCaseId.Length &gt; 0) Then
+                    Dim sqlStr As String = ""
+                    sqlStr = "select  a.caseid,a.brid,b.caseitemid caseitemid,b.loanitem 授信項目名稱,b.datadate 資料日期 from En_Casemain a ,En_Casedetailcond  b where a.caseid=b.caseid " + _
+                    " and CASEID=" + ProviderFactory.PositionPara + "CASEID and b.caseitemid=1 "
+ 
+                    '下面這三個欄位屬於En_Casedetailcond的，並非屬於En_CaseMain的欄位
+                    '因此須將En_Casedetailcond的三個欄位手動加入EN_CASEMAINList的物件，如此此能取得這三各欄位的值
+                    Me.addAttribute("caseitemid", System.Data.DbType.Decimal)'如果資料型別是Number--&gt;System.Data.DbType.Decimal
+                    Me.addAttribute("授信項目名稱", System.Data.DbType.String)'如果資料型別是String--&gt;System.Data.DbType.String
+                    Me.addAttribute("資料日期", System.Data.DbType.Date)'如果資料型別是Date--&gt;System.Data.DbType.Date
+ 
+                    Dim para As IDbDataParameter = ProviderFactory.CreateDataParameter("CASEID", sCaseId)
+ 
+                    Return Me.loadBySQL(sqlStr, para)
+               End If
+          Catch ex As ProviderException
+               Throw ex
+          Catch ex As BosException
+               Throw ex
+          Catch ex As Exception
+               Throw ex
+          End Try
+ 
+          Return 0
+     End Function
+ End Class
+ </code>
+	</example>
+	<history>
+ 	[Titan]	2010/05/20	modify
+ </history>
+</member><member name="F:com.Azion.NET.VB.BosList.m_databaseManager">
+	<summary>
+ 連線物件
+ </summary>
+	<remarks></remarks>
+</member><member name="F:com.Azion.NET.VB.BosList.m_sTableName">
+	<summary>
+ Table Name
+ </summary>
+	<remarks></remarks>
+</member><member name="F:com.Azion.NET.VB.BosList.m_objects">
+	<summary>
+ 存放BosBase物件陣列
+ </summary>
+	<remarks></remarks>
+</member><member name="F:com.Azion.NET.VB.BosList.m_BosAttrMetas">
+	<summary>
+ 存放BosAttrMeta欄位物件陣列
+ </summary>
+	<remarks></remarks>
+</member><member name="F:com.Azion.NET.VB.BosList.m_sSQLCondition">
+	<summary>
+ 依需求調整Condition
+ </summary>
+	<remarks></remarks>
+</member><member name="F:com.Azion.NET.VB.BosList.m_currentIndex">
+	<summary>
+ 目前記錄的指標
+ </summary>
+	<remarks></remarks>
+</member><member name="F:com.Azion.NET.VB.BosList.m_dsCurrent">
+	<summary>
+ Current DataSet
+ </summary>
+	<remarks></remarks>
+</member><member name="F:com.Azion.NET.VB.BosList.m_sSQL">
+	<summary>
+ SQL script
+ </summary>
+	<remarks></remarks>
+</member><member name="M:com.Azion.NET.VB.BosList.#ctor(System.String,com.Azion.NET.VB.DatabaseManager)">
+	<summary>
+ 初始化 BosList 類別的新執行個體 (Instance)。
+ </summary>
+	<param name="sTableName">傳入Table Name(大寫)</param>
+	<param name="databaseManager">傳入 DatabaseManager</param>
+	<remarks>建構子
+ </remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.loadAllData(System.Boolean)">
+	<summary>
+ 取得相關Table的所有記錄。
+ </summary>
+	<returns>Integer 傳回記錄的筆數。</returns>
+	<remarks>
+ select * from [your TABLE_NAME]
+ </remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.loadBySQL(System.String)">
+	<summary>
+ 使用DataAdatpter.Fill(DataTable)方法，取的相關Table的記錄。
+ </summary>
+	<param name="sSQL">傳入SQL語法。</param>
+	<returns>Integer 傳回記錄的筆數。</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.loadBySQL(System.Data.IDataParameter[])">
+	<summary>
+ 使用DataAdatpter.Fill(DataTable)方法，取的相關Table的記錄。
+ </summary>
+	<param name="commandParameters">傳入IDataParameter陣列。</param>
+	<returns>Integer 傳回記錄的筆數。</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.loadBySQL(System.String,System.Data.IDataParameter[])">
+	<summary>
+ 使用DataAdatpter.Fill(DataTable)方法，取的相關Table的記錄。
+ </summary>
+	<param name="sSQL">傳入SQL語法。</param>
+	<param name="commandParameters">傳入IDataParameter陣列。</param>
+	<returns>Integer 傳回記錄的筆數</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.loadBySQLOnlyDs(System.String)">
+	<summary>
+ 使用DataAdatpter.Fill(DataTable)方法，取的相關Table的記錄。
+ </summary>
+	<param name="sSQL">傳入SQL語法。</param>
+	<returns>Integer 傳回記錄的筆數。</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.loadBySQLOnlyDs(System.Data.IDataParameter[])">
+	<summary>
+ 使用DataAdatpter.Fill(DataTable)方法，取的相關Table的記錄。
+ </summary>
+	<param name="commandParameters">傳入IDataParameter陣列。</param>
+	<returns>Integer 傳回記錄的筆數。</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.loadBySQLOnlyDs(System.String,System.Data.IDataParameter[])">
+	<summary>
+ 使用DataAdatpter.Fill(DataTable)方法，取的相關Table的記錄。
+ </summary>
+	<param name="sSQL">傳入SQL語法。</param>
+	<param name="commandParameters">傳入IDataParameter陣列。</param>
+	<returns>Integer 傳回記錄的筆數</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.constructBosData(System.Data.IDataReader)">
+	<summary>
+ 將多筆物件回充填至單筆Bos物件(初始化單筆物件)。不產生DataTable
+ </summary>
+	<param name="IReader">傳入IDataReader。</param>
+	<remarks>
+ 大型物件，走constructIRDData
+ </remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.ShowSelectSQL(System.String,System.Data.IDataParameter[])">
+	<summary>
+ 偵錯時，Show Select SQL。
+ </summary>
+	<param name="sSQL">傳入SQL語法。</param>
+	<param name="commandParameters">傳入IDataParameter陣列。</param>
+	<returns>String</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.newBos">
+	<summary>
+ 每個繼承BosList的物件，Must Override this Function
+ 將多筆物件回充填至單筆Bos物件(初始化單筆物件)
+ </summary>
+	<remarks>
+	</remarks>
+</member><member name="M:com.Azion.NET.VB.BosList.setTableName(System.String)">
+	<summary>
+ 設定Table Name。
+ </summary>
+	<param name="sTableName">傳入Table Name。</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.getTableName">
+	<summary>
+ 取得Table Name。
+ </summary>
+	<returns>String 傳回Table Name</returns>
+	<remarks>
+ EN_CASEMAIN
+ </remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.getSchemaTableName">
+	<summary>
+ 取得Schema Table Name。
+ </summary>
+	<returns>String 傳回Schema Table Name</returns>
+	<remarks>
+ BOTELOAN.EN_CASEMAIN
+ </remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.setDataTableName">
+	<summary>
+ 設定Curr DataTable's Name。
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.setCurrentDataSet(System.Data.DataSet)">
+	<summary>
+ 設定Current DataSet。
+ </summary>
+	<param name="dataSet">傳入DataSet。</param>
+	<remarks>
+ 將物件由memory重新載入
+ </remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.getCurrentDataSet">
+	<summary>
+ 取得Current DataSet。
+ </summary>
+	<returns>DataSet 傳回物件 Current DataSet</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.setDatabaseManager(com.Azion.NET.VB.DatabaseManager)">
+	<summary>
+ 設定DatabaseManager Object。
+ </summary>
+	<param name="databaseManager">傳入DatabaseManager。</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.getDatabaseManager">
+	<summary>
+ 取得DatabaseManager。Object
+ </summary>
+	<returns>DatabaseManager 傳回DatabaseManager</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.setSQLCondition(System.String)">
+	<summary>
+ 設定SQL Condition。
+ </summary>
+	<param name="sSQLCondition">傳入SQL Condition。</param>
+	<remarks>此物件可重複使用
+ </remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.getSQLCondition">
+	<summary>
+ 取得SQL Condition。
+ </summary>
+	<returns>String 傳回SQL Condition</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.GetEnumerator">
+	<summary>
+ 傳回可透過集合來重複的列舉值。
+ </summary>
+	<remarks>實作IEnumerator、IEnumerable 介面。
+ </remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.Reset">
+	<summary>
+ 設定列舉值至它的初始位置，這是在集合中第一個元素之前。
+ </summary>
+	<remarks>實作IEnumerator、IEnumerable 介面。
+ </remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.MoveNext">
+	<summary>
+ 將列舉值推前至下一個集合的元素。
+ </summary>
+	<remarks>實作IEnumerator、IEnumerable 介面。
+ </remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="P:com.Azion.NET.VB.BosList.Current">
+	<summary>
+ 取得集合中目前的項目。
+ </summary>
+	<remarks>實作IEnumerator、IEnumerable 介面。
+ </remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.constructIRDData(System.Data.IDataReader)">
+	<summary>
+ 將多筆物件回充填至單筆Bos物件(初始化單筆物件)。
+ </summary>
+	<param name="IReader">傳入IDataReader。</param>
+	<remarks>
+ 大型物件，走constructIRDData
+ </remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.CreateDataColumns(System.Data.IDataReader)">
+	<summary>
+ 產生DataTable的欄位
+ </summary>
+	<param name="IReader">傳入IDataReader。</param>
+	<returns>DataColumn()</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.constructData(System.Data.DataTable)">
+	<summary>
+ 將多筆物件回充填至單筆Bos物件(初始化單筆物件)。
+ </summary>
+	<param name="dataTable">傳入DataTable。</param>
+	<remarks>
+ 可以被Overridable
+ you can see EN_04_RPT_ATTACH04_ITEMList class。
+ </remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.ExecuteReader(com.Azion.NET.VB.DatabaseManager,System.Data.CommandType,System.String,System.Data.IDataParameter[])">
+	<summary>
+ ExecuteReader
+ </summary>
+	<param name="commandType">傳入CommandType</param>
+	<param name="commandText">傳入commandText</param>
+	<param name="commandParameters">傳入IDataParameter()</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.ExecuteDataset(System.Data.CommandType,System.String,System.Data.IDataParameter[])">
+	<summary>
+ ExecuteDataset
+ </summary>
+	<param name="commandType">傳入CommandType</param>
+	<param name="commandText">傳入commandText</param>
+	<param name="commandParameters">傳入IDataParameter()</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.addFields(com.Azion.NET.VB.BosBase)">
+	<summary>
+ 加載Bos Object 的欄位名稱、值及資料型別等屬性值
+ </summary>
+	<param name="bos">傳入BosBase</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.addAttribute(com.Azion.NET.VB.BosAttrMeta)">
+	<summary>
+ 提供非此 BosList 物件之加載欄位屬性值，如案例三
+ </summary>
+	<param name="attr">傳入BosAttrMeta</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.addAttribute(System.String,System.Data.DbType)">
+	<summary>
+ 提供非此 BosList 物件之加載欄位屬性值，如案例三
+ </summary>
+	<param name="sColName">傳入Column Name</param>
+	<param name="DBType">傳入System.Data.DbType</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.add(com.Azion.NET.VB.BosBase)">
+	<summary>
+ 加載BosList object
+ </summary>
+	<param name="bos">傳入BosBase</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.remove(com.Azion.NET.VB.BosBase)">
+	<summary>
+ 移除單筆BosList object
+ </summary>
+	<param name="bos">傳入BosBase</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.clear">
+	<summary>
+ 清除所有BosList object
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.item(System.Int32)">
+	<summary>
+ 取得BosList object
+ </summary>
+	<param name="index">傳入Integer</param>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.size">
+	<summary>
+ 取得BosList object size
+ </summary>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.getSchemaName">
+	<summary>
+ 取得Schema Name(User ID)。
+ </summary>
+	<returns>String 傳回Schema Table Name</returns>
+	<remarks>
+ BOTELOAN
+ </remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="M:com.Azion.NET.VB.BosList.loadReadeBySQL(System.String,System.Data.IDataParameter[])">
+	<summary>
+ This function will be removed from future Versions.Use another function 'loadReaderBySQL'
+ </summary>
+	<param name="sSQL">傳入SQL語法。</param>
+	<param name="commandParameters">傳入IDataParameter陣列。</param>
+	<returns>Integer 傳回記錄的筆數</returns>
+	<remarks>
+	</remarks>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member><member name="T:com.Azion.NET.VB.BosList">
+	<summary>
+  The List of the Business objects (BOS)。
+ </summary>
+	<remarks>
+ BosList 實作IEnumerator、IEnumerable 介面
+ 所有實作多筆 Table Object物件須繼承BosList。
+ 
+ </remarks>
+	<example> This sample shows how to inherits the BosList class based on EN_CASEMAIN which has the primary key
+ <code>
+ '請注意命名方法 
+ '----------------------------------------------
+ '|Table Name  | BosBase     |  BosList         |
+ '|------------| ------------|  ----------------|
+ '|EN_CASEMAIN | EN_CASEMAIN |  EN_CASEMAINList |
+ '----------------------------------------------
+ Public Class EN_CASEMAINList Inherits BosList
+     '建構子
+     Sub New(ByVal dbManager As DatabaseManager)
+          MyBase.New("EN_CASEMAIN", dbManager)
+     End Sub
+ 
+     'must Overrides Function newBos
+     Overrides Function newBos() As BosBase
+          Return New EN_CASEMAIN(MyBase.getDatabaseManager)
+     End Function
+     
+     '案例一:不寫SQL語法，直接給參數
+     '內部運作語法:[select * from en_casemain where GOBRID=sBrId]
+     Function loadByBrIdEx1(ByVal sBrId As String) As Integer
+          Try
+               If (Not IsNothing(sBrId) AndAlso sBrId.Length &gt; 0) Then
+                    Dim paras(0) As System.Data.IDbDataParameter
+                    paras(0) = ProviderFactory.CreateDataParameter("GOBRID", sBrId)
+                    Return MyBase.loadBySQL(paras)
+               End If
+          Catch ex As ProviderException
+               Throw ex
+          Catch ex As BosException
+               Throw ex
+          Catch ex As Exception
+               Throw ex
+          End Try
+ 
+          Return 0
+     End Function
+ 
+     '案例二:寫SQL語法，並給參數
+     '內部運作語法:[programmer 給的SQL = select * from en_casemain where GOBRID=sBrId]
+     Function loadByBrIdEx2(ByVal sBrId As String) As Integer
+          Try
+               If (Not IsNothing(sBrId) AndAlso sBrId.Length &gt; 0) Then
+                    Dim sSQL As String="select * from en_casemain where GOBRID" + ProviderFactory.PositionPara + "sBrId"
+                    Dim paras(0) As System.Data.IDbDataParameter
+                    paras(0) = ProviderFactory.CreateDataParameter("GOBRID", sBrId)
+                    Return MyBase.loadBySQL(sSQL, paras)
+               End If
+          Catch ex As ProviderException
+               Throw ex
+          Catch ex As BosException
+               Throw ex
+          Catch ex As Exception
+               Throw ex
+          End Try
+ 
+          Return 0
+     End Function
+ 
+    '案例三:寫Join SQL語法，並給參數
+    '內部運作語法:[programmer 給的SQL = select  a.caseid,a.brid,b.caseitemid caseitemid,b.loanitem 授信項目名稱,b.datadate 資料日期 from En_Casemain a ,En_Casedetailcond  b where a.caseid=b.caseid and b.caseid=sCaseID]
+    '如果是多各不同Table Join在一起時，
+    '在此物件(EN_CASEMAINList)須手動增加欄位屬性，才可取得不同Table(En_Casedetailcond)的欄位(caseitemid、loanitem、datadate)
+     Function loadCaseItem(ByVal sCaseId As String) As Integer
+          Try
+               If (Not IsNothing(sCaseId) AndAlso sCaseId.Length &gt; 0) Then
+                    Dim sqlStr As String = ""
+                    sqlStr = "select  a.caseid,a.brid,b.caseitemid caseitemid,b.loanitem 授信項目名稱,b.datadate 資料日期 from En_Casemain a ,En_Casedetailcond  b where a.caseid=b.caseid " + _
+                    " and CASEID=" + ProviderFactory.PositionPara + "CASEID "
+ 
+                    '下面這三個欄位屬於En_Casedetailcond的，並非屬於En_CaseMain的欄位
+                    '因此須將En_Casedetailcond的三個欄位手動加入EN_CASEMAINList的物件，如此此能取得這三各欄位的值
+                    Me.addAttribute("caseitemid", System.Data.DbType.Decimal)'如果資料型別是Number--&gt;System.Data.DbType.Decimal
+                    Me.addAttribute("授信項目名稱", System.Data.DbType.String)'如果資料型別是String--&gt;System.Data.DbType.String
+                    Me.addAttribute("資料日期", System.Data.DbType.Date)'如果資料型別是Date--&gt;System.Data.DbType.Date
+ 
+                    Dim para As IDbDataParameter = ProviderFactory.CreateDataParameter("CASEID", sCaseId)
+ 
+                    Return Me.loadBySQL(sqlStr, para)
+               End If
+          Catch ex As ProviderException
+               Throw ex
+          Catch ex As BosException
+               Throw ex
+          Catch ex As Exception
+               Throw ex
+          End Try
+ 
+          Return 0
+     End Function
+ End Class
+ </code>
+	</example>
+	<history>
+ 	[Titan]	2009/01/20	modify
+ </history>
+</member>
+</members>
+</doc>

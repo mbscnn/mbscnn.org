@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="BIG5"?>
+<!-- 法金e-Loan 房貸信貸案件明細查詢 上行電文 -->
+<INPUT>
+	<AP_HEADER>
+		<ABEND>xxx</ABEND>
+		<FROM_HOST>BELOANE</FROM_HOST>             
+		<FROM_SERVICE></FROM_SERVICE>
+		<FROM_DTAQ></FROM_DTAQ>
+		<TO_HOST>900</TO_HOST>
+		<TO_SERVICE></TO_SERVICE>
+		<TO_DTAQ>CGCTL</TO_DTAQ>
+		<MSG_ID>BLN201107071800000100003</MSG_ID> 
+		<DATE>20110707</DATE>
+		<TIME>18000001</TIME>
+		<TXCD>EL13</TXCD>
+		<SUBCODE>00</SUBCODE>
+		<PRIORITY>6</PRIORITY>  
+		<END_CODE>Y</END_CODE>                    
+	</AP_HEADER>
+	<!-- AP_DATA上中心後會轉換為固定位置字串，自151位開始 -->
+	<AP_DATA>
+		<!-- TIA HEAD -->
+		<TIAHD type="char" length="30" from="151" to="180">xxx</TIAHD>
+		<!-- 案件編號 -->
+		<EALWNO type="char" length="10" from="181" to="190">9801000114</EALWNO>
+	</AP_DATA>
+</INPUT>

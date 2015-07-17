@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="big5"?>
+<INPUT>
+  <AP_HEADER>
+    <ABEND></ABEND>
+    <FROM_HOST>BELOANA</FROM_HOST>
+    <FROM_SERVICE></FROM_SERVICE>
+    <FROM_DTAQ></FROM_DTAQ>
+    <TO_HOST>900</TO_HOST>
+    <TO_SERVICE></TO_SERVICE>
+    <TO_DTAQ>CGCTL</TO_DTAQ>
+    <MSG_ID enabled="false"></MSG_ID>
+    <DATE>20110714</DATE>
+    <TIME>18000021</TIME>
+    <TXCD>EL10</TXCD>
+    <SUBCODE>00</SUBCODE>
+    <PRIORITY>6</PRIORITY>
+    <END_CODE>Y</END_CODE>
+  </AP_HEADER>
+  <AP_DATA>
+    <TIAHD from="151" to="180" length="30" type="char" />
+    <EDATE from="181" to="187" length="7" type="num" decimal="0" />
+    <ERAREA from="188" to="190" length="3" type="char" />
+    <ECFI1 from="191" to="201" length="11" type="char" />
+    <EALWNO from="202" to="211" length="10" type="char" />
+    <AORMCD from="212" to="217" length="5" type="char" />
+    <EIBBUS from="218" to="218" length="1" type="char" />
+    <EAULVL from="219" to="219" length="1" type="char" />
+  </AP_DATA>
+</INPUT>

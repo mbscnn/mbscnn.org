@@ -1,0 +1,585 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+EloanUtility
+</name>
+</assembly>
+<members>
+<member name="T:com.Azion.EloanUtility.DBSyntax">
+	<summary>
+ 依DB Server的SQL語法不同，回傳不同的String
+ </summary>
+	<remarks>
+ 目前僅區分Oracel與MS_SQL
+ 方法名稱以Oracle為主
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.DateUtility.showTWYYMM(System.Object)">
+	<summary>
+ DateUtility.showTWYYMMDD(Date)--&gt;100.07
+ </summary>
+	<param name="data">date</param>
+	<returns></returns>
+	<remarks>
+ [Titan] 	2011/07/19	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.DateUtility.showTWYYMMDD(System.Object)">
+	<summary>
+  DateUtility.showTWYYMMDD(Date)--&gt;100.07.20
+ </summary>
+	<param name="data">date</param>
+	<returns></returns>
+	<remarks>
+ [Titan] 	2011/07/19	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.DateUtility.showTWDate(System.Object,System.String,System.String)">
+	<summary>
+ 格式化民國日期
+ DateUtility.showTWDate(Date,"YYMM","-")--&gt;100-07
+ DateUtility.showTWDate(Date,"YYMM",".")--&gt;100.07
+ DateUtility.showTWDate(Date,"","")--&gt;10007
+ DateUtility.showTWDate(Date,"",".")--&gt;100.07.20
+ DateUtility.showTWDate(Date,"","-")--&gt;100-07-20
+ DateUtility.showTWDate(Date,"","")--&gt;1000720
+ </summary>
+	<param name="data">date</param>
+	<param name="sFormat">YYMM or YYMMDD</param>
+	<param name="sSplit">分隔符號</param>
+	<returns></returns>
+	<remarks>
+ [Titan] 	2011/07/19	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.DateUtility.showADYYMM(System.Object)">
+	<summary>
+ DateUtility.showADYYMMDD(Date)--&gt;2011.07
+ </summary>
+	<param name="data">date</param>
+	<returns></returns>
+	<remarks>
+ [Titan] 	2011/07/19	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.DateUtility.showADYYMMDD(System.Object)">
+	<summary>
+ DateUtility.showADYYMMDD(Date)--&gt;2011.07.20
+ </summary>
+	<param name="data">date</param>
+	<returns></returns>
+	<remarks>
+ [Titan] 	2011/07/19	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.DateUtility.showADDate(System.Object,System.String,System.String)">
+	<summary>
+ 格式化西元日期
+ DateUtility.showADDate(Date,"YYMM","-")--&gt;2011-07
+ DateUtility.showADDate(Date,"YYMM",".")--&gt;2011.07
+ DateUtility.showADDate(Date,"","")--&gt;201107
+ DateUtility.showADDate(Date,"",".")--&gt;2011.07.20
+ DateUtility.showADDate(Date,"","-")--&gt;2011-07-20
+ DateUtility.showADDate(Date,"","")--&gt;20110720
+ </summary>
+	<param name="data">date</param>
+	<param name="sFormat">YYMM or YYMMDD</param>
+	<param name="sSplit">分隔符號</param>
+	<returns></returns>
+	<remarks>
+ [Titan] 	2011/07/19	Created
+ </remarks>
+</member><member name="T:com.Azion.EloanUtility.DateUtility">
+	<summary>
+ 提供日期相關函式
+ Format...
+ [Titan] 	2011/07/19	Created
+ </summary>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.isTesting">
+	<summary>
+ 是否為測試模式
+ </summary>
+	<returns>Boolean</returns>
+	<remarks>
+ [Titan] 	2011/07/20	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.isDebug">
+	<summary>
+ 是否為debug模式
+ </summary>
+	<returns>Boolean</returns>
+	<remarks>
+ [Titan] 	2011/11/06	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.newSession">
+	<summary>
+ 判斷Session是否遺失，假使遺失由Request，賦予Session值，並從新設定TimeOut
+ </summary>
+	<remarks>
+ [Titan] 	2011/10/05	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.getCaseID">
+	<summary>
+ 由 session or Request 取得caseid
+ </summary>
+	<returns>String</returns>
+	<remarks>
+ [Titan] 	2011/07/20	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.getIDBAN">
+	<summary>
+ 由 Request 取得IDBAN(徵信對象統編)
+ </summary>
+	<returns>String</returns>
+	<remarks>
+ [Ted] 	2011/12/19	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.getLoginUserID">
+	<summary>
+ 由 session or Request 取得userid
+ </summary>
+	<returns>String</returns>
+	<remarks>
+ [Titan] 	2011/07/20	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.getEnTieLoginUserID">
+	<summary>
+ 由 session or Request 取得安泰 userid(5碼)
+ </summary>
+	<returns>String</returns>
+	<remarks>
+ [Titan] 	2011/07/20	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.getJCICConnectionString">
+	<summary>
+ 取得JCIC SP_GETJCICDATA連接字串
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.getUNIRISKConnectionString">
+	<summary>
+ 取得UNI RISK風控資料庫連線字串
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.getTEJConnectionString">
+	<summary>
+ 取得TEJ資料庫連線字串
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.getNOTESSessionID">
+	<summary>
+ 由 session or Request 取得經過NOTES驗證的Session id
+ </summary>
+	<returns>String</returns>
+	<remarks>
+ [Ted] 	2012/01/03	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.getStepno">
+	<summary>
+ 由 Request 取得stepno
+ </summary>
+	<returns>String</returns>
+	<remarks>
+ [Titan] 	2011/07/20	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.getWatchStepno">
+	<summary>
+ 由 Request 取得Watch Stepno
+ 取得查詢的步驟
+ </summary>
+	<returns>String</returns>
+	<remarks>
+ [Titan] 	2011/12/16	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.getVersion">
+	<summary>
+ 由 Request 取得 版號
+ </summary>
+	<returns>String</returns>
+	<remarks>
+ [Titan] 	2011/12/16	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.getLoginBrID">
+	<summary>
+ 由 session or Request 取得BrID
+ </summary>
+	<returns>String</returns>
+	<remarks>
+ [Titan] 	2011/07/20	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.isRemoteMode">
+	<summary>
+ 由 session or Request 取得RemoteFlag
+ </summary>
+	<returns>Boolean</returns>
+	<remarks>
+ [Titan] 	2011/07/20	Created
+ 尚未實作
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.getRootPath(System.Boolean)">
+	<summary>
+ 取得eLoan專案目錄
+ </summary>
+	<returns>String</returns>
+	<remarks>
+ [Titan] 	2011/07/20	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.getENPath">
+	<summary>
+ 取得企金目錄
+ </summary>
+	<returns>String</returns>
+	<remarks>
+ [Titan] 	2011/07/20	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.getGAPath">
+	<summary>
+ 取得企金目錄
+ </summary>
+	<returns>String</returns>
+	<remarks>
+ [Titan] 	2011/07/20	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.getWSPath">
+	<summary>
+ 取得WebService目錄
+ </summary>
+	<returns>String</returns>
+	<remarks>
+ [Titan] 	2011/07/20	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.getUICtlPath">
+	<summary>
+ 取得UI Ctl目錄
+ </summary>
+	<returns>String</returns>
+	<remarks>
+ [Titan] 	2011/12/23	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.getImgPath">
+	<summary>
+ 取得img目錄
+ </summary>
+	<returns>String</returns>
+	<remarks>
+ [Titan] 	2011/07/20	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.geteLandPDFPath">
+	<summary>
+ 取得img目錄
+ </summary>
+	<returns>String</returns>
+	<remarks>
+ [Titan] 	2011/07/20	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.Redirect(System.String)">
+	<summary>
+ Response.Redirect
+ </summary>
+	<param name="sURL">String</param>
+	<remarks>
+ [Titan] 	2011/08/24	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.Transfer(System.String)">
+	<summary>
+ Server.Transfer
+ </summary>
+	<param name="sURL">String</param>
+	<remarks>
+ [Titan] 	2011/08/24	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.setControlRead(System.Web.UI.Control,System.Web.UI.Control)">
+	<summary>
+ disable all Control
+ </summary>
+	<param name="control">控制項</param>
+	<param name="sDisplayCtl">子控制項</param>
+	<remarks>
+ [Titan] 	2011/07/20	Created 
+ </remarks>
+</member><member name="P:com.Azion.EloanUtility.My.Resources.Resources.ResourceManager">
+	<summary>
+  傳回這個類別使用的快取的 ResourceManager 執行個體。
+</summary>
+</member><member name="P:com.Azion.EloanUtility.My.Resources.Resources.Culture">
+	<summary>
+  覆寫目前執行緒的 CurrentUICulture 屬性，對象是所有
+  使用這個強型別資源類別的資源查閱。
+</summary>
+</member><member name="T:com.Azion.EloanUtility.My.Resources.Resources">
+	<summary>
+  用於查詢當地語系化字串等的強型別資源類別
+</summary>
+</member><member name="M:com.Azion.EloanUtility.ValidateUtility.isValidateData(System.Object)">
+	<summary>
+ 驗證有無資料
+ </summary>
+	<param name="obj"></param>
+	<returns></returns>
+	<remarks>
+ [Titan] 	2011/07/19	Created
+ </remarks>
+</member><member name="T:com.Azion.EloanUtility.ValidateUtility">
+	<summary>
+ 提供資料驗證相關函式
+ [Titan] 	2011/07/19	Created
+ </summary>
+</member><member name="M:com.Azion.EloanUtility.NetUtility.FtpUpload(System.String,System.String,System.String,System.String)">
+	<summary>
+ fileName上傳的檔案
+ </summary>
+	<param name="sFileNmae"> c:\abc.xml</param>
+	<param name="sUploadURL">ftp://127.0.0.1</param>
+	<param name="sUserName">使用者FTP登入帳號</param>
+	<param name="sPassword">使用者登入密碼</param>
+	<remarks>
+ [Titan] 	2011/07/19	Created
+ </remarks>
+	<exception cref="T:System.Net.Sockets.SocketException"></exception>
+</member><member name="M:com.Azion.EloanUtility.NetUtility.pingSite(System.String,System.Int32)">
+	<summary>
+ ping tool
+ </summary>
+	<param name="hostNameOrAddress">IP or HostName</param>
+	<param name="portnum">port number</param>
+	<returns>Boolean</returns>
+	<remarks>
+ [Titan] 	2011/07/19	Created
+ </remarks>
+	<exception cref="T:System.Net.Sockets.SocketException"></exception>
+</member><member name="M:com.Azion.EloanUtility.NetUtility.socketSend(System.String,System.Int32,System.String,System.Int32)">
+	<summary>
+ socket client
+ </summary>
+	<param name="hostNameOrAddress">IP or HostName</param>
+	<param name="portnum">port number</param>
+	<param name="sMsg">Msg</param>
+	<param name="iTimeOut">Time Out</param>
+	<returns>Boolean</returns>
+	<remarks>
+ [Titan] 	2011/07/19	Created
+ </remarks>
+	<exception cref="T:System.Net.Sockets.SocketException"></exception>
+</member><member name="M:com.Azion.EloanUtility.NetUtility.UploadByIDMService(System.String,System.String,System.String,System.String,System.String,System.Web.HttpPostedFile)">
+	<summary>
+ 檔案上傳，將硬碟檔案上傳至主機
+ </summary>
+	<param name="sCaseID">案件編號</param>
+	<param name="sCASEID_GA">擔保品案件編號</param>
+	<param name="sUserID">使用者帳號</param>
+	<param name="sBRID">使用者分行</param>
+	<param name="sSUBSYSID">子系統編號</param>
+	<param name="objPostedFile">上傳檔案</param>
+	<returns>String</returns>
+	<remarks>
+ [Dora] 	2011/08/05	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.NetUtility.DeleteFile(System.String,System.String,System.String)">
+	<summary>
+ 檔案刪除，根據傳入的案件編號、擔保品案件編號以及檔案名稱，將已上傳檔案進行刪除
+ </summary>
+	<param name="sCaseID">案件編號</param>
+	<param name="sCASEID_GA">擔保品案件編號</param>
+	<param name="sFILENAME">檔案名稱</param>
+	<returns>String</returns>
+	<remarks>
+ [Dora] 	2011/08/05	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.NetUtility.DownloadFile(System.String,System.String,System.String)">
+	<summary>
+ 檔案下載，開啟已上傳的檔案
+ </summary>
+	<param name="sCaseID">案件編號</param>
+	<param name="sCASEID_GA">擔保品案件編號</param>
+	<param name="sFILENAME">檔案名稱</param>
+	<remarks>
+ [Dora] 	2011/08/05	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.NetUtility.GMail_Send(System.String[],System.String[],System.String,System.String,System.Boolean,System.String[],System.Boolean)">
+	<summary>
+ 完整的寄信功能
+ </summary>
+	<param name="sMailTos">收信人E-mail Address</param>
+	<param name="sCcs">副本E-mail Address</param>
+	<param name="sMailSub">主旨</param>
+	<param name="sMailBody">信件內容</param>
+	<param name="isBodyHtml">是否採用HTML格式</param>
+	<param name="sfilePaths">附檔在WebServer檔案總管路徑</param>
+	<param name="deleteFileAttachment">是否刪除在WebServer上的附件</param>
+	<returns>是否成功</returns>
+</member><member name="T:com.Azion.EloanUtility.NetUtility">
+	<summary>
+ 提供網路相關函式
+ Ftp、HTTP....
+ [Titan] 	2011/07/19	Created
+ </summary>
+</member><member name="M:com.Azion.EloanUtility.ImgUtility.reSizeImage(System.Double,System.String)">
+	<summary>
+ 縮放圖檔
+ </summary>
+	<param name="scaleFactor">比例</param>
+	<param name="sFileName">檔名&gt;</param>
+	<remarks>
+ [Titan] Create 2011/12/23
+ </remarks>
+	<returns>MemoryStream</returns>
+</member><member name="M:com.Azion.EloanUtility.NumUtility.str2Amount(System.Object,System.Boolean)">
+	<summary>
+ 金額的表示, 每3位數(千)加逗號，到小數點第二位，超過會自動四捨五入
+ if isZero2Dash = True then  0 --&gt; 顯示 -(Dash) else 0 --&gt;顯示 0
+ IntegerUtility.str2Amount(0,True)--&gt; 這個會顯示 -
+ IntegerUtility.str2Amount(0,False)--&gt; 這個會顯示 0.00
+ </summary>
+	<param name="obj">Object</param>
+	<param name="isZero2Dash">Boolean</param>
+	<returns>String</returns>
+	<remarks>
+ [Titan] 	2011/07/19	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.NumUtility.str2Percen(System.Object,System.Boolean)">
+	<summary>
+ 百分比
+ if isZero2Dash = True then  0 --&gt; 顯示 -(Dash) else 0 --&gt;顯示 0
+ IntegerUtility.str2Amount(0,True)--&gt; 這個會顯示 -
+ IntegerUtility.str2Amount(0,False)--&gt; 這個會顯示 0.00%
+ </summary>
+	<param name="obj">Object</param>
+	<param name="isZero2Dash">Boolean</param>
+	<returns>String</returns>
+	<remarks>
+ [Titan] 	2011/07/19	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.NumUtility.cypherConverCNum(System.String)">
+	<summary>
+ 阿拉伯數字轉為大寫國字
+ </summary>
+	<param name="sNum"></param>
+	<returns></returns>
+	<remarks>
+ [Titan] 	2011/07/19	Created
+ </remarks>
+</member><member name="T:com.Azion.EloanUtility.NumUtility">
+	<summary>
+ 提供數字相關函式
+ Format....
+ [Titan] 	2011/07/19	Created
+ </summary>
+</member><member name="M:com.Azion.EloanUtility.EncryptUtility.MD5(System.String)">
+	<summary>
+ 計算字串的MD5值
+ </summary>
+	<param name="input">要計算MD5的原始字串</param>
+	<returns>傳回MD5值，以字串的形式傳回</returns>
+	<remarks></remarks>
+</member><member name="M:com.Azion.EloanUtility.FileUtility.getAppSettings(System.String,System.String)">
+	<summary>
+ 取得目前應用程式預設組態的參數
+ AppSettingsSection 物件包含組態檔之 appSettings 區段的內容
+ com.Azion.EloanUtility.FileUtility.getAppSettings("skey",Application("EloanConf"))
+ C:\eLoanConf\eloan_EnTie.config
+ </summary>
+	<param name="sKey">key</param>
+	<param name="sFileName">SString 設定檔的位置</param>
+	<returns></returns>
+	<remarks>
+ [Titan] 	2011/07/19	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.FileUtility.setAppSettings(System.String,System.String,System.String,System.Boolean)">
+	<summary>
+ 取得目前應用程式預設組態的參數
+ AppSettingsSection 物件包含組態檔之 appSettings 區段的內容
+ com.Azion.EloanUtility.FileUtility.getAppSettings("skey",Application("EloanConf"))
+ </summary>
+	<param name="sKey">key</param>
+	<param name="sFileName">SString 設定檔的位置</param>
+	<returns></returns>
+	<remarks>
+ [Titan] 	2011/07/19	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.FileUtility.getPathFilebyExet(System.String,System.String[],System.Boolean)">
+	<summary>
+ 取得目錄下副檔名為特定格式的檔案
+ </summary>
+	<param name="sDirPath">起始目錄</param>
+	<param name="sFileExtension">要尋找的副檔名</param>
+	<param name="bRecursive">是否要尋找子目錄(預設值為不尋找子目錄)</param>
+	<returns>List(Of FileInfo)</returns>
+	<remarks>
+ [Titan] 	2011/07/19	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.FileUtility.getPathFilebyNaming(System.String,System.String,System.Boolean)">
+	<summary>
+ 取得目錄下相似的檔名檔案
+ </summary>
+	<param name="sDirPath">起始目錄</param>
+	<param name="sNaming">要尋找的檔名</param>
+	<param name="bRecursive">是否要尋找子目錄(預設值為不尋找子目錄)</param>
+	<returns>List(Of FileInfo)</returns>
+	<remarks>
+ [Titan] 	2011/07/19	Created
+ </remarks>
+</member><member name="T:com.Azion.EloanUtility.FileUtility">
+	<summary>
+ 提供檔案相關函式
+ [Titan] 	2011/07/19	Created
+ </summary>
+</member><member name="M:com.Azion.EloanUtility.StrUtility.stripCommas(System.String)">
+	<summary>
+ 除了[a-zA-Z0-9_.@-]外，其餘轉為String.Empty
+ </summary>
+	<param name="str"></param>
+	<returns>String</returns>
+	<remarks>
+ [Titan] 	2011/07/19	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.StrUtility.strSplitStartEnd(System.String@,System.String@,System.String@,System.Boolean,System.Int16)">
+	<summary>
+ 從strSplit字串中先取得strStart位置，再從擷取後的位置找strEnd位置，再擷取完畢。
+ </summary>
+	<param name="strSplit">input String</param>
+	<param name="strStart">Start String</param>
+	<param name="strEnd">End String</param>
+	<param name="bolPreserveStartEnd">Boolean 是否保留原本搜尋的字串</param>
+	<param name="shtToLowOrUpp">Short 全部轉換大(1)小(0)寫</param>
+	<returns></returns>
+	<remarks>
+ [Titan] 	2011/07/19	Created
+ </remarks>
+</member><member name="M:com.Azion.EloanUtility.StrUtility.FormatUserID(System.String,System.Boolean)">
+	<summary>
+ 員編格式化: 傳回7碼員編, 也可傳回安泰的5碼員編(EnTie5Code=True)
+ </summary>
+	<param name="inUserID"></param>
+	<param name="EnTie5Code"></param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:com.Azion.EloanUtility.StrUtility.FillZero(System.String,System.Int32)">
+	<summary>
+ 補足0位函式
+ </summary>
+	<param name="sBeAdd">輸入字串</param>
+	<param name="iLength">補足長度(字串總長度)</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:com.Azion.EloanUtility.StrUtility.FillRightLength(System.String,System.String,System.Int32)">
+	<summary>
+ 左靠右補
+ </summary>
+	<param name="sINData">輸入字串</param>
+	<param name="sRFill">右補字串</param>
+	<param name="iLength">右補長度(字串總長度)</param>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:com.Azion.EloanUtility.StrUtility.ToYYYMMDD(System.Object)">
+	<summary>
+ 轉換日期函式-西曆轉中曆 YYYY/MM/DD-&gt;YYYMMDD
+ </summary>
+	<param name="D_Date">西元日期</param>
+	<returns>民國年月日</returns>
+	<remarks></remarks>
+</member><member name="T:com.Azion.EloanUtility.StrUtility">
+	<summary>
+ 提供字串相關函式
+ Format....
+ [Titan] 	2011/07/19	Created
+ </summary>
+</member>
+</members>
+</doc>

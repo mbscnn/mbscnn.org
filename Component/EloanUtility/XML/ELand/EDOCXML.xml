@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<EDOCAPPLY version="1.0">
+  <REQUEST>
+    <ApplyInfo>
+      <!--申請人資料-->
+      <ApplyMode></ApplyMode>
+      <!--申請模式,	VARCHAR	1	"0"表示一般申請;"1"表示立即申請(強迫申請)-->
+      <MaxPage>30</MaxPage>
+      <!--謄本最大下載張數	INTEGER-->
+      <BIOID></BIOID>
+      <!--系統整合關連值1	VARCHAR	50	※-->
+      <OID></OID>
+      <!--系統整合關連值2	VARCHAR	50	-->
+      <User ID="888">AZION888</User>
+      <!--申請者帳號(ID)與申請者姓名	VARCHARVARCHAR	3030	※-->
+      <Unit ID="AZION">驊宏資通</Unit>
+      <!--申請者所屬單位(ID)及單位名稱	VARCHARVARCHAR	30100	※-->
+      <Account id="" PWD="" ACCTYPE=""></Account>
+      <!--申請帳號類別:"0"測試帳號, "1"跨縣市公務帳號,"2"HiNet帳號,"5"法拍帳號-->
+      <AAA_CODE></AAA_CODE>
+      <!--HiNet 1A身分認證碼	VARCHAR	50	-->
+      <Charge>
+        <!--計費資料-->
+        <TYPE></TYPE>
+        <!--計費類別	VARCHAR	4	-->
+        <User ID=""></User>
+        <!--計費人員ID及姓名-->
+        <Unit ID=""></Unit>
+        <!--計費單位ID及名稱-->
+      </Charge>
+    </ApplyInfo>
+    <DATA NO="1">
+      <CITYID />
+      <AREAID />
+      <LN />
+      <IR48 />
+      <IRC />
+      <IRF />
+      <LIDN />
+      <REG CHECK="N">
+        <PRINT_HD>N</PRINT_HD>
+        <PRINT_OD>N</PRINT_OD>
+        <PRINT_SRPRC>N</PRINT_SRPRC>
+        <TYPE />
+        <REG_SAME>Y</REG_SAME>
+      </REG>
+      <PRC CHECK="N">
+        <BRSURVEY />
+        <AA16 TYPE="" CHECK="">
+          <START_YEAR />
+          <END_YEAR />
+        </AA16>
+        <BB21 CHECK="" TYPE="">
+          <START_YEAR />
+          <END_YEAR />
+        </BB21>
+        <SRPRCE />
+        <PRC_TYPE />
+        <PRC_SAME>Y</PRC_SAME>
+      </PRC>
+      <EMAP CHECK = "N">
+        <TYPE></TYPE>
+        <ADDR></ADDR>
+      </EMAP>
+      <PIC1 CHECK="N">
+        <P1>N</P1>
+        <P2>-1</P2>
+        <PIC1_SAME>Y</PIC1_SAME>
+      </PIC1>
+      <PIC2 CHECK="N">
+        <PIC2_SAME>Y</PIC2_SAME>
+      </PIC2>
+      <IDX CHECK="N">
+        <IS03 />
+        <IS04_1 />
+        <IS04_2 />
+        <IS00 />
+        <IS01 />
+        <ISTYPE />
+        <IDX_SAME>Y</IDX_SAME>
+      </IDX>
+      <IDR CHECK="N">
+        <IS03 />
+        <IS04_1 />
+        <IS04_1C />
+        <IS04_2 />
+        <IDR_SAME>Y</IDR_SAME>
+      </IDR>
+      <REF CHECK="N">
+        <REF_SAME>Y</REF_SAME>
+      </REF>
+      <SAVE_P00>N</SAVE_P00>
+    </DATA>
+  </REQUEST>
+</EDOCAPPLY>

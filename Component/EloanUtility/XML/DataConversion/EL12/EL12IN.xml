@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="BIG5"?>
+<!-- EL12:法金e-Loan本行存單及備償專戶查詢_下行電文( AS/400->e-Loan) -->
+<INPUT>
+  <AP_HEADER>
+    <ABEND></ABEND>
+    <!--錯誤代碼空白或0000或第一碼為' W' - 表成功(第一碼為' W'表示警告訊息，需在畫面上提示)-->
+    <FROM_HOST>BELOANE</FROM_HOST>
+    <FROM_SERVICE></FROM_SERVICE>
+    <FROM_DTAQ></FROM_DTAQ>
+    <TO_HOST>900</TO_HOST>
+    <!--production:S00A-->
+    <TO_SERVICE></TO_SERVICE>
+    <TO_DTAQ>CGCTL</TO_DTAQ>
+    <!--查詢類交易請輸入’CGCTL’帳務類交易請輸入’CGCTLT’-->
+    <MSG_ID>SSSDDDDDDDDTTTTTTTTNNNNN</MSG_ID>
+    <!--訊息ID:1~3 系統別,4~11 日期,12~19 時間,20~24 流水號-->
+    <DATE>DDDDDDDD</DATE>
+    <TIME>TTTTTTTT</TIME>
+    <TXCD>EL12</TXCD>
+    <SUBCODE>00</SUBCODE>
+    <PRIORITY>3</PRIORITY>
+    <!--帳務類為3查詢類為6-->
+    <END_CODE>Y</END_CODE>
+  </AP_HEADER>
+  <AP_DATA>
+    <TIAHD from="151" to="180" length="30" type="char"></TIAHD>
+    <KIND  from="181" to="181" length="1" type="char">2</KIND>
+    <X21D  from="182" to="193" length="12" type="char">003126116561</X21D >
+    <SEQ  from="194" to="200" length="7" type="num" decimal="0">3</SEQ>
+    <FCUR  from="201" to="203" length="3" type="char">EUR</FCUR>
+  </AP_DATA>
+</INPUT>

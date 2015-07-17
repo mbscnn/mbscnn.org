@@ -1,0 +1,10 @@
+﻿1.專案名稱:DBMeta
+2.組件名稱:DBMeta
+3.輸出類型:類別庫
+4.命名空間:Com.Azion.VB.DBMeta
+5.参考組件:DBUtility.dll
+6.相關被参考組件:
+	     OP dll: EN_OP,FX_OP
+
+產生Meta Code : generateMetaData.vb
+設定檔:C:\DBProfile.txt

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="big5"?>
+<OUTPUT>
+  <MQ_HEADER>
+    <MDID></MDID>
+    <IP>10.253.6.244</IP>
+    <MAC>enco</MAC>
+  </MQ_HEADER>
+  <AP_HEADER>
+    <ABEND></ABEND>
+    <FROM_HOST>BELOANE</FROM_HOST>
+    <FROM_SERVICE></FROM_SERVICE>
+    <FROM_DTAQ></FROM_DTAQ>
+    <TO_HOST>900</TO_HOST>
+    <TO_SERVICE></TO_SERVICE>
+    <TO_DTAQ>CGCTLT</TO_DTAQ>
+    <MSG_ID>BLN201107071800000100003</MSG_ID>
+    <DATE>20110707</DATE>
+    <TIME>18000001</TIME>
+    <TXCD>EL14</TXCD>
+    <SUBCODE>00</SUBCODE>
+    <PRIORITY>6</PRIORITY>
+    <END_CODE>Y</END_CODE>
+  </AP_HEADER>
+  <AP_DATA>
+    <DATA1>
+      <TIAHD type="char" length="30" ></TIAHD>
+      <!-- 案件編號 -->
+      <EALWNO type="char" length="10">7171001233</EALWNO>
+      <!-- 區域中心代碼 706/956-->
+      <ERAREA type="char" length="3">956</ERAREA>
+      <!-- 客戶統編 -->
+      <ECFI1 type="char" length="11">21744392</ECFI1>
+      <!-- AO/RM CODE 04678/01057-->
+      <AORMCD type="char" length="5">01057</AORMCD>
+      <!-- 事業群 1/2-->
+      <EIBBUS type="char" length="1">2</EIBBUS>
+      <!-- 核貸層級代碼 -->
+      <EAULVL type="char" length="1">4</EAULVL>
+    </DATA1>
+  </AP_DATA>
+</OUTPUT>

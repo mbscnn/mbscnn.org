@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="BIG5"?>
+<!--  法金e-Loan 房貸信貸案件明細查詢 上行電文  -->
+<OUTPUT>       
+ <MQ_HEADER>           
+  <MDID />           
+  <IP>10.253.6.244</IP>           
+  <MAC>enco</MAC>         
+ </MQ_HEADER>       
+ <AP_HEADER>
+   <ABEND></ABEND>           
+  <FROM_HOST>BELOANE</FROM_HOST>           
+  <FROM_SERVICE />           
+  <FROM_DTAQ />           
+  <TO_HOST>900</TO_HOST>           
+  <TO_SERVICE />           
+  <TO_DTAQ>CGCTL</TO_DTAQ>           
+  <MSG_ID>BLN201107071800000100003</MSG_ID>           
+  <DATE>20110707</DATE>           
+  <TIME>18000001</TIME>           
+  <TXCD>EL13</TXCD>           
+  <SUBCODE>00</SUBCODE>           
+  <PRIORITY>6</PRIORITY>           
+  <END_CODE>Y</END_CODE>         
+ </AP_HEADER>       
+ <AP_DATA>           
+  <DATA1>
+	  <!-- TIA HEAD -->
+	  <TIAHD type="char" length="30"> </TIAHD>
+	  <!-- 案件編號 -->
+    <SEALWN type="char" length="10">7171001233</SEALWN>
+	  <!--案件類型 "1": 房貸 "2": 信貸 -->
+	  <EKIND  type="char" length="1">1</EKIND>
+   <!-- 第一組案件明細-->
+	  <!-- 序號 -->
+	  <ESEQ1  type="num" decimal="0" length="2">1</ESEQ1>
+	  <!-- 性質別  -->
+	  <ECAS1  type="char" length="6">C019</ECAS1>
+	  <!-- 案件類別  -->
+	  <ETP1 type="char" length="1">1</ETP1>
+	  <!-- 科目  -->
+	  <EIT1 type="char" length="1">1</EIT1>
+	  <!-- 用途  -->
+	  <EUSE1 type="char" length="1">5</EUSE1>
+	  <!-- 撥款金額 -->
+	  <EAMT1 type="num" decimal="0" length="13">5000000</EAMT1>
+	  <!-- 期數 -->
+	  <EINI1 type="num" decimal="0" length="3">83</EINI1>
+  <!-- 第二組案件明細-->
+	  <!-- 序號 -->
+	  <ESEQ2  type="num" decimal="0" length="2">2</ESEQ2>
+	  <!-- 性質別  -->
+	  <ECAS2  type="char" length="6">C019</ECAS2>
+	  <!-- 案件類別  -->
+	  <ETP2 type="char" length="1">1</ETP2>
+	  <!-- 科目  -->
+	  <EIT2 type="char" length="1">1</EIT2>
+	  <!-- 用途  -->
+	  <EUSE2 type="char" length="1">5</EUSE2>
+	  <!-- 撥款金額 -->
+	  <EAMT2 type="num" decimal="0" length="13">5000000</EAMT2>
+	  <!-- 期數 -->
+	  <EINI2 type="num" decimal="0" length="3">2</EINI2>
+  <!-- 第三組案件明細-->
+	  <!-- 序號 -->
+	  <ESEQ3  type="num" decimal="0" length="2">3</ESEQ3>
+	  <!-- 性質別  -->
+	  <ECAS3  type="char" length="6">C019</ECAS3>
+	  <!-- 案件類別  -->
+	  <ETP3 type="char" length="1">1</ETP3>
+	  <!-- 科目  -->
+	  <EIT3 type="char" length="1">1</EIT3>
+	  <!-- 用途  -->
+	  <EUSE3 type="char" length="1">5</EUSE3>
+	  <!-- 撥款金額 -->
+	  <EAMT3 type="num" decimal="0" length="13">5000000</EAMT3>
+	  <!-- 期數 -->
+	  <EINI3 type="num" decimal="0" length="3">84</EINI3>
+ <!-- 第四組案件明細-->
+	  <!-- 序號 -->
+	  <ESEQ4  type="num" decimal="0" length="2">4</ESEQ4>
+	  <!-- 性質別  -->
+	  <ECAS4  type="char" length="6">C019</ECAS4>
+	  <!-- 案件類別  -->
+	  <ETP4 type="char" length="1">1</ETP4>
+	  <!-- 科目  -->
+	  <EIT4 type="char" length="1">1</EIT4>
+	  <!-- 用途  -->
+	  <EUSE4 type="char" length="1">5</EUSE4>
+	  <!-- 撥款金額 -->
+	  <EAMT4 type="num" decimal="0" length="13">5000000</EAMT4>
+	  <!-- 期數 -->
+	  <EINI4 type="num" decimal="0" length="3">84</EINI4>
+  </DATA1>        
+ </AP_DATA>     
+</OUTPUT>
+

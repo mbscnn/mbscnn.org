@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<IFX>
+  <Header>
+    <ClientAppSeq>111111111111</ClientAppSeq>
+    <ServerAppSeq>111111111111</ServerAppSeq>
+    <MsgId>ifxifxifx</MsgId>
+  </Header>
+  <SignonRq>
+    <SignonPswd>
+      <SignonRole>Customer</SignonRole>
+      <CustId>
+        <CustPermIdType>1</CustPermIdType>
+        <CustPermId>11027686</CustPermId>
+        <CustLoginId>GreatCompany</CustLoginId>
+      </CustId>
+    </SignonPswd>
+    <SessKey>duycsytfcytfsty</SessKey>
+    <ClientDt>2003-03-06T08:08:08</ClientDt>
+    <ClientApp>
+      <Name>FXML</Name>
+      <Password>xygdvw1</Password>
+      <IPAddr />
+    </ClientApp>
+    <RqChkType />
+    <Cert>
+      <CertType />
+      <Subject>C=;O=;OU=;CN=</Subject>
+    </Cert>
+  </SignonRq>
+  <TrxSvcRq>
+    <TrxRq>
+      <CustPermId />
+      <ActiveFlag />
+    </TrxRq>
+  </TrxSvcRq>
+</IFX>

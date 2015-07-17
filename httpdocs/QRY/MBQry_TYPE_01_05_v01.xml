@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+  <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+    <Author>ASGARD</Author>
+    <LastAuthor>ASGARD</LastAuthor>
+    <LastPrinted>2008-11-14T02:24:26Z</LastPrinted>
+    <Created>2008-11-13T08:54:33Z</Created>
+    <LastSaved>2008-11-13T09:15:29Z</LastSaved>
+    <Company>ASGARD</Company>
+    <Version>12.00</Version>
+  </DocumentProperties>
+  <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+    <WindowHeight>7620</WindowHeight>
+    <WindowWidth>14640</WindowWidth>
+    <WindowTopX>480</WindowTopX>
+    <WindowTopY>300</WindowTopY>
+    <ProtectStructure>False</ProtectStructure>
+    <ProtectWindows>False</ProtectWindows>
+  </ExcelWorkbook>
+  <Styles>
+    <Style ss:ID="Default" ss:Name="Normal">
+      <Alignment ss:Vertical="Center"/>
+      <Borders/>
+      <Font ss:FontName="新細明體" x:CharSet="136" x:Family="Roman" ss:Size="12"
+       ss:Color="#000000"/>
+      <Interior/>
+      <NumberFormat/>
+      <Protection/>
+    </Style>
+    <Style ss:ID="m43607360">
+      <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+      </Borders>
+      <Font ss:FontName="新細明體" x:CharSet="136" x:Family="Roman" ss:Color="#000000"/>
+    </Style>
+    <Style ss:ID="m43607380">
+      <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+      </Borders>
+      <Font ss:FontName="新細明體" x:CharSet="136" x:Family="Roman" ss:Color="#000000"/>
+    </Style>
+    <Style ss:ID="m43607400">
+      <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+      </Borders>
+      <Font ss:FontName="新細明體" x:CharSet="136" x:Family="Roman" ss:Color="#000000"/>
+    </Style>
+    <Style ss:ID="m43607420">
+      <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+      </Borders>
+      <Font ss:FontName="新細明體" x:CharSet="136" x:Family="Roman" ss:Color="#000000"/>
+    </Style>
+    <Style ss:ID="m43607136">
+      <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+      </Borders>
+      <Font ss:FontName="標楷體" x:CharSet="136" x:Family="Script" ss:Size="14"
+       ss:Color="#000000" ss:Bold="1"/>
+    </Style>
+    <Style ss:ID="m43607156">
+      <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+      </Borders>
+      <Font ss:FontName="新細明體" x:CharSet="136" x:Family="Roman" ss:Color="#000000"/>
+    </Style>
+    <Style ss:ID="m43607176">
+      <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+      </Borders>
+      <Font ss:FontName="新細明體" x:CharSet="136" x:Family="Roman" ss:Color="#000000"/>
+    </Style>
+    <Style ss:ID="m43607196">
+      <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+      </Borders>
+      <Font ss:FontName="新細明體" x:CharSet="136" x:Family="Roman" ss:Color="#000000"/>
+    </Style>
+    <Style ss:ID="m43607216">
+      <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+      </Borders>
+      <Font ss:FontName="新細明體" x:CharSet="136" x:Family="Roman" ss:Color="#000000"/>
+    </Style>
+    <Style ss:ID="m43607236">
+      <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+      </Borders>
+      <Font ss:FontName="新細明體" x:CharSet="136" x:Family="Roman" ss:Color="#000000"/>
+    </Style>
+    <Style ss:ID="m43607256">
+      <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+      </Borders>
+      <Font ss:FontName="新細明體" x:CharSet="136" x:Family="Roman" ss:Color="#000000"/>
+    </Style>
+    <Style ss:ID="m43607276">
+      <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+      </Borders>
+      <Font ss:FontName="新細明體" x:CharSet="136" x:Family="Roman" ss:Color="#000000"/>
+    </Style>
+    <Style ss:ID="m43607296">
+      <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+      </Borders>
+      <Font ss:FontName="新細明體" x:CharSet="136" x:Family="Roman" ss:Color="#000000"/>
+    </Style>
+    <Style ss:ID="m43607316">
+      <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+      </Borders>
+      <Font ss:FontName="新細明體" x:CharSet="136" x:Family="Roman" ss:Color="#000000"/>
+    </Style>
+    <Style ss:ID="s72">
+      <Alignment ss:Horizontal="Right" ss:Vertical="Center" ss:WrapText="1"/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+      </Borders>
+      <Font ss:FontName="新細明體" x:CharSet="136" x:Family="Roman" ss:Color="#000000"/>
+    </Style>
+    <Style ss:ID="s32">
+      <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+      </Borders>
+      <Font ss:FontName="標楷體" x:CharSet="136" x:Family="Script" ss:Size="12"/>
+    </Style>
+    <Style ss:ID="s33">
+      <Alignment ss:Horizontal="Right" ss:Vertical="Bottom" ss:WrapText="1"/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+      </Borders>
+      <Font ss:FontName="標楷體" x:CharSet="136" x:Family="Script" ss:Size="12"/>
+    </Style>
+    <Style ss:ID="s62">
+      <Alignment ss:Vertical="Center" ss:WrapText="1"/>
+      <Borders/>
+      <Font ss:FontName="新細明體" x:CharSet="136" x:Family="Roman" ss:Color="#000000"/>
+    </Style>
+    <Style ss:ID="s63">
+      <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+      </Borders>
+      <Font ss:FontName="新細明體" x:CharSet="136" x:Family="Roman" ss:Color="#000000"/>
+    </Style>
+    <Style ss:ID="s64">
+      <Alignment ss:Horizontal="Right" ss:Vertical="Center" ss:WrapText="1"/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+      </Borders>
+      <Font ss:FontName="新細明體" x:CharSet="136" x:Family="Roman" ss:Color="#000000"/>
+    </Style>
+    <Style ss:ID="s71">
+      <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
+      <Borders/>
+      <Font ss:FontName="新細明體" x:CharSet="136" x:Family="Roman" ss:Color="#000000"/>
+    </Style>
+  </Styles>
+  <Worksheet ss:Name="Sheet1">
+    <Table ss:ExpandedColumnCount="17" ss:ExpandedRowCount="10000" x:FullColumns="1"
+     x:FullRows="1" ss:StyleID="s62" ss:DefaultColumnWidth="54" ss:DefaultRowHeight="30">
+      <Column ss:StyleID="s63" ss:Width="100" />
+      <Column ss:StyleID="s63" ss:Width="100" />
+      <Column ss:StyleID="s63" ss:Width="100" />
+      <Column ss:StyleID="s63" ss:Width="100" />
+      <Column ss:StyleID="s63" ss:Width="100" />
+      <Column ss:StyleID="s63" ss:Width="100" />
+      <Column ss:StyleID="s63" ss:Width="100" />
+      <Column ss:StyleID="s63" ss:Width="100" />
+      <Column ss:StyleID="s63" ss:Width="100" />
+      <Column ss:StyleID="s63" ss:Width="100" />
+      <Column ss:StyleID="s63" ss:Width="100" />
+      <Column ss:StyleID="s63" ss:Width="100" />
+      <Column ss:StyleID="s63" ss:Width="100" />
+      <Column ss:StyleID="s63" ss:Width="100" />
+      <Column ss:StyleID="s63" ss:Width="100" />
+      <Column ss:StyleID="s63" ss:Width="100" />
+      <Column ss:StyleID="s63" ss:Width="100" />
+      <Row ss:AutoFitHeight="0">
+        <Cell ss:MergeAcross="16" ss:StyleID="m43607136">
+          <Data ss:Type="String">一般會員繳款年報表</Data>
+        </Cell>
+      </Row>
+      <Row ss:AutoFitHeight="1" ss:Height="40" ss:StyleID="s71">
+        <Cell ss:StyleID="m43607156">
+          <Data ss:Type="String">區別</Data>
+        </Cell>
+        <Cell ss:StyleID="m43607156">
+          <Data ss:Type="String">委員</Data>
+        </Cell>
+        <Cell ss:StyleID="m43607156">
+          <Data ss:Type="String">會員編號</Data>
+        </Cell>
+        <Cell ss:StyleID="m43607176">
+          <Data ss:Type="String">捐款人</Data>
+        </Cell>
+        <Cell ss:StyleID="m43607176">
+          <Data ss:Type="String">繳款年度</Data>
+        </Cell>
+        <Cell ss:StyleID="m43607176">
+          <Data ss:Type="String">1月</Data>
+        </Cell>
+        <Cell ss:StyleID="m43607196">
+          <Data ss:Type="String">2月</Data>
+        </Cell>
+        <Cell ss:StyleID="m43607196">
+          <Data ss:Type="String">3月</Data>
+        </Cell>
+        <Cell ss:StyleID="m43607196">
+          <Data ss:Type="String">4月</Data>
+        </Cell>
+        <Cell ss:StyleID="m43607196">
+          <Data ss:Type="String">5月</Data>
+        </Cell>
+        <Cell ss:StyleID="m43607196">
+          <Data ss:Type="String">6月</Data>
+        </Cell>
+        <Cell ss:StyleID="m43607196">
+          <Data ss:Type="String">7月</Data>
+        </Cell>
+        <Cell ss:StyleID="m43607196">
+          <Data ss:Type="String">8月</Data>
+        </Cell>
+        <Cell ss:StyleID="m43607196">
+          <Data ss:Type="String">9月</Data>
+        </Cell>
+        <Cell ss:StyleID="m43607196">
+          <Data ss:Type="String">10月</Data>
+        </Cell>
+        <Cell ss:StyleID="m43607196">
+          <Data ss:Type="String">11月</Data>
+        </Cell>
+        <Cell ss:StyleID="m43607196">
+          <Data ss:Type="String">12月</Data>
+        </Cell>
+      </Row>
+      {{DATAROW}}
+    </Table>
+    <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+      <PageSetup>
+        <Layout x:Orientation="Landscape" x:CenterHorizontal="1"/>
+        <Header x:Margin="0"/>
+        <Footer x:Margin="0"/>
+        <PageMargins x:Bottom="0.19685039370078741" x:Left="0.5"
+         x:Right="0" x:Top="0.19685039370078741"/>
+      </PageSetup>
+      <Unsynced/>
+      <Print>
+        <ValidPrinterInfo/>
+        <PaperSizeIndex>9</PaperSizeIndex>
+        <VerticalResolution>0</VerticalResolution>
+        <Scale>75</Scale>
+        <Gridlines/>
+      </Print>
+      <Selected/>
+      <Panes>
+        <Pane>
+          <Number>3</Number>
+          <RangeSelection>R1C1:R1C17</RangeSelection>
+        </Pane>
+      </Panes>
+      <ProtectObjects>False</ProtectObjects>
+      <ProtectScenarios>False</ProtectScenarios>
+    </WorksheetOptions>
+  </Worksheet>
+</Workbook>

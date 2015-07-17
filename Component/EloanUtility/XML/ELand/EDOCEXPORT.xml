@@ -1,0 +1,788 @@
+<?xml version="1.0" encoding="big5"?>
+<EDOCExport version="1.0">
+	<RespMsg Code="0">謄本資料匯出成功</RespMsg>
+
+	<EDOCData>
+		<BuildREG>
+			<City ID="379160000A">臺北市</City>
+			<Area ID="11">文山區</Area>
+			<Section ID="0126">木柵段二小段</Section>
+			<BuildNo>02575000</BuildNo>
+			<RegisterReason Date="0841229">第一次登記</RegisterReason>
+			<TotalAreaSize>19.89</TotalAreaSize>
+			<Address>木新路２段２７號十四樓</Address>
+			<Purpose ID="A">住家用</Purpose>
+			<Material ID="04">鋼筋混凝土造</Material>
+			<BuildLevel>014</BuildLevel>
+			<FinishDate>0841024</FinishDate>
+
+			<BuildLocation>
+				<Section ID="0126">木柵段二小段</Section>
+				<LandNo>01390000</LandNo>
+			</BuildLocation>
+
+			<BuildLocation>
+				<Section ID="0126">木柵段二小段</Section>
+				<LandNo>01390000</LandNo>
+			</BuildLocation>
+
+			<FloorInfo>
+				<BuildType Type="M">建物分層</BuildType>
+				<Purpose ID="014">十四層</Purpose>
+				<AreaSize>19.89</AreaSize>
+			</FloorInfo>
+
+			<FloorInfo>
+				<BuildType Type="M">建物分層</BuildType>
+				<Purpose ID="014">十四層</Purpose>
+				<AreaSize>19.89</AreaSize>
+			</FloorInfo>
+
+			<BTOD31>
+				<MainBuildNo SectionID="0126">02575000</MainBuildNo>
+				<CommonUseBuildNo SectionID="0126">02676000</CommonUseBuildNo>
+				<AreaSize>1922.95</AreaSize>
+
+				<RightsRange>
+					<Denominator>100000</Denominator>
+					<Numerator>180</Numerator>
+				</RightsRange>
+
+				<ParkInfo>
+					<ParkNum>地下一層59</ParkNum>
+
+					<RightsRange>
+						<Denominator>100000</Denominator>
+						<Numerator>993</Numerator>
+					</RightsRange>
+
+				</ParkInfo>
+
+				<ParkInfo>
+					<ParkNum>地下一層59</ParkNum>
+
+					<RightsRange>
+						<Denominator>100000</Denominator>
+						<Numerator>993</Numerator>
+					</RightsRange>
+
+				</ParkInfo>
+
+			</BTOD31>
+
+			<BTOD31>
+				<MainBuildNo SectionID="0126">02575000</MainBuildNo>
+				<CommonUseBuildNo SectionID="0126">02676000</CommonUseBuildNo>
+				<AreaSize>1922.95</AreaSize>
+
+				<RightsRange>
+					<Denominator>100000</Denominator>
+					<Numerator>180</Numerator>
+				</RightsRange>
+
+				<ParkInfo>
+					<ParkNum>地下一層59</ParkNum>
+					
+					<RightsRange>
+						<Denominator>100000</Denominator>
+						<Numerator>993</Numerator>
+					</RightsRange>
+
+				</ParkInfo>
+
+				<ParkInfo>
+					<ParkNum>地下一層59</ParkNum>
+
+					<RightsRange>
+						<Denominator>100000</Denominator>
+						<Numerator>993</Numerator>
+					</RightsRange>
+
+				</ParkInfo>
+
+			</BTOD31>
+
+			<OtherRegister ID="nn">XXXXXX</OtherRegister>
+			<OtherRegister ID="nn">XXXXXX</OtherRegister>
+
+			<BTEBOW>
+				<RegisterOrder>0002</RegisterOrder>
+				<RegisterReason Date="0940816" HDate="0940816">買賣</RegisterReason>
+				<Owner ID="A221822XXX">林X秀</Owner>
+				<OwnerAddress></OwnerAddress>
+
+				<RightsRange>
+					<RightsReason></RightsReason>
+					<Denominator>1</Denominator>
+					<Numerator>1</Numerator>
+				</RightsRange>
+
+				<B16>091北重建字第019867號</B16>
+				<ORRegisterOrder>0002000</ORRegisterOrder>
+				<ORRegisterOrder>0002000</ORRegisterOrder>
+				<OtherRegister ID="nn">XXXXXX</OtherRegister>
+				<OtherRegister ID="nn">XXXXXX</OtherRegister>
+			</BTEBOW>
+
+			<BTEBOW>
+				<RegisterOrder>0002</RegisterOrder>
+				<RegisterReason Date="0940816" HDate="0940816">買賣</RegisterReason>
+				<Owner ID="A221822XXX">林X秀</Owner>
+				<OwnerAddress></OwnerAddress>
+				<RightsRange>
+					<RightsReason></RightsReason>
+					<Denominator>1</Denominator>
+					<Numerator>1</Numerator>
+				</RightsRange>
+				<B16>091北重建字第019867號</B16>
+				<ORRegisterOrder>0002000</ORRegisterOrder>
+				<ORRegisterOrder>0002000</ORRegisterOrder>
+				<OtherRegister ID="nn">XXXXXX</OtherRegister>
+				<OtherRegister ID="nn">XXXXXX</OtherRegister>
+			</BTEBOW>
+			<BTCLOR>
+				<RegisterOrder Order="1">0002000</RegisterOrder>
+				<ReceiveNumber>壢登字第062270號</ReceiveNumber>
+				<RegisterReason Date="0940816">設定</RegisterReason>
+				<Obligee ID="86521704">XXX銀行股份有限公司</Obligee>
+				<ObligeeAddress></ObligeeAddress>
+				<RightsValueRange>
+					<Denominator>1</Denominator>
+					<Numerator>1</Numerator>
+				</RightsValueRange>
+				<TargetRegisterOrder></TargetRegisterOrder>
+				<TargetRegisterOrder></TargetRegisterOrder>
+				<RightsTargetType ID="A">所有權</RightsTargetType>
+				<RightsRange>
+					<Denominator>1</Denominator>
+					<Numerator>1</Numerator>
+				</RightsRange>
+				<C16>095北板他字第002788號</C16>
+				<Debtor>林X秀</Debtor>
+				<SetObligor>林X秀</SetObligor>
+				<RightsType ID="B">抵押權</RightsType>
+				<RightsValueType type="C">本金最高限額新台幣</RightsValueType>
+				<RightsValue>2640000</RightsValue>
+				<RightKind>OOOOOOOOO</RightKind>
+				<ExistPeriod>
+					<Start>0940805</Start>
+					<End>1240804</End>
+				</ExistPeriod>
+				<DischargeDate></DischargeDate>
+				<Interest></Interest>
+				<DelayInterest></DelayInterest >
+				<Penalty></Penalty>
+				<RightsDate>OOOOOOOOO</RightsDate>
+				<RightsOtherKind></RightsOtherKind>
+				<RightsQuota></RightsQuota>
+				<RightsPromise></RightsPromise>
+				<BTTOGHC>
+					<Section ID="0126">木柵段二小段</Section>
+					<LandNo>06310000</LandNo>
+					<BuildNo>06310000</BuildNo>
+				</BTTOGHC>
+				<BTTOGHC>
+					<Section ID="0126">木柵段二小段</Section>
+					<LandNo>06310000</LandNo>
+					<BuildNo>06310000</BuildNo>
+				</BTTOGHC>
+			</BTCLOR>
+			<BTCLOR>
+				<RegisterOrder Order="1">0002000</RegisterOrder>
+				<ReceiveNumber>壢登字第062270號</ReceiveNumber>
+				<RegisterReason Date="0940816">設定</RegisterReason>
+				<Obligee ID="86521704">XXX銀行股份有限公司</Obligee>
+				<ObligeeAddress></ObligeeAddress>
+				<RightsValueRange>
+					<Denominator>1</Denominator>
+					<Numerator>1</Numerator>
+				</RightsValueRange>
+				<TargetRegisterOrder></TargetRegisterOrder>
+				<TargetRegisterOrder></TargetRegisterOrder>
+				<RightsTargetType ID="A">所有權</RightsTargetType>
+				<RightsRange>
+					<Denominator>1</Denominator>
+					<Numerator>1</Numerator>
+				</RightsRange>
+				<C16>095北板他字第002788號</C16>
+				<Debtor>林X秀</Debtor>
+				<SetObligor>林X秀</SetObligor>
+				<RightsType ID="B">抵押權</RightsType>
+				<RightsValueType type="C">本金最高限額新台幣</RightsValueType>
+				<RightsValue>2640000</RightsValue>
+				<RightKind>OOOOOOOOO</RightKind>
+				<ExistPeriod>
+					<Start>0940805</Start>
+					<End>1240804</End>
+				</ExistPeriod>
+				<DischargeDate></DischargeDate>
+				<Interest></Interest>
+				<DelayInterest></DelayInterest >
+				<Penalty></Penalty>
+				<RightsDate>OOOOOOOOO</RightsDate>
+				<RightsOtherKind></RightsOtherKind>
+				<RightsQuota></RightsQuota>
+				<RightsPromise></RightsPromise>
+				<BTTOGHC>
+					<Section ID="0126">木柵段二小段</Section>
+					<LandNo>06310000</LandNo>
+					<BuildNo>06310000</BuildNo>
+				</BTTOGHC>
+				<BTTOGHC>
+					<Section ID="0126">木柵段二小段</Section>
+					<LandNo>06310000</LandNo>
+					<BuildNo>06310000</BuildNo>
+				</BTTOGHC>
+			</BTCLOR>
+			<OtherRegister ID="nn">XXXXXX</OtherRegister>
+			<OtherRegister ID="nn">XXXXXX</OtherRegister>
+		</BuildREG>
+		<BuildREG>
+			<City ID="379160000A">臺北市</City>
+			<Area ID="11">文山區</Area>
+			<Section ID="0126">木柵段二小段</Section>
+			<BuildNo>02575000</BuildNo>
+			<RegisterReason Date="0841229">第一次登記</RegisterReason>
+			<TotalAreaSize>19.89</TotalAreaSize>
+			<Address>木新路２段２７號十四樓</Address>
+			<Purpose ID="A">住家用</Purpose>
+			<Material ID="04">鋼筋混凝土造</Material>
+			<BuildLevel>014</BuildLevel>
+			<FinishDate>0841024</FinishDate>
+			<BuildLocation>
+				<Section ID="0126">木柵段二小段</Section>
+				<LandNo>01390000</LandNo>
+			</BuildLocation>
+			<BuildLocation>
+				<Section ID="0126">木柵段二小段</Section>
+				<LandNo>01390000</LandNo>
+			</BuildLocation>
+			<FloorInfo>
+				<BuildType Type="M">建物分層</BuildType>
+				<Purpose ID="014">十四層</Purpose>
+				<AreaSize>19.89</AreaSize>
+			</FloorInfo>
+				<FloorInfo>
+				<BuildType Type="M">建物分層</BuildType>
+				<Purpose ID="014">十四層</Purpose>
+				<AreaSize>19.89</AreaSize>
+			</FloorInfo>
+			<BTOD31>
+				<MainBuildNo SectionID="0126">02575000</MainBuildNo>
+				<CommonUseBuildNo SectionID="0126">02676000</CommonUseBuildNo>
+				<AreaSize>1922.95</AreaSize>
+				<RightsRange>
+					<Denominator>100000</Denominator>
+					<Numerator>180</Numerator>
+				</RightsRange>
+				<ParkInfo>
+					<ParkNum>地下一層59</ParkNum>
+					<RightsRange>
+						<Denominator>100000</Denominator>
+						<Numerator>993</Numerator>
+					</RightsRange>
+				</ParkInfo>
+								<ParkInfo>
+					<ParkNum>地下一層59</ParkNum>
+					<RightsRange>
+						<Denominator>100000</Denominator>
+						<Numerator>993</Numerator>
+					</RightsRange>
+				</ParkInfo>
+			</BTOD31>
+			<BTOD31>
+				<MainBuildNo SectionID="0126">02575000</MainBuildNo>
+				<CommonUseBuildNo SectionID="0126">02676000</CommonUseBuildNo>
+				<AreaSize>1922.95</AreaSize>
+				<RightsRange>
+					<Denominator>100000</Denominator>
+					<Numerator>180</Numerator>
+				</RightsRange>
+				<ParkInfo>
+					<ParkNum>地下一層59</ParkNum>
+					<RightsRange>
+						<Denominator>100000</Denominator>
+						<Numerator>993</Numerator>
+					</RightsRange>
+				</ParkInfo>
+								<ParkInfo>
+					<ParkNum>地下一層59</ParkNum>
+					<RightsRange>
+						<Denominator>100000</Denominator>
+						<Numerator>993</Numerator>
+					</RightsRange>
+				</ParkInfo>
+			</BTOD31>
+			<OtherRegister ID="nn">XXXXXX</OtherRegister>
+			<OtherRegister ID="nn">XXXXXX</OtherRegister>
+			<BTEBOW>
+				<RegisterOrder>0002</RegisterOrder>
+				<RegisterReason Date="0940816" HDate="0940816">買賣</RegisterReason>
+				<Owner ID="A221822XXX">林X秀</Owner>
+				<OwnerAddress></OwnerAddress>
+				<RightsRange>
+					<RightsReason></RightsReason>
+					<Denominator>1</Denominator>
+					<Numerator>1</Numerator>
+				</RightsRange>
+				<B16>091北重建字第019867號</B16>
+				<ORRegisterOrder>0002000</ORRegisterOrder>
+				<ORRegisterOrder>0002000</ORRegisterOrder>
+				<OtherRegister ID="nn">XXXXXX</OtherRegister>
+				<OtherRegister ID="nn">XXXXXX</OtherRegister>
+			</BTEBOW>
+			<BTEBOW>
+				<RegisterOrder>0002</RegisterOrder>
+				<RegisterReason Date="0940816" HDate="0940816">買賣</RegisterReason>
+				<Owner ID="A221822XXX">林X秀</Owner>
+				<OwnerAddress></OwnerAddress>
+				<RightsRange>
+					<RightsReason></RightsReason>
+					<Denominator>1</Denominator>
+					<Numerator>1</Numerator>
+				</RightsRange>
+				<B16>091北重建字第019867號</B16>
+				<ORRegisterOrder>0002000</ORRegisterOrder>
+				<ORRegisterOrder>0002000</ORRegisterOrder>
+				<OtherRegister ID="nn">XXXXXX</OtherRegister>
+				<OtherRegister ID="nn">XXXXXX</OtherRegister>
+			</BTEBOW>
+			<BTCLOR>
+				<RegisterOrder Order="1">0002000</RegisterOrder>
+				<ReceiveNumber>壢登字第062270號</ReceiveNumber>
+				<RegisterReason Date="0940816">設定</RegisterReason>
+				<Obligee ID="86521704">XXX銀行股份有限公司</Obligee>
+				<ObligeeAddress></ObligeeAddress>
+				<RightsValueRange>
+					<Denominator>1</Denominator>
+					<Numerator>1</Numerator>
+				</RightsValueRange>
+				<TargetRegisterOrder></TargetRegisterOrder>
+				<TargetRegisterOrder></TargetRegisterOrder>
+				<RightsTargetType ID="A">所有權</RightsTargetType>
+				<RightsRange>
+					<Denominator>1</Denominator>
+					<Numerator>1</Numerator>
+				</RightsRange>
+				<C16>095北板他字第002788號</C16>
+				<Debtor>林X秀</Debtor>
+				<SetObligor>林X秀</SetObligor>
+				<RightsType ID="B">抵押權</RightsType>
+				<RightsValueType type="C">本金最高限額新台幣</RightsValueType>
+				<RightsValue>2640000</RightsValue>
+				<RightKind>OOOOOOOOO</RightKind>
+				<ExistPeriod>
+					<Start>0940805</Start>
+					<End>1240804</End>
+				</ExistPeriod>
+				<DischargeDate></DischargeDate>
+				<Interest></Interest>
+				<DelayInterest></DelayInterest >
+				<Penalty></Penalty>
+				<RightsDate>OOOOOOOOO</RightsDate>
+				<RightsOtherKind></RightsOtherKind>
+				<RightsQuota></RightsQuota>
+				<RightsPromise></RightsPromise>
+				<BTTOGHC>
+					<Section ID="0126">木柵段二小段</Section>
+					<LandNo>06310000</LandNo>
+					<BuildNo>06310000</BuildNo>
+				</BTTOGHC>
+				<BTTOGHC>
+					<Section ID="0126">木柵段二小段</Section>
+					<LandNo>06310000</LandNo>
+					<BuildNo>06310000</BuildNo>
+				</BTTOGHC>
+			</BTCLOR>
+			<BTCLOR>
+				<RegisterOrder Order="1">0002000</RegisterOrder>
+				<ReceiveNumber>壢登字第062270號</ReceiveNumber>
+				<RegisterReason Date="0940816">設定</RegisterReason>
+				<Obligee ID="86521704">XXX銀行股份有限公司</Obligee>
+				<ObligeeAddress></ObligeeAddress>
+				<RightsValueRange>
+					<Denominator>1</Denominator>
+					<Numerator>1</Numerator>
+				</RightsValueRange>
+				<TargetRegisterOrder></TargetRegisterOrder>
+				<TargetRegisterOrder></TargetRegisterOrder>
+				<RightsTargetType ID="A">所有權</RightsTargetType>
+				<RightsRange>
+					<Denominator>1</Denominator>
+					<Numerator>1</Numerator>
+				</RightsRange>
+				<C16>095北板他字第002788號</C16>
+				<Debtor>林X秀</Debtor>
+				<SetObligor>林X秀</SetObligor>
+				<RightsType ID="B">抵押權</RightsType>
+				<RightsValueType type="C">本金最高限額新台幣</RightsValueType>
+				<RightsValue>2640000</RightsValue>
+				<RightKind>OOOOOOOOO</RightKind>
+				<ExistPeriod>
+					<Start>0940805</Start>
+					<End>1240804</End>
+				</ExistPeriod>
+				<DischargeDate></DischargeDate>
+				<Interest></Interest>
+				<DelayInterest></DelayInterest >
+				<Penalty></Penalty>
+				<RightsDate>OOOOOOOOO</RightsDate>
+				<RightsOtherKind></RightsOtherKind>
+				<RightsQuota></RightsQuota>
+				<RightsPromise></RightsPromise>
+				<BTTOGHC>
+					<Section ID="0126">木柵段二小段</Section>
+					<LandNo>06310000</LandNo>
+					<BuildNo>06310000</BuildNo>
+				</BTTOGHC>
+				<BTTOGHC>
+					<Section ID="0126">木柵段二小段</Section>
+					<LandNo>06310000</LandNo>
+					<BuildNo>06310000</BuildNo>
+				</BTTOGHC>
+			</BTCLOR>
+			<OtherRegister ID="nn">XXXXXX</OtherRegister>
+			<OtherRegister ID="nn">XXXXXX</OtherRegister>
+		</BuildREG>
+		<LandREG>
+			<City ID="379160000A">臺北市</City>
+			<Area ID="11">文山區</Area>
+			<Section ID="0126">木柵段二小段</Section>
+			<LandNo>06310000</LandNo>
+			<RegisterReason Date="0841108">合併</RegisterReason>
+			<OutLine ID="B">田</OutLine>
+			<UseType ID="EE">農牧用地</UseType>
+			<AreaSize>4530.00</AreaSize>
+			<UseArea ID="AF">山坡地保育區</UseArea>
+			<PublicValue Date="09501">104416</PublicValue>
+			<OtherRegister ID="nn">XXXXXX</OtherRegister>
+			<OtherRegister ID="nn">XXXXXX</OtherRegister>
+			<BTBLOW>
+				<RegisterOrder>0342</RegisterOrder>
+				<RegisterReason Date="0940816" HDate="0940816">買賣</RegisterReason>
+				<Owner ID="A221822XXX">林X秀</Owner>
+				<OwnerAddress></OwnerAddress>
+				<RightsRange>
+					<RightsReason></RightsReason>
+					<Denominator>10000</Denominator>
+					<Numerator>18</Numerator>
+				</RightsRange>
+				<B16>091北重建字第019867號</B16>
+				<DeclaredValue Date="09301">29362.4</DeclaredValue>
+				<ORRegisterOrder>0372000</ORRegisterOrder>
+				<ORRegisterOrder>0372000</ORRegisterOrder>
+				<BTPRCE>
+					<LastDate>09407</LastDate>
+					<LastValue>96018.0</LastValue>
+					<Denominator>10000</Denominator>
+					<Numerator>18</Numerator>
+				</BTPRCE>
+				<BTPRCE>
+					<LastDate>09407</LastDate>
+					<LastValue>96018.0</LastValue>
+					<Denominator>10000</Denominator>
+					<Numerator>18</Numerator>
+				</BTPRCE>
+				<OtherRegister ID="nn">XXXXXX</OtherRegister>
+				<OtherRegister ID="nn">XXXXXX</OtherRegister>
+			</BTBLOW>
+			<BTBLOW>
+				<RegisterOrder>0342</RegisterOrder>
+				<RegisterReason Date="0940816" HDate="0940816">買賣</RegisterReason>
+				<Owner ID="A221822XXX">林X秀</Owner>
+				<OwnerAddress></OwnerAddress>
+				<RightsRange>
+					<RightsReason></RightsReason>
+					<Denominator>10000</Denominator>
+					<Numerator>18</Numerator>
+				</RightsRange>
+				<B16>091北重建字第019867號</B16>
+				<DeclaredValue Date="09301">29362.4</DeclaredValue>
+				<ORRegisterOrder>0372000</ORRegisterOrder>
+				<ORRegisterOrder>0372000</ORRegisterOrder>
+				<BTPRCE>
+					<LastDate>09407</LastDate>
+					<LastValue>96018.0</LastValue>
+					<Denominator>10000</Denominator>
+					<Numerator>18</Numerator>
+				</BTPRCE>
+				<BTPRCE>
+					<LastDate>09407</LastDate>
+					<LastValue>96018.0</LastValue>
+					<Denominator>10000</Denominator>
+					<Numerator>18</Numerator>
+				</BTPRCE>
+				<OtherRegister ID="nn">XXXXXX</OtherRegister>
+				<OtherRegister ID="nn">XXXXXX</OtherRegister>
+			</BTBLOW>
+			<BTCLOR>
+				<RegisterOrder Order="1">0002000</RegisterOrder>
+				<ReceiveNumber>壢登字第062270號</ReceiveNumber>
+				<RegisterReason Date="0940816">設定</RegisterReason>
+				<Obligee ID="86521704">XXX銀行股份有限公司</Obligee>
+				<ObligeeAddress></ObligeeAddress>
+				<RightsValueRange>
+					<Denominator>1</Denominator>
+					<Numerator>1</Numerator>
+				</RightsValueRange>
+				<TargetRegisterOrder></TargetRegisterOrder>
+				<TargetRegisterOrder></TargetRegisterOrder>
+				<RightsTargetType ID="A">所有權</RightsTargetType>
+				<RightsRange>
+					<Denominator>1</Denominator>
+					<Numerator>1</Numerator>
+				</RightsRange>
+				<C16>095北板他字第002788號</C16>
+				<Debtor>林X秀</Debtor>
+				<SetObligor>林X秀</SetObligor>
+				<RightsType ID="B">抵押權</RightsType>
+				<RightsValueType type="C">本金最高限額新台幣</RightsValueType>
+				<RightsValue>2640000</RightsValue>
+				<RightKind>OOOOOOOOO</RightKind>
+				<ExistPeriod>
+					<Start>0940805</Start>
+					<End>1240804</End>
+				</ExistPeriod>
+				<DischargeDate></DischargeDate>
+				<Interest></Interest>
+				<DelayInterest></DelayInterest >
+				<Penalty></Penalty>
+				<RightsDate>OOOOOOOOO</RightsDate>
+				<RightsOtherKind></RightsOtherKind>
+				<RightsQuota></RightsQuota>
+				<RightsPromise></RightsPromise>
+				<BTTOGHC>
+					<Section ID="0126">木柵段二小段</Section>
+					<LandNo>06310000</LandNo>
+					<BuildNo>06310000</BuildNo>
+				</BTTOGHC>
+				<BTTOGHC>
+					<Section ID="0126">木柵段二小段</Section>
+					<LandNo>06310000</LandNo>
+					<BuildNo>06310000</BuildNo>
+				</BTTOGHC>
+				<OtherRegister ID="nn">XXXXXX</OtherRegister>
+				<OtherRegister ID="nn">XXXXXX</OtherRegister>
+			</BTCLOR>		
+			<BTCLOR>
+				<RegisterOrder Order="1">0002000</RegisterOrder>
+				<ReceiveNumber>壢登字第062270號</ReceiveNumber>
+				<RegisterReason Date="0940816">設定</RegisterReason>
+				<Obligee ID="86521704">XXX銀行股份有限公司</Obligee>
+				<ObligeeAddress></ObligeeAddress>
+				<RightsValueRange>
+					<Denominator>1</Denominator>
+					<Numerator>1</Numerator>
+				</RightsValueRange>
+				<TargetRegisterOrder></TargetRegisterOrder>
+				<TargetRegisterOrder></TargetRegisterOrder>
+				<RightsTargetType ID="A">所有權</RightsTargetType>
+				<RightsRange>
+					<Denominator>1</Denominator>
+					<Numerator>1</Numerator>
+				</RightsRange>
+				<C16>095北板他字第002788號</C16>
+				<Debtor>林X秀</Debtor>
+				<SetObligor>林X秀</SetObligor>
+				<RightsType ID="B">抵押權</RightsType>
+				<RightsValueType type="C">本金最高限額新台幣</RightsValueType>
+				<RightsValue>2640000</RightsValue>
+				<RightKind>OOOOOOOOO</RightKind>
+				<ExistPeriod>
+					<Start>0940805</Start>
+					<End>1240804</End>
+				</ExistPeriod>
+				<DischargeDate></DischargeDate>
+				<Interest></Interest>
+				<DelayInterest></DelayInterest >
+				<Penalty></Penalty>
+				<RightsDate>OOOOOOOOO</RightsDate>
+				<RightsOtherKind></RightsOtherKind>
+				<RightsQuota></RightsQuota>
+				<RightsPromise></RightsPromise>
+				<BTTOGHC>
+					<Section ID="0126">木柵段二小段</Section>
+					<LandNo>06310000</LandNo>
+					<BuildNo>06310000</BuildNo>
+				</BTTOGHC>
+				<BTTOGHC>
+					<Section ID="0126">木柵段二小段</Section>
+					<LandNo>06310000</LandNo>
+					<BuildNo>06310000</BuildNo>
+				</BTTOGHC>
+				<OtherRegister ID="nn">XXXXXX</OtherRegister>
+				<OtherRegister ID="nn">XXXXXX</OtherRegister>
+			</BTCLOR>
+		</LandREG>
+		<LandREG>
+			<City ID="379160000A">臺北市</City>
+			<Area ID="11">文山區</Area>
+			<Section ID="0126">木柵段二小段</Section>
+			<LandNo>06310000</LandNo>
+			<RegisterReason Date="0841108">合併</RegisterReason>
+			<OutLine ID="B">田</OutLine>
+			<UseType ID="EE">農牧用地</UseType>
+			<AreaSize>4530.00</AreaSize>
+			<UseArea ID="AF">山坡地保育區</UseArea>
+			<PublicValue Date="09501">104416</PublicValue>
+			<OtherRegister ID="nn">XXXXXX</OtherRegister>
+			<OtherRegister ID="nn">XXXXXX</OtherRegister>
+			<BTBLOW>
+				<RegisterOrder>0342</RegisterOrder>
+				<RegisterReason Date="0940816" HDate="0940816">買賣</RegisterReason>
+				<Owner ID="A221822XXX">林X秀</Owner>
+				<OwnerAddress></OwnerAddress>
+				<RightsRange>
+					<RightsReason></RightsReason>
+					<Denominator>10000</Denominator>
+					<Numerator>18</Numerator>
+				</RightsRange>
+				<B16>091北重建字第019867號</B16>
+				<DeclaredValue Date="09301">29362.4</DeclaredValue>
+				<ORRegisterOrder>0372000</ORRegisterOrder>
+				<ORRegisterOrder>0372000</ORRegisterOrder>
+				<BTPRCE>
+					<LastDate>09407</LastDate>
+					<LastValue>96018.0</LastValue>
+					<Denominator>10000</Denominator>
+					<Numerator>18</Numerator>
+				</BTPRCE>
+				<BTPRCE>
+					<LastDate>09407</LastDate>
+					<LastValue>96018.0</LastValue>
+					<Denominator>10000</Denominator>
+					<Numerator>18</Numerator>
+				</BTPRCE>
+				<OtherRegister ID="nn">XXXXXX</OtherRegister>
+				<OtherRegister ID="nn">XXXXXX</OtherRegister>
+			</BTBLOW>
+			<BTBLOW>
+				<RegisterOrder>0342</RegisterOrder>
+				<RegisterReason Date="0940816" HDate="0940816">買賣</RegisterReason>
+				<Owner ID="A221822XXX">林X秀</Owner>
+				<OwnerAddress></OwnerAddress>
+				<RightsRange>
+					<RightsReason></RightsReason>
+					<Denominator>10000</Denominator>
+					<Numerator>18</Numerator>
+				</RightsRange>
+				<B16>091北重建字第019867號</B16>
+				<DeclaredValue Date="09301">29362.4</DeclaredValue>
+				<ORRegisterOrder>0372000</ORRegisterOrder>
+				<ORRegisterOrder>0372000</ORRegisterOrder>
+				<BTPRCE>
+					<LastDate>09407</LastDate>
+					<LastValue>96018.0</LastValue>
+					<Denominator>10000</Denominator>
+					<Numerator>18</Numerator>
+				</BTPRCE>
+				<BTPRCE>
+					<LastDate>09407</LastDate>
+					<LastValue>96018.0</LastValue>
+					<Denominator>10000</Denominator>
+					<Numerator>18</Numerator>
+				</BTPRCE>
+				<OtherRegister ID="nn">XXXXXX</OtherRegister>
+				<OtherRegister ID="nn">XXXXXX</OtherRegister>
+			</BTBLOW>
+			<BTCLOR>
+				<RegisterOrder Order="1">0002000</RegisterOrder>
+				<ReceiveNumber>壢登字第062270號</ReceiveNumber>
+				<RegisterReason Date="0940816">設定</RegisterReason>
+				<Obligee ID="86521704">XXX銀行股份有限公司</Obligee>
+				<ObligeeAddress></ObligeeAddress>
+				<RightsValueRange>
+					<Denominator>1</Denominator>
+					<Numerator>1</Numerator>
+				</RightsValueRange>
+				<TargetRegisterOrder></TargetRegisterOrder>
+				<TargetRegisterOrder></TargetRegisterOrder>
+				<RightsTargetType ID="A">所有權</RightsTargetType>
+				<RightsRange>
+					<Denominator>1</Denominator>
+					<Numerator>1</Numerator>
+				</RightsRange>
+				<C16>095北板他字第002788號</C16>
+				<Debtor>林X秀</Debtor>
+				<SetObligor>林X秀</SetObligor>
+				<RightsType ID="B">抵押權</RightsType>
+				<RightsValueType type="C">本金最高限額新台幣</RightsValueType>
+				<RightsValue>2640000</RightsValue>
+				<RightKind>OOOOOOOOO</RightKind>
+				<ExistPeriod>
+					<Start>0940805</Start>
+					<End>1240804</End>
+				</ExistPeriod>
+				<DischargeDate></DischargeDate>
+				<Interest></Interest>
+				<DelayInterest></DelayInterest >
+				<Penalty></Penalty>
+				<RightsDate>OOOOOOOOO</RightsDate>
+				<RightsOtherKind></RightsOtherKind>
+				<RightsQuota></RightsQuota>
+				<RightsPromise></RightsPromise>
+				<BTTOGHC>
+					<Section ID="0126">木柵段二小段</Section>
+					<LandNo>06310000</LandNo>
+					<BuildNo>06310000</BuildNo>
+				</BTTOGHC>
+				<BTTOGHC>
+					<Section ID="0126">木柵段二小段</Section>
+					<LandNo>06310000</LandNo>
+					<BuildNo>06310000</BuildNo>
+				</BTTOGHC>
+				<OtherRegister ID="nn">XXXXXX</OtherRegister>
+				<OtherRegister ID="nn">XXXXXX</OtherRegister>
+			</BTCLOR>		
+			<BTCLOR>
+				<RegisterOrder Order="1">0002000</RegisterOrder>
+				<ReceiveNumber>壢登字第062270號</ReceiveNumber>
+				<RegisterReason Date="0940816">設定</RegisterReason>
+				<Obligee ID="86521704">XXX銀行股份有限公司</Obligee>
+				<ObligeeAddress></ObligeeAddress>
+				<RightsValueRange>
+					<Denominator>1</Denominator>
+					<Numerator>1</Numerator>
+				</RightsValueRange>
+				<TargetRegisterOrder></TargetRegisterOrder>
+				<TargetRegisterOrder></TargetRegisterOrder>
+				<RightsTargetType ID="A">所有權</RightsTargetType>
+				<RightsRange>
+					<Denominator>1</Denominator>
+					<Numerator>1</Numerator>
+				</RightsRange>
+				<C16>095北板他字第002788號</C16>
+				<Debtor>林X秀</Debtor>
+				<SetObligor>林X秀</SetObligor>
+				<RightsType ID="B">抵押權</RightsType>
+				<RightsValueType type="C">本金最高限額新台幣</RightsValueType>
+				<RightsValue>2640000</RightsValue>
+				<RightKind>OOOOOOOOO</RightKind>
+				<ExistPeriod>
+					<Start>0940805</Start>
+					<End>1240804</End>
+				</ExistPeriod>
+				<DischargeDate></DischargeDate>
+				<Interest></Interest>
+				<DelayInterest></DelayInterest >
+				<Penalty></Penalty>
+				<RightsDate>OOOOOOOOO</RightsDate>
+				<RightsOtherKind></RightsOtherKind>
+				<RightsQuota></RightsQuota>
+				<RightsPromise></RightsPromise>
+				<BTTOGHC>
+					<Section ID="0126">木柵段二小段</Section>
+					<LandNo>06310000</LandNo>
+					<BuildNo>06310000</BuildNo>
+				</BTTOGHC>
+				<BTTOGHC>
+					<Section ID="0126">木柵段二小段</Section>
+					<LandNo>06310000</LandNo>
+					<BuildNo>06310000</BuildNo>
+				</BTTOGHC>
+				<OtherRegister ID="nn">XXXXXX</OtherRegister>
+				<OtherRegister ID="nn">XXXXXX</OtherRegister>
+			</BTCLOR>
+		</LandREG>
+	</EDOCData>
+</EDOCExport>

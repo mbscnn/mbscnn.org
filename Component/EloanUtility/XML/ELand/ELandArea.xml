@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SectionInfo version="2.1">
+  <RespMsg Code="0">查詢成功</RespMsg>
+  <Result>
+    <City ID="376570000A" Name="基隆市">
+      <Area ID="07" Name="信義區">
+        <Section ID="0108" LN="CB" LNName="信義">中正段一小段</Section>
+        <Section ID="0109" LN="CB" LNName="信義">中正段二小段</Section>
+        <Section ID="0110" LN="CB" LNName="信義">中正段三小段</Section>
+        <Section ID="0111" LN="CB" LNName="信義">東信段一小段</Section>
+        <Section ID="0112" LN="CB" LNName="信義">東信段二小段</Section>
+        <Section ID="0113" LN="CB" LNName="信義">東信段三小段</Section>
+        <Section ID="0114" LN="CB" LNName="信義">東信段四小段</Section>
+        <Section ID="0115" LN="CB" LNName="信義">福祿段</Section>
+        <Section ID="0116" LN="CB" LNName="信義">田寮段</Section>
+        <Section ID="0117" LN="CB" LNName="信義">東明段</Section>
+        <Section ID="0118" LN="CB" LNName="信義">深澳坑段深澳坑小段</Section>
+        <Section ID="0119" LN="CB" LNName="信義">深澳坑段槓子寮小段</Section>
+        <Section ID="0120" LN="CB" LNName="信義">深澳坑段深澳坑口小段</Section>
+        <Section ID="0121" LN="CB" LNName="信義">光明段</Section>
+        <Section ID="0122" LN="CB" LNName="信義">大水窟段</Section>
+        <Section ID="0301" LN="CB" LNName="信義">深美段</Section>
+        <Section ID="0302" LN="CB" LNName="信義">培德段</Section>
+        <Section ID="0303" LN="CB" LNName="信義">深澳段</Section>
+        <Section ID="0304" LN="CB" LNName="信義">基瑞段</Section>
+      </Area>
+      <Area ID="04" Name="仁愛區">
+        <Section ID="0069" LN="CB" LNName="信義">海濱段一小段</Section>
+        <Section ID="0070" LN="CB" LNName="信義">海濱段二小段</Section>
+        <Section ID="0071" LN="CB" LNName="信義">海濱段三小段</Section>
+        <Section ID="0072" LN="CB" LNName="信義">新店段一小段</Section>
+        <Section ID="0073" LN="CB" LNName="信義">新店段二小段</Section>
+        <Section ID="0074" LN="CB" LNName="信義">新店段三小段</Section>
+        <Section ID="0075" LN="CB" LNName="信義">新店段四小段</Section>
+        <Section ID="0076" LN="CB" LNName="信義">復興段一小段</Section>
+        <Section ID="0077" LN="CB" LNName="信義">復興段二小段</Section>
+        <Section ID="0078" LN="CB" LNName="信義">復興段三小段</Section>
+        <Section ID="0079" LN="CB" LNName="信義">中央段一小段</Section>
+        <Section ID="0080" LN="CB" LNName="信義">中央段二小段</Section>
+        <Section ID="0081" LN="CB" LNName="信義">中央段三小段</Section>
+        <Section ID="0082" LN="CB" LNName="信義">中央段四小段</Section>
+        <Section ID="0083" LN="CB" LNName="信義">中興段一小段</Section>
+        <Section ID="0084" LN="CB" LNName="信義">中興段二小段</Section>
+        <Section ID="0085" LN="CB" LNName="信義">中興段三小段</Section>
+        <Section ID="0086" LN="CB" LNName="信義">延平段</Section>
+        <Section ID="0087" LN="CB" LNName="信義">南榮段</Section>
+        <Section ID="0088" LN="CB" LNName="信義">南新段</Section>
+        <Section ID="0089" LN="CB" LNName="信義">德厚段</Section>
+        <Section ID="0090" LN="CB" LNName="信義">成功段</Section>
+        <Section ID="0091" LN="CB" LNName="信義">延年段</Section>
+      </Area>
+      <Area ID="03" Name="暖暖區">
+        <Section ID="0058" LN="CC" LNName="安樂">暖暖段東勢坑小段</Section>
+        <Section ID="0059" LN="CC" LNName="安樂">暖暖段西勢坑小段</Section>
+        <Section ID="0060" LN="CC" LNName="安樂">暖暖段過港小段</Section>
+        <Section ID="0061" LN="CC" LNName="安樂">暖暖段外西勢小段</Section>
+        <Section ID="0062" LN="CC" LNName="安樂">暖暖段暖暖小段</Section>
+        <Section ID="0063" LN="CC" LNName="安樂">碇內段碇內小段</Section>
+        <Section ID="0064" LN="CC" LNName="安樂">碇內段溪西股小段</Section>
+        <Section ID="0065" LN="CC" LNName="安樂">八堵段八堵南小段</Section>
+        <Section ID="0066" LN="CC" LNName="安樂">八德段</Section>
+        <Section ID="0067" LN="CC" LNName="安樂">源遠段</Section>
+        <Section ID="0068" LN="CC" LNName="安樂">過港段</Section>
+        <Section ID="0138" LN="CC" LNName="安樂">金華段</Section>
+      </Area>
+      <Area ID="05" Name="中山區">
+        <Section ID="0092" LN="CC" LNName="安樂">中山段</Section>
+        <Section ID="0093" LN="CC" LNName="安樂">太平段</Section>
+        <Section ID="0094" LN="CC" LNName="安樂">大德段</Section>
+        <Section ID="0095" LN="CC" LNName="安樂">仁德段</Section>
+        <Section ID="0096" LN="CC" LNName="安樂">中和段</Section>
+        <Section ID="0097" LN="CC" LNName="安樂">內木山段</Section>
+        <Section ID="0098" LN="CC" LNName="安樂">外木山段</Section>
+        <Section ID="0099" LN="CC" LNName="安樂">仙洞段</Section>
+        <Section ID="0104" LN="CC" LNName="安樂">榮華段</Section>
+        <Section ID="0139" LN="CC" LNName="安樂">協和段</Section>
+        <Section ID="0140" LN="CC" LNName="安樂">德安段</Section>
+        <Section ID="0141" LN="CC" LNName="安樂">德育段</Section>
+      </Area>
+      <Area ID="06" Name="安樂區">
+        <Section ID="0030" LN="CC" LNName="安樂">鶯歌石段石皮瀨小段</Section>
+        <Section ID="0031" LN="CC" LNName="安樂">鶯歌石段新山小段</Section>
+        <Section ID="0032" LN="CC" LNName="安樂">鶯歌石段鶯歌石小段</Section>
+        <Section ID="0034" LN="CC" LNName="安樂">港口段</Section>
+        <Section ID="0057" LN="CC" LNName="安樂">安國段</Section>
+        <Section ID="0100" LN="CC" LNName="安樂">大竿林段</Section>
+        <Section ID="0101" LN="CC" LNName="安樂">觀音段</Section>
+        <Section ID="0102" LN="CC" LNName="安樂">保定段</Section>
+        <Section ID="0103" LN="CC" LNName="安樂">西定段</Section>
+        <Section ID="0105" LN="CC" LNName="安樂">大武崙段外寮小段</Section>
+        <Section ID="0106" LN="CC" LNName="安樂">大武崙段內寮小段</Section>
+        <Section ID="0107" LN="CC" LNName="安樂">大武崙段武崙小段</Section>
+        <Section ID="0128" LN="CC" LNName="安樂">代天府段</Section>
+        <Section ID="0129" LN="CC" LNName="安樂">新崙段</Section>
+        <Section ID="0130" LN="CC" LNName="安樂">情人湖段</Section>
+        <Section ID="0131" LN="CC" LNName="安樂">新會段</Section>
+        <Section ID="0132" LN="CC" LNName="安樂">武嶺段</Section>
+        <Section ID="0133" LN="CC" LNName="安樂">新城段</Section>
+        <Section ID="0134" LN="CC" LNName="安樂">麥金段</Section>
+      </Area>
+      <Area ID="01" Name="中正區">
+        <Section ID="0001" LN="CB" LNName="信義">日新段一小段</Section>
+        <Section ID="0002" LN="CB" LNName="信義">日新段二小段</Section>
+        <Section ID="0003" LN="CB" LNName="信義">日新段三小段</Section>
+        <Section ID="0004" LN="CB" LNName="信義">日新段四小段</Section>
+        <Section ID="0005" LN="CB" LNName="信義">日新段五小段</Section>
+        <Section ID="0006" LN="CB" LNName="信義">日新段六小段</Section>
+        <Section ID="0007" LN="CB" LNName="信義">日新段七小段</Section>
+        <Section ID="0008" LN="CB" LNName="信義">忠義段一小段</Section>
+        <Section ID="0009" LN="CB" LNName="信義">忠義段二小段</Section>
+        <Section ID="0010" LN="CB" LNName="信義">忠義段三小段</Section>
+        <Section ID="0011" LN="CB" LNName="信義">忠義段四小段</Section>
+        <Section ID="0012" LN="CB" LNName="信義">忠義段五小段</Section>
+        <Section ID="0013" LN="CB" LNName="信義">忠義段六小段</Section>
+        <Section ID="0014" LN="CB" LNName="信義">港灣段一小段</Section>
+        <Section ID="0015" LN="CB" LNName="信義">港灣段二小段</Section>
+        <Section ID="0016" LN="CB" LNName="信義">港灣段三小段</Section>
+        <Section ID="0017" LN="CB" LNName="信義">港灣段四小段</Section>
+        <Section ID="0018" LN="CB" LNName="信義">中濱段</Section>
+        <Section ID="0019" LN="CB" LNName="信義">祥豐段</Section>
+        <Section ID="0020" LN="CB" LNName="信義">港濱段</Section>
+        <Section ID="0021" LN="CB" LNName="信義">和平段</Section>
+        <Section ID="0022" LN="CB" LNName="信義">八斗子段牛稠嶺小段</Section>
+        <Section ID="0023" LN="CB" LNName="信義">八斗子段砂子園小段</Section>
+        <Section ID="0024" LN="CB" LNName="信義">長潭段</Section>
+        <Section ID="0025" LN="CB" LNName="信義">正隆段</Section>
+        <Section ID="0026" LN="CB" LNName="信義">彭佳嶼段</Section>
+        <Section ID="0126" LN="CB" LNName="信義">基隆嶼</Section>
+        <Section ID="0127" LN="CB" LNName="信義">棉花嶼段</Section>
+        <Section ID="0300" LN="CB" LNName="信義">調和段</Section>
+      </Area>
+      <Area ID="02" Name="七堵區">
+        <Section ID="0027" LN="CC" LNName="安樂">八堵段八堵北小段</Section>
+        <Section ID="0028" LN="CC" LNName="安樂">七堵段七堵小段</Section>
+        <Section ID="0029" LN="CC" LNName="安樂">七堵段連柑宅小段</Section>
+        <Section ID="0033" LN="CC" LNName="安樂">鶯歌石段石厝坑小段</Section>
+        <Section ID="0035" LN="CC" LNName="安樂">草濫段拔西猴小段</Section>
+        <Section ID="0036" LN="CC" LNName="安樂">草濫段後旦旦小段</Section>
+        <Section ID="0037" LN="CC" LNName="安樂">草濫段小坑小段</Section>
+        <Section ID="0038" LN="CC" LNName="安樂">草濫段草濫小段</Section>
+        <Section ID="0039" LN="CC" LNName="安樂">五堵段五堵北小段</Section>
+        <Section ID="0040" LN="CC" LNName="安樂">五堵段五堵南小段</Section>
+        <Section ID="0041" LN="CC" LNName="安樂">五堵段下坡小段</Section>
+        <Section ID="0042" LN="CC" LNName="安樂">瑪陵坑段東勢上股小段</Section>
+        <Section ID="0043" LN="CC" LNName="安樂">瑪陵坑段東勢中股小段</Section>
+        <Section ID="0044" LN="CC" LNName="安樂">瑪陵坑段東勢下股小段</Section>
+        <Section ID="0045" LN="CC" LNName="安樂">瑪陵坑段西勢內寮小段</Section>
+        <Section ID="0046" LN="CC" LNName="安樂">瑪陵坑段西勢仙洞湖小段</Section>
+        <Section ID="0047" LN="CC" LNName="安樂">瑪陵坑段西勢面桶寮小段</Section>
+        <Section ID="0048" LN="CC" LNName="安樂">六堵段</Section>
+        <Section ID="0049" LN="CC" LNName="安樂">六堵段工業小段</Section>
+        <Section ID="0050" LN="CC" LNName="安樂">友蚋段港口小段</Section>
+        <Section ID="0051" LN="CC" LNName="安樂">友蚋段七分寮小段</Section>
+        <Section ID="0052" LN="CC" LNName="安樂">友蚋段十四坑小段</Section>
+        <Section ID="0053" LN="CC" LNName="安樂">友蚋段赤皮湖小段</Section>
+        <Section ID="0054" LN="CC" LNName="安樂">友蚋段興化坑小段</Section>
+        <Section ID="0055" LN="CC" LNName="安樂">友蚋段鹿寮小段</Section>
+        <Section ID="0056" LN="CC" LNName="安樂">友蚋段樟空湖小段</Section>
+        <Section ID="0123" LN="CC" LNName="安樂">明德段</Section>
+        <Section ID="0124" LN="CC" LNName="安樂">大華段</Section>
+        <Section ID="0125" LN="CC" LNName="安樂">工建段</Section>
+        <Section ID="0135" LN="CC" LNName="安樂">溪頭段</Section>
+        <Section ID="0136" LN="CC" LNName="安樂">長安段</Section>
+        <Section ID="0137" LN="CC" LNName="安樂">台五線段</Section>
+        <Section ID="0142" LN="CC" LNName="安樂">舊站段</Section>
+      </Area>
+    </City>
+  </Result>
+</SectionInfo>

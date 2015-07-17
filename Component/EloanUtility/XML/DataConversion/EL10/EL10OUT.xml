@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="Big5"?> 
+<OUTPUT>      
+	<MQ_HEADER>
+    <MDID></MDID>        
+		<IP>S900</IP>
+    <MAC></MAC>    
+	</MQ_HEADER>      
+	<AP_HEADER>         
+		<ABEND>0000</ABEND>         
+		<FROM_HOST>900</FROM_HOST>
+    <FROM_SERVICE></FROM_SERVICE>      
+		<FROM_DTAQ>CGCTL</FROM_DTAQ>         
+		<TO_HOST>BELOANA</TO_HOST>
+    <TO_SERVICE></TO_SERVICE>
+    <TO_DTAQ></TO_DTAQ>   
+		<MSG_ID  enabled="false"></MSG_ID>         
+		<DATE>20110629</DATE>         
+		<TIME>13420600</TIME>         
+		<TXCD>EL10</TXCD>         
+		<SUBCODE>00</SUBCODE>         
+		<PRIORITY>6</PRIORITY>         
+		<END_CODE>Y</END_CODE>       
+	</AP_HEADER>      
+	<AP_DATA>
+    <DATA1>
+      <TIAHD></TIAHD><!--TIA HEAD-->
+		  <EDATE>1000629</EDATE><!--資料日期民國年格式yyymmdd-->
+		  <ERAREA>711</ERAREA><!--區域中心代碼-->
+		  <ECFI1>Y279354379</ECFI1><!--客戶統編--> 
+		  <EALWNO>7110998004</EALWNO><!--案件編號--> 
+		  <AORMCD>03413</AORMCD><!--AO/RM CODE--> 
+		  <EIBBUS>1</EIBBUS><!--事業群--> 
+		  <EAULVL>1</EAULVL><!--核定層級-->
+     </DATA1>
+		</AP_DATA>  
+</OUTPUT>
+
+
+
+

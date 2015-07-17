@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="big5"?>
+<OUTPUT>
+  <MQ_HEADER>
+    <MDID></MDID>
+    <IP>10.253.6.244</IP>
+    <MAC>enco</MAC>
+  </MQ_HEADER>
+  <AP_HEADER>
+    <ABEND></ABEND>
+    <FROM_HOST>BELOANE</FROM_HOST>
+    <FROM_SERVICE ></FROM_SERVICE>
+    <FROM_DTAQ></FROM_DTAQ>
+    <TO_HOST>900</TO_HOST>
+    <TO_SERVICE />
+    <TO_DTAQ>CGCTLT</TO_DTAQ>
+    <MSG_ID>BLN201107041800000100002</MSG_ID>
+    <DATE>20110704</DATE>
+    <TIME>18000001</TIME>
+    <TXCD>EL11</TXCD>
+    <SUBCODE>00</SUBCODE>
+    <PRIORITY>6</PRIORITY>
+    <END_CODE>Y</END_CODE>
+  </AP_HEADER>
+  <AP_DATA>
+    <DATA1>
+      <TIAHD type="char" length="30" ></TIAHD>
+      <ID type="char" length="11">70734477</ID>
+      <LNAM type="char" length="82">誠Ｘ科技股份有限公司</LNAM>
+      <SNAM type="char" length="12">誠Ｘ科技股</SNAM>
+      <ENAM type="char" length="35">SRONIC TECHNOLOGY INC.</ENAM>
+      <BRTH type="num" decimal="0" length="7">900628</BRTH>
+      <ZIP1 type="char" length="5">303</ZIP1>
+      <ADR1 type="char" length="82">新竹縣湖Ｘ鄉ＸＸ村新興路４５８之３號</ADR1>
+      <ZIP2 type="char" length="5">303</ZIP2>
+      <ADR2 type="char" length="82">新竹縣湖Ｘ鄉ＸＸ村新興路４５８之３號</ADR2>
+      <CEL type="char" length="30" ></CEL>
+      <TEL1 type="char" length="30">035979866</TEL1>
+      <TEL2 type="char" length="30">035979866#268</TEL2>
+      <MAIL type="char" length="68">mingzhe@sintronic.com.tw</MAIL>
+      <INDS type="char" length="6">012699</INDS>
+      <CID type="char" length="11">A120513161</CID>
+      <CIDNM type="char" length="82">董Ｘ業</CIDNM>
+      <CIDTEL type="char" length="30">0223939889#4133</CIDTEL>
+      <ORGTP type="char" length="2">04</ORGTP>
+      <MBUS type="char" length="1">2</MBUS>
+      <OPND type="num" decimal="0" length="7">940124</OPND>
+      <JCICID type="char" length="11" ></JCICID>
+      <MARD type="char" length="1" ></MARD>
+      <HSTS type="char" length="1" ></HSTS>
+      <BADFG type="char" length="1" ></BADFG>
+      <RMCD type="char" length="5">03649</RMCD>
+      <OBUMK type="char" length="1" ></OBUMK>
+    </DATA1>
+  </AP_DATA>
+</OUTPUT>

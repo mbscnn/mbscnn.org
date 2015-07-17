@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="BIG5"?>
+<!-- 法金e-Loan授信明細查詢 下行電文 -->
+<OUTPUT>
+  <MQ_HEADER>
+    <MDID />
+    <IP>10.253.6.244</IP>
+    <MAC>enco</MAC>
+  </MQ_HEADER>
+  <AP_HEADER>
+    <ABEND />
+    <FROM_HOST>BELOANE</FROM_HOST>
+    <FROM_SERVICE />
+    <FROM_DTAQ />
+    <TO_HOST>900</TO_HOST>
+    <TO_SERVICE />
+    <TO_DTAQ>CGCTLT</TO_DTAQ>
+    <MSG_ID>BLN201107261800000101017</MSG_ID>
+    <DATE>20110707</DATE>
+    <TIME>18000001</TIME>
+    <TXCD>EL15</TXCD>
+    <SUBCODE>00</SUBCODE>
+    <PRIORITY>6</PRIORITY>
+    <END_CODE>Y</END_CODE>
+  </AP_HEADER>
+  <AP_DATA>
+    <DATA1>
+      <!-- 統一編號 -->
+      <ECFI1>12345678901</ECFI1>
+      <!-- 帳號 -->
+      <EREFN>12345678901234567890</EREFN>
+      <!-- 分號 -->
+      <ESEQX>0000001</ESEQX>
+      <!-- 案件編號 -->
+      <EALWNO>1234567890</EALWNO>
+      <!-- 授信幣別 -->
+      <EFCUR>TWD</EFCUR>
+      <!-- 原幣撥款金額 -->
+      <EFCFM0>1234567890123.00</EFCFM0>
+      <!-- 原幣授信餘額 -->
+      <EFCFM3>1234567890123.00</EFCFM3>
+      <!-- 初放日 -->
+      <ECFD1>1234567</ECFD1>
+      <!-- 到期日 -->
+      <ECFD2>1234567</ECFD2>
+      <!-- 正擔代碼 -->
+      <EMOR>12</EMOR>
+      <!-- 副擔代碼 -->
+      <EMOR2>12</EMOR2>
+    </DATA1>
+    <DATA1>
+      <ECFI1>12345678901</ECFI1>
+      <EREFN>12345678901234567890</EREFN>
+      <ESEQX>0000002</ESEQX>
+      <EALWNO>1234567890</EALWNO>
+      <EFCUR>TWD</EFCUR>
+      <EFCFM0>1234567890123.00</EFCFM0>
+      <EFCFM3>1234567890123.00</EFCFM3>
+      <ECFD1>1234567</ECFD1>
+      <ECFD2>1234567</ECFD2>
+      <EMOR>12</EMOR>
+      <EMOR2>12</EMOR2>
+    </DATA1>
+    <DATA2>
+      <!-- 是否結束 -->
+      <APEND>Y</APEND>
+      <!-- 全部資料筆數 -->
+      <TOTOAL>002</TOTOAL>
+      <!-- FORM RECORD -->
+      <STRR>001</STRR>
+      <!-- TO   RECORD -->
+      <ENDR>002</ENDR>
+    </DATA2>
+  </AP_DATA>
+</OUTPUT>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="big5"?>
+<OUTPUT>
+  <MQ_HEADER>
+    <MDID></MDID>
+    <IP></IP>
+    <MAC></MAC>
+  </MQ_HEADER> -<AP_HEADER>
+    <ABEND></ABEND>
+    <FROM_HOST>BELOANE</FROM_HOST>
+    <FROM_SERVICE></FROM_SERVICE>
+    <FROM_DTAQ></FROM_DTAQ>
+    <TO_HOST>900</TO_HOST>
+    <TO_SERVICE></TO_SERVICE>
+    <TO_DTAQ>CGCTL</TO_DTAQ>
+    <MSG_ID>GAS201110071740286300000</MSG_ID>
+    <DATE>20111007</DATE>
+    <TIME>17402863</TIME>
+    <TXCD>EL12</TXCD>
+    <SUBCODE>00</SUBCODE>
+    <PRIORITY>3</PRIORITY>
+    <END_CODE>Y</END_CODE>
+  </AP_HEADER> 
+  <AP_DATA>
+    <DATA1>
+      <TIAHD length="30" type="char">1</TIAHD>
+      <KIND length="1" type="char">1</KIND>
+      <X21D length="12" type="char">006301134815</X21D>
+      <SEQ length="7" type="num" decimal="0">9006722</SEQ>
+      <FCUR length="3" type="char">EUR</FCUR>
+      <FAMT length="15" type="num" decimal="2">10002.63</FAMT>
+      <STRDT length="7" type="num" decimal="0">991209</STRDT>
+      <ENDDT length="7" type="num" decimal="0">1000109</ENDDT>
+      <OWNID length="11" type="char">89950762</OWNID>
+      <OWNM length="42" type="char">豆花妹傳播有限公司</OWNM>
+      <MSG length="52" type="char"></MSG>
+    </DATA1>
+  </AP_DATA>
+</OUTPUT>

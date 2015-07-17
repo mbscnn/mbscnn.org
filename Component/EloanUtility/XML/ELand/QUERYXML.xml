@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="big5" ?>
+<EDOCQuery version="1.0">
+    <RespMsg Code="0">查詢成功</RespMsg>
+    <Result>
+        <EDOCData>
+            <ApplyDate>2005/10/31 14:34:57</ApplyDate>
+            <City ID="376550000A">花蓮縣</City>
+            <Area ID="03">玉里鎮</Area>
+            <IR00 ID="C">地</IR00>
+            <IR49>00010000</IR49>
+            <LIDN></LIDN>
+            <Status Code="D" Desc="已下載"></Status>
+            <GUID>094UC006711PIC142F76A8F42E3BE32A29DEF87FDF8</GUID>
+            <DocName>094玉里電謄006711</DocName>
+            <DocType Code="PIC1">地籍圖謄本</DocType>
+            <Page>1</Page>
+            <URL>http://203.73.41.34:8080/LBWebServices/System/DownloadPDF.jsp?m=5&amp;g=094UC006711PIC142F76A8F42E3BE32A29DEF87FDF8</URL>
+            <BIOID>9410310010</BIOID>
+            <OID></OID>
+            <DownloadDate>2005/10/31 14:36:48</DownloadDate>
+            <ApplyUser ID="Test">測試人員</ApplyUser>
+            <ApplyUnit ID="SI">華安聯網</ApplyUnit>
+        </EDOCData>
+    </Result>
+</EDOCQuery>
