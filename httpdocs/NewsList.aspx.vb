@@ -17,6 +17,8 @@ Public Class NewsList
 
     Dim m_sCRETIME As String = String.Empty
 
+    '測試GitHub變更
+
 #Region "Page Events"
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
