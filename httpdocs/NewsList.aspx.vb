@@ -330,30 +330,39 @@ Public Class NewsList
                 End If
 
                 Dim LTL_APLY As Label = e.Item.FindControl("LTL_APLY")
-                If IsDate(DRV("MB_SAPLY").ToString) Then
-                    'LTL_APLY.Text &= CDate(DRV("MB_SAPLY").ToString).Year - 1911 & "年" & CDate(DRV("MB_SAPLY").ToString).Month & "月" & CDate(DRV("MB_SAPLY").ToString).Day & "日"
-                    LTL_APLY.Text = CDate(DRV("MB_SAPLY").ToString).Month & "月" & CDate(DRV("MB_SAPLY").ToString).Day & "日開始報名"
-                End If
-                If IsDate(DRV("MB_EAPLY").ToString) Then
-                    If Now > CDate(DRV("MB_EAPLY").ToString) Then
-                        LTL_APLY.Text = "已截止報名"
-                    End If
-                End If
-
-                'If IsDate(DRV("MB_EAPLY").ToString) Then
-                '    LTL_APLY.Text &= "~" & CDate(DRV("MB_EAPLY").ToString).Year - 1911 & "年" & CDate(DRV("MB_EAPLY").ToString).Month & "月" & CDate(DRV("MB_EAPLY").ToString).Day & "日"
-                'End If
-
-                Dim btnCanClass As Button = e.Item.FindControl("btnCanClass")
-                Dim PLH_APLY As PlaceHolder = e.Item.FindControl("PLH_APLY")
-                If Now >= CDate(DRV("MB_SAPLY").ToString) AndAlso Now <= CDate(DRV("MB_EAPLY").ToString) Then
-                    PLH_APLY.Visible = False
-                    btnClass.Visible = True
-                    btnCanClass.Visible = True
-                Else
+                If MB_CLASS.getString("MB_YES") = "N" Then
+                    LTL_APLY.Text = "已截止報名"
+                    Dim PLH_APLY As PlaceHolder = e.Item.FindControl("PLH_APLY")
                     PLH_APLY.Visible = True
                     btnClass.Visible = False
+                    Dim btnCanClass As Button = e.Item.FindControl("btnCanClass")
                     btnCanClass.Visible = False
+                Else
+                    If IsDate(DRV("MB_SAPLY").ToString) Then
+                        'LTL_APLY.Text &= CDate(DRV("MB_SAPLY").ToString).Year - 1911 & "年" & CDate(DRV("MB_SAPLY").ToString).Month & "月" & CDate(DRV("MB_SAPLY").ToString).Day & "日"
+                        LTL_APLY.Text = CDate(DRV("MB_SAPLY").ToString).Month & "月" & CDate(DRV("MB_SAPLY").ToString).Day & "日開始報名"
+                    End If
+                    If IsDate(DRV("MB_EAPLY").ToString) Then
+                        If Now > CDate(DRV("MB_EAPLY").ToString) Then
+                            LTL_APLY.Text = "已截止報名"
+                        End If
+                    End If
+
+                    'If IsDate(DRV("MB_EAPLY").ToString) Then
+                    '    LTL_APLY.Text &= "~" & CDate(DRV("MB_EAPLY").ToString).Year - 1911 & "年" & CDate(DRV("MB_EAPLY").ToString).Month & "月" & CDate(DRV("MB_EAPLY").ToString).Day & "日"
+                    'End If
+
+                    Dim btnCanClass As Button = e.Item.FindControl("btnCanClass")
+                    Dim PLH_APLY As PlaceHolder = e.Item.FindControl("PLH_APLY")
+                    If Now >= CDate(DRV("MB_SAPLY").ToString) AndAlso Now <= CDate(DRV("MB_EAPLY").ToString) Then
+                        PLH_APLY.Visible = False
+                        btnClass.Visible = True
+                        btnCanClass.Visible = True
+                    Else
+                        PLH_APLY.Visible = True
+                        btnClass.Visible = False
+                        btnCanClass.Visible = False
+                    End If
                 End If
             End If
         Catch ex As Exception
@@ -950,21 +959,21 @@ Public Class NewsList
         End Try
     End Sub
 
-    Private Sub LB_CLASS_4_Click(sender As Object, e As EventArgs) Handles LB_CLASS_4.Click
-        Try
-            Me.PLH_CLASS_4.Visible = True
-        Catch ex As Exception
-            UIShareFun.showErrMsg(Me, ex)
-        End Try
-    End Sub
+    'Private Sub LB_CLASS_4_Click(sender As Object, e As EventArgs) Handles LB_CLASS_4.Click
+    '    Try
+    '        Me.PLH_CLASS_4.Visible = True
+    '    Catch ex As Exception
+    '        UIShareFun.showErrMsg(Me, ex)
+    '    End Try
+    'End Sub
 
-    Private Sub LB_CLASS_2_Click(sender As Object, e As EventArgs) Handles LB_CLASS_2.Click
-        Try
-            Me.PLH_CLASS_2.Visible = True
-        Catch ex As Exception
-            UIShareFun.showErrMsg(Me, ex)
-        End Try
-    End Sub
+    'Private Sub LB_CLASS_2_Click(sender As Object, e As EventArgs) Handles LB_CLASS_2.Click
+    '    Try
+    '        Me.PLH_CLASS_2.Visible = True
+    '    Catch ex As Exception
+    '        UIShareFun.showErrMsg(Me, ex)
+    '    End Try
+    'End Sub
 
     Private Sub RP_Banner_ItemDataBound(sender As Object, e As Web.UI.WebControls.RepeaterItemEventArgs) Handles RP_Banner.ItemDataBound
         Try

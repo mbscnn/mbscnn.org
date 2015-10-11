@@ -181,8 +181,9 @@ Public Class MB_CLASSList
 
             sqlStr = "SELECT *" & _
                      "  FROM MB_CLASS" & _
-                     " WHERE SYSDATE() >= MB_SAPLY" & _
-                     "   AND SYSDATE() < MB_EAPLY" & _
+                     " WHERE SYSDATE() >= MB_SAPLY " & _
+                     "   AND SYSDATE() < MB_EAPLY " & _
+                     "   AND IFNULL(MB_YES,'Y') = 'Y' " & _
                      "      GROUP BY MB_SEQ ORDER BY MB_SAPLY "
 
             Return Me.loadBySQLOnlyDs(sqlStr)
@@ -343,6 +344,7 @@ Public Class MB_CLASSList
             sqlStr = "SELECT *" & _
                      "  FROM MB_CLASS" & _
                      " WHERE MB_SAPLY > SYSDATE() " & _
+                     "      AND IFNULL(MB_YES,'Y')='Y' " & _
                      "  GROUP BY MB_SEQ ORDER BY MB_SAPLY "
 
             Return Me.loadBySQLOnlyDs(sqlStr)
@@ -517,6 +519,7 @@ Public Class MB_CLASSList
             sqlStr = "SELECT *" & _
                      "  FROM MB_CLASS" & _
                      " WHERE SYSDATE() BETWEEN MB_SDATE AND MB_EDATE " & _
+                     "      AND IFNULL(MB_YES,'Y') = 'Y' " & _
                      "  GROUP BY MB_SEQ ORDER BY MB_SDATE "
 
             Return Me.loadBySQLOnlyDs(sqlStr)

@@ -907,6 +907,7 @@ Public Class MBMnt_Sign_01_v01
                 Me.TR_G_12.Visible = False
                 Me.TR_G_13.Visible = False
                 Me.TR_G_14.Visible = False
+                Me.TR_G_15_T.Visible = False
                 Me.TR_G_15.Visible = False
             Else
                 '黃色區+ 灰色區
@@ -1283,11 +1284,15 @@ Public Class MBMnt_Sign_01_v01
                                     Dim sMailTos() As String = {Trim(mbMEMBER.getString("MB_EMAIL"))}
 
                                     Dim sMailSub As String = String.Empty
-                                    sMailSub = MB_CLASS.getString("MB_CLASS_NAME")
+                                    If MB_CLASS.getString("MB_APV") <> "Y" Then
+                                        sMailSub = MB_CLASS.getString("MB_CLASS_NAME") & " 錄取通知 請務必回覆是否出席"
+                                    Else
+                                        sMailSub = MB_CLASS.getString("MB_CLASS_NAME")
+                                    End If
 
                                     Dim sMailBody As String = String.Empty
 
-                                    sMailBody = Me.getMailBody(Trim(mbMEMBER.getString("MB_NAME")), MB_CLASS)
+                                    sMailBody = Me.getMailBody(lbl_MB_MEMSEQ.Text, Trim(mbMEMBER.getString("MB_NAME")), MB_CLASS)
 
                                     com.Azion.EloanUtility.NetUtility.GMail_Send(sMailTos, Nothing, sMailSub, sMailBody, True, Nothing, False)
                                 End If
@@ -1327,17 +1332,91 @@ Public Class MBMnt_Sign_01_v01
         End Try
     End Sub
 
-    Function getMailBody(ByVal sAPPNAME As String, ByVal MB_CLASS As MB_CLASS) As String
+    Function getMailBody(ByVal iMB_MEMSEQ As Decimal, ByVal sAPPNAME As String, ByVal MB_CLASS As MB_CLASS) As String
         Try
             Dim sb As New StringBuilder
-            sb.Append("<P>")
-            sb.Append("親愛的" & sAPPNAME & "您好：<BR/>")
-            sb.Append("已收到您的線上報名【" & MB_CLASS.getString("MB_CLASS_NAME") & "】。<BR/>")
-            sb.Append("感謝您﹗若獲錄取將於開課前十日內寄發錄取通知。<BR/>")
-            sb.Append("若要取消報名，請於").Append(Me.getMB_CDAYS(MB_CLASS.getAttribute("MB_SDATE"), MB_CLASS.getDecimal("MB_CDAYS"))).Append("前取消!若超過期限欲取消報名，請聯絡中心<BR/>")
-            sb.Append("<SPAN STYLE='color:red'>此信函為系統所發出，請勿直接回覆。</SPAN><BR/>")
-            sb.Append("&nbsp;&nbsp;&nbsp;MBSC原始正法中心 合十")
-            sb.Append("</P>")
+
+            If MB_CLASS.getString("MB_APV") = "Y" Then
+                '發原來報名成功通知函
+                sb.Append("<P>")
+                sb.Append("親愛的" & sAPPNAME & "您好：<BR/>")
+                sb.Append("已收到您的線上報名【" & MB_CLASS.getString("MB_CLASS_NAME") & "】。<BR/>")
+                sb.Append("感謝您﹗若獲錄取將於開課前十日內寄發錄取通知。<BR/>")
+                sb.Append("若要取消報名，請於").Append(Me.getMB_CDAYS(MB_CLASS.getAttribute("MB_SDATE"), MB_CLASS.getDecimal("MB_CDAYS"))).Append("前取消!若超過期限欲取消報名，請聯絡中心<BR/>")
+                sb.Append("<SPAN STYLE='color:red'>此信函為系統所發出，請勿直接回覆。</SPAN><BR/>")
+                sb.Append("&nbsp;&nbsp;&nbsp;MBSC原始正法中心 合十")
+                sb.Append("</P>")
+            Else
+                '錄取通知 (參照下表)  (為原來提醒信一再修一下黃色螢光部分)
+                sb.Append("<DIV style='text-align:center;font-size:24pt;color:red' >").Append(MB_CLASS.getString("MB_CLASS_NAME")).Append("</DIV>")
+                sb.Append("<DIV style='text-align:center;font-size:24pt;color:red;font-weight:bold;text-decoration:underline' >錄取通知").Append("</DIV>")
+                sb.Append("<DIV style='font-size:12pt;color:#7030A0'>").Append("仁者吉祥：").Append("</DIV>")
+
+                sb.Append("<DIV style='font-size:12pt;color:#7030A0;font-weight:bold'>").Append("　　  歡迎您報名參加")
+                sb.Append("<span style='color:red'>")
+                sb.Append(MB_CLASS.getString("MB_CLASS_NAME"))
+                sb.Append("</span>")
+                sb.Append("！此通知函，乃透過系統發送。為使您在課程期間能順利進行，並獲得最大收穫，請務必閱讀下列注意事項：").Append("</DIV>")
+
+                sb.Append("<ol type='1' style='font-size:12pt;color:#7030A0;font-weight:bold' >")
+                Dim sMB_SDATE As String = String.Empty
+                If Utility.isValidateData(MB_CLASS.getAttribute("MB_SDATE")) Then
+                    sMB_SDATE = CDate(MB_CLASS.getAttribute("MB_SDATE").ToString).Year & "年" & CDate(MB_CLASS.getAttribute("MB_SDATE").ToString).Month & "月" & _
+                                CDate(MB_CLASS.getAttribute("MB_SDATE").ToString).Day & "日"
+                End If
+                Dim sREGTIME As String = String.Empty
+                sREGTIME = Left(Utility.FillZero(MB_CLASS.getString("REGTIME"), 4), 2) & Right(Utility.FillZero(MB_CLASS.getString("REGTIME"), 4), 2)
+                sb.Append("<li>").Append("本課程開始日期時間：").Append("<span style='color:red'>").Append(sMB_SDATE).Append("</span>")
+                sb.Append("　報到時間：").Append("<span style='color:red'>").Append(sREGTIME).Append("</span>")
+                sb.Append("</li>")
+                sb.Append("<li>")
+                sb.Append(" 課程地點：").Append("<span style='color:#F335CF'>MBSC").Append(MB_CLASS.getString("MB_PLACE")).Append(" / ")
+                sb.Append(MB_CLASS.getString("CLASS_PLACE")).Append("<BR/>").Append(MB_CLASS.getString("TRAFFIC_DESC"))
+                sb.Append("</li>")
+                sb.Append("<li>")
+                sb.Append("<span style='font-weight:bold;font-size:12pt;'>").Append("當您收到確認後，").Append("</span>")
+                sb.Append("<span style='color:red;font-weight:bold;font-size:24pt'>").Append("請於開課五日前，按確定出席/不出席，").Append("</span>")
+                Dim sC_URL As String = String.Empty
+                sC_URL = "http://mbscnn.org/MNT/MBMnt_RESP_01_v01.aspx?MB_MEMSEQ=" & iMB_MEMSEQ & "&MB_SEQ=" & MB_CLASS.getString("MB_SEQ") & "&MB_BATCH=" & MB_CLASS.getString("MB_BATCH") & _
+                         "&OPTYPE=Y"
+                Dim sN_URL As String = String.Empty
+                sN_URL = "http://mbscnn.org/MNT/MBMnt_RESP_01_v01.aspx?MB_MEMSEQ=" & iMB_MEMSEQ & "&MB_SEQ=" & MB_CLASS.getString("MB_SEQ") & "&MB_BATCH=" & MB_CLASS.getString("MB_BATCH") & _
+                         "&OPTYPE=N"
+                sb.Append("<a style='color:#000040;font-size:20pt;font-weight:bold;' href='").Append(sC_URL).Append("' >確定出席</a>").Append("　　")
+                sb.Append("<a style='color:#000040;font-size:20pt;font-weight:bold;' href='").Append(sN_URL).Append("' >確定不出席</a>").Append("　　，")
+                sb.Append("<span style='font-weight:bold;font-size:12pt;'>").Append("開課前五日內若有變動，請與電話告知聯絡人").Append("</span>")
+                sb.Append("，以利增補候補學員，感謝您。")
+                sb.Append("</li>")
+
+                sb.Append("<li>")
+                sb.Append("<span style='color:red'>聯絡電話：</span>").Append(MB_CLASS.getString("CONTEL")).Append("　　")
+                sb.Append("<span style='color:red'>聯絡人：").Append(MB_CLASS.getString("CONTACT")).Append("</span>")
+                sb.Append("</li>")
+
+                sb.Append("<li>")
+                sb.Append("<span style='color:red'>請穿著寬鬆衣褲；男女眾皆請勿穿著短褲。女眾請勿穿著貼身衣裙。</span>")
+                sb.Append("</li>")
+
+                sb.Append("<li>")
+                sb.Append("請攜帶環保杯、筷子。")
+                sb.Append("</li>")
+
+                sb.Append("<li>")
+                sb.Append("歡迎隨喜發心贊助場地或推廣教育課程費用。")
+                sb.Append("</li>")
+
+                sb.Append("<li>")
+                sb.Append("可代訂素食便當（報到時登記即可，歡迎隨喜打齋）。")
+                sb.Append("</li>")
+
+                sb.Append("</ol>")
+
+                sb.Append("<div style='color:#C80896;font-size:14pt;font-weight:bold'>")
+                sb.Append("　祝您").Append("<BR/>")
+                sb.Append("　　　禪修愉快、收穫滿滿").Append("<BR/>").Append("<BR/>")
+                sb.Append("　　　　　　　　　 MBSC 台北教育中心 敬邀合十")
+                sb.Append("</div>")
+            End If
 
             Return sb.ToString
         Catch ex As Exception

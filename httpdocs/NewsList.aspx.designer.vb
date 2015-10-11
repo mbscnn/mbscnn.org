@@ -23,15 +23,6 @@ Partial Public Class NewsList
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
 
     '''<summary>
-    '''PLH_CLASS_LIST 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents PLH_CLASS_LIST As Global.System.Web.UI.WebControls.PlaceHolder
-
-    '''<summary>
     '''RP_Banner 控制項。
     '''</summary>
     '''<remarks>
@@ -50,24 +41,6 @@ Partial Public Class NewsList
     Protected WithEvents RP_CLASS_1 As Global.System.Web.UI.WebControls.Repeater
 
     '''<summary>
-    '''LB_CLASS_4 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents LB_CLASS_4 As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''PLH_CLASS_4 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents PLH_CLASS_4 As Global.System.Web.UI.WebControls.PlaceHolder
-
-    '''<summary>
     '''RP_CLASS_4 控制項。
     '''</summary>
     '''<remarks>
@@ -75,24 +48,6 @@ Partial Public Class NewsList
     '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
     '''</remarks>
     Protected WithEvents RP_CLASS_4 As Global.System.Web.UI.WebControls.Repeater
-
-    '''<summary>
-    '''LB_CLASS_2 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents LB_CLASS_2 As Global.System.Web.UI.WebControls.LinkButton
-
-    '''<summary>
-    '''PLH_CLASS_2 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents PLH_CLASS_2 As Global.System.Web.UI.WebControls.PlaceHolder
 
     '''<summary>
     '''RP_CLASS_2 控制項。
@@ -113,40 +68,13 @@ Partial Public Class NewsList
     Protected WithEvents RP_NEWS As Global.System.Web.UI.WebControls.Repeater
 
     '''<summary>
-    '''HID_PAGE 控制項。
+    '''PLH_CLASS_LIST 控制項。
     '''</summary>
     '''<remarks>
     '''自動產生的欄位。
     '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents HID_PAGE As Global.System.Web.UI.HtmlControls.HtmlInputHidden
-
-    '''<summary>
-    '''IMG_LEFT 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents IMG_LEFT As Global.System.Web.UI.WebControls.ImageButton
-
-    '''<summary>
-    '''IMG_ADD 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents IMG_ADD As Global.System.Web.UI.WebControls.ImageButton
-
-    '''<summary>
-    '''IMG_RIGHT 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents IMG_RIGHT As Global.System.Web.UI.WebControls.ImageButton
+    Protected WithEvents PLH_CLASS_LIST As Global.System.Web.UI.WebControls.PlaceHolder
 
     '''<summary>
     '''PLH_CKEditor 控制項。
@@ -291,4 +219,40 @@ Partial Public Class NewsList
     '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
     '''</remarks>
     Protected WithEvents btCancel As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''HID_PAGE 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents HID_PAGE As Global.System.Web.UI.HtmlControls.HtmlInputHidden
+
+    '''<summary>
+    '''IMG_LEFT 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents IMG_LEFT As Global.System.Web.UI.WebControls.ImageButton
+
+    '''<summary>
+    '''IMG_ADD 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents IMG_ADD As Global.System.Web.UI.WebControls.ImageButton
+
+    '''<summary>
+    '''IMG_RIGHT 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents IMG_RIGHT As Global.System.Web.UI.WebControls.ImageButton
 End Class

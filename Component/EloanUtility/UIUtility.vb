@@ -346,7 +346,41 @@ Public NotInheritable Class UIUtility
         'Return HttpContext.Current.Request.ApplicationPath
         'HttpContext.Current.Request.PhysicalApplicationPath
 
-        Return ""
+        Return String.Empty
+
+        'Dim sROOT As String = String.Empty
+        'Dim sPath As String = String.Empty
+        'sPath = HttpContext.Current.Request.ApplicationPath
+        'If com.Azion.EloanUtility.ValidateUtility.isValidateData(sPath) AndAlso Right(sPath, 1) = "/" Then
+        '    sPath = Left(sPath, sPath.Length - 1)
+        'End If
+        'sROOT = "//" & HttpContext.Current.Request.Url.Authority & sPath
+        'Return sROOT
+    End Function
+
+    ''' <summary>
+    ''' 取得eLoan專案目錄
+    ''' </summary>
+    ''' <returns>String</returns>
+    ''' <remarks>
+    ''' [Titan] 	2011/07/20	Created
+    ''' </remarks>
+    Public Shared Function getRootPathClient(Optional ByVal hasSessionId As Boolean = True) As String
+
+        'If hasSessionId Then Return HttpContext.Current.Request.ApplicationPath '& "/(S(" & System.Web.HttpContext.Current.Session.SessionID & "))"
+        'Return HttpContext.Current.Request.ApplicationPath
+        'HttpContext.Current.Request.PhysicalApplicationPath
+
+        'Return ""
+
+        Dim sROOT As String = String.Empty
+        Dim sPath As String = String.Empty
+        sPath = HttpContext.Current.Request.ApplicationPath
+        If com.Azion.EloanUtility.ValidateUtility.isValidateData(sPath) AndAlso Right(sPath, 1) = "/" Then
+            sPath = Left(sPath, sPath.Length - 1)
+        End If
+        sROOT = "//" & HttpContext.Current.Request.Url.Authority & sPath
+        Return sROOT
     End Function
 
     ''' <summary>

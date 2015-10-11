@@ -842,6 +842,15 @@ Partial Public Class MBMnt_Sign_01_v01
     Protected WithEvents txt_MB_CONTMOBIL As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''TR_G_15_T 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents TR_G_15_T As Global.System.Web.UI.HtmlControls.HtmlTableRow
+
+    '''<summary>
     '''TR_G_15 控制項。
     '''</summary>
     '''<remarks>

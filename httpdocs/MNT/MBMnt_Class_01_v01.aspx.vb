@@ -716,9 +716,10 @@ Public Class MBMnt_Class_01_v01
             ElseIf DateTime.DaysInMonth(CInt(ddl_EditEndYear.SelectedValue), CInt(ddl_EditEndMonth.SelectedValue)) < CInt(ddl_EditStartDay.SelectedValue) OrElse DateTime.DaysInMonth(CInt(ddl_EditEndYear.SelectedValue), CInt(ddl_EditEndMonth.SelectedValue)) < CInt(ddl_EditEndDay.SelectedValue) Then
                 com.Azion.EloanUtility.UIUtility.alert("請檢核開課日期")
                 Return False
-            ElseIf (CInt(ddl_EditStartYear.SelectedValue) * 10000 + CInt(ddl_EditStartMonth.SelectedValue) * 100 + CInt(ddl_EditStartDay.SelectedValue)) <= (Now.Year) * 10000 + Now.Month * 100 + Now.Day Then
-                com.Azion.EloanUtility.UIUtility.alert("開課日期起日不可小於等於今天")
-                Return False
+                '1040720 AMY 不檢核開課日期起日不可小於等於今天
+                'ElseIf (CInt(ddl_EditStartYear.SelectedValue) * 10000 + CInt(ddl_EditStartMonth.SelectedValue) * 100 + CInt(ddl_EditStartDay.SelectedValue)) <= (Now.Year) * 10000 + Now.Month * 100 + Now.Day Then
+                '    com.Azion.EloanUtility.UIUtility.alert("開課日期起日不可小於等於今天")
+                '    Return False
             ElseIf CInt(ddl_EditStartYear.SelectedValue) * 10000 + CInt(ddl_EditStartMonth.SelectedValue) * 100 + CInt(ddl_EditStartDay.SelectedValue) > CInt(ddl_EditEndYear.SelectedValue) * 10000 + CInt(ddl_EditEndMonth.SelectedValue) * 100 + CInt(ddl_EditEndDay.SelectedValue) Then
                 com.Azion.EloanUtility.UIUtility.alert("開課日期起日不可大於開課日期訖日")
                 Return False
@@ -761,13 +762,15 @@ Public Class MBMnt_Class_01_v01
                 com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "請輸入完整課程報名起日")
                 Return False
             Else
+                '1040720 AMY 不檢核開課日期起日不可小於等於今天
                 '新增時 課程報名起 >= 今天 and
-                Dim D_NOW As New Date(Now.Year, Now.Month, Now.Day)
-                If CDate(sMB_SAPLY) < D_NOW Then
-                    com.Azion.EloanUtility.UIUtility.showJSMsg(Me, "課程報名起日需大於今天")
-                    com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "課程報名起日需大於今天")
-                    Return False
-                End If
+                'Dim D_NOW As New Date(Now.Year, Now.Month, Now.Day)
+                'If CDate(sMB_SAPLY) < D_NOW Then
+                '    com.Azion.EloanUtility.UIUtility.showJSMsg(Me, "課程報名起日需大於今天")
+                '    com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "課程報名起日需大於今天")
+                '    Return False
+                'End If
+
                 '課程報名起日 >  MB_CLASS.MB_SDATE (課程時間起)
                 If CDate(sMB_SAPLY) > CDate(sMB_SDATE) Then
                     com.Azion.EloanUtility.UIUtility.showJSMsg(Me, "課程報名起日需小於課程時間起日")

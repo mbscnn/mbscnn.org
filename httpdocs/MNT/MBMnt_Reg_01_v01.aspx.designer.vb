@@ -41,6 +41,15 @@ Partial Public Class MBMnt_Reg_01_v01
     Protected WithEvents PLH_MB_ACCT As Global.System.Web.UI.WebControls.PlaceHolder
 
     '''<summary>
+    '''LTL_TITLE 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents LTL_TITLE As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
     '''TXT_EMAIL 控制項。
     '''</summary>
     '''<remarks>
@@ -104,6 +113,15 @@ Partial Public Class MBMnt_Reg_01_v01
     Protected WithEvents IMG_Vad As Global.System.Web.UI.HtmlControls.HtmlImage
 
     '''<summary>
+    '''PLH_Send 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents PLH_Send As Global.System.Web.UI.WebControls.PlaceHolder
+
+    '''<summary>
     '''btSend 控制項。
     '''</summary>
     '''<remarks>
@@ -111,6 +129,24 @@ Partial Public Class MBMnt_Reg_01_v01
     '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
     '''</remarks>
     Protected WithEvents btSend As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''PLH_REPASS 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents PLH_REPASS As Global.System.Web.UI.WebControls.PlaceHolder
+
+    '''<summary>
+    '''bntRePASS 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents bntRePASS As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''PLH_MAILSend 控制項。

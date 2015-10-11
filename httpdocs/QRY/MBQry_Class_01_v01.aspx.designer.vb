@@ -572,6 +572,15 @@ Partial Public Class MBQry_Class_01_v01
     Protected WithEvents TD_5_5 As Global.System.Web.UI.HtmlControls.HtmlTableCell
 
     '''<summary>
+    '''TD_5_6 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents TD_5_6 As Global.System.Web.UI.HtmlControls.HtmlTableCell
+
+    '''<summary>
     '''RP_CLASS_5 控制項。
     '''</summary>
     '''<remarks>

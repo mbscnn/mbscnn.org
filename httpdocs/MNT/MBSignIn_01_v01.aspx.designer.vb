@@ -66,4 +66,49 @@ Partial Public Class MBSignIn_01_v01
     '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
     '''</remarks>
     Protected WithEvents btnReMail As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''btnFPass 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents btnFPass As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''PLH_NUMBER 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents PLH_NUMBER As Global.System.Web.UI.WebControls.PlaceHolder
+
+    '''<summary>
+    '''TXT_NUMBER 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents TXT_NUMBER As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''IMG_Vad 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents IMG_Vad As Global.System.Web.UI.HtmlControls.HtmlImage
+
+    '''<summary>
+    '''btnReSetPass 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''將移動欄位宣告從設計檔案修改為程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents btnReSetPass As Global.System.Web.UI.WebControls.Button
 End Class

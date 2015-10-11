@@ -105,6 +105,11 @@ Public Class MBQry_Class_01_v01
                 Me.RP_CLASS_4.DataBind()
 
                 '截止報名尚未開課
+                If Me.is76User(Session("UserId")) Then
+                    Me.TD_5_6.Visible = True
+                Else
+                    Me.TD_5_6.Visible = False
+                End If
                 Me.Bind_DDL_MB_PLACE(Me.DDL_MB_PLACE_5)
                 Me.Bind_DDL_Date(Me.DDL_MB_SDATE_SY_5, "1")
                 Me.Bind_DDL_Date(Me.DDL_MB_SDATE_SM_5, "2")
@@ -324,6 +329,8 @@ Public Class MBQry_Class_01_v01
             MB_MEMCLASSList.getMail_TO(MB_CLASS.getDecimal("MB_SEQ"), MB_CLASS.getDecimal("MB_BATCH"))
             DT_MAIL = MB_MEMCLASSList.getCurrentDataSet.Tables(0)
             If Not IsNothing(DT_MAIL) AndAlso DT_MAIL.Rows.Count > 0 Then
+                Dim sMailSub As String = String.Empty
+
                 For Each ROW As DataRow In DT_MAIL.Rows
                     If Utility.isValidateData(Trim(ROW("MB_EMAIL").ToString)) Then
                         Dim sMailBody As String = String.Empty
@@ -333,10 +340,10 @@ Public Class MBQry_Class_01_v01
                             sMailBody = Me.getMailBody_2(MB_CLASS, ROW("MB_MEMSEQ"), ROW("MB_NAME").ToString)
                         End If
 
-                        Dim sMailSub As String = String.Empty
+
                         If iMode = 1 Then
-                            '台北中階精進二日禪 錄取通知 請務必回覆是否出席
-                            sMailSub = MB_CLASS.getString("MB_CLASS_NAME") & " 錄取通知 請務必回覆是否出席"
+                            '台北中階精進二日禪  提醒通知函
+                            sMailSub = MB_CLASS.getString("MB_CLASS_NAME") & " 提醒通知函"
                         ElseIf iMode = 2 Then
                             '台北中階精進二日禪  提醒通知函
                             sMailSub = MB_CLASS.getString("MB_CLASS_NAME") & " 提醒通知函"
@@ -348,6 +355,14 @@ Public Class MBQry_Class_01_v01
                         End Try
                     End If
                 Next
+
+                Dim sMsg As String = String.Empty
+                If iMode = 1 Then
+                    sMsg = sMailSub & "(一)，已發送完畢"
+                Else
+                    sMsg = sMailSub & "(二)，已發送完畢"
+                End If
+                com.Azion.EloanUtility.UIUtility.showErrMsg(Me, sMailSub)
             End If
         Catch ex As Exception
             Throw
@@ -363,14 +378,14 @@ Public Class MBQry_Class_01_v01
             Dim sb As New System.Text.StringBuilder
 
             sb.Append("<DIV style='text-align:center;font-size:24pt;color:red' >").Append(MB_CLASS.getString("MB_CLASS_NAME")).Append("</DIV>")
-            sb.Append("<DIV style='text-align:center;font-size:24pt;color:red;font-weight:bold;text-decoration:underline' >錄取通知").Append("</DIV>")
+            sb.Append("<DIV style='text-align:center;font-size:24pt;color:red;font-weight:bold;text-decoration:underline' >★ 提醒您 ★").Append("</DIV>")
             sb.Append("<DIV style='font-size:12pt;color:#7030A0'>").Append("仁者吉祥：").Append("</DIV>")
 
-            sb.Append("<DIV style='font-size:12pt;color:#7030A0;font-weight:bold'>").Append("　　  歡迎您報名參加")
+            sb.Append("<DIV style='font-size:12pt;color:#7030A0;font-weight:bold'>").Append("　　  您已報名參加 ")
             sb.Append("<span style='color:red'>")
             sb.Append(MB_CLASS.getString("MB_CLASS_NAME"))
             sb.Append("</span>")
-            sb.Append("！此通知函，乃透過系統發送。為使您在課程期間能順利進行，並獲得最大收穫，請務必閱讀下列注意事項：").Append("</DIV>")
+            sb.Append("！此通知函，提醒您，別在忙碌中流逝，忘了學習或放棄初衷，期待與您相見。").Append("</DIV>")
 
             sb.Append("<ol type='1' style='font-size:12pt;color:#7030A0;font-weight:bold' >")
             Dim sMB_SDATE As String = String.Empty
@@ -387,18 +402,18 @@ Public Class MBQry_Class_01_v01
             sb.Append(" 課程地點：").Append("<span style='color:#F335CF'>MBSC").Append(MB_CLASS.getString("MB_PLACE")).Append(" / ")
             sb.Append(MB_CLASS.getString("CLASS_PLACE")).Append("<BR/>").Append(MB_CLASS.getString("TRAFFIC_DESC"))
             sb.Append("</li>")
-            sb.Append("<li>")
-            sb.Append("當您收到確認後，").Append("<span style='color:red;font-weight:bold;font-size:24pt'>").Append("請按確定出席/不出席，").Append("</span>")
-            Dim sC_URL As String = String.Empty
-            sC_URL = "http://mbscnn.org/MNT/MBMnt_RESP_01_v01.aspx?MB_MEMSEQ=" & iMB_MEMSEQ & "&MB_SEQ=" & MB_CLASS.getString("MB_SEQ") & "&MB_BATCH=" & MB_CLASS.getString("MB_BATCH") & _
-                     "&OPTYPE=Y"
-            Dim sN_URL As String = String.Empty
-            sN_URL = "http://mbscnn.org/MNT/MBMnt_RESP_01_v01.aspx?MB_MEMSEQ=" & iMB_MEMSEQ & "&MB_SEQ=" & MB_CLASS.getString("MB_SEQ") & "&MB_BATCH=" & MB_CLASS.getString("MB_BATCH") & _
-                     "&OPTYPE=N"
-            sb.Append("<a style='color:#000040;font-size:20pt;font-weight:bold;' href='").Append(sC_URL).Append("' >確定出席</a>").Append("　　")
-            sb.Append("<a style='color:#000040;font-size:20pt;font-weight:bold;' href='").Append(sN_URL).Append("' >確定不出席</a>").Append("　　，")
-            sb.Append("以利增補候補學員，感謝您。")
-            sb.Append("</li>")
+            'sb.Append("<li>")
+            'sb.Append("當您收到確認後，").Append("<span style='color:red;font-weight:bold;font-size:24pt'>").Append("請按確定出席/不出席，").Append("</span>")
+            'Dim sC_URL As String = String.Empty
+            'sC_URL = "http://mbscnn.org/MNT/MBMnt_RESP_01_v01.aspx?MB_MEMSEQ=" & iMB_MEMSEQ & "&MB_SEQ=" & MB_CLASS.getString("MB_SEQ") & "&MB_BATCH=" & MB_CLASS.getString("MB_BATCH") & _
+            '         "&OPTYPE=Y"
+            'Dim sN_URL As String = String.Empty
+            'sN_URL = "http://mbscnn.org/MNT/MBMnt_RESP_01_v01.aspx?MB_MEMSEQ=" & iMB_MEMSEQ & "&MB_SEQ=" & MB_CLASS.getString("MB_SEQ") & "&MB_BATCH=" & MB_CLASS.getString("MB_BATCH") & _
+            '         "&OPTYPE=N"
+            'sb.Append("<a style='color:#000040;font-size:20pt;font-weight:bold;' href='").Append(sC_URL).Append("' >確定出席</a>").Append("　　")
+            'sb.Append("<a style='color:#000040;font-size:20pt;font-weight:bold;' href='").Append(sN_URL).Append("' >確定不出席</a>").Append("　　，")
+            'sb.Append("以利增補候補學員，感謝您。")
+            'sb.Append("</li>")
 
             sb.Append("<li>")
             sb.Append("<span style='color:red'>聯絡電話：</span>").Append(MB_CLASS.getString("CONTEL")).Append("　　")
@@ -418,7 +433,11 @@ Public Class MBQry_Class_01_v01
             sb.Append("</li>")
 
             sb.Append("<li>")
-            sb.Append("可代訂素食便當（報到時登記即可，歡迎隨喜打齋）。")
+            sb.Append(" 可代訂素食便當（報到時登記即可，歡迎隨喜打齋）。")
+            sb.Append("</li>")
+
+            sb.Append("<li>")
+            sb.Append(" 尚未回覆者，請盡快回覆。")
             sb.Append("</li>")
 
             sb.Append("</ol>")
@@ -554,7 +573,13 @@ Public Class MBQry_Class_01_v01
                             btnMB_ALERT1.Enabled = False
                             btnMB_ALERT1.Text = "已經發第一封提醒信"
 
-                            If CDate(DRV("MB_SDATE").ToString).AddDays(-1 * DRV("MB_ALERT2_DAY")) <= Now Then
+                            'If CDate(DRV("MB_SDATE").ToString).AddDays(-1 * DRV("MB_ALERT2_DAY")) <= Now Then
+                            '    btnMB_ALERT2.Visible = True
+                            'Else
+                            '    btnMB_ALERT2.Visible = False
+                            'End If
+
+                            If CDate(DRV("MB_SDATE").ToString) > Now Then
                                 btnMB_ALERT2.Visible = True
                             Else
                                 btnMB_ALERT2.Visible = False
@@ -590,6 +615,25 @@ Public Class MBQry_Class_01_v01
 
                     Dim TD_1_7 As HtmlTableCell = e.Item.FindControl("TD_1_7")
                     TD_1_7.Visible = False
+                End If
+
+                If DRV("MB_YES").ToString = "N" Then
+                    Dim btnSIGNUP As Button = e.Item.FindControl("btnSIGNUP")
+                    btnSIGNUP.Visible = False
+                    Dim btnCANCEL As Button = e.Item.FindControl("btnCANCEL")
+                    btnCANCEL.Visible = False
+                    Dim LTL_APLY As Label = e.Item.FindControl("LTL_APLY")
+                    LTL_APLY.Visible = True
+
+                    Dim btnMB_ALERT1 As Button = e.Item.FindControl("btnMB_ALERT1")
+                    btnMB_ALERT1.Visible = False
+                    Dim btnMB_ALERT2 As Button = e.Item.FindControl("btnMB_ALERT2")
+                    btnMB_ALERT2.Visible = False
+                End If
+
+                If DRV("MB_ALERT2").ToString = "Y" Then
+                    Dim LTL_MB_ALERT2 As Label = e.Item.FindControl("LTL_MB_ALERT2")
+                    LTL_MB_ALERT2.Text = "<BR/>已發過"
                 End If
             End If
         Catch ex As Exception
@@ -1018,6 +1062,38 @@ Public Class MBQry_Class_01_v01
                 'Dim LTL_MB_SEDATE As Literal = e.Item.FindControl("LTL_MB_SEDATE")
                 'LTL_MB_SEDATE.Text = sMB_SAPLY & "~" & sMB_EAPLY
 
+                If Me.is76User(Session("UserId")) Then
+                    Dim btnMB_ALERT1 As Button = e.Item.FindControl("btnMB_ALERT1")
+                    Dim btnMB_ALERT2 As Button = e.Item.FindControl("btnMB_ALERT2")
+
+                    If CDate(DRV("MB_SDATE").ToString).AddDays(-1 * DRV("MB_ALERT1_DAY")) <= Now Then
+                        If Not Utility.isValidateData(DRV("MB_ALERT1")) Then
+                            btnMB_ALERT1.Visible = True
+                        Else
+                            btnMB_ALERT1.Enabled = False
+                            btnMB_ALERT1.Text = "已經發第一封提醒信"
+
+                            'If CDate(DRV("MB_SDATE").ToString).AddDays(-1 * DRV("MB_ALERT2_DAY")) <= Now Then
+                            '    btnMB_ALERT2.Visible = True
+                            'Else
+                            '    btnMB_ALERT2.Visible = False
+                            'End If
+
+                            If CDate(DRV("MB_SDATE").ToString) > Now Then
+                                btnMB_ALERT2.Visible = True
+                            Else
+                                btnMB_ALERT2.Visible = False
+                            End If
+                        End If
+                    Else
+                        btnMB_ALERT1.Visible = False
+                        btnMB_ALERT2.Visible = False
+                    End If
+                Else
+                    Dim TD_5_6 As HtmlTableCell = e.Item.FindControl("TD_5_6")
+                    TD_5_6.Visible = False
+                End If
+
                 If Utility.isValidateData(Me.m_sPLACE) Then
                     Dim TD_5_1 As HtmlTableCell = e.Item.FindControl("TD_5_1")
                     TD_5_1.Visible = False
@@ -1034,8 +1110,13 @@ Public Class MBQry_Class_01_v01
                     Dim TD_5_5 As HtmlTableCell = e.Item.FindControl("TD_5_5")
                     TD_5_5.Visible = False
 
-                    'Dim TD_5_6 As HtmlTableCell = e.Item.FindControl("TD_5_6")
-                    'TD_5_6.Visible = False
+                    Dim TD_5_6 As HtmlTableCell = e.Item.FindControl("TD_5_6")
+                    TD_5_6.Visible = False
+                End If
+
+                If DRV("MB_ALERT2").ToString = "Y" Then
+                    Dim LTL_MB_ALERT2 As Label = e.Item.FindControl("LTL_MB_ALERT2")
+                    LTL_MB_ALERT2.Text = "<BR/>已發過"
                 End If
             End If
         Catch ex As Exception

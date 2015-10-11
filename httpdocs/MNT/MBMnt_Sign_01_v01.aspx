@@ -8,7 +8,7 @@
 <html>
 <head runat="server">
     <title></title>
-    <script type="text/javascript" language="JavaScript" src="<%=com.Azion.EloanUtility.UIUtility.getRootPath() + "/js/jquery-1.7.1.min.js"%>"></script>
+    <script type="text/javascript" language="JavaScript" src="<%=com.Azion.EloanUtility.UIUtility.getRootPathClient() + "/js/jquery-1.7.1.min.js"%>"></script>
     <script type="text/javascript" language="JavaScript">
         //DataGrid Radiobutton防止多選
         function RadioButtonSelect(aspRadioButtonID) {
@@ -54,9 +54,6 @@
         <!-- #include virtual="~/inc/PageTab.inc" -->
 <table width="100%" cellspacing="0" cellpadding="0" style="width:1235px;background:transparent;margin-left: auto; margin-right: auto;" align="center">
     <tr>
-        <td style="vertical-align:top;padding:0;text-align:left;background:transparent;width:185px" >
-            <!-- #include virtual="~/inc/vTab.inc" -->
-        </td>
         <td style="vertical-align:top;padding:0;text-align:left;background:transparent;width:1050px" >
             <!-- #include virtual="~/inc/Signin.inc" -->
             <div align="center">
@@ -209,7 +206,7 @@
 
             <table class="CRTable_Top" width="100%" cellspacing="0" runat="server" id="tb_Page3" visible="false" >
                 <tr>
-                    <td class="th1_b" colspan="4">
+                    <td class="th1_b" colspan="4" style="font-size:14pt;padding:4px" >
                         會員編號 : 
                         <asp:Label ID="lbl_MB_AREA" runat="server" Text="" />-
                         <asp:Label ID="lbl_MB_MEMSEQ" runat="server" Text="" />
@@ -217,93 +214,93 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         課程名稱
                     </td>
-                    <td class="td2_b" width="85%" colspan="3">
+                    <td class="td2_b" width="85%" colspan="3" style="font-size:14pt;padding:4px" >
                         <asp:Label ID="lbl_Class" runat="server" Text=""></asp:Label>
                     </td>
                 </tr>
                 <tr>
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px">
                         <span style="color:Red">*</span>
-                        法名/姓名
+                        姓名
                     </td>
-                    <td class="td2_b" width="35%">
+                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
                         <asp:TextBox ID="txt_MB_NAME" runat="server"></asp:TextBox>
                     </td>
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px">
                         <span style="color:Red">*</span>
                         性別
                     </td>
-                    <td class="td2_b" width="35%">
-                        <asp:RadioButtonList ID="rbtList_MB_SEX" runat="server" RepeatDirection="Horizontal">
-                            <asp:ListItem Value="1" Text="男"></asp:ListItem>
-                            <asp:ListItem Value="2" Text="女"></asp:ListItem>
+                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
+                        <asp:RadioButtonList ID="rbtList_MB_SEX" runat="server" RepeatDirection="Horizontal" style="font-size:14pt;" >
+                            <asp:ListItem Value="1" Text="男" style="font-size:14pt;" ></asp:ListItem>
+                            <asp:ListItem Value="2" Text="女" style="font-size:14pt;" ></asp:ListItem>
                         </asp:RadioButtonList>
                     </td>
                 </tr>
                 <tr>
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px">
                         <span style="color:Red">*</span>
                         出生年月日
                     </td>
-                    <td id="TD_Y_1" runat="server" class="td2_b" width="35%">
+                    <td id="TD_Y_1" runat="server" class="td2_b" width="35%" style="font-size:14pt;padding:4px">
                         西元
                         <asp:TextBox ID="txt_MB_BIRTH_YYY" runat="server" Width="10%"></asp:TextBox>年&nbsp;
                         <asp:TextBox ID="txt_MB_BIRTH_MM" runat="server" Width="8%"></asp:TextBox>月&nbsp;
                         <asp:TextBox ID="txt_MB_BIRTH_DD" runat="server" Width="8%"></asp:TextBox>日&nbsp;
                     </td>
-                    <td id="TD_G_1_1" runat="server" class="th1c_b" width="15%">
+                    <td id="TD_G_1_1" runat="server" class="th1c_b" width="15%" style="font-size:14pt;padding:4px">
                         <span style="color:Red">*</span>
                         出家眾
                     </td>
-                    <td id="TD_G_1_2" runat="server" class="td2_b" width="35%">
+                    <td id="TD_G_1_2" runat="server" class="td2_b" width="35%" style="font-size:14pt;padding:4px">
                         <asp:RadioButton ID="rbt_MB_MONK_Y" runat="server" Text="是" GroupName="MB_MONK" onclick="CheckMonk(this);"></asp:RadioButton>
                         <asp:RadioButton ID="rbt_MB_MONK_N" runat="server" Text="否" GroupName="MB_MONK" onclick="CheckMonk(this);"></asp:RadioButton>
                     </td>
                 </tr>
                 <tr runat="server" id="tr_MB_MONK_1" style="display:none">
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         法名
                     </td>
-                    <td class="td2_b" width="35%">
+                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
                         <asp:TextBox ID="txt_MB_MONKNAME" runat="server" Width="30%"></asp:TextBox>
                     </td>
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         剃度/皈依恩師/戒師
                     </td>
-                    <td class="td2_b" width="35%">
+                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
                         <asp:TextBox ID="txt_MB_MONKTECH" runat="server" Width="30%"></asp:TextBox>
                     </td>
                 </tr>
                 <tr runat="server" id="tr_MB_MONK_2" style="display:none">
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         傳承
                     </td>
-                    <td class="td2_b" width="35%">
-                        <asp:DropDownList ID="dd_MB_EDUTYPE" runat="server">
+                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" > 
+                        <asp:DropDownList ID="dd_MB_EDUTYPE" runat="server" style="font-size:14pt" >
                         </asp:DropDownList>
                     </td>
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         常住/親近道場
                     </td>
-                    <td class="td2_b" width="35%">
+                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
                         <asp:TextBox ID="txt_MB_MONKPLACE" runat="server" Width="30%"></asp:TextBox>
                     </td>
                 </tr>
                 <tr runat="server" id="tr_MB_MONK_3" style="display:none">
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         戒別
                     </td>
-                    <td class="td2_b" width="35%">
-                        <asp:DropDownList ID="dd_MB_MONKTYPE" runat="server">
+                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
+                        <asp:DropDownList ID="dd_MB_MONKTYPE" runat="server" style="font-size:14pt" >
                         </asp:DropDownList>
                     </td>
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         受戒日期
                     </td>
-                    <td class="td2_b" width="35%">
+                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
                         西元
                         <asp:TextBox ID="txt_MB_MONKDATE_YYY" runat="server" Width="10%"></asp:TextBox>年&nbsp;
                         <asp:TextBox ID="txt_MB_MONKDATE_MM" runat="server" Width="8%"></asp:TextBox>月&nbsp;
@@ -311,62 +308,62 @@
                     </td>
                 </tr>
                 <tr runat="server" id="tr_MB_MONK_4" style="display:none">
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         受戒地點
                     </td>
-                    <td class="td2_b" width="85%" colspan="3">
+                    <td class="td2_b" width="85%" colspan="3" style="font-size:14pt;padding:4px" >
                         <asp:TextBox ID="txt_MB_MONKPLACE1" runat="server" Width="70%"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         <span style="color:Red">*</span>
                         手機
                     </td>
-                    <td class="td2_b" width="35%">
+                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
                         <asp:TextBox ID="txt_MB_MOBIL" runat="server" Width="40%"></asp:TextBox>
                     </td>
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         <span style="color:Red">*</span>
                         電話
                     </td>
-                    <td class="td2_b" width="35%">
+                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
                         <asp:TextBox ID="txt_MB_TEL_ZIP" runat="server" Width="10%" MaxLength="2"></asp:TextBox>
                         &nbsp;─&nbsp;
                         <asp:TextBox ID="txt_MB_TEL" runat="server" Width="40%"></asp:TextBox>
                     </td>
                 </tr>
                 <tr>
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         <span style="color:Red">*</span>
                         E-mail
                     </td>
-                    <td id="TD_Y_2" runat="server" class="td2_b" width="35%">
+                    <td id="TD_Y_2" runat="server" class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
                         <asp:TextBox ID="txt_MB_EMAIL" runat="server" Width="60%"></asp:TextBox>
                     </td>
-                    <td id="TD_G_2_1" runat="server" class="th1c_b" width="15%">
+                    <td id="TD_G_2_1" runat="server" class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         <span style="color:Red">**</span>
                         身分證字號
                     </td>
-                    <td id="TD_G_2_2" runat="server" class="td2_b" width="35%">
+                    <td id="TD_G_2_2" runat="server" class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
                         <asp:TextBox ID="txt_MB_ID" runat="server" ></asp:TextBox>
                     </td>
                 </tr>
                 <tr >
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         <span style="color:Red">*</span>
                         參加動機或目的
                     </td>
-                    <td class="td2_b" colspan="3">
+                    <td class="td2_b" colspan="3" style="font-size:14pt;padding:4px;background-color:darksalmon" >
                         <asp:TextBox ID="MB_OBJECT" runat="server" Columns="100" />
                     </td> 
                 </tr>
                 <tr >
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         <span style="color:Red">*</span>
                         是否曾參加過本中心課程?
                     </td>
-                    <td class="td2_b" colspan="3">
+                    <td class="td2_b" colspan="3" style="font-size:14pt;padding:4px" >
                         <asp:RadioButtonList ID="JOINMBSC" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" >
                             <asp:ListItem Text="是" Value="Y" />
                             <asp:ListItem Text="否" Value="N" />
@@ -374,55 +371,55 @@
                     </td> 
                 </tr>
                 <tr>
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px">
                         學歷
                     </td>
-                    <td class="td2_b" width="35%">
-                        <asp:DropDownList ID="dd_MB_EDU" runat="server">
+                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
+                        <asp:DropDownList ID="dd_MB_EDU" runat="server" style="font-size:14pt" >
                         </asp:DropDownList>
                     </td>
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         介紹人/訊息來源
                     </td>
-                    <td class="td2_b" width="35%">
+                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
                         <asp:TextBox ID="txt_MB_REFER" runat="server" ></asp:TextBox>
                     </td>
                 </tr>
                 <tr id="TR_G_3" runat="server" >
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         <span style="color:Red">*</span>
                         通訊地址
                     </td>
-                    <td class="td2_b" width="85%" colspan="3">
-                        <asp:DropDownList ID="dd_MB_CITY" runat="server" AutoPostBack="true">
+                    <td class="td2_b" width="85%" colspan="3" style="font-size:14pt;padding:4px" >
+                        <asp:DropDownList ID="dd_MB_CITY" runat="server" AutoPostBack="true" style="font-size:14pt" >
                         </asp:DropDownList>&nbsp;
-                        <asp:DropDownList ID="dd_MB_VLG" runat="server">
+                        <asp:DropDownList ID="dd_MB_VLG" runat="server" style="font-size:14pt" > 
                         </asp:DropDownList>&nbsp;
                         <asp:TextBox ID="txt_MB_ADDR" runat="server" Width="60%" ></asp:TextBox>
                     </td>
                 </tr>
                 <tr id="TR_G_4" runat="server">
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         戶籍地址
                         <asp:CheckBox ID="cb_Ditto" runat="server" Text="同上" AutoPostBack="True" />
                     </td>
-                    <td class="td2_b" width="85%" colspan="3">
-                        <asp:DropDownList ID="dd_MB_CITY1" runat="server" AutoPostBack="true">
+                    <td class="td2_b" width="85%" colspan="3" style="font-size:14pt;padding:4px" >
+                        <asp:DropDownList ID="dd_MB_CITY1" runat="server" AutoPostBack="true" style="font-size:14pt" >
                         </asp:DropDownList>&nbsp;
-                        <asp:DropDownList ID="dd_MB_VLG1" runat="server">
+                        <asp:DropDownList ID="dd_MB_VLG1" runat="server" style="font-size:14pt" >
                         </asp:DropDownList>&nbsp;
                         <asp:TextBox ID="txt_MB_ADDR1" runat="server" Width="60%" ></asp:TextBox>
                     </td>
                 </tr>
                 <tr id="TR_G_5" runat="server">
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         語言
                     </td>
-                    <td class="td2_b" width="85%" colspan="3">
+                    <td class="td2_b" width="85%" colspan="3" style="font-size:14pt;padding:4px" >
                         <asp:DataList ID="dl_MB_LANG" runat="server" RepeatDirection="Horizontal">
                             <ItemTemplate>
                                 <asp:HiddenField ID="hid_MB_LANG" runat="server" Value='<%#Container.DataItem("VALUE")%>' />
-                                <asp:CheckBox ID="cb_MB_LANG" runat="server" Text='<%#Container.DataItem("TEXT")%>'>
+                                <asp:CheckBox ID="cb_MB_LANG" runat="server" Text='<%#Container.DataItem("TEXT")%>' style="font-size:14pt" >
                                 </asp:CheckBox>
                                 <asp:TextBox ID="txt_MB_LANG" runat="server" Visible="false"></asp:TextBox>
                             </ItemTemplate>
@@ -430,127 +427,129 @@
                     </td>
                 </tr>
                 <tr id="TR_G_6" runat="server">
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         專長
                     </td>
-                    <td class="td2_b" width="35%">
-                        <asp:DropDownList ID="dd_MB_SPECIAL" runat="server">
+                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
+                        <asp:DropDownList ID="dd_MB_SPECIAL" runat="server" style="font-size:14pt" >
                         </asp:DropDownList>
                     </td>
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         職業
                     </td>
-                    <td class="td2_b" width="35%">
-                        <asp:DropDownList ID="dd_MB_JOB" runat="server">
+                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
+                        <asp:DropDownList ID="dd_MB_JOB" runat="server" style="font-size:14pt" >
                         </asp:DropDownList>&nbsp;
                         職稱
-                        <asp:DropDownList ID="dd_MB_JOBTITLE" runat="server">
+                        <asp:DropDownList ID="dd_MB_JOBTITLE" runat="server" style="font-size:14pt" >
                         </asp:DropDownList>
                     </td>
                 </tr>
                 <tr>
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         <span style="color:Red">*</span>
                         宗教信仰
                     </td>
-                    <td id="TD_Y_7" runat="server" class="td2_b" width="35%">
-                        <asp:DropDownList ID="dd_MB_RELIGION" runat="server">
+                    <td id="TD_Y_7" runat="server" class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
+                        <asp:DropDownList ID="dd_MB_RELIGION" runat="server" style="font-size:14pt" >
                         </asp:DropDownList>
                     </td>
-                    <td id="TD_G_7_1" runat="server" class="th1c_b" width="15%">
+                    <td id="TD_G_7_1" runat="server" class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         <span style="color:Red">**</span>
                         打鼾
                     </td>
-                    <td id="TD_G_7_2" runat="server" class="td2_b" width="35%">
-                        <asp:RadioButtonList ID="rbtList_MB_SNORE" runat="server">
-                            <asp:ListItem Text="是" Value="1"></asp:ListItem>
-                            <asp:ListItem Text="否" Value="2"></asp:ListItem>
-                            <asp:ListItem Text="不知道" Value="3"></asp:ListItem>
+                    <td id="TD_G_7_2" runat="server" class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
+                        <asp:RadioButtonList ID="rbtList_MB_SNORE" runat="server" style="font-size:14pt" >
+                            <asp:ListItem Text="是" Value="1" style="font-size:14pt"></asp:ListItem>
+                            <asp:ListItem Text="否" Value="2" style="font-size:14pt"></asp:ListItem>
+                            <asp:ListItem Text="不知道" Value="3" style="font-size:14pt"></asp:ListItem>
                         </asp:RadioButtonList>
                         (為安排住宿)
                     </td>
                 </tr>
                 <tr>
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         公司/學校系級
                     </td>
-                    <td class="td2_b" width="85%" colspan="3">
+                    <td class="td2_b" width="85%" colspan="3" style="font-size:14pt;padding:4px" >
                         <asp:TextBox ID="SCHOOL" runat="server" Columns="100" />
                     </td>
                 </tr>
                 <tr id="TR_G_8" runat="server">
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         <span style="color:Red">**</span>
                         身心狀況
                     </td>
-                    <td class="td2_b" width="85%" colspan="3">
+                    <td class="td2_b" width="85%" colspan="3" style="font-size:14pt;padding:4px" >
                         <asp:DataList ID="dl_MB_SICK" runat="server">
                             <ItemTemplate>
                                 <asp:HiddenField ID="hid_MB_SICK" runat="server" Value='<%#Container.DataItem("VALUE")%>' />
-                                <asp:CheckBox ID="cb_MB_SICK" runat="server" Text='<%#Container.DataItem("TEXT")%>'>
+                                <asp:CheckBox ID="cb_MB_SICK" runat="server" Text='<%#Container.DataItem("TEXT")%>' style="font-size:14pt;">
                                 </asp:CheckBox>
                                 <asp:TextBox ID="txt_MB_SICK" runat="server" Visible="false"></asp:TextBox>
                             </ItemTemplate>
                         </asp:DataList>
                     </td>
                 </tr>
-                <tr id="TR_G_9" runat="server">
-                    <td class="mtr" width="100%" colspan="4" align="center">
+                <tr id="TR_G_9" runat="server" >
+                    <td class="mtr" width="100%" colspan="4" align="center" style="font-size:14pt;padding:4px" >
                         修持法門
                     </td>
                 </tr>
                 <tr id="TR_G_10" runat="server">
-                    <td class="td2_b" width="100%" colspan="4">
+                    <td class="td2_b" width="100%" colspan="4" style="font-size:14pt;padding:4px" >
                         您曾經修持過毗婆舍那禪法嗎?&nbsp;&nbsp;
-                        <asp:RadioButton ID="rbt_MB_PIPOSHENA_Y" Text="是" runat="server" GroupName="MB_PIPOSHENA" />
-                        <asp:RadioButton ID="rbt_MB_PIPOSHENA_N" Text="否" runat="server" GroupName="MB_PIPOSHENA" />
+                        <asp:RadioButton ID="rbt_MB_PIPOSHENA_Y" Text="是" runat="server" GroupName="MB_PIPOSHENA" style="font-size:14pt" />
+                        <asp:RadioButton ID="rbt_MB_PIPOSHENA_N" Text="否" runat="server" GroupName="MB_PIPOSHENA" style="font-size:14pt" />
                         &nbsp;&nbsp;&nbsp;&nbsp;指導老師：
                         <asp:TextBox ID="txt_MB_TEACH" runat="server"></asp:TextBox>
                     </td>
                 </tr>
                 <tr id="TR_G_11" runat="server">
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         您目前的修持法門
                     </td>
-                    <td class="td2_b" width="85%" colspan="3">
+                    <td class="td2_b" width="85%" colspan="3" style="font-size:14pt;padding:4px">
                         <asp:TextBox ID="txt_MB_FAMENNIAN" runat="server"></asp:TextBox>
                     </td>
                 </tr>
                 <tr id="TR_G_12" runat="server">
-                    <td class="td2_b" width="100%" colspan="4">
+                    <td class="td2_b" width="100%" colspan="4" style="font-size:14pt;padding:4px" >
                         您過去曾經參加過七天以上的禪修嗎?&nbsp;&nbsp;
-                        <asp:RadioButton ID="rbt_MB_OVER7DAY_Y" Text="是" runat="server" GroupName="MB_OVER7DAY" />
-                        <asp:RadioButton ID="rbt_MB_OVER7DAY_N" Text="否" runat="server" GroupName="MB_OVER7DAY" />
+                        <asp:RadioButton ID="rbt_MB_OVER7DAY_Y" Text="是" runat="server" GroupName="MB_OVER7DAY" style="font-size:14pt" />
+                        <asp:RadioButton ID="rbt_MB_OVER7DAY_N" Text="否" runat="server" GroupName="MB_OVER7DAY" style="font-size:14pt" />
                         &nbsp;&nbsp;&nbsp;&nbsp;地點：
                         <asp:TextBox ID="txt_MB_PLACE" runat="server"></asp:TextBox>
                     </td>
                 </tr>
                 <tr id="TR_G_13" runat="server">
-                    <td class="mtr" width="100%" colspan="4" align="center">
+                    <td class="mtr" width="100%" colspan="4" align="center" style="font-size:14pt;padding:4px" >
                         <span style="color:Red">**</span>
                         緊急聯絡人
                     </td>
                 </tr>
                 <tr id="TR_G_14" runat="server">
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         法名/姓名
                     </td>
-                    <td class="td2_b" width="35%">
+                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
                         <asp:TextBox ID="txt_MB_EMGCONT" runat="server"></asp:TextBox>
                     </td>
-                    <td class="th1c_b" width="15%">
+                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
                         電話/手機
                     </td>
-                    <td class="td2_b" width="35%">
+                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
                         <asp:TextBox ID="txt_MB_CONTMOBIL" runat="server"></asp:TextBox>
                     </td>
                 </tr>
-                <tr id="TR_G_15" runat="server" >
-                    <td class="th1c_b" width="15%">
+                <tr id="TR_G_15_T" runat="server">
+                    <td class="mtr" width="100%" colspan="4" align="center" style="font-size:14pt;padding:4px" >                        
                         捐助物資/捐款
                     </td>
-                    <td class="th1c_b" width="85%" colspan="3">
-                        <asp:TextBox ID="MB_AMTMEMO" runat="server" />
+                </tr>
+                <tr id="TR_G_15" runat="server" >
+                    <td class="td2_b" width="85%" colspan="4" style="font-size:14pt;padding:4px" >
+                        <asp:TextBox ID="MB_AMTMEMO" runat="server" Width="99%" />
                     </td>
                 </tr>
             </table>

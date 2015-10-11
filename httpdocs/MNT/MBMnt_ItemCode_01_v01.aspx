@@ -104,9 +104,6 @@
             <!-- #include virtual="~/inc/PageTab.inc" -->
             <table width="100%" cellspacing="0" cellpadding="0" style="width:1235px;background:transparent;margin-left: auto; margin-right: auto;" align="center">
                 <tr>
-                    <td style="vertical-align:top;padding:0;text-align:left;background:transparent;width:185px" >
-                        <!-- #include virtual="~/inc/vTab.inc" -->
-                    </td>
                     <td style="vertical-align:top;padding:0;text-align:left;background:transparent;width:1050px" >
                         <!-- #include virtual="~/inc/Signin.inc" -->
 			            <div style="FONT-SIZE: 17pt; COLOR: #800080; FONT-FAMILY: 標楷體; TEXT-ALIGN: center">下拉選單維護作業</div>

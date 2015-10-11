@@ -51,6 +51,12 @@ Public Class MB_ACCT_dbMeta
 			hMetaData8.add("PROVIDER_TYPE",253 )
 			hMetaData8.add("PROVIDER_TYPE_NAME", MySql.Data.MySqlClient.MySqlDbType.VarChar )
 			arry.add(hMetaData8)
+			Static hMetaData9 As new System.Collections.Hashtable
+			hMetaData9.add("COLUMN_NAME", "MB_PASSVID" )
+			hMetaData9.add("DB_TYPE", 16 )
+			hMetaData9.add("PROVIDER_TYPE",253 )
+			hMetaData9.add("PROVIDER_TYPE_NAME", MySql.Data.MySqlClient.MySqlDbType.VarChar )
+			arry.add(hMetaData9)
      End Sub
      Public Function getMetaArray() as System.Collections.ArrayList Implements com.Azion.NET.VB.DBMetaData.getMetaArray
          Return arry

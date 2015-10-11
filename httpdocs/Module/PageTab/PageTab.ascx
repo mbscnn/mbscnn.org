@@ -6,6 +6,7 @@
         background-position: center;
         margin-left: auto;
         margin-right: auto;
+        height:155px;
     }
 
     #outer-wrapper {
@@ -13,10 +14,11 @@
         margin: 0px auto 0px;
         padding: 0px;
         text-align: left;
+        height:155px;
     }
 </style>
 
-<div id="header-inner" style="background-image: url('http://mbscnn.org/img/mbscbanner02.jpg'); background-position: center; min-height: 250px; _height: 250px; background-repeat: no-repeat;">
+<div id="header-inner" >
     <div style="background: transparent">
         <div style="height: 70px;"></div>
         <div id="outer-wrapper" style="background: transparent; border-width: 0px; font-size:14pt;font-weight:bold;display:none">
@@ -24,3 +26,48 @@
         </div>
     </div>
 </div>
+
+<!--Menu dropdown include-->
+ <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header page-scroll">
+                    
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+
+                        </button>
+                        <a class="navbar-brand page-scroll" href="#page-top"><img class="img-responsive" src="/img/logotext.png" alt="Responsive image"/></a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                         <!-- #include virtual="~/inc/vTab.inc" -->
+                    </div>
+         <!-- /.navbar-collapse -->
+     </div>
+     <!-- /.container -->
+ </nav>
+<!--/.Menu dropdown include-->
+
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        var offset = 220;
+        var duration = 500;
+        jQuery(window).scroll(function () {
+            if (jQuery(this).scrollTop() > offset) {
+                jQuery('.back-to-top').fadeIn(duration);
+            } else {
+                jQuery('.back-to-top').fadeOut(duration);
+            }
+        });
+
+        jQuery('.back-to-top').click(function (event) {
+            event.preventDefault();
+            jQuery('html, body').animate({ scrollTop: 0 }, duration);
+            return false;
+        })
+    });
+</script>

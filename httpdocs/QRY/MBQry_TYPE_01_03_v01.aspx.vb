@@ -65,7 +65,12 @@ Public Class MBQry_TYPE_01_03_v01
                 objStringBuilder.Append("<Cell><Data ss:Type=""String"">" & ROW("MB_SEQ").ToString & "</Data></Cell>")
 
                 '課程名稱
-                objStringBuilder.Append("<Cell><Data ss:Type=""String"">" & ROW("MB_CLASS_NAME").ToString & "</Data></Cell>")
+                Dim sMB_CLASS_NAME As String = String.Empty
+                sMB_CLASS_NAME = ROW("MB_CLASS_NAME").ToString
+                If IsNumeric(ROW("MB_BATCH")) AndAlso CDec(ROW("MB_BATCH")) > 0 Then
+                    sMB_CLASS_NAME &= "　第" & ROW("MB_BATCH").ToString & "梯次"
+                End If
+                objStringBuilder.Append("<Cell><Data ss:Type=""String"">" & sMB_CLASS_NAME & "</Data></Cell>")
 
                 '錄取
                 'If ROW("MB_CHKFLAG").ToString = "1" Then

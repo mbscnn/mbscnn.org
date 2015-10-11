@@ -1,9 +1,14 @@
 ﻿<ASP:PANEL id="ErrorMsg" Runat="server" Visible="False">
-	<TABLE cellSpacing="0" cellPadding="0" width="100%" align="center" border="0">
-		<TR align="center">
-			<TD class="mtr" align="left" width="100%" colSpan="2" height="50" valign="top" style="background:transparent">
-			 	 <asp:label id="lblErrorMsg" runat="server" style="font-size:16pt;font-weight:bold" ForeColor="red" EnableViewState="False"></asp:label>
-			</TD>
-		</TR>
-	</TABLE>
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+	<div class="alert alert-danger alert-dismissible" role="alert">
+	<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	<strong>注意!</strong> <asp:label id="lblErrorMsg" runat="server" ForeColor="black" EnableViewState="False"></asp:label>
+</div>
+
+</div>	
+</div></div>
+
+
 </ASP:PANEL>

@@ -221,6 +221,14 @@ EloanUtility
 	<remarks>
  [Titan] 	2011/07/20	Created
  </remarks>
+</member><member name="M:com.Azion.EloanUtility.UIUtility.getRootPathClient(System.Boolean)">
+	<summary>
+ 取得eLoan專案目錄
+ </summary>
+	<returns>String</returns>
+	<remarks>
+ [Titan] 	2011/07/20	Created
+ </remarks>
 </member><member name="M:com.Azion.EloanUtility.UIUtility.getENPath">
 	<summary>
  取得企金目錄

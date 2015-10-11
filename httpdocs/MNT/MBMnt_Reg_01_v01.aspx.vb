@@ -45,6 +45,36 @@ Public Class MBMnt_Reg_01_v01
                     Finally
                         dbManage.releaseConnection()
                     End Try
+                ElseIf Me.m_sMOD = "RESET" AndAlso com.Azion.EloanUtility.ValidateUtility.isValidateData(m_sUID) Then
+                    Me.TXT_EMAIL.Attributes.Add("Readonly", "True")
+
+                    Me.PLH_Send.Visible = False
+
+                    Me.LTL_TITLE.Text = "重設密碼"
+
+                    Dim dbManage As com.Azion.NET.VB.DatabaseManager = com.Azion.NET.VB.DatabaseManager.getInstance
+                    Try
+                        Dim mbACCT As New MB_ACCT(dbManage)
+                        If mbACCT.LoadByMB_PASSVID(Me.m_sUID) Then
+                            Me.HID_USERID.Value = mbACCT.getString("MB_ACCT")
+                            Me.TXT_EMAIL.Text = mbACCT.getString("MB_ACCT")
+
+                            Me.TXT_APPNAME.Text = mbACCT.getString("MB_NAME")
+
+                            Me.RBL_MB_SEX.SelectedIndex = -1
+                            If Not IsNothing(Me.RBL_MB_SEX.Items.FindByValue(mbACCT.getString("MB_SEX"))) Then
+                                Me.RBL_MB_SEX.Items.FindByValue(mbACCT.getString("MB_SEX")).Selected = True
+                            End If
+
+                            Me.PLH_REPASS.Visible = True
+                        Else
+                            com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "查無會員資料，無法重設密碼")
+                        End If
+                    Catch ex As Exception
+                        Throw
+                    Finally
+                        dbManage.releaseConnection()
+                    End Try
                 Else
                     Me.IMG_Vad.Src = com.Azion.EloanUtility.UIUtility.getRootPath & "/Module/ValidateNumber.ashx"
 
@@ -87,6 +117,58 @@ Public Class MBMnt_Reg_01_v01
                             sEMAILErr = sEMAIL & "已於" & com.Azion.EloanUtility.StrUtility.ToYYYMMDD(mbACCT.getAttribute("MB_CRE_DATE")) & _
                                         "註冊為會員，但尚未驗證啟用"
                         End If
+                    End If
+                Catch ex As Exception
+                    Throw
+                Finally
+                    dbManager.releaseConnection()
+                End Try
+            End If
+
+            Dim sPASSVadErr As String = String.Empty
+            If sPASSWORD <> sVARPASSWORD Then
+                sPASSVadErr = "密碼與確認密碼不符合"
+            End If
+
+            If Trim(sPASSWORD).Length < 8 OrElse Trim(sPASSWORD).Length > 15 Then
+                sPASSVadErr = "密碼最多15碼最少8碼"
+            End If
+
+            Return "{""NUMBER"":""" & sNUMBERErr & """,""EMAIL"":""" & sEMAILErr & """,""PASSWORD"":""" & sPASSVadErr & """}"
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+    <System.Web.Services.WebMethod()> _
+    Public Shared Function RE_ValidINPUT(ByVal sNUMBER As String, ByVal sEMAIL As String, ByVal sPASSWORD As String, ByVal sVARPASSWORD As String) As String
+        Try
+            Dim sNUMBERErr As String = String.Empty
+            If HttpContext.Current.Session Is Nothing OrElse HttpContext.Current.Session("ValidateNumber") = Nothing OrElse HttpContext.Current.Session("ValidateNumber") = "" Then
+                sNUMBERErr = "驗證碼逾時，請重新整理"
+            Else
+                If sNUMBER <> HttpContext.Current.Session("ValidateNumber") Then
+                    sNUMBERErr = "驗證碼錯誤"
+                End If
+            End If
+
+            Dim sEMAILErr As String = String.Empty
+            If Not com.Azion.EloanUtility.ValidateUtility.isEmail(Trim(sEMAIL)) Then
+                sEMAILErr = "EMAIL錯誤"
+            Else
+                Dim dbManager As com.Azion.NET.VB.DatabaseManager = com.Azion.NET.VB.DatabaseManager.getInstance
+                Try
+                    Dim mbACCT As New MB_ACCT(dbManager)
+                    If mbACCT.LoadByPK(Trim(sEMAIL)) Then
+                        If mbACCT.getString("MB_APV") = "Y" Then
+                            'sEMAILErr = sEMAIL & "已於" & com.Azion.EloanUtility.StrUtility.ToYYYMMDD(mbACCT.getAttribute("MB_CRE_DATE")) & _
+                            '            "註冊啟用為會員"
+                        Else
+                            sEMAILErr = sEMAIL & "已於" & com.Azion.EloanUtility.StrUtility.ToYYYMMDD(mbACCT.getAttribute("MB_CRE_DATE")) & _
+                                        "註冊為會員，但尚未驗證啟用"
+                        End If
+                    Else
+                        sEMAILErr = sEMAIL & "尚未註冊為會員"
                     End If
                 Catch ex As Exception
                     Throw
@@ -342,4 +424,38 @@ Public Class MBMnt_Reg_01_v01
     '    End Function
     '#End Region
 
+    Private Sub bntRePASS_Click(sender As Object, e As EventArgs) Handles bntRePASS.Click
+        Dim dbManager As com.Azion.NET.VB.DatabaseManager = com.Azion.NET.VB.DatabaseManager.getInstance
+        Try
+            Dim MB_ACCT As New MB_ACCT(dbManager)
+            If MB_ACCT.LoadByPK(Me.TXT_EMAIL.Text) Then
+                'MB_PSW varchar(15) 密碼
+                MB_ACCT.setAttribute("MB_PSW", Trim(Me.TXT_PASSWORD.Text))
+
+                'MB_NAME varchar(20) 姓名
+                MB_ACCT.setAttribute("MB_NAME", Trim(Me.TXT_APPNAME.Text))
+
+                'MB_SEX char(1) 性別
+                MB_ACCT.setAttribute("MB_SEX", Trim(Me.RBL_MB_SEX.SelectedValue))
+
+                MB_ACCT.save()
+
+                com.Azion.EloanUtility.UIUtility.alert("密碼已重設，請使用新密碼做會員登入")
+
+                Dim sURL As String = String.Empty
+                'sURL = com.Azion.EloanUtility.UIUtility.getRootPath & "/MNT/MBMnt_Sign_01_v01.aspx"
+                sURL = com.Azion.EloanUtility.UIUtility.getRootPath & "/NewsList.aspx"
+
+                Response.Redirect(sURL)
+            Else
+                com.Azion.EloanUtility.UIUtility.alert("查無會員資料，無法重設密碼")
+                com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "查無會員資料，無法重設密碼")
+            End If
+        Catch ex As System.Threading.ThreadAbortException
+        Catch ex As Exception
+            com.Azion.EloanUtility.UIUtility.showErrMsg(Me, ex)
+        Finally
+            dbManager.releaseConnection()
+        End Try
+    End Sub
 End Class

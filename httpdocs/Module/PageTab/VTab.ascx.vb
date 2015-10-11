@@ -65,14 +65,13 @@ Public Class VTab
 
                 Dim RP_Tab_LV2 As Repeater = e.Item.FindControl("RP_Tab_LV2")
                 If Not IsNothing(ROW_LV2) AndAlso ROW_LV2.Length > 0 Then
-                    Dim PLH_LV2 As PlaceHolder = e.Item.FindControl("PLH_LV2")
-                    PLH_LV2.Visible = True
                     RP_Tab_LV2.DataSource = ROW_LV2
                     RP_Tab_LV2.DataBind()
                 End If
 
                 Dim HPL_LV1 As HyperLink = e.Item.FindControl("HPL_LV1")
                 If Utility.isValidateData(DRV("NOTE")) Then
+                    HPL_LV1.Attributes("data-toggle") = ""
                     If DRV("CODEID").ToString = "38" Then
                         HPL_LV1.NavigateUrl = com.Azion.EloanUtility.UIUtility.getRootPath & "/" & DRV("NOTE")
                     Else
@@ -101,11 +100,7 @@ Public Class VTab
                 Dim HID_CODEID As HtmlGenericControl = e.Item.FindControl("HID_CODEID")
                 If sCLASS = HID_CODEID.InnerText Then
                     Dim objItem As RepeaterItem = sender.namingcontainer
-                    Dim Tab_Li As HtmlGenericControl = objItem.FindControl("Tab_Li")
-                    Tab_Li.Attributes("class") = "active"
 
-                    Dim Tab_Li_C As HtmlGenericControl = e.Item.FindControl("Tab_Li")
-                    Tab_Li_C.Attributes("style") = "background: #003545;border-left: 5px solid #970000;"
                 Else
                     If Utility.isValidateData(sCLASS) Then
                         Dim ap_C_CODEList As New AP_CODEList(Me.m_DBManager)
@@ -114,11 +109,7 @@ Public Class VTab
                         ROW_CHK = ap_C_CODEList.getCurrentDataSet.Tables(0).Select("CODEID=" & sCLASS)
                         If Not IsNothing(ROW_CHK) AndAlso ROW_CHK.Length > 0 Then
                             Dim objItem As RepeaterItem = sender.namingcontainer
-                            Dim Tab_Li As HtmlGenericControl = objItem.FindControl("Tab_Li")
-                            Tab_Li.Attributes("class") = "active"
 
-                            Dim Tab_Li_C As HtmlGenericControl = e.Item.FindControl("Tab_Li")
-                            Tab_Li_C.Attributes("style") = "background: #003545;border-left: 5px solid #970000;"
                         End If
                     End If
                 End If
@@ -136,14 +127,13 @@ Public Class VTab
 
                 Dim RP_Tab_LV3 As Repeater = e.Item.FindControl("RP_Tab_LV3")
                 If Not IsNothing(ROW_LV3) AndAlso ROW_LV3.Length > 0 Then
-                    Dim PLH_LV3 As PlaceHolder = e.Item.FindControl("PLH_LV3")
-                    PLH_LV3.Visible = True
                     RP_Tab_LV3.DataSource = ROW_LV3
                     RP_Tab_LV3.DataBind()
                 End If
 
                 Dim HPL_LV2 As HyperLink = e.Item.FindControl("HPL_LV2")
                 If Utility.isValidateData(DRV("NOTE")) Then
+                    HPL_LV2.Attributes("data-toggle") = ""
                     If DRV("CODEID").ToString = "38" Then
                         HPL_LV2.NavigateUrl = com.Azion.EloanUtility.UIUtility.getRootPath & "/" & DRV("NOTE")
                     Else
@@ -172,11 +162,6 @@ Public Class VTab
                 Dim HID_CODEID As HtmlGenericControl = e.Item.FindControl("HID_CODEID")
                 If sCLASS = HID_CODEID.InnerText Then
                     Dim objItem As RepeaterItem = sender.namingcontainer
-                    Dim Tab_Li As HtmlGenericControl = objItem.FindControl("Tab_Li")
-                    Tab_Li.Attributes("class") = "active"
-
-                    Dim Tab_Li_C As HtmlGenericControl = e.Item.FindControl("Tab_Li")
-                    Tab_Li_C.Attributes("style") = "background: #003545;border-left: 5px solid #970000;"
 
                     'Dim apCODE As New AP_CODE(Me.m_DBManager)
                     'apCODE.loadByPK(sCLASS)
@@ -205,8 +190,6 @@ Public Class VTab
 
                 Dim RP_Tab_LV4 As Repeater = e.Item.FindControl("RP_Tab_LV4")
                 If Not IsNothing(ROW_LV4) AndAlso ROW_LV4.Length > 0 AndAlso Not IsNothing(RP_Tab_LV4) Then
-                    Dim PLH_LV4 As PlaceHolder = e.Item.FindControl("PLH_LV4")
-                    PLH_LV4.Visible = True
                     RP_Tab_LV4.DataSource = ROW_LV4
                     RP_Tab_LV4.DataBind()
                 End If

@@ -12,18 +12,11 @@
 <body topmargin="0">
     <form id="form1" runat="server">
         <!-- #include virtual="~/inc/PageTab.inc" -->
-<table width="100%" cellspacing="0" cellpadding="0" style="width:1235px;background:transparent;margin-left: auto; margin-right: auto;" align="center">
-    <tr>
-        <td style="vertical-align:top;padding:0;text-align:left;background:transparent;width:185px" >
-            <!-- #include virtual="~/inc/vTab.inc" -->
-        </td>
-        <td style="vertical-align:top;padding:0;text-align:left;background:transparent;width:1050px" >
+<table  cellspacing="0" cellpadding="0" style="width:1235px;background:transparent;margin-left: auto; margin-right: auto;" align="center">
+        <tr>
+        <td style="vertical-align:top;padding:0;text-align:left;background:transparent" >
             <!-- #include virtual="~/inc/Signin.inc" -->
-            <div align="center">
-                <h2 style="color: #800080; font-family: 標楷體">
-                    MBSC課程報名彙總表
-                </h2>
-            </div>
+
             <!--顯示上方外框線-->
             <!-- #include virtual="~/inc/MBSCTableStart.inc" -->
             <!--錯誤訊息區-->
@@ -126,11 +119,13 @@
                                 <!--報名-->
                                 <asp:Button ID="btnSIGNUP" runat="server" CssClass="bt" Text="我要報名" CommandName="SIGNUP" />
                                 <asp:Button ID="btnCANCEL" runat="server" CssClass="bt" Text="取消報名" CommandName="CANCEL" />
+                                <asp:Label ID="LTL_APLY" runat="server" Style="font-size:14pt;font-weight:bold" Visible="false" Text="已截止報名" />
                             </td>
                             <td id="TD_1_7" runat="server" width="10%" class="td2Dc_b">
                                 <!--發mail-->
                                 <asp:Button ID="btnMB_ALERT1" runat="server" CssClass="bt" Text="提醒信一" CommandName="MB_ALERT1" Visible="false" />
                                 <asp:Button ID="btnMB_ALERT2" runat="server" CssClass="bt" Text="提醒信二" CommandName="MB_ALERT2" Visible="false" />
+                                <asp:Label ID="LTL_MB_ALERT2" runat="server" style="color:red;font-weight:bold" />
                             </td>
                         </tr>
                     </ItemTemplate>
@@ -361,7 +356,7 @@
                     <td id="TD_5_2" runat="server" width="10%" class="th1c_b">
                         地點
                     </td>
-                    <td width="20%" class="th1c_b">
+                    <td width="15%" class="th1c_b">
                         課程起訖日
                     </td>
                     <td width="20%" class="th1c_b">
@@ -373,8 +368,11 @@
                     <td id="TD_5_4" runat="server" width="10%" class="th1c_b">
                         招收人數
                     </td>
-                    <td id="TD_5_5" runat="server" width="20%" class="th1c_b" style="display:none" >
+                    <td id="TD_5_5" runat="server" width="15%" class="th1c_b" style="display:none" >
                         報名起訖日
+                    </td>
+                    <td id="TD_5_6" runat="server" width="10%" class="th1c_b">
+                        發mail
                     </td>
                 </tr>
                 </asp:PlaceHolder>
@@ -389,7 +387,7 @@
                                 <!--地點-->
                                 <%#Container.DataItem("MB_PLACE")%>
                             </td>
-                            <td width="20%" class="td2Dc_b">
+                            <td width="15%" class="td2Dc_b">
                                 <!--課程起訖日-->
                                 <asp:Literal ID="LTL_MB_SEDATE" runat="server" />
                             </td>
@@ -405,9 +403,15 @@
                                 <!--招收人數-->
                                 <%#Container.DataItem("MB_FULL")%>
                             </td>
-                            <td id="TD_5_5" runat="server" width="20%" class="td2Dc_b" style="display:none" >
+                            <td id="TD_5_5" runat="server" width="15%" class="td2Dc_b" style="display:none" >
                                 <!--報名起訖日-->
                                 <asp:Literal ID="LTL_MB_SEAPLY" runat="server" />
+                            </td>
+                            <td id="TD_5_6" runat="server" width="10%" class="td2Dc_b">
+                                <!--發mail-->
+                                <asp:Button ID="btnMB_ALERT1" runat="server" CssClass="bt" Text="提醒信一" CommandName="MB_ALERT1" Visible="false" />
+                                <asp:Button ID="btnMB_ALERT2" runat="server" CssClass="bt" Text="提醒信二" CommandName="MB_ALERT2" Visible="false" />
+                                <asp:Label ID="LTL_MB_ALERT2" runat="server" style="color:red;font-weight:bold" />
                             </td>
                         </tr>
                     </ItemTemplate>

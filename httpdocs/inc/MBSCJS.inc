@@ -1,5 +1,33 @@
-ï»¿<Script lang="JavaScript" src="<%=com.Azion.EloanUtility.UIUtility.getRootPath() + "/js/JSUtil.js"%>"></Script>
-<!-- éœ€ç•«é¢åˆ—å° è«‹include ã€Žprintscript.incã€  -->
-<script lang="JavaScript" src="<%=com.Azion.EloanUtility.UIUtility.getRootPath() + "/js/KeyCheck.js"%>"></script>
-<script type="text/javascript" language="javascript" src="<%=com.Azion.EloanUtility.UIUtility.getRootPath() + "/js/jquery-1.7.1.min.js"%>"></script>
-<script language="JavaScript" src="<%=com.Azion.EloanUtility.UIUtility.getRootPath() + "/js/json2.js"%>"></script>
+<Script lang="JavaScript" src="<%=com.Azion.EloanUtility.UIUtility.getRootPathClient() + "/js/JSUtil.js"%>" ></Script>
+<!-- »Ýµe­±¦C¦L ½Ðinclude ¡yprintscript.inc¡z  -->
+<script lang="JavaScript" src="<%=com.Azion.EloanUtility.UIUtility.getRootPathClient() + "/js/KeyCheck.js"%>" ></script>
+<script language="JavaScript" src="<%=com.Azion.EloanUtility.UIUtility.getRootPathClient() + "/js/json2.js"%>"></script>
+<script src="<%=com.Azion.EloanUtility.UIUtility.getRootPathClient() + "/js/jquery.js"%>" type="text/javascript"></script>
+<script src="<%=com.Azion.EloanUtility.UIUtility.getRootPathClient() + "/js/bootstrap.min.js"%>" type="text/javascript"></script>
+<script src="<%=com.Azion.EloanUtility.UIUtility.getRootPathClient() + "/js/scrolling-nav.js"%>" type="text/javascript"></script>
+<script src="<%=com.Azion.EloanUtility.UIUtility.getRootPathClient() + "/js/jquery.easing.min.js"%>" type="text/javascript"></script>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        var offset = 220;
+        var duration = 500;
+        jQuery(window).scroll(function () {
+            if (jQuery(this).scrollTop() > offset) {
+                jQuery('.back-to-top').fadeIn(duration);
+            } else {
+                jQuery('.back-to-top').fadeOut(duration);
+            }
+        });
+
+        jQuery('.back-to-top').click(function (event) {
+            event.preventDefault();
+            jQuery('html, body').animate({ scrollTop: 0 }, duration);
+            return false;
+        })
+    });
+      jQuery(function($) {
+    
+    $("table").removeAttr("style");
+    $("table").addClass("table table-bordered");
+});
+    
+</script>
