@@ -29,7 +29,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents tb_Page1 As Global.System.Web.UI.HtmlControls.HtmlTable
+    Protected WithEvents tb_Page1 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''lbl_USERID 控制項。
@@ -128,7 +128,16 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents dgRpt_Page2 As Global.System.Web.UI.WebControls.DataGrid
+    Protected WithEvents dgRpt_Page2 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''RP_Page2 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents RP_Page2 As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
     '''tb_Page2_Button 控制項。
@@ -137,7 +146,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents tb_Page2_Button As Global.System.Web.UI.HtmlControls.HtmlTable
+    Protected WithEvents tb_Page2_Button As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''btn_Confirm 控制項。
@@ -155,7 +164,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents tb_Page3 As Global.System.Web.UI.HtmlControls.HtmlTable
+    Protected WithEvents tb_Page3 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''lbl_MB_AREA 控制項。
@@ -209,7 +218,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TD_Y_1 As Global.System.Web.UI.HtmlControls.HtmlTableCell
+    Protected WithEvents TD_Y_1 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''txt_MB_BIRTH_YYY 控制項。
@@ -245,7 +254,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TD_G_1_1 As Global.System.Web.UI.HtmlControls.HtmlTableCell
+    Protected WithEvents TD_G_1_1 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''TD_G_1_2 控制項。
@@ -254,7 +263,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TD_G_1_2 As Global.System.Web.UI.HtmlControls.HtmlTableCell
+    Protected WithEvents TD_G_1_2 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''rbt_MB_MONK_Y 控制項。
@@ -281,7 +290,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents tr_MB_MONK_1 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+    Protected WithEvents tr_MB_MONK_1 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''txt_MB_MONKNAME 控制項。
@@ -308,7 +317,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents tr_MB_MONK_2 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+    Protected WithEvents tr_MB_MONK_2 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''dd_MB_EDUTYPE 控制項。
@@ -335,7 +344,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents tr_MB_MONK_3 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+    Protected WithEvents tr_MB_MONK_3 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''dd_MB_MONKTYPE 控制項。
@@ -380,7 +389,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents tr_MB_MONK_4 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+    Protected WithEvents tr_MB_MONK_4 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''txt_MB_MONKPLACE1 控制項。
@@ -425,7 +434,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TD_Y_2 As Global.System.Web.UI.HtmlControls.HtmlTableCell
+    Protected WithEvents TD_Y_2 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''txt_MB_EMAIL 控制項。
@@ -443,7 +452,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TD_G_2_1 As Global.System.Web.UI.HtmlControls.HtmlTableCell
+    Protected WithEvents TD_G_2_1 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''TD_G_2_2 控制項。
@@ -452,7 +461,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TD_G_2_2 As Global.System.Web.UI.HtmlControls.HtmlTableCell
+    Protected WithEvents TD_G_2_2 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''txt_MB_ID 控制項。
@@ -506,7 +515,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TR_G_3 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+    Protected WithEvents TR_G_3 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''dd_MB_CITY 控制項。
@@ -542,7 +551,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TR_G_4 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+    Protected WithEvents TR_G_4 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''cb_Ditto 控制項。
@@ -587,7 +596,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TR_G_5 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+    Protected WithEvents TR_G_5 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''dl_MB_LANG 控制項。
@@ -605,7 +614,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TR_G_6 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+    Protected WithEvents TR_G_6 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''dd_MB_SPECIAL 控制項。
@@ -641,7 +650,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TD_Y_7 As Global.System.Web.UI.HtmlControls.HtmlTableCell
+    Protected WithEvents TD_Y_7 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''dd_MB_RELIGION 控制項。
@@ -659,7 +668,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TD_G_7_1 As Global.System.Web.UI.HtmlControls.HtmlTableCell
+    Protected WithEvents TD_G_7_1 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''TD_G_7_2 控制項。
@@ -668,7 +677,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TD_G_7_2 As Global.System.Web.UI.HtmlControls.HtmlTableCell
+    Protected WithEvents TD_G_7_2 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''rbtList_MB_SNORE 控制項。
@@ -695,7 +704,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TR_G_8 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+    Protected WithEvents TR_G_8 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''dl_MB_SICK 控制項。
@@ -713,7 +722,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TR_G_9 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+    Protected WithEvents TR_G_9 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''TR_G_10 控制項。
@@ -722,7 +731,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TR_G_10 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+    Protected WithEvents TR_G_10 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''rbt_MB_PIPOSHENA_Y 控制項。
@@ -758,7 +767,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TR_G_11 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+    Protected WithEvents TR_G_11 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''txt_MB_FAMENNIAN 控制項。
@@ -776,7 +785,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TR_G_12 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+    Protected WithEvents TR_G_12 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''rbt_MB_OVER7DAY_Y 控制項。
@@ -812,7 +821,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TR_G_13 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+    Protected WithEvents TR_G_13 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''TR_G_14 控制項。
@@ -821,7 +830,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TR_G_14 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+    Protected WithEvents TR_G_14 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''txt_MB_EMGCONT 控制項。
@@ -848,7 +857,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TR_G_15_T As Global.System.Web.UI.HtmlControls.HtmlTableRow
+    Protected WithEvents TR_G_15_T As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''TR_G_15 控制項。
@@ -857,7 +866,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TR_G_15 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+    Protected WithEvents TR_G_15 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''MB_AMTMEMO 控制項。
@@ -875,7 +884,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents tb_Page3_Button As Global.System.Web.UI.HtmlControls.HtmlTable
+    Protected WithEvents tb_Page3_Button As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
     '''btn_Cancel 控制項。

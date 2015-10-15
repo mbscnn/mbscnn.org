@@ -550,7 +550,7 @@ ilayer {
     border-color:Black;
     border-style:solid;
     border-width:0 1 1 0;
-    padding:4px;		
+    padding:4px;
 }
 .th1c_b
 {
@@ -591,6 +591,33 @@ ilayer {
     border-width:0 1 1 0;
     padding:4px;	
 }
+
+.th1M
+{
+    font-weight: bold;
+    font-size: 14pt;
+    background-color: #F2E5C2;
+    /*text-align: Left;	
+    border-color:Black;
+    border-style:solid;
+    border-width:0 1 1 0;
+    padding:4px;*/
+}
+
+.td2M
+{
+    font-size: 14pt;
+    /*background-color: #F2E5C2;*/
+    background:transparent;
+    /*text-align: Left ;
+	
+    border-color:black;
+    border-style:solid;
+    border-width:0 1 1 0;
+    padding:4px;*/		
+}
+
+
 .td2_b
 {
     font-size: 14pt;

@@ -1,9 +1,6 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="MBMnt_Sign_01_v01.aspx.vb" Inherits="MBSC.MBMnt_Sign_01_v01" %>
 
-<%@ Register Assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
-    Namespace="System.Web.UI.DataVisualization.Charting" TagPrefix="asp" %>
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE html>
 
 <html>
 <head runat="server">
@@ -48,535 +45,634 @@
     <!--CSS-->
     <!-- #include virtual="~/inc/MBSCJS.inc" -->
     <!--JS-->
+    <style>
+        /*div.row{
+          border: 1px solid;
+          border-bottom: 0px;
+        }
+
+        .container div.row:last-child {
+          border-bottom: 1px solid;
+        }*/
+
+        /*.my-container [class^="col-"] {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            background-color: #eee;
+            border: 1px solid #ddd;
+            background-color: rgba(86,61,124,.15);
+            border: 1px solid rgba(86,61,124,.2);
+        }*/
+
+        /*.row {
+            border: 1px solid #c2c2c2;
+        }*/
+
+        /*.row [class^="col-"] {
+            border-right: 1px solid #c2c2c2;
+        }
+
+        .row:last-child {
+            border-right: none;
+        }*/
+
+        /*.row + .row {
+            border-top: 0;
+        }*/
+
+        .grid-container {
+            /*width: 100%;
+            max-width: 1200px;*/
+            background-color: #FAEADD;
+            /*background: -webkit-linear-gradient(top, rgba(255, 179, 51, 0.37) 0%, rgba(255, 255, 254, 0) 30%);
+            background: linear-gradient(to bottom, rgb(249, 186, 128) 0%, rgba(249, 244, 241, 0.87) 30%);*/
+            /*border-right: 1px solid #ddd;*/
+            border-bottom: 1px solid #ddd;
+        }
+
+        .grid-container * {
+          box-sizing: border-box;
+        }
+
+        .row:before,
+        .row:after {
+          content: "";
+          display: table;
+          clear: both;
+        }
+
+        [class*='col-'] {
+            font-size: 14pt;
+            /*float: left;*/
+            /*min-height: 1px;*/
+            /*width: 16.66%;*/
+            padding: 7px;
+            /*background: #eee;*/
+            /*background:transparent;*/
+            border-top: 1px solid #ddd;
+            /*border-left: 1px solid #ddd;*/
+            text-align:left;
+        }
+
+        .thm
+        {
+            /*background-color: #003040;
+            background: -webkit-linear-gradient(top, rgba(255, 255, 254, 0) 100% ,rgba(255, 179, 51, 0.37) 0%);
+            background: linear-gradient(to bottom, rgba(249, 244, 241, 0.87) 100%, rgb(249, 186, 128) 0%);*/
+            background:rgba(249, 186, 128, 0.5);
+            font-weight:bold;
+            padding: 7px;
+        }
+
+        body{
+            font-size: 14pt;
+            text-align:left;
+        }
+
+        /* Small devices (tablets, 768px and up) */
+        @media all and (min-width: 768px) {
+            [class*='col-'] {
+                font-size: 12px;
+                /*float: left;*/
+                /*min-height: 1px;*/
+                /*width: 16.66%;*/
+                padding: 5px;
+                /*background: #eee;*/
+                /*background:transparent;*/
+                /*border-top: 1px solid #ddd;
+                border-left: 1px solid #ddd;*/
+                text-align:left;
+            }
+        }
+
+        /* Medium devices (desktops, 992px and up) */
+        @media all and (min-width: 992px) {
+            [class*='col-'] {
+                font-size: 14pt;
+                /*float: left;*/
+                /*min-height: 1px;*/
+                /*width: 16.66%;*/
+                padding: 7px;
+                /*background: #eee;*/
+                /*background:transparent;*/
+                /*border-top: 1px solid #ddd;
+                border-left: 1px solid #ddd;*/
+                text-align:left;
+            }
+        }
+
+        /* Large devices (large desktops, 1200px and up) */
+        @media all and (min-width: 1200px) {
+            [class*='col-'] {
+                font-size: 16pt;
+                /*float: left;*/
+                /*min-height: 1px;*/
+                /*width: 16.66%;*/
+                padding: 9px;
+                /*background: #eee;*/
+                /*background:transparent;*/
+                /*border-top: 1px solid #ddd;
+                border-left: 1px solid #ddd;*/
+                text-align:left;
+            }
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
         <!-- #include virtual="~/inc/PageTab.inc" -->
-<table width="100%" cellspacing="0" cellpadding="0" style="width:1235px;background:transparent;margin-left: auto; margin-right: auto;" align="center">
-    <tr>
-        <td style="vertical-align:top;padding:0;text-align:left;background:transparent;width:1050px" >
-            <!-- #include virtual="~/inc/Signin.inc" -->
-            <div align="center">
-                <h2 style="color: #800080; font-family: 標楷體">
-                    MBSC報名表
-                </h2>
-            </div>
+        <!-- #include virtual="~/inc/Signin.inc" -->
+        <div style="text-align:center">
+            <h2 style="color: #800080; font-family: 標楷體">
+                MBSC報名表
+            </h2>
+        </div>
 
-            <!--顯示上方外框線-->
-            <!-- #include virtual="~/inc/MBSCTableStart.inc" -->
+        <!--顯示上方外框線-->
+        <!-- #include virtual="~/inc/MBSCTableStart.inc" -->
 
-            <!--錯誤訊息區-->
-            <!-- #include virtual="~/inc/MBSCErrorMsg.inc" -->
-
-            <table class="CRTable_Top" width="100%" cellspacing="0" runat="server" id="tb_Page1">
-                <tr>
-                    <td class="th1_b" width="100%" colspan="4">
-                        帳號：<asp:Label ID="lbl_USERID" runat="server" Text="" ForeColor="Blue"></asp:Label>
-                        <br />
-                        <span style="color: #FF0000">(若非報名本人請輸入報名者手機或電話擇一，將選出報名者資料)</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="th1c_b" width="15%">
-                        <asp:RadioButton ID="rbt_Cel" runat="server" Text="手機：" GroupName="SelectType" />
-                    </td>
-                    <td class="td2_b" width="35%">
-                        <asp:TextBox ID="txt_Cel" runat="server" Width="45%"></asp:TextBox>
-                    </td>
-                    <td class="th1c_b" width="15%">
-                        <asp:RadioButton ID="rbt_Tel" runat="server" Text="電話：" GroupName="SelectType" />
-                    </td>
-                    <td class="td2_b" width="35%">
-                        <asp:TextBox ID="txt_Tel_Zip" runat="server" Width="10%" MaxLength="2"></asp:TextBox>
-                        &nbsp;─&nbsp;
-                        <asp:TextBox ID="txt_Tel" runat="server" Width="40%" MaxLength="10"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="th1r_b" width="100%" colspan="4" align="right">
-                        <asp:Button ID="btn_Qry" runat="server" Text="確定" CssClass="bt" />
-                    </td>
-                </tr>
-            </table>
-
-            <asp:PlaceHolder ID="PLH_MAIL_SAME" runat="server" Visible="false">
-                <table class="CRTable_Top" width="100%" Cellspacing="0">
-                    <tr>
-                        <td width="15%" class="th1c_b">
-                            點選
-                        </td>
-                        <td width="20%" class="th1c_b">
-                            姓名
-                        </td>
-                        <td width="35%" class="th1c_b">
-                            通訊地址
-                        </td>
-                        <td width="20%" class="th1c_b">
-                            會員編號
-                        </td>
-                    </tr>
-                    <asp:Repeater ID="RP_MAIL_SAME" runat="server">
-                        <ItemTemplate>
-                            <tr>
-                                <td width="15%" class="td2c_b">
-                                    <!--點選-->
-                                    <asp:RadioButton ID="RB_CHOOSE" runat="server" AutoPostBack="true" OnCheckedChanged="RB_CHOOSE_OnCheckedChanged" />
-                                    <input type="hidden" id="HID_MB_MEMSEQ" runat="server" value='<%#Container.DataItem("MB_MEMSEQ")%>' />
-                                </td>
-                                <td width="20%" class="td2c_b">
-                                    <!--姓名-->
-                                    <%#Container.DataItem("MB_NAME")%>
-                                </td>
-                                <td width="35%" class="td2_b">
-                                    <!--通訊地址-->
-                                    <%# Container.DataItem("MB_CITY")%><%# Container.DataItem("MB_VLG")%><%#Container.DataItem("MB_ADDR")%>
-                                </td>
-                                <td width="20%" class="td2c_b">
-                                    <!--會員編號-->
-                                    <%#getMB_MEMSEQ(Container.DataItem("MB_MEMSEQ"), Container.DataItem("MB_AREA"))%>
-                                </td>
-                            </tr>
-                        </ItemTemplate>
-                    </asp:Repeater>
-                </table>
-                <div align="center" >
-                    <asp:Button ID="btnModify" runat="server" CssClass="bt" Text="報名" />
+        <!--錯誤訊息區-->
+        <!-- #include virtual="~/inc/MBSCErrorMsg.inc" -->
+        <div id="tb_Page1" runat="server" class="container-fluid grid-container">
+            <div class="row">
+                <div class="col-md-12 thm">
+                    帳號：<asp:Label ID="lbl_USERID" runat="server" Text="" ForeColor="Blue"></asp:Label>
+                    <br />
+                    <span style="color: #FF0000">(若非報名本人請輸入報名者手機或電話擇一，將選出報名者資料)</span>
                 </div>
-            </asp:PlaceHolder>
+            </div>
+            <div class="row">
+                <div class="col-md-2 thm">
+                    <asp:RadioButton ID="rbt_Cel" runat="server" Text="手機：" GroupName="SelectType" />
+                </div>
+                <div class="col-md-4">
+                    <asp:TextBox ID="txt_Cel" runat="server" class="form-control" />
+                </div>
+                <div class="col-md-2 thm">
+                    <asp:RadioButton ID="rbt_Tel" runat="server" Text="電話：" GroupName="SelectType" />
+                </div>
+                <div class="col-md-4">
+                    <asp:TextBox ID="txt_Tel_Zip" runat="server" Columns="2" MaxLength="2"></asp:TextBox>
+                    &nbsp;─&nbsp;
+                    <asp:TextBox ID="txt_Tel" runat="server" Columns="10" MaxLength="10"></asp:TextBox>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <asp:Button ID="btn_Qry" runat="server" Text="確定" CssClass="btn btn-info" />
+        </div>
 
-            <asp:DataGrid ID="dgRpt_Page2" Runat="server" Width="100%" AutoGenerateColumns="False" CellPadding="0"
-            BorderWidth="0" CellSpacing="0" CssClass="CRTable" ShowFooter="False" Visible="false">
-                <Columns>
-                    <asp:TemplateColumn>
-                        <HeaderStyle CssClass="th1c_b"></HeaderStyle>
-                        <HeaderTemplate>
-                            點選
-                        </HeaderTemplate>
-                        <ItemStyle CssClass="td2c_b" HorizontalAlign="center"></ItemStyle>
-                        <ItemTemplate>
+        <asp:PlaceHolder ID="PLH_MAIL_SAME" runat="server" Visible="false">
+            <div class="container-fluid grid-container">
+            	<div class="row">
+            		<div class="col-xs-1 col-md-1 thm">
+            			點選
+            		</div>
+            		<div class="col-xs-3 col-md-3 thm">
+            			姓名
+            		</div>
+            		<div class="col-xs-6 col-md-6 thm">
+            			通訊地址
+            		</div>
+            		<div class="col-xs-2 col-md-2 thm">
+            			會員編號
+            		</div>
+            	</div>
+            	<asp:Repeater ID="RP_MAIL_SAME" runat="server">
+            		<ItemTemplate>
+            			<div class="row">
+		            		<div class="col-xs-1 col-md-1">
+		            			<!--點選-->
+                                <asp:RadioButton ID="RB_CHOOSE" runat="server" AutoPostBack="true" OnCheckedChanged="RB_CHOOSE_OnCheckedChanged" />
+                                <input type="hidden" id="HID_MB_MEMSEQ" runat="server" value='<%#Container.DataItem("MB_MEMSEQ")%>' />		            					
+		            		</div>
+		            		<div class="col-xs-3 col-md-3">
+		            			<!--姓名--> 
+		            			<%#Container.DataItem("MB_NAME")%>
+		            		</div>
+		            		<div class="col-xs-6 col-md-6">
+		            			<!--通訊地址-->
+		            			<%# Container.DataItem("MB_CITY")%><%# Container.DataItem("MB_VLG")%><%#Container.DataItem("MB_ADDR")%>
+		            		</div>
+		            		<div class="col-xs-2 col-md-2">
+		            			<!--會員編號-->
+		            			<%#getMB_MEMSEQ(Container.DataItem("MB_MEMSEQ"), Container.DataItem("MB_AREA"))%>
+		            		</div>            						
+            			</div>
+            		</ItemTemplate>
+            	</asp:Repeater>
+            </div>
+            <div class="text-center">
+                <asp:Button ID="btnModify" runat="server" CssClass="btn btn-info" Text="報名" />
+            </div>
+        </asp:PlaceHolder>
+
+        <div id="dgRpt_Page2" runat="server" visible="false" class="container-fluid grid-container" >
+            <div class="row">
+                <div class="col-xs-1 col-md-1 thm">
+                    點選
+                </div>
+                <div class="col-xs-3 col-md-3 thm">
+                    法名/姓名
+                </div>
+                <div class="col-xs-6 col-md-6 thm">
+                    通訊地址
+                </div>
+                <div class="col-xs-2 col-md-2 thm">
+                    會員編號
+                </div>
+            </div>
+            <asp:Repeater ID="RP_Page2" runat="server">
+                <ItemTemplate>
+                    <div class="row">
+                        <div class="col-xs-1 col-md-1">
+                            <!--點選-->
                             <asp:RadioButton ID="rbData" runat="server" onclick="RadioButtonSelect(this);" />
-                        </ItemTemplate>
-                    </asp:TemplateColumn>
-
-                    <asp:TemplateColumn>
-                        <HeaderStyle CssClass="th1c_b"></HeaderStyle>
-                        <HeaderTemplate>
-                            法名/ 姓名
-                        </HeaderTemplate>
-                        <ItemStyle CssClass="td2c_b" HorizontalAlign="center"></ItemStyle>
-                        <ItemTemplate>
+                        </div>
+                        <div class="col-xs-3 col-md-3">
+                            <!--法名/ 姓名-->
                             <asp:Label ID="lbl_MB_NAME" runat="server" Text='<%#Container.DataItem("MB_NAME")%>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateColumn>
-
-                    <asp:TemplateColumn>
-                        <HeaderStyle CssClass="th1c_b"></HeaderStyle>
-                        <HeaderTemplate>
-                            通訊地址
-                        </HeaderTemplate>
-                        <ItemStyle CssClass="td2c_b" HorizontalAlign="center"></ItemStyle>
-                        <ItemTemplate>
+                        </div>
+                        <div class="col-xs-6 col-md-6">
+                            <!--通訊地址-->
                             <asp:Label ID="lbl_MB_CITY" runat="server" Text='<%#Container.DataItem("MB_CITY")%>'></asp:Label>
                             <asp:Label ID="lbl_MB_VLG" runat="server" Text='<%#Container.DataItem("MB_VLG")%>'></asp:Label>
                             <asp:Label ID="lbl_MB_ADDR" runat="server" Text='<%#Container.DataItem("MB_ADDR")%>'></asp:Label>
-                        </ItemTemplate>
-                    </asp:TemplateColumn>
-
-                    <asp:TemplateColumn>
-                        <HeaderStyle CssClass="th1c_b"></HeaderStyle>
-                        <HeaderTemplate>
-                            會員編號
-                        </HeaderTemplate>
-                        <ItemStyle CssClass="td2c_b" HorizontalAlign="center"></ItemStyle>
-                        <ItemTemplate>
+                        </div>
+                        <div class="col-xs-2 col-md-2">
+                            <!--會員編號-->
                             <asp:Label ID="lbl_MB_AREA" runat="server" Text='<%#Container.DataItem("MB_AREA")%>'></asp:Label>
                             -
                             <asp:Label ID="lbl_MB_MEMSEQ" runat="server" Text='<%#Container.DataItem("MB_MEMSEQ")%>'></asp:Label>
+                        </div>
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
+        </div>
+        <div id="tb_Page2_Button" runat="server" class="text-center" visible="false" >
+            <asp:Button ID="btn_Confirm" runat="server" Text="確定" CssClass="btn btn-info" />
+        </div>
+						
+		<div id="tb_Page3" runat="server" class="container-fluid grid-container" visible="false" >
+			<div class="row">
+				<div class="col-md-12 thm"  >
+                    會員編號 : 
+                    <asp:Label ID="lbl_MB_AREA" runat="server" Text="" />-
+                    <asp:Label ID="lbl_MB_MEMSEQ" runat="server" Text="" />
+                    &nbsp;基本資料									
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2 thm">
+					課程名稱
+				</div>
+				<div class="col-md-10">
+					<asp:Label ID="lbl_Class" runat="server" Text="" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2 thm">
+					<span style="color:Red">*</span>姓名
+				</div>
+				<div class="col-md-4">
+					<asp:TextBox ID="txt_MB_NAME" runat="server" class="form-control"  />
+				</div>
+				<div class="col-md-2 thm">
+					<span style="color:Red">*</span>
+					性別
+				</div>
+				<div class="col-md-4">
+                    <asp:RadioButtonList ID="rbtList_MB_SEX" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow"   >
+                        <asp:ListItem Value="1" Text="男" class="radio-inline"  ></asp:ListItem>
+                        <asp:ListItem Value="2" Text="女" class="radio-inline" ></asp:ListItem>
+                    </asp:RadioButtonList>									
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-2 thm">
+					<span style="color:Red">*</span>
+					出生年月日
+				</div>
+				<div class="col-md-4 text-right" id="TD_Y_1" runat="server" >
+                    西元
+                    <asp:TextBox ID="txt_MB_BIRTH_YYY" runat="server" Columns="4" ></asp:TextBox>年&nbsp;
+                    <asp:TextBox ID="txt_MB_BIRTH_MM" runat="server" Columns="2" ></asp:TextBox>月&nbsp;
+                    <asp:TextBox ID="txt_MB_BIRTH_DD" runat="server" Columns="2" ></asp:TextBox>日&nbsp;									
+				</div>            
+				<div class="col-md-2 thm" id="TD_G_1_1" runat="server" >
+					<span style="color:Red">*</span>
+					出家眾
+				</div>
+				<div class="col-md-4" id="TD_G_1_2" runat="server" >
+                    <asp:RadioButton ID="rbt_MB_MONK_Y" runat="server" Text="是" GroupName="MB_MONK" onclick="CheckMonk(this);"></asp:RadioButton>
+                    <asp:RadioButton ID="rbt_MB_MONK_N" runat="server" Text="否" GroupName="MB_MONK" onclick="CheckMonk(this);"></asp:RadioButton>									
+				</div>
+			</div>
+			<div id="tr_MB_MONK_1" runat="server" class="row" style="display:none" >
+				<div class="col-md-2 thm">
+					法名
+				</div>
+				<div class="col-md-4">
+					<asp:TextBox ID="txt_MB_MONKNAME" runat="server" class="form-control" />
+				</div>
+				<div class="col-md-2 thm">
+					剃度/皈依恩師/戒師
+				</div>
+				<div class="col-md-4">
+					<asp:TextBox ID="txt_MB_MONKTECH" runat="server" class="form-control" />
+				</div>
+			</div>
+			<div id="tr_MB_MONK_2" runat="server" class="row" style="display:none">
+				<div class="col-md-2 thm">
+					傳承
+				</div>
+				<div class="col-md-4">
+					<asp:DropDownList ID="dd_MB_EDUTYPE" runat="server" style="font-size:14pt" />
+				</div>
+				<div class="col-md-2 thm">
+					常住/親近道場
+				</div>
+				<div class="col-md-4">
+					<asp:TextBox ID="txt_MB_MONKPLACE" runat="server" class="form-control" />
+				</div>
+			</div>
+			<div id="tr_MB_MONK_3" runat="server" class="row" style="display:none">
+				<div class="col-md-2 thm">
+					戒別
+				</div>
+				<div class="col-md-4">
+					<asp:DropDownList ID="dd_MB_MONKTYPE" runat="server" style="font-size:14pt" />
+				</div>
+				<div class="col-md-2 thm">
+					受戒日期
+				</div>
+				<div class="col-md-4">
+					西元
+					<asp:TextBox ID="txt_MB_MONKDATE_YYY" runat="server" Columns="4" ></asp:TextBox>年&nbsp;
+					<asp:TextBox ID="txt_MB_MONKDATE_MM" runat="server" Columns="2" ></asp:TextBox>月&nbsp;
+					<asp:TextBox ID="txt_MB_MONKDATE_DD" runat="server" Columns="2" ></asp:TextBox>日
+				</div>
+			</div>
+			<div id="tr_MB_MONK_4" runat="server" class="row" style="display:none">
+				<div class="col-md-2 thm">
+					受戒地點
+				</div>
+				<div class="col-md-10">
+					<asp:TextBox ID="txt_MB_MONKPLACE1" runat="server" class="form-control" />
+				</div>
+			</div>
+			<div class="row" >
+				<div class="col-md-2 thm">
+					<span style="color:Red">*</span>
+					手機
+				</div>
+				<div class="col-md-4">
+					<asp:TextBox ID="txt_MB_MOBIL" runat="server" class="form-control" />
+				</div>
+				<div class="col-md-2 thm">
+					<span style="color:Red">*</span>
+					電話
+				</div>
+				<div class="col-md-4">
+					<asp:TextBox ID="txt_MB_TEL_ZIP" runat="server" Columns="2"  MaxLength="2" />
+					&nbsp;─&nbsp;
+					<asp:TextBox ID="txt_MB_TEL" runat="server" Columns="10" />
+				</div>
+			</div>
+			<div class="row" >
+				<div class="col-md-2 thm">
+					<span style="color:Red">*</span>
+					E-mail
+				</div>
+				<div id="TD_Y_2" runat="server" class="col-md-4">
+					<asp:TextBox ID="txt_MB_EMAIL" runat="server" class="form-control" />
+				</div>
+				<div id="TD_G_2_1" runat="server"  class="col-md-2 thm">
+					<span style="color:Red">**</span>
+					身分證字號
+				</div>
+				<div id="TD_G_2_2" runat="server"  class="col-md-4">
+					<asp:TextBox ID="txt_MB_ID" runat="server" class="form-control" />
+				</div>
+			</div>
+			<div class="row" >
+				<div class="col-md-2 thm">
+					<span style="color:Red">*</span>
+					參加動機或目的
+				</div>
+				<div class="col-md-10">
+					<asp:TextBox ID="MB_OBJECT" runat="server" class="form-control" />
+				</div>
+			</div>
+			<div class="row" >
+				<div class="col-md-2 thm">
+					<span style="color:Red">*</span>
+					是否曾參加過本中心課程?
+				</div>
+				<div class="col-md-10">
+                    <asp:RadioButtonList ID="JOINMBSC" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" >
+                        <asp:ListItem Text="是" Value="Y" />
+                        <asp:ListItem Text="否" Value="N" />
+                    </asp:RadioButtonList>									
+				</div>
+			</div>
+			<div class="row" >
+				<div class="col-md-2 thm">
+					學歷
+				</div>
+				<div class="col-md-4">
+					<asp:DropDownList ID="dd_MB_EDU" runat="server" style="font-size:14pt" />
+				</div>
+				<div class="col-md-2 thm">
+					介紹人/訊息來源
+				</div>
+				<div class="col-md-4">
+					<asp:TextBox ID="txt_MB_REFER" runat="server" class="form-control" />
+				</div>
+			</div>
+			<div id="TR_G_3" runat="server" class="row" >
+				<div class="col-md-2 thm">
+					<span style="color:Red">*</span>
+					通訊地址
+				</div>
+				<div class="col-md-10">
+                    <asp:DropDownList ID="dd_MB_CITY" runat="server" AutoPostBack="true" style="font-size:14pt" />
+                    &nbsp;
+                    <asp:DropDownList ID="dd_MB_VLG" runat="server" style="font-size:14pt" /> 
+                    &nbsp;
+                    <asp:TextBox ID="txt_MB_ADDR" runat="server" class="form-control" />					
+				</div>
+			</div>
+			<div id="TR_G_4" runat="server" class="row" >
+				<div class="col-md-2 thm">
+					戶籍地址
+					<asp:CheckBox ID="cb_Ditto" runat="server" Text="同上" AutoPostBack="True" />
+				</div>
+				<div class="col-md-10">
+                    <asp:DropDownList ID="dd_MB_CITY1" runat="server" AutoPostBack="true" style="font-size:14pt" />
+                    &nbsp;
+                    <asp:DropDownList ID="dd_MB_VLG1" runat="server" style="font-size:14pt" />
+                    &nbsp;
+                    <asp:TextBox ID="txt_MB_ADDR1" runat="server" class="form-control" />						
+				</div>
+			</div>
+			<div id="TR_G_5" runat="server" class="row" >
+				<div class="col-md-2 thm">
+					語言
+				</div>
+				<div class="col-md-10">
+                    <asp:DataList ID="dl_MB_LANG" runat="server" RepeatDirection="Horizontal">
+                        <ItemTemplate>
+                            <asp:HiddenField ID="hid_MB_LANG" runat="server" Value='<%#Container.DataItem("VALUE")%>' />
+                            <asp:CheckBox ID="cb_MB_LANG" runat="server" Text='<%#Container.DataItem("TEXT")%>' style="font-size:14pt" >
+                            </asp:CheckBox>
+                            <asp:TextBox ID="txt_MB_LANG" runat="server" Visible="false" class="form-control" ></asp:TextBox>
                         </ItemTemplate>
-                    </asp:TemplateColumn>
-                </Columns>
-            </asp:DataGrid>
-            <table width="100%" runat="server" id="tb_Page2_Button" visible="false">
-                <tr>
-                    <td width="100%" align="center">
-                        <asp:Button ID="btn_Confirm" runat="server" Text="確定" CssClass="bt" />
-                    </td>
-                </tr>
-            </table>
+                    </asp:DataList>									
+				</div>
+			</div>
+			<div id="TR_G_6" runat="server" class="row" >
+				<div class="col-md-2 thm">
+					專長
+				</div>
+				<div class="col-md-4">
+                    <asp:DropDownList ID="dd_MB_SPECIAL" runat="server" style="font-size:14pt" />
+				</div>
+				<div class="col-md-2 thm">
+					職業
+				</div>
+				<div class="col-md-4">
+                    <asp:DropDownList ID="dd_MB_JOB" runat="server" style="font-size:14pt" />
+                    <BR/>
+                    職稱
+                    <BR/>
+                    <asp:DropDownList ID="dd_MB_JOBTITLE" runat="server" style="font-size:14pt" />							
+				</div>
+			</div>
+			<div class="row" >
+				<div class="col-md-2 thm">
+					<span style="color:Red">*</span>
+					宗教信仰
+				</div>
+				<div id="TD_Y_7" runat="server"  class="col-md-4">
+					<asp:DropDownList ID="dd_MB_RELIGION" runat="server" style="font-size:14pt" />
+				</div>
+				<div id="TD_G_7_1" runat="server" class="col-md-2 thm">
+					<span style="color:Red">**</span>
+					打鼾
+				</div>
+				<div id="TD_G_7_2" runat="server"  class="col-md-4">
+                    <asp:RadioButtonList ID="rbtList_MB_SNORE" runat="server" style="font-size:14pt" >
+                        <asp:ListItem Text="是" Value="1" style="font-size:14pt"></asp:ListItem>
+                        <asp:ListItem Text="否" Value="2" style="font-size:14pt"></asp:ListItem>
+                        <asp:ListItem Text="不知道" Value="3" style="font-size:14pt"></asp:ListItem>
+                    </asp:RadioButtonList>
+                    (為安排住宿)									
+				</div>
+			</div>
+			<div class="row" >
+				<div class="col-md-2 thm">
+					公司/學校系級
+				</div>
+				<div class="col-md-10">
+					<asp:TextBox ID="SCHOOL" runat="server" class="form-control" />
+				</div>
+			</div>
+			<div id="TR_G_8" runat="server" class="row" >
+				<div class="col-md-2 thm">
+					<span style="color:Red">**</span>
+					身心狀況
+				</div>
+				<div class="col-md-10">
+                    <asp:DataList ID="dl_MB_SICK" runat="server">
+                        <ItemTemplate>
+                            <asp:HiddenField ID="hid_MB_SICK" runat="server" Value='<%#Container.DataItem("VALUE")%>' />
+                            <asp:CheckBox ID="cb_MB_SICK" runat="server" Text='<%#Container.DataItem("TEXT")%>' style="font-size:14pt;">
+                            </asp:CheckBox>
+                            <asp:TextBox ID="txt_MB_SICK" runat="server" Visible="false" class="form-control" ></asp:TextBox>
+                        </ItemTemplate>
+                    </asp:DataList>									
+				</div>
+			</div>
+			<div id="TR_G_9" runat="server" class="row" >
+				<div class="col-md-12 thm">
+					修持法門
+				</div>
+			</div>
+			<div id="TR_G_10" runat="server" class="row" >
+				<div class="col-md-12">
+                    您曾經修持過毗婆舍那禪法嗎?<BR/>
+                    <asp:RadioButton ID="rbt_MB_PIPOSHENA_Y" Text="是" runat="server" GroupName="MB_PIPOSHENA" style="font-size:14pt" />
+                    <asp:RadioButton ID="rbt_MB_PIPOSHENA_N" Text="否" runat="server" GroupName="MB_PIPOSHENA" style="font-size:14pt" />
+                    <BR/>指導老師：
+                    <asp:TextBox ID="txt_MB_TEACH" runat="server" class="form-control" />							
+				</div>
+			</div>
+			<div id="TR_G_11" runat="server" class="row" >
+				<div class="col-md-2 thm">
+					您目前的修持法門
+				</div>
+				<div class="col-md-10">
+					<asp:TextBox ID="txt_MB_FAMENNIAN" runat="server" class="form-control" />
+				</div>
+			</div>
+			<div id="TR_G_12" runat="server" class="row" >
+				<div class="col-md-12">
+                    您過去曾經參加過七天以上的禪修嗎?<br/>
+                    <asp:RadioButton ID="rbt_MB_OVER7DAY_Y" Text="是" runat="server" GroupName="MB_OVER7DAY" style="font-size:14pt" />
+                    <asp:RadioButton ID="rbt_MB_OVER7DAY_N" Text="否" runat="server" GroupName="MB_OVER7DAY" style="font-size:14pt" />
+                    <br/>地點：<br/>
+                    <asp:TextBox ID="txt_MB_PLACE" runat="server" class="form-control" />					
+				</div>
+			</div>
+			<div id="TR_G_13" runat="server" class="row" >
+				<div class="col-md-12 thm">
+                    <span style="color:Red">**</span>
+                    緊急聯絡人									
+				</div>
+			</div>
+			<div id="TR_G_14" runat="server" class="row" >
+				<div class="col-md-2 thm">
+					法名/姓名
+				</div>
+				<div class="col-md-4">
+					<asp:TextBox ID="txt_MB_EMGCONT" runat="server" class="form-control" />
+				</div>
+				<div class="col-md-2 thm">
+					電話/手機
+				</div>
+				<div class="col-md-4">
+					<asp:TextBox ID="txt_MB_CONTMOBIL" runat="server" class="form-control" />
+				</div>
+			</div>
+			<div id="TR_G_15_T" runat="server" class="row" >
+				<div class="col-md-12 thm">
+					捐助物資/捐款
+				</div>
+			</div>
+			<div id="TR_G_15" runat="server" class="row" >
+				<div class="col-md-12">
+					<asp:TextBox ID="MB_AMTMEMO" runat="server" class="form-control" />
+				</div>
+			</div>
+		</div>
+        <!--顯示下方外框線-->
+        <!--#include virtual="~/inc/MBSCTableEnd.inc"-->
+        <div id="tb_Page3_Button" runat="server" class="text-center" visible="false" >
+            <asp:Button ID="btn_Cancel" runat="server" Text="取消報名" CssClass="btn btn-info" Visible="false" />
+            &nbsp;&nbsp;&nbsp;
+            <asp:Button ID="btn_Save" runat="server" Text="確定" CssClass="btn btn-info" />            		
+        </div>
 
-            <table class="CRTable_Top" width="100%" cellspacing="0" runat="server" id="tb_Page3" visible="false" >
-                <tr>
-                    <td class="th1_b" colspan="4" style="font-size:14pt;padding:4px" >
-                        會員編號 : 
-                        <asp:Label ID="lbl_MB_AREA" runat="server" Text="" />-
-                        <asp:Label ID="lbl_MB_MEMSEQ" runat="server" Text="" />
-                        &nbsp;基本資料
-                    </td>
-                </tr>
-                <tr>
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        課程名稱
-                    </td>
-                    <td class="td2_b" width="85%" colspan="3" style="font-size:14pt;padding:4px" >
-                        <asp:Label ID="lbl_Class" runat="server" Text=""></asp:Label>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px">
-                        <span style="color:Red">*</span>
-                        姓名
-                    </td>
-                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
-                        <asp:TextBox ID="txt_MB_NAME" runat="server"></asp:TextBox>
-                    </td>
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px">
-                        <span style="color:Red">*</span>
-                        性別
-                    </td>
-                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
-                        <asp:RadioButtonList ID="rbtList_MB_SEX" runat="server" RepeatDirection="Horizontal" style="font-size:14pt;" >
-                            <asp:ListItem Value="1" Text="男" style="font-size:14pt;" ></asp:ListItem>
-                            <asp:ListItem Value="2" Text="女" style="font-size:14pt;" ></asp:ListItem>
-                        </asp:RadioButtonList>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px">
-                        <span style="color:Red">*</span>
-                        出生年月日
-                    </td>
-                    <td id="TD_Y_1" runat="server" class="td2_b" width="35%" style="font-size:14pt;padding:4px">
-                        西元
-                        <asp:TextBox ID="txt_MB_BIRTH_YYY" runat="server" Width="10%"></asp:TextBox>年&nbsp;
-                        <asp:TextBox ID="txt_MB_BIRTH_MM" runat="server" Width="8%"></asp:TextBox>月&nbsp;
-                        <asp:TextBox ID="txt_MB_BIRTH_DD" runat="server" Width="8%"></asp:TextBox>日&nbsp;
-                    </td>
-                    <td id="TD_G_1_1" runat="server" class="th1c_b" width="15%" style="font-size:14pt;padding:4px">
-                        <span style="color:Red">*</span>
-                        出家眾
-                    </td>
-                    <td id="TD_G_1_2" runat="server" class="td2_b" width="35%" style="font-size:14pt;padding:4px">
-                        <asp:RadioButton ID="rbt_MB_MONK_Y" runat="server" Text="是" GroupName="MB_MONK" onclick="CheckMonk(this);"></asp:RadioButton>
-                        <asp:RadioButton ID="rbt_MB_MONK_N" runat="server" Text="否" GroupName="MB_MONK" onclick="CheckMonk(this);"></asp:RadioButton>
-                    </td>
-                </tr>
-                <tr runat="server" id="tr_MB_MONK_1" style="display:none">
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        法名
-                    </td>
-                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
-                        <asp:TextBox ID="txt_MB_MONKNAME" runat="server" Width="30%"></asp:TextBox>
-                    </td>
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        剃度/皈依恩師/戒師
-                    </td>
-                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
-                        <asp:TextBox ID="txt_MB_MONKTECH" runat="server" Width="30%"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr runat="server" id="tr_MB_MONK_2" style="display:none">
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        傳承
-                    </td>
-                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" > 
-                        <asp:DropDownList ID="dd_MB_EDUTYPE" runat="server" style="font-size:14pt" >
-                        </asp:DropDownList>
-                    </td>
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        常住/親近道場
-                    </td>
-                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
-                        <asp:TextBox ID="txt_MB_MONKPLACE" runat="server" Width="30%"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr runat="server" id="tr_MB_MONK_3" style="display:none">
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        戒別
-                    </td>
-                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
-                        <asp:DropDownList ID="dd_MB_MONKTYPE" runat="server" style="font-size:14pt" >
-                        </asp:DropDownList>
-                    </td>
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        受戒日期
-                    </td>
-                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
-                        西元
-                        <asp:TextBox ID="txt_MB_MONKDATE_YYY" runat="server" Width="10%"></asp:TextBox>年&nbsp;
-                        <asp:TextBox ID="txt_MB_MONKDATE_MM" runat="server" Width="8%"></asp:TextBox>月&nbsp;
-                        <asp:TextBox ID="txt_MB_MONKDATE_DD" runat="server" Width="8%"></asp:TextBox>日
-                    </td>
-                </tr>
-                <tr runat="server" id="tr_MB_MONK_4" style="display:none">
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        受戒地點
-                    </td>
-                    <td class="td2_b" width="85%" colspan="3" style="font-size:14pt;padding:4px" >
-                        <asp:TextBox ID="txt_MB_MONKPLACE1" runat="server" Width="70%"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        <span style="color:Red">*</span>
-                        手機
-                    </td>
-                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
-                        <asp:TextBox ID="txt_MB_MOBIL" runat="server" Width="40%"></asp:TextBox>
-                    </td>
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        <span style="color:Red">*</span>
-                        電話
-                    </td>
-                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
-                        <asp:TextBox ID="txt_MB_TEL_ZIP" runat="server" Width="10%" MaxLength="2"></asp:TextBox>
-                        &nbsp;─&nbsp;
-                        <asp:TextBox ID="txt_MB_TEL" runat="server" Width="40%"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        <span style="color:Red">*</span>
-                        E-mail
-                    </td>
-                    <td id="TD_Y_2" runat="server" class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
-                        <asp:TextBox ID="txt_MB_EMAIL" runat="server" Width="60%"></asp:TextBox>
-                    </td>
-                    <td id="TD_G_2_1" runat="server" class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        <span style="color:Red">**</span>
-                        身分證字號
-                    </td>
-                    <td id="TD_G_2_2" runat="server" class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
-                        <asp:TextBox ID="txt_MB_ID" runat="server" ></asp:TextBox>
-                    </td>
-                </tr>
-                <tr >
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        <span style="color:Red">*</span>
-                        參加動機或目的
-                    </td>
-                    <td class="td2_b" colspan="3" style="font-size:14pt;padding:4px;background-color:darksalmon" >
-                        <asp:TextBox ID="MB_OBJECT" runat="server" Columns="100" />
-                    </td> 
-                </tr>
-                <tr >
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        <span style="color:Red">*</span>
-                        是否曾參加過本中心課程?
-                    </td>
-                    <td class="td2_b" colspan="3" style="font-size:14pt;padding:4px" >
-                        <asp:RadioButtonList ID="JOINMBSC" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" >
-                            <asp:ListItem Text="是" Value="Y" />
-                            <asp:ListItem Text="否" Value="N" />
-                        </asp:RadioButtonList>
-                    </td> 
-                </tr>
-                <tr>
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px">
-                        學歷
-                    </td>
-                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
-                        <asp:DropDownList ID="dd_MB_EDU" runat="server" style="font-size:14pt" >
-                        </asp:DropDownList>
-                    </td>
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        介紹人/訊息來源
-                    </td>
-                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
-                        <asp:TextBox ID="txt_MB_REFER" runat="server" ></asp:TextBox>
-                    </td>
-                </tr>
-                <tr id="TR_G_3" runat="server" >
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        <span style="color:Red">*</span>
-                        通訊地址
-                    </td>
-                    <td class="td2_b" width="85%" colspan="3" style="font-size:14pt;padding:4px" >
-                        <asp:DropDownList ID="dd_MB_CITY" runat="server" AutoPostBack="true" style="font-size:14pt" >
-                        </asp:DropDownList>&nbsp;
-                        <asp:DropDownList ID="dd_MB_VLG" runat="server" style="font-size:14pt" > 
-                        </asp:DropDownList>&nbsp;
-                        <asp:TextBox ID="txt_MB_ADDR" runat="server" Width="60%" ></asp:TextBox>
-                    </td>
-                </tr>
-                <tr id="TR_G_4" runat="server">
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        戶籍地址
-                        <asp:CheckBox ID="cb_Ditto" runat="server" Text="同上" AutoPostBack="True" />
-                    </td>
-                    <td class="td2_b" width="85%" colspan="3" style="font-size:14pt;padding:4px" >
-                        <asp:DropDownList ID="dd_MB_CITY1" runat="server" AutoPostBack="true" style="font-size:14pt" >
-                        </asp:DropDownList>&nbsp;
-                        <asp:DropDownList ID="dd_MB_VLG1" runat="server" style="font-size:14pt" >
-                        </asp:DropDownList>&nbsp;
-                        <asp:TextBox ID="txt_MB_ADDR1" runat="server" Width="60%" ></asp:TextBox>
-                    </td>
-                </tr>
-                <tr id="TR_G_5" runat="server">
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        語言
-                    </td>
-                    <td class="td2_b" width="85%" colspan="3" style="font-size:14pt;padding:4px" >
-                        <asp:DataList ID="dl_MB_LANG" runat="server" RepeatDirection="Horizontal">
-                            <ItemTemplate>
-                                <asp:HiddenField ID="hid_MB_LANG" runat="server" Value='<%#Container.DataItem("VALUE")%>' />
-                                <asp:CheckBox ID="cb_MB_LANG" runat="server" Text='<%#Container.DataItem("TEXT")%>' style="font-size:14pt" >
-                                </asp:CheckBox>
-                                <asp:TextBox ID="txt_MB_LANG" runat="server" Visible="false"></asp:TextBox>
-                            </ItemTemplate>
-                        </asp:DataList>
-                    </td>
-                </tr>
-                <tr id="TR_G_6" runat="server">
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        專長
-                    </td>
-                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
-                        <asp:DropDownList ID="dd_MB_SPECIAL" runat="server" style="font-size:14pt" >
-                        </asp:DropDownList>
-                    </td>
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        職業
-                    </td>
-                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
-                        <asp:DropDownList ID="dd_MB_JOB" runat="server" style="font-size:14pt" >
-                        </asp:DropDownList>&nbsp;
-                        職稱
-                        <asp:DropDownList ID="dd_MB_JOBTITLE" runat="server" style="font-size:14pt" >
-                        </asp:DropDownList>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        <span style="color:Red">*</span>
-                        宗教信仰
-                    </td>
-                    <td id="TD_Y_7" runat="server" class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
-                        <asp:DropDownList ID="dd_MB_RELIGION" runat="server" style="font-size:14pt" >
-                        </asp:DropDownList>
-                    </td>
-                    <td id="TD_G_7_1" runat="server" class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        <span style="color:Red">**</span>
-                        打鼾
-                    </td>
-                    <td id="TD_G_7_2" runat="server" class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
-                        <asp:RadioButtonList ID="rbtList_MB_SNORE" runat="server" style="font-size:14pt" >
-                            <asp:ListItem Text="是" Value="1" style="font-size:14pt"></asp:ListItem>
-                            <asp:ListItem Text="否" Value="2" style="font-size:14pt"></asp:ListItem>
-                            <asp:ListItem Text="不知道" Value="3" style="font-size:14pt"></asp:ListItem>
-                        </asp:RadioButtonList>
-                        (為安排住宿)
-                    </td>
-                </tr>
-                <tr>
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        公司/學校系級
-                    </td>
-                    <td class="td2_b" width="85%" colspan="3" style="font-size:14pt;padding:4px" >
-                        <asp:TextBox ID="SCHOOL" runat="server" Columns="100" />
-                    </td>
-                </tr>
-                <tr id="TR_G_8" runat="server">
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        <span style="color:Red">**</span>
-                        身心狀況
-                    </td>
-                    <td class="td2_b" width="85%" colspan="3" style="font-size:14pt;padding:4px" >
-                        <asp:DataList ID="dl_MB_SICK" runat="server">
-                            <ItemTemplate>
-                                <asp:HiddenField ID="hid_MB_SICK" runat="server" Value='<%#Container.DataItem("VALUE")%>' />
-                                <asp:CheckBox ID="cb_MB_SICK" runat="server" Text='<%#Container.DataItem("TEXT")%>' style="font-size:14pt;">
-                                </asp:CheckBox>
-                                <asp:TextBox ID="txt_MB_SICK" runat="server" Visible="false"></asp:TextBox>
-                            </ItemTemplate>
-                        </asp:DataList>
-                    </td>
-                </tr>
-                <tr id="TR_G_9" runat="server" >
-                    <td class="mtr" width="100%" colspan="4" align="center" style="font-size:14pt;padding:4px" >
-                        修持法門
-                    </td>
-                </tr>
-                <tr id="TR_G_10" runat="server">
-                    <td class="td2_b" width="100%" colspan="4" style="font-size:14pt;padding:4px" >
-                        您曾經修持過毗婆舍那禪法嗎?&nbsp;&nbsp;
-                        <asp:RadioButton ID="rbt_MB_PIPOSHENA_Y" Text="是" runat="server" GroupName="MB_PIPOSHENA" style="font-size:14pt" />
-                        <asp:RadioButton ID="rbt_MB_PIPOSHENA_N" Text="否" runat="server" GroupName="MB_PIPOSHENA" style="font-size:14pt" />
-                        &nbsp;&nbsp;&nbsp;&nbsp;指導老師：
-                        <asp:TextBox ID="txt_MB_TEACH" runat="server"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr id="TR_G_11" runat="server">
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        您目前的修持法門
-                    </td>
-                    <td class="td2_b" width="85%" colspan="3" style="font-size:14pt;padding:4px">
-                        <asp:TextBox ID="txt_MB_FAMENNIAN" runat="server"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr id="TR_G_12" runat="server">
-                    <td class="td2_b" width="100%" colspan="4" style="font-size:14pt;padding:4px" >
-                        您過去曾經參加過七天以上的禪修嗎?&nbsp;&nbsp;
-                        <asp:RadioButton ID="rbt_MB_OVER7DAY_Y" Text="是" runat="server" GroupName="MB_OVER7DAY" style="font-size:14pt" />
-                        <asp:RadioButton ID="rbt_MB_OVER7DAY_N" Text="否" runat="server" GroupName="MB_OVER7DAY" style="font-size:14pt" />
-                        &nbsp;&nbsp;&nbsp;&nbsp;地點：
-                        <asp:TextBox ID="txt_MB_PLACE" runat="server"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr id="TR_G_13" runat="server">
-                    <td class="mtr" width="100%" colspan="4" align="center" style="font-size:14pt;padding:4px" >
-                        <span style="color:Red">**</span>
-                        緊急聯絡人
-                    </td>
-                </tr>
-                <tr id="TR_G_14" runat="server">
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        法名/姓名
-                    </td>
-                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
-                        <asp:TextBox ID="txt_MB_EMGCONT" runat="server"></asp:TextBox>
-                    </td>
-                    <td class="th1c_b" width="15%" style="font-size:14pt;padding:4px" >
-                        電話/手機
-                    </td>
-                    <td class="td2_b" width="35%" style="font-size:14pt;padding:4px" >
-                        <asp:TextBox ID="txt_MB_CONTMOBIL" runat="server"></asp:TextBox>
-                    </td>
-                </tr>
-                <tr id="TR_G_15_T" runat="server">
-                    <td class="mtr" width="100%" colspan="4" align="center" style="font-size:14pt;padding:4px" >                        
-                        捐助物資/捐款
-                    </td>
-                </tr>
-                <tr id="TR_G_15" runat="server" >
-                    <td class="td2_b" width="85%" colspan="4" style="font-size:14pt;padding:4px" >
-                        <asp:TextBox ID="MB_AMTMEMO" runat="server" Width="99%" />
-                    </td>
-                </tr>
-            </table>
-            <!--顯示下方外框線-->
-            <!--#include virtual="~/inc/MBSCTableEnd.inc"--> 
-            <table width="100%" runat="server" id="tb_Page3_Button" visible="false">
-                <tr>
-                    <td align="center">
-                        <asp:Button ID="btn_Cancel" runat="server" Text="取消報名" CssClass="bt" Visible="false" />
-                        &nbsp;&nbsp;&nbsp;
-                        <asp:Button ID="btn_Save" runat="server" Text="確定" CssClass="bt" />
-                    </td>
-                </tr>
-            </table>
-        
-            <div style="color:red">
-                說明
-                <BR/>
-                *:為所有課程必填項目,未填者將無法報名
-                <BR/>
-                **:七天以上(含)之禪修課程必填
-            </div>
+        <div class="text-left">
+            說明
+            <br/>
+            *:為所有課程必填項目,未填者將無法報名
+            <br/>
+            **:七天以上(含)之禪修課程必填            		
+        </div>
 
-            <asp:HiddenField ID="hid_HaveMember" runat="server" Value="False" />
-        </td>
-    </tr>
-</table>
+        <asp:HiddenField ID="hid_HaveMember" runat="server" Value="False" />
     </form>
 </body>
 </html>

@@ -224,9 +224,8 @@ Public Class MBMnt_Sign_01_v01
             tb_Page3.Visible = False
             tb_Page3_Button.Visible = False
 
-            dgRpt_Page2.DataSource = dt
-            dgRpt_Page2.DataBind()
-
+            Me.RP_Page2.DataSource = dt
+            Me.RP_Page2.DataBind()
         Catch ex As Exception
             Throw
         End Try
@@ -860,7 +859,8 @@ Public Class MBMnt_Sign_01_v01
             If sMB_APV = "N" Then
                 'Show 黃色區
                 '出生年月日
-                Me.TD_Y_1.ColSpan = 3
+                'Me.TD_Y_1.ColSpan = 3
+                Me.TD_Y_1.Attributes("class") = "col-md-10 text-left"
                 '西元
                 Me.TD_G_1_1.Visible = False
                 '出家眾
@@ -876,7 +876,8 @@ Public Class MBMnt_Sign_01_v01
                 Me.tr_MB_MONK_4.Visible = False
 
                 'E-mail
-                Me.TD_Y_2.ColSpan = 3
+                'Me.TD_Y_2.ColSpan = 3
+                Me.TD_Y_2.Attributes("class") = "col-md-10 text-left"
                 '身分證字號
                 Me.TD_G_2_1.Visible = False
                 Me.TD_G_2_2.Visible = False
@@ -891,7 +892,8 @@ Public Class MBMnt_Sign_01_v01
                 Me.TR_G_6.Visible = False
 
                 '宗教信仰
-                Me.TD_Y_7.ColSpan = 3
+                'Me.TD_Y_7.ColSpan = 3
+                Me.TD_Y_7.Attributes("class") = "col-md-10 text-left"
                 '打鼾
                 Me.TD_G_7_1.Visible = False
                 Me.TD_G_7_2.Visible = False
@@ -921,9 +923,9 @@ Public Class MBMnt_Sign_01_v01
     '二號畫面Button
     Protected Sub btn_Confirm_Click(sender As Object, e As EventArgs) Handles btn_Confirm.Click
         Try
-            For i As Integer = 0 To dgRpt_Page2.Items.Count - 1
-                Dim rbData As RadioButton = dgRpt_Page2.Items(i).FindControl("rbData")
-                Dim lbl_MB_MEMSEQ As Label = dgRpt_Page2.Items(i).FindControl("lbl_MB_MEMSEQ")
+            For i As Integer = 0 To Me.RP_Page2.Items.Count - 1
+                Dim rbData As RadioButton = Me.RP_Page2.Items(i).FindControl("rbData")
+                Dim lbl_MB_MEMSEQ As Label = Me.RP_Page2.Items(i).FindControl("lbl_MB_MEMSEQ")
 
                 If rbData.Checked Then
                     GoPage3(lbl_MB_MEMSEQ.Text.Trim)
