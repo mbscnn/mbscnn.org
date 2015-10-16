@@ -83,9 +83,9 @@
         .grid-container {
             /*width: 100%;
             max-width: 1200px;*/
-            background-color: #FAEADD;
-            /*background: -webkit-linear-gradient(top, rgba(255, 179, 51, 0.37) 0%, rgba(255, 255, 254, 0) 30%);
-            background: linear-gradient(to bottom, rgb(249, 186, 128) 0%, rgba(249, 244, 241, 0.87) 30%);*/
+            /*background-color: #FAEADD;*/
+            background: -webkit-linear-gradient(top, rgba(255, 179, 51, 0.37) 0%, rgba(255, 255, 254, 0) 100%);
+            background: linear-gradient(to bottom, rgb(249, 186, 128) 0%, rgba(249, 244, 241, 0.87) 100%);
             /*border-right: 1px solid #ddd;*/
             border-bottom: 1px solid #ddd;
         }
@@ -100,15 +100,15 @@
           display: table;
           clear: both;
         }
-
-        [class*='col-'] {
+         
+        .row [class*="col-"] {
             font-size: 14pt;
             /*float: left;*/
             /*min-height: 1px;*/
             /*width: 16.66%;*/
             padding: 7px;
             /*background: #eee;*/
-            /*background:transparent;*/
+            background:transparent;
             border-top: 1px solid #ddd;
             /*border-left: 1px solid #ddd;*/
             text-align:left;
@@ -119,26 +119,27 @@
             /*background-color: #003040;
             background: -webkit-linear-gradient(top, rgba(255, 255, 254, 0) 100% ,rgba(255, 179, 51, 0.37) 0%);
             background: linear-gradient(to bottom, rgba(249, 244, 241, 0.87) 100%, rgb(249, 186, 128) 0%);*/
-            background:rgba(249, 186, 128, 0.5);
+            /*background:rgba(249, 186, 128, 0.5);*/
             font-weight:bold;
             padding: 7px;
+            background:transparent;
         }
 
-        body{
+        /*body{
             font-size: 14pt;
             text-align:left;
-        }
+        }*/
 
         /* Small devices (tablets, 768px and up) */
         @media all and (min-width: 768px) {
-            [class*='col-'] {
+            .row [class*="col-"] {
                 font-size: 12px;
                 /*float: left;*/
                 /*min-height: 1px;*/
                 /*width: 16.66%;*/
                 padding: 5px;
                 /*background: #eee;*/
-                /*background:transparent;*/
+                background:transparent;
                 /*border-top: 1px solid #ddd;
                 border-left: 1px solid #ddd;*/
                 text-align:left;
@@ -147,14 +148,14 @@
 
         /* Medium devices (desktops, 992px and up) */
         @media all and (min-width: 992px) {
-            [class*='col-'] {
+            .row [class*="col-"] {
                 font-size: 14pt;
                 /*float: left;*/
                 /*min-height: 1px;*/
                 /*width: 16.66%;*/
                 padding: 7px;
                 /*background: #eee;*/
-                /*background:transparent;*/
+                background:transparent;
                 /*border-top: 1px solid #ddd;
                 border-left: 1px solid #ddd;*/
                 text-align:left;
@@ -163,14 +164,14 @@
 
         /* Large devices (large desktops, 1200px and up) */
         @media all and (min-width: 1200px) {
-            [class*='col-'] {
+            .row [class*="col-"] {
                 font-size: 16pt;
                 /*float: left;*/
                 /*min-height: 1px;*/
                 /*width: 16.66%;*/
                 padding: 9px;
                 /*background: #eee;*/
-                /*background:transparent;*/
+                background:transparent;
                 /*border-top: 1px solid #ddd;
                 border-left: 1px solid #ddd;*/
                 text-align:left;
@@ -218,7 +219,7 @@
                 </div>
             </div>
         </div>
-        <div class="text-center">
+        <div id="tb_Page1_btn" runat="server" class="text-center">
             <asp:Button ID="btn_Qry" runat="server" Text="確定" CssClass="btn btn-info" />
         </div>
 
@@ -521,14 +522,14 @@
 					語言
 				</div>
 				<div class="col-md-10">
-                    <asp:DataList ID="dl_MB_LANG" runat="server" RepeatDirection="Horizontal">
+                    <asp:Repeater ID="dl_MB_LANG" runat="server">
                         <ItemTemplate>
                             <asp:HiddenField ID="hid_MB_LANG" runat="server" Value='<%#Container.DataItem("VALUE")%>' />
                             <asp:CheckBox ID="cb_MB_LANG" runat="server" Text='<%#Container.DataItem("TEXT")%>' style="font-size:14pt" >
                             </asp:CheckBox>
                             <asp:TextBox ID="txt_MB_LANG" runat="server" Visible="false" class="form-control" ></asp:TextBox>
                         </ItemTemplate>
-                    </asp:DataList>									
+                    </asp:Repeater>
 				</div>
 			</div>
 			<div id="TR_G_6" runat="server" class="row" >
@@ -562,7 +563,7 @@
 					打鼾
 				</div>
 				<div id="TD_G_7_2" runat="server"  class="col-md-4">
-                    <asp:RadioButtonList ID="rbtList_MB_SNORE" runat="server" style="font-size:14pt" >
+                    <asp:RadioButtonList ID="rbtList_MB_SNORE" runat="server" style="font-size:14pt;background:transparent" RepeatLayout="Flow" RepeatDirection="Horizontal" >
                         <asp:ListItem Text="是" Value="1" style="font-size:14pt"></asp:ListItem>
                         <asp:ListItem Text="否" Value="2" style="font-size:14pt"></asp:ListItem>
                         <asp:ListItem Text="不知道" Value="3" style="font-size:14pt"></asp:ListItem>
@@ -584,14 +585,14 @@
 					身心狀況
 				</div>
 				<div class="col-md-10">
-                    <asp:DataList ID="dl_MB_SICK" runat="server">
+                    <asp:Repeater ID="dl_MB_SICK" runat="server">
                         <ItemTemplate>
                             <asp:HiddenField ID="hid_MB_SICK" runat="server" Value='<%#Container.DataItem("VALUE")%>' />
                             <asp:CheckBox ID="cb_MB_SICK" runat="server" Text='<%#Container.DataItem("TEXT")%>' style="font-size:14pt;">
                             </asp:CheckBox>
                             <asp:TextBox ID="txt_MB_SICK" runat="server" Visible="false" class="form-control" ></asp:TextBox>
                         </ItemTemplate>
-                    </asp:DataList>									
+                    </asp:Repeater>
 				</div>
 			</div>
 			<div id="TR_G_9" runat="server" class="row" >

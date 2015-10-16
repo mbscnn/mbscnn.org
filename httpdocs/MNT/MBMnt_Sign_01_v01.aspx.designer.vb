@@ -86,6 +86,15 @@ Partial Public Class MBMnt_Sign_01_v01
     Protected WithEvents txt_Tel As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''tb_Page1_btn 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents tb_Page1_btn As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
     '''btn_Qry 控制項。
     '''</summary>
     '''<remarks>
@@ -605,7 +614,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents dl_MB_LANG As Global.System.Web.UI.WebControls.DataList
+    Protected WithEvents dl_MB_LANG As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
     '''TR_G_6 控制項。
@@ -713,7 +722,7 @@ Partial Public Class MBMnt_Sign_01_v01
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents dl_MB_SICK As Global.System.Web.UI.WebControls.DataList
+    Protected WithEvents dl_MB_SICK As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
     '''TR_G_9 控制項。

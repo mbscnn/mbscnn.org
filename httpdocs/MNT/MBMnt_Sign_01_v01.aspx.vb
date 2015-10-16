@@ -30,9 +30,11 @@ Public Class MBMnt_Sign_01_v01
 
                     If Me.is76User(com.Azion.EloanUtility.UIUtility.getLoginUserID) Then
                         Me.tb_Page1.Visible = True
+                        Me.tb_Page1_btn.Visible = True
                         Me.PLH_MAIL_SAME.Visible = False
                     Else
                         Me.tb_Page1.Visible = False
+                        Me.tb_Page1_btn.Visible = False
 
                         Me.btnModify.Text = "取消報名"
 
@@ -63,9 +65,11 @@ Public Class MBMnt_Sign_01_v01
                 Else
                     If Me.is76User(com.Azion.EloanUtility.UIUtility.getLoginUserID) Then
                         Me.tb_Page1.Visible = True
+                        Me.tb_Page1_btn.Visible = True
                         Me.PLH_MAIL_SAME.Visible = False
                     Else
                         Me.tb_Page1.Visible = False
+                        Me.tb_Page1_btn.Visible = False
 
                         Using m_DBManager As com.Azion.NET.VB.DatabaseManager = UIShareFun.getDataBaseManager
                             Dim mbMEMBERList As New MB_MEMBERList(m_DBManager)
@@ -202,6 +206,7 @@ Public Class MBMnt_Sign_01_v01
         Try
             '開啟一號畫面
             tb_Page1.Visible = True
+            tb_Page1_btn.Visible = True
             '關閉二三號畫面
             dgRpt_Page2.Visible = False
             tb_Page2_Button.Visible = False
@@ -217,6 +222,7 @@ Public Class MBMnt_Sign_01_v01
         Try
             '關閉一號畫面
             tb_Page1.Visible = False
+            tb_Page1_btn.Visible = False
             '開啟二號畫面
             dgRpt_Page2.Visible = True
             tb_Page2_Button.Visible = True
@@ -236,6 +242,7 @@ Public Class MBMnt_Sign_01_v01
         Try
             '關閉一號畫面
             tb_Page1.Visible = False
+            tb_Page1_btn.Visible = False
             '關閉二號畫面
             dgRpt_Page2.Visible = False
             tb_Page2_Button.Visible = False
@@ -592,7 +599,9 @@ Public Class MBMnt_Sign_01_v01
                 '語言
                 AP_CODEList.getCurrentDataSet.Clear()
                 AP_CODEList.getVALUEandTEXTbyUPCODE(CodeList.getAppSettings("UPCODE95"))
-                init_ddl(dl_MB_LANG, AP_CODEList.getCurrentDataSet.Tables(0))
+                'init_ddl(dl_MB_LANG, AP_CODEList.getCurrentDataSet.Tables(0))
+                dl_MB_LANG.DataSource = AP_CODEList.getCurrentDataSet.Tables(0)
+                dl_MB_LANG.DataBind()
                 '專長
                 AP_CODEList.getCurrentDataSet.Clear()
                 AP_CODEList.getVALUEandTEXTbyUPCODE(CodeList.getAppSettings("UPCODE164"))
@@ -612,7 +621,9 @@ Public Class MBMnt_Sign_01_v01
                 '身心狀況
                 AP_CODEList.getCurrentDataSet.Clear()
                 AP_CODEList.getVALUEandTEXTbyUPCODE(CodeList.getAppSettings("UPCODE136"))
-                init_ddl(dl_MB_SICK, AP_CODEList.getCurrentDataSet.Tables(0))
+                'init_ddl(dl_MB_SICK, AP_CODEList.getCurrentDataSet.Tables(0))
+                dl_MB_SICK.DataSource = AP_CODEList.getCurrentDataSet.Tables(0)
+                dl_MB_SICK.DataBind()
                 '傳承
                 AP_CODEList.getCurrentDataSet.Clear()
                 AP_CODEList.getVALUEandTEXTbyUPCODE(CodeList.getAppSettings("UPCODE165"))
@@ -686,7 +697,7 @@ Public Class MBMnt_Sign_01_v01
     End Sub
 
     '語言DataList-ItemDataBound
-    Sub dl_MB_LANG_ItemDataBound(sender As Object, e As System.Web.UI.WebControls.DataListItemEventArgs) Handles dl_MB_LANG.ItemDataBound
+    Sub dl_MB_LANG_ItemDataBound(sender As Object, e As System.Web.UI.WebControls.RepeaterItemEventArgs) Handles dl_MB_LANG.ItemDataBound
         Try
             If e.Item.ItemType = ListItemType.Item Or e.Item.ItemType = ListItemType.AlternatingItem Then
                 Dim hid_MB_LANG As HiddenField = e.Item.FindControl("hid_MB_LANG")
@@ -705,7 +716,7 @@ Public Class MBMnt_Sign_01_v01
     End Sub
 
     '身心狀況DataList-ItemDataBound
-    Sub dl_MB_SICK_ItemDataBound(sender As Object, e As System.Web.UI.WebControls.DataListItemEventArgs) Handles dl_MB_SICK.ItemDataBound
+    Sub dl_MB_SICK_ItemDataBound(sender As Object, e As System.Web.UI.WebControls.RepeaterItemEventArgs) Handles dl_MB_SICK.ItemDataBound
         Try
             If e.Item.ItemType = ListItemType.Item Or e.Item.ItemType = ListItemType.AlternatingItem Then
                 Dim hid_MB_SICK As HiddenField = e.Item.FindControl("hid_MB_SICK")
