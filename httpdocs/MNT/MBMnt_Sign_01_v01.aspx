@@ -124,7 +124,7 @@
             padding: 7px;
             background:transparent;
         }
-
+		
         /*body{
             font-size: 14pt;
             text-align:left;
@@ -188,10 +188,6 @@
                 MBSC報名表
             </h2>
         </div>
-
-        <!--顯示上方外框線-->
-        <!-- #include virtual="~/inc/MBSCTableStart.inc" -->
-
         <!--錯誤訊息區-->
         <!-- #include virtual="~/inc/MBSCErrorMsg.inc" -->
         <div id="tb_Page1" runat="server" class="container-fluid grid-container">
@@ -267,48 +263,51 @@
                 <asp:Button ID="btnModify" runat="server" CssClass="btn btn-info" Text="報名" />
             </div>
         </asp:PlaceHolder>
-
-        <div id="dgRpt_Page2" runat="server" visible="false" class="container-fluid grid-container" >
-            <div class="row">
-                <div class="col-xs-1 col-md-1 thm">
-                    點選
-                </div>
-                <div class="col-xs-3 col-md-3 thm">
-                    法名/姓名
-                </div>
-                <div class="col-xs-6 col-md-6 thm">
-                    通訊地址
-                </div>
-                <div class="col-xs-2 col-md-2 thm">
-                    會員編號
-                </div>
-            </div>
-            <asp:Repeater ID="RP_Page2" runat="server">
-                <ItemTemplate>
-                    <div class="row">
-                        <div class="col-xs-1 col-md-1">
-                            <!--點選-->
-                            <asp:RadioButton ID="rbData" runat="server" onclick="RadioButtonSelect(this);" />
-                        </div>
-                        <div class="col-xs-3 col-md-3">
-                            <!--法名/ 姓名-->
-                            <asp:Label ID="lbl_MB_NAME" runat="server" Text='<%#Container.DataItem("MB_NAME")%>'></asp:Label>
-                        </div>
-                        <div class="col-xs-6 col-md-6">
-                            <!--通訊地址-->
-                            <asp:Label ID="lbl_MB_CITY" runat="server" Text='<%#Container.DataItem("MB_CITY")%>'></asp:Label>
-                            <asp:Label ID="lbl_MB_VLG" runat="server" Text='<%#Container.DataItem("MB_VLG")%>'></asp:Label>
-                            <asp:Label ID="lbl_MB_ADDR" runat="server" Text='<%#Container.DataItem("MB_ADDR")%>'></asp:Label>
-                        </div>
-                        <div class="col-xs-2 col-md-2">
-                            <!--會員編號-->
-                            <asp:Label ID="lbl_MB_AREA" runat="server" Text='<%#Container.DataItem("MB_AREA")%>'></asp:Label>
-                            -
-                            <asp:Label ID="lbl_MB_MEMSEQ" runat="server" Text='<%#Container.DataItem("MB_MEMSEQ")%>'></asp:Label>
-                        </div>
-                    </div>
-                </ItemTemplate>
-            </asp:Repeater>
+        <div id="dgRpt_Page2" runat="server" visible="false" class="table-responsive">
+            <table class="table">
+                <tbody>
+                    <tr class="warning" >
+                        <td style="font-size:14pt;font-weight:bold">
+                            點選
+                        </td>
+                        <td style="font-size:14pt;font-weight:bold">
+                            法名/姓名
+                        </td>
+                        <td style="font-size:14pt;font-weight:bold">
+                            通訊地址
+                        </td>
+                        <td style="font-size:14pt;font-weight:bold">
+                            會員編號
+                        </td>
+                    </tr>				
+                    <asp:Repeater ID="RP_Page2" runat="server">
+                        <ItemTemplate>
+                            <tr>
+                                <td style="font-size:14pt;">
+                                    <!--點選-->
+                                    <asp:RadioButton ID="rbData" runat="server" onclick="RadioButtonSelect(this);" />
+                                </td>
+                                <td style="font-size:14pt;">
+                                    <!--法名/ 姓名-->
+                                    <asp:Label ID="lbl_MB_NAME" runat="server" Text='<%#Container.DataItem("MB_NAME")%>'></asp:Label>
+                                </td>
+                                <td style="font-size:14pt;">
+                                    <!--通訊地址-->
+                                    <asp:Label ID="lbl_MB_CITY" runat="server" Text='<%#Container.DataItem("MB_CITY")%>'></asp:Label>
+                                    <asp:Label ID="lbl_MB_VLG" runat="server" Text='<%#Container.DataItem("MB_VLG")%>'></asp:Label>
+                                    <asp:Label ID="lbl_MB_ADDR" runat="server" Text='<%#Container.DataItem("MB_ADDR")%>'></asp:Label>
+                                </td>
+                                <td style="font-size:14pt;">
+                                    <!--會員編號-->
+                                    <asp:Label ID="lbl_MB_AREA" runat="server" Text='<%#Container.DataItem("MB_AREA")%>'></asp:Label>
+                                    -
+                                    <asp:Label ID="lbl_MB_MEMSEQ" runat="server" Text='<%#Container.DataItem("MB_MEMSEQ")%>'></asp:Label>
+                                </td>
+                            </tr>
+                        </ItemTemplate>
+                    </asp:Repeater>
+                </tbody>
+            </table>
         </div>
         <div id="tb_Page2_Button" runat="server" class="text-center" visible="false" >
             <asp:Button ID="btn_Confirm" runat="server" Text="確定" CssClass="btn btn-info" />
@@ -657,8 +656,7 @@
 				</div>
 			</div>
 		</div>
-        <!--顯示下方外框線-->
-        <!--#include virtual="~/inc/MBSCTableEnd.inc"-->
+
         <div id="tb_Page3_Button" runat="server" class="text-center" visible="false" >
             <asp:Button ID="btn_Cancel" runat="server" Text="取消報名" CssClass="btn btn-info" Visible="false" />
             &nbsp;&nbsp;&nbsp;
