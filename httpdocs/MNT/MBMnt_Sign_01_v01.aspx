@@ -86,13 +86,18 @@
             /*background-color: #FAEADD;*/
             background: -webkit-linear-gradient(top, rgba(255, 179, 51, 0.37) 0%, rgba(255, 255, 254, 0) 100%);
             background: linear-gradient(to bottom, rgb(249, 186, 128) 0%, rgba(249, 244, 241, 0.87) 100%);
-            /*border-right: 1px solid #c3c3c3;*/
+            border-right: 1px solid #c3c3c3;
             border-bottom: 1px solid #c3c3c3;
         }
 
         .grid-container * {
           box-sizing: border-box;
         }
+
+        /*所有div高度相同*/
+        /*.row{
+            overflow: hidden; 
+        }*/
 
         .row:before,
         .row:after {
@@ -124,7 +129,16 @@
                 border-top: 1px solid #c3c3c3;
                 /*border-left: 1px solid #c3c3c3;*/
                 text-align:left;
+
+                /*所有div高度相同*/
+                /*margin-bottom: -99999px;
+                padding-bottom: 99999px;*/
             }
+
+            /*.form-control
+            {
+                margin-bottom:3px;
+            }*/
         }
 
         /* Small devices (tablets, 768px and up) */
@@ -140,7 +154,16 @@
                 border-top: 1px solid #c3c3c3;
                 /*border-left: 1px solid #c3c3c3;*/
                 text-align:left;
+
+                /*所有div高度相同*/
+                /*margin-bottom: -99999px;
+                padding-bottom: 99999px;*/
             }
+
+            /*.form-control
+            {
+                margin-bottom:5px;
+            }*/
         }
 
         /* Medium devices (desktops, 992px and up) */
@@ -156,7 +179,16 @@
                 border-top: 1px solid #c3c3c3;
                 /*border-left: 1px solid #c3c3c3;*/
                 text-align:left;
+
+                /*所有div高度相同*/
+                /*margin-bottom: -99999px;
+                padding-bottom: 99999px;*/
             }
+
+            /*.form-control
+            {
+                margin-bottom:7px;
+            }*/
         }
 
         /* Large devices (large desktops, 1200px and up) */
@@ -172,7 +204,16 @@
                 border-top: 1px solid #c3c3c3;
                 /*border-left: 1px solid #c3c3c3;*/
                 text-align:left;
+
+                /*所有div高度相同*/
+                /*margin-bottom: -99999px;
+                padding-bottom: 99999px;*/
             }
+
+            /*.form-control
+            {
+                margin-bottom:9px;
+            }*/
         }
     </style>
 </head>
