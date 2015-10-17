@@ -59,7 +59,7 @@
             padding-top: 10px;
             padding-bottom: 10px;
             background-color: #eee;
-            border: 1px solid #ddd;
+            border: 1px solid #c3c3c3;
             background-color: rgba(86,61,124,.15);
             border: 1px solid rgba(86,61,124,.2);
         }*/
@@ -86,8 +86,8 @@
             /*background-color: #FAEADD;*/
             background: -webkit-linear-gradient(top, rgba(255, 179, 51, 0.37) 0%, rgba(255, 255, 254, 0) 100%);
             background: linear-gradient(to bottom, rgb(249, 186, 128) 0%, rgba(249, 244, 241, 0.87) 100%);
-            /*border-right: 1px solid #ddd;*/
-            border-bottom: 1px solid #ddd;
+            /*border-right: 1px solid #c3c3c3;*/
+            border-bottom: 1px solid #c3c3c3;
         }
 
         .grid-container * {
@@ -109,8 +109,8 @@
             padding: 7px;
             /*background: #eee;*/
             background:transparent;
-            border-top: 1px solid #ddd;
-            /*border-left: 1px solid #ddd;*/
+            border-top: 1px solid #c3c3c3;
+            /*border-left: 1px solid #c3c3c3;*/
             text-align:left;
         }
 
@@ -120,9 +120,9 @@
             background: -webkit-linear-gradient(top, rgba(255, 255, 254, 0) 100% ,rgba(255, 179, 51, 0.37) 0%);
             background: linear-gradient(to bottom, rgba(249, 244, 241, 0.87) 100%, rgb(249, 186, 128) 0%);*/
             /*background:rgba(249, 186, 128, 0.5);*/
+            background:transparent;
             font-weight:bold;
             padding: 7px;
-            background:transparent;
         }
 		
         /*body{
@@ -140,8 +140,8 @@
                 padding: 5px;
                 /*background: #eee;*/
                 background:transparent;
-                /*border-top: 1px solid #ddd;
-                border-left: 1px solid #ddd;*/
+                border-top: 1px solid #c3c3c3;
+                /*border-left: 1px solid #c3c3c3;*/
                 text-align:left;
             }
         }
@@ -156,8 +156,8 @@
                 padding: 7px;
                 /*background: #eee;*/
                 background:transparent;
-                /*border-top: 1px solid #ddd;
-                border-left: 1px solid #ddd;*/
+                border-top: 1px solid #c3c3c3;
+                /*border-left: 1px solid #c3c3c3;*/
                 text-align:left;
             }
         }
@@ -172,8 +172,8 @@
                 padding: 9px;
                 /*background: #eee;*/
                 background:transparent;
-                /*border-top: 1px solid #ddd;
-                border-left: 1px solid #ddd;*/
+                border-top: 1px solid #c3c3c3;
+                /*border-left: 1px solid #c3c3c3;*/
                 text-align:left;
             }
         }
@@ -263,41 +263,41 @@
                 <asp:Button ID="btnModify" runat="server" CssClass="btn btn-info" Text="報名" />
             </div>
         </asp:PlaceHolder>
-        <div id="dgRpt_Page2" runat="server" visible="false" class="table-responsive">
+        <div id="dgRpt_Page2" runat="server" visible="false" class="table-responsive grid-container">
             <table class="table">
                 <tbody>
-                    <tr class="warning" >
-                        <td style="font-size:14pt;font-weight:bold">
+                    <tr  >
+                        <td style="font-size:14pt;font-weight:bold;background:transparent">
                             點選
                         </td>
-                        <td style="font-size:14pt;font-weight:bold">
+                        <td style="font-size:14pt;font-weight:bold;background:transparent">
                             法名/姓名
                         </td>
-                        <td style="font-size:14pt;font-weight:bold">
+                        <td style="font-size:14pt;font-weight:bold;background:transparent">
                             通訊地址
                         </td>
-                        <td style="font-size:14pt;font-weight:bold">
+                        <td style="font-size:14pt;font-weight:bold;background:transparent">
                             會員編號
                         </td>
                     </tr>				
                     <asp:Repeater ID="RP_Page2" runat="server">
                         <ItemTemplate>
                             <tr>
-                                <td style="font-size:14pt;">
+                                <td style="font-size:14pt;background:transparent">
                                     <!--點選-->
                                     <asp:RadioButton ID="rbData" runat="server" onclick="RadioButtonSelect(this);" />
                                 </td>
-                                <td style="font-size:14pt;">
+                                <td style="font-size:14pt;background:transparent">
                                     <!--法名/ 姓名-->
                                     <asp:Label ID="lbl_MB_NAME" runat="server" Text='<%#Container.DataItem("MB_NAME")%>'></asp:Label>
                                 </td>
-                                <td style="font-size:14pt;">
+                                <td style="font-size:14pt;background:transparent">
                                     <!--通訊地址-->
                                     <asp:Label ID="lbl_MB_CITY" runat="server" Text='<%#Container.DataItem("MB_CITY")%>'></asp:Label>
                                     <asp:Label ID="lbl_MB_VLG" runat="server" Text='<%#Container.DataItem("MB_VLG")%>'></asp:Label>
                                     <asp:Label ID="lbl_MB_ADDR" runat="server" Text='<%#Container.DataItem("MB_ADDR")%>'></asp:Label>
                                 </td>
-                                <td style="font-size:14pt;">
+                                <td style="font-size:14pt;background:transparent">
                                     <!--會員編號-->
                                     <asp:Label ID="lbl_MB_AREA" runat="server" Text='<%#Container.DataItem("MB_AREA")%>'></asp:Label>
                                     -

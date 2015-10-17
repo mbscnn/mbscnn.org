@@ -12,16 +12,12 @@
 <body topmargin="0">
     <form id="form1" runat="server">
         <!-- #include virtual="~/inc/PageTab.inc" -->
-<table  cellspacing="0" cellpadding="0" style="width:1235px;background:transparent;margin-left: auto; margin-right: auto;" align="center">
-        <tr>
-        <td style="vertical-align:top;padding:0;text-align:left;background:transparent" >
-            <!-- #include virtual="~/inc/Signin.inc" -->
+        <!-- #include virtual="~/inc/Signin.inc" -->
 
-            <!--顯示上方外框線-->
-            <!-- #include virtual="~/inc/MBSCTableStart.inc" -->
-            <!--錯誤訊息區-->
-            <!-- #include virtual="~/inc/MBSCErrorMsg.inc" -->
-            <table class="CRTable_Top" width="100%" cellspacing="0">
+        <!--錯誤訊息區-->
+        <!-- #include virtual="~/inc/MBSCErrorMsg.inc" -->
+        <div class="table-responsive" >
+            <table class="table CRTable_Top" width="100%" cellspacing="0">
                 <tr>
                     <td width="100%" class="mtrSecTitle_b" style="font-family: 標楷體;text-align:center" colspan="2">
                         <asp:Image ID="IMG_SET" runat="server" style="width: 32px; height: 32px;vertical-align:middle" />
@@ -51,88 +47,92 @@
                 </tr>
                 </asp:PlaceHolder>
             </table>
-            <table class="CRTable" width="100%" cellspacing="0">
-                <asp:PlaceHolder ID="PLH_APLY_1_2" runat="server" >
-                <tr>
-                    <td id="TD_1_1" runat="server" width="10%" class="th1c_b">
-                        課程編號
-                    </td>
-                    <td id="TD_1_2" runat="server" width="10%" class="th1c_b">
-                        地點
-                    </td>
-                    <td width="10%" class="th1c_b">
-                        課程起訖日
-                    </td>
-                    <td width="15%" class="th1c_b">
-                        課程名稱
-                    </td>
-                    <td id="TD_1_3" runat="server" width="10%" class="th1c_b">
-                        指導老師
-                    </td>
-                    <td id="TD_1_4" runat="server" width="10%" class="th1c_b">
-                        招收人數
-                    </td>
-                    <td  id="TD_1_5" runat="server" width="15%" class="th1c_b" style="display:none" >
-                        報名起訖日
-                    </td>
-                    <td id="TD_1_6" runat="server" width="10%" class="th1c_b">
-                        報名
-                    </td>
-                    <td id="TD_1_7" runat="server" width="10%" class="th1c_b">
-                        發mail
-                    </td>
-                </tr>
-                </asp:PlaceHolder>
-                <asp:Repeater ID="RP_CLASS_1" runat="server">
-                    <ItemTemplate>
-                        <tr>
-                            <td id="TD_1_1" runat="server" width="10%" class="td2Dc_b">
-                                <!--課程編號-->
-                                <asp:Literal ID="LTL_MB_SEQ" runat="server" Text='<%#Container.DataItem("MB_SEQ")%>' />    
-                                <input type="hidden" id="MB_BATCH" runat="server" value='<%#Container.DataItem("MB_BATCH")%>' />                          
-                            </td>
-                            <td id="TD_1_2" runat="server" width="10%" class="td2Dc_b">
-                                <!--地點-->
-                                <%#Container.DataItem("MB_PLACE")%>
-                            </td>
-                            <td width="10%" class="td2Dc_b">
-                                <!--課程起訖日-->
-                                <asp:Literal ID="LTL_MB_SEDATE" runat="server" />
-                            </td>
-                            <td width="15%" class="td2Dc_b">
-                                <!--課程名稱-->
-                                <asp:LinkButton ID="MB_CLASS_NAME" runat="server" Text='<%#getMB_CLASS_NAME(Container.DataItem("MB_CLASS_NAME"), Container.DataItem("MB_BATCH"))%>' Style="text-decoration:underline" CommandName="CONTENT"  />
-                            </td>
-                            <td id="TD_1_3" runat="server" width="10%" class="td2Dc_b">
-                                <!--指導老師-->
-                                <%#Container.DataItem("MB_TEACHER")%>
-                            </td>
-                            <td id="TD_1_4" runat="server" width="10%" class="td2Dc_b">
-                                <!--招收人數-->
-                                <%#Container.DataItem("MB_FULL")%>
-                            </td>
-                            <td id="TD_1_5" runat="server" width="15%" class="td2Dc_b" style="display:none" >
-                                <!--報名起訖日-->
-                                <asp:Literal ID="LTL_MB_SEAPLY" runat="server" />
-                            </td>
-                            <td id="TD_1_6" runat="server" width="10%" class="td2Dc_b">
-                                <!--報名-->
-                                <asp:Button ID="btnSIGNUP" runat="server" CssClass="bt" Text="我要報名" CommandName="SIGNUP" />
-                                <asp:Button ID="btnCANCEL" runat="server" CssClass="bt" Text="取消報名" CommandName="CANCEL" />
-                                <asp:Label ID="LTL_APLY" runat="server" Style="font-size:14pt;font-weight:bold" Visible="false" Text="已截止報名" />
-                            </td>
-                            <td id="TD_1_7" runat="server" width="10%" class="td2Dc_b">
-                                <!--發mail-->
-                                <asp:Button ID="btnMB_ALERT1" runat="server" CssClass="bt" Text="提醒信一" CommandName="MB_ALERT1" Visible="false" />
-                                <asp:Button ID="btnMB_ALERT2" runat="server" CssClass="bt" Text="提醒信二" CommandName="MB_ALERT2" Visible="false" />
-                                <asp:Label ID="LTL_MB_ALERT2" runat="server" style="color:red;font-weight:bold" />
-                            </td>
-                        </tr>
-                    </ItemTemplate>
-                </asp:Repeater>
-            </table>
-            <BR/>
-            <table class="CRTable_Top" width="100%" cellspacing="0">
+        </div>
+        <div class="table-responsive" >
+        <table class="table CRTable" width="100%" cellspacing="0">
+            <asp:PlaceHolder ID="PLH_APLY_1_2" runat="server" >
+            <tr>
+                <td id="TD_1_1" runat="server" width="10%" class="th1c_b">
+                    課程編號
+                </td>
+                <td id="TD_1_2" runat="server" width="10%" class="th1c_b">
+                    地點
+                </td>
+                <td width="10%" class="th1c_b">
+                    課程起訖日
+                </td>
+                <td width="15%" class="th1c_b">
+                    課程名稱
+                </td>
+                <td id="TD_1_3" runat="server" width="10%" class="th1c_b">
+                    指導老師
+                </td>
+                <td id="TD_1_4" runat="server" width="10%" class="th1c_b">
+                    招收人數
+                </td>
+                <td  id="TD_1_5" runat="server" width="15%" class="th1c_b" style="display:none" >
+                    報名起訖日
+                </td>
+                <td id="TD_1_6" runat="server" width="10%" class="th1c_b">
+                    報名
+                </td>
+                <td id="TD_1_7" runat="server" width="10%" class="th1c_b">
+                    發mail
+                </td>
+            </tr>
+            </asp:PlaceHolder>
+            <asp:Repeater ID="RP_CLASS_1" runat="server">
+                <ItemTemplate>
+                    <tr>
+                        <td id="TD_1_1" runat="server" width="10%" class="td2Dc_b">
+                            <!--課程編號-->
+                            <asp:Literal ID="LTL_MB_SEQ" runat="server" Text='<%#Container.DataItem("MB_SEQ")%>' />    
+                            <input type="hidden" id="MB_BATCH" runat="server" value='<%#Container.DataItem("MB_BATCH")%>' />                          
+                        </td>
+                        <td id="TD_1_2" runat="server" width="10%" class="td2Dc_b">
+                            <!--地點-->
+                            <%#Container.DataItem("MB_PLACE")%>
+                        </td>
+                        <td width="10%" class="td2Dc_b">
+                            <!--課程起訖日-->
+                            <asp:Literal ID="LTL_MB_SEDATE" runat="server" />
+                        </td>
+                        <td width="15%" class="td2Dc_b">
+                            <!--課程名稱-->
+                            <asp:LinkButton ID="MB_CLASS_NAME" runat="server" Text='<%#getMB_CLASS_NAME(Container.DataItem("MB_CLASS_NAME"), Container.DataItem("MB_BATCH"))%>' Style="text-decoration:underline" CommandName="CONTENT"  />
+                        </td>
+                        <td id="TD_1_3" runat="server" width="10%" class="td2Dc_b">
+                            <!--指導老師-->
+                            <%#Container.DataItem("MB_TEACHER")%>
+                        </td>
+                        <td id="TD_1_4" runat="server" width="10%" class="td2Dc_b">
+                            <!--招收人數-->
+                            <%#Container.DataItem("MB_FULL")%>
+                        </td>
+                        <td id="TD_1_5" runat="server" width="15%" class="td2Dc_b" style="display:none" >
+                            <!--報名起訖日-->
+                            <asp:Literal ID="LTL_MB_SEAPLY" runat="server" />
+                        </td>
+                        <td id="TD_1_6" runat="server" width="10%" class="td2Dc_b">
+                            <!--報名-->
+                            <asp:Button ID="btnSIGNUP" runat="server" CssClass="bt" Text="我要報名" CommandName="SIGNUP" />
+                            <asp:Button ID="btnCANCEL" runat="server" CssClass="bt" Text="取消報名" CommandName="CANCEL" />
+                            <asp:Label ID="LTL_APLY" runat="server" Style="font-size:14pt;font-weight:bold" Visible="false" Text="已截止報名" />
+                        </td>
+                        <td id="TD_1_7" runat="server" width="10%" class="td2Dc_b">
+                            <!--發mail-->
+                            <asp:Button ID="btnMB_ALERT1" runat="server" CssClass="bt" Text="提醒信一" CommandName="MB_ALERT1" Visible="false" />
+                            <asp:Button ID="btnMB_ALERT2" runat="server" CssClass="bt" Text="提醒信二" CommandName="MB_ALERT2" Visible="false" />
+                            <asp:Label ID="LTL_MB_ALERT2" runat="server" style="color:red;font-weight:bold" />
+                        </td>
+                    </tr>
+                </ItemTemplate>
+            </asp:Repeater>
+        </table>
+        </div>
+        <BR/>
+        <div class="table-responsive" >
+            <table class="table CRTable_Top" width="100%" cellspacing="0">
                 <tr>
                     <td width="100%" class="mtrSecTitle_b" style="font-family: 標楷體;text-align:center" colspan="2">
                         <asp:Image ID="IMG_PRE" runat="server" style="width: 32px; height: 32px;vertical-align:middle" />
@@ -162,7 +162,9 @@
                     </tr>
                 </asp:PlaceHolder>
             </table>
-            <table class="CRTable" width="100%" cellspacing="0">
+        </div>
+        <div class="table-responsive" >
+            <table class="table CRTable" width="100%" cellspacing="0">
                 <asp:PlaceHolder ID="PLH_APLY_2_2" runat="server" >
                 <tr>
                     <td id="TD_2_1" runat="server" width="10%" class="th1c_b">
@@ -223,8 +225,10 @@
                     </ItemTemplate>
                 </asp:Repeater>
             </table>
-            <BR/>
-            <table class="CRTable_Top" width="100%" cellspacing="0">
+        </div>
+        <BR/>
+        <div class="table-responsive" >
+            <table class="table CRTable_Top" width="100%" cellspacing="0">
                 <tr>
                     <td width="100%" class="mtrSecTitle_b" style="font-family: 標楷體;text-align:center" colspan="2">
                         <asp:Image ID="IMG_RUN" runat="server" style="width: 32px; height: 32px;vertical-align:middle" />
@@ -254,7 +258,9 @@
                 </tr>
                 </asp:PlaceHolder>
             </table>
-            <table class="CRTable" width="100%" cellspacing="0">
+        </div>
+        <div class="table-responsive" >
+            <table class="table CRTable" width="100%" cellspacing="0">
                 <asp:PlaceHolder ID="PLH_APLY_3_2" runat="server" >
                 <tr>
                     <td id="TD_3_1" runat="server" width="10%" class="th1c_b">
@@ -315,9 +321,10 @@
                     </ItemTemplate>
                 </asp:Repeater>
             </table>
-            <BR />
-
-            <table class="CRTable_Top" width="100%" cellspacing="0">
+        </div>
+        <BR />
+        <div class="table-responsive" >
+            <table class="table CRTable_Top" width="100%" cellspacing="0">
                 <tr>
                     <td width="100%" class="mtrSecTitle_b" style="font-family: 標楷體;text-align:center" colspan="2">
                         <asp:Image ID="IMG_NOSIGN" runat="server" style="width: 32px; height: 32px;vertical-align:middle" />
@@ -347,7 +354,9 @@
                 </tr>
                 </asp:PlaceHolder>
             </table>
-            <table class="CRTable" width="100%" cellspacing="0">
+        </div>
+        <div class="table-responsive" >
+            <table class="table CRTable" width="100%" cellspacing="0">
                 <asp:PlaceHolder ID="PLH_APLY_5_2" runat="server" >
                 <tr>
                     <td id="TD_5_1" runat="server" width="10%" class="th1c_b">
@@ -417,10 +426,12 @@
                     </ItemTemplate>
                 </asp:Repeater>
             </table>
+        </div>
 
-            <asp:PlaceHolder ID="PLH_4" runat="server">
-            <BR />
-            <table class="CRTable_Top" width="100%" cellspacing="0">
+        <asp:PlaceHolder ID="PLH_4" runat="server">
+        <BR />
+        <div class="table-responsive" >
+            <table class="table CRTable_Top" width="100%" cellspacing="0">
                 <tr>
                     <td width="100%" class="mtrSecTitle_b" style="font-family: 標楷體;text-align:center" colspan="2">
                         <asp:Image ID="IMG_HIS" runat="server" style="width: 32px; height: 32px;vertical-align:middle" />
@@ -448,7 +459,9 @@
                     </td>
                 </tr>
             </table>
-            <table class="CRTable" width="100%" cellspacing="0">
+        </div>
+        <div class="table-responsive" >
+            <table class="table CRTable" width="100%" cellspacing="0">
                 <tr>
                     <td width="10%" class="th1c_b">
                         課程編號
@@ -477,7 +490,7 @@
                         <tr>
                             <td width="10%" class="td2Dc_b">
                                 <!--課程編號-->
-                               <asp:Literal ID="LTL_MB_SEQ" runat="server" Text='<%#Container.DataItem("MB_SEQ")%>' />       
+                                <asp:Literal ID="LTL_MB_SEQ" runat="server" Text='<%#Container.DataItem("MB_SEQ")%>' />       
                             </td>
                             <td width="10%" class="td2Dc_b">
                                 <!--地點-->
@@ -507,12 +520,8 @@
                     </ItemTemplate>
                 </asp:Repeater>
             </table>
-            </asp:PlaceHolder>
-            <!--顯示下方外框線-->
-            <!--#include virtual="~/inc/MBSCTableEnd.inc"--> 
-        </td>
-    </tr>
-</table>
+        </div>
+        </asp:PlaceHolder>
     </form>
 </body>
 </html>
