@@ -462,14 +462,14 @@
 			<div class="row" >
 				<div class="col-md-2 thm">
 					<span style="color:Red">*</span>
-					手機
+					手機<span style="color:Red"><BR/>請勿輸入非數字</span>
 				</div>
 				<div class="col-md-4">
 					<asp:TextBox ID="txt_MB_MOBIL" runat="server" class="form-control" />
 				</div>
 				<div class="col-md-2 thm">
 					<span style="color:Red">*</span>
-					電話
+					電話<span style="color:Red"><BR/>請勿輸入非數字</span>
 				</div>
 				<div class="col-md-4">
 					<asp:TextBox ID="txt_MB_TEL_ZIP" runat="server" Columns="2"  MaxLength="2" />

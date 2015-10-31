@@ -1012,7 +1012,6 @@ Public NotInheritable Class UIUtility
         End If
         Return sbJS.ToString
     End Function
-
 #End Region
 
 #Region "是否為頁簽PostBack"

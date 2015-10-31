@@ -226,14 +226,21 @@ Public Class NewsList
                 End If
 
                 Dim LTL_CNTHTML As Literal = e.Item.FindControl("LTL_CNTHTML")
+                Dim LTL_CNTHTML_MORE As Literal = e.Item.FindControl("LTL_CNTHTML_MORE")
+                Dim DIV_MORE As HtmlGenericControl = e.Item.FindControl("DIV_MORE")
                 If Utility.isValidateData(DRV("DESCHTML")) Then
                     LTL_CNTHTML.Text = DRV("DESCHTML").ToString
 
-                    Dim DIV_MORE As HtmlGenericControl = e.Item.FindControl("DIV_MORE")
                     DIV_MORE.Visible = True
                 Else
                     LTL_CNTHTML.Text = DRV("CNTHTML").ToString
                 End If
+                LTL_CNTHTML_MORE.Text = DRV("CNTHTML").ToString
+
+                Dim DIV_LTL_CNTHTML As HtmlGenericControl = e.Item.FindControl("DIV_LTL_CNTHTML")
+                Dim DIV_LTL_CNTHTML_MORE As HtmlGenericControl = e.Item.FindControl("DIV_LTL_CNTHTML_MORE")
+                Dim btnReadMore As HtmlInputButton = e.Item.FindControl("btnReadMore")
+                btnReadMore.Attributes("onclick") = "$('#" & DIV_LTL_CNTHTML.ClientID & "').hide();$('#" & DIV_LTL_CNTHTML_MORE.ClientID & "').show();$('#" & DIV_MORE.ClientID & "').hide();"
 
                 Dim HID_MB_SEQ As HtmlInputHidden = e.Item.FindControl("HID_MB_SEQ")
                 Dim sMB_PLACE_VALUE As String = String.Empty
@@ -435,6 +442,9 @@ Public Class NewsList
                     Dim PNL_CLASS As Panel = e.Item.FindControl("PNL_CLASS")
                     PNL_CLASS.Visible = True
                 End If
+
+                'Dim DIV_TITLE As HtmlGenericControl = e.Item.FindControl("DIV_TITLE")
+                'com.Azion.EloanUtility.UIUtility.setObjFocus(Me, DIV_TITLE.ClientID)
             ElseIf UCase(e.CommandName) = "CLASS" Then
                 '我要報名
                 'If Not com.Azion.EloanUtility.ValidateUtility.isValidateData(Session("USERID")) Then

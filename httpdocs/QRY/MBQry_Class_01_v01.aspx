@@ -390,7 +390,8 @@
                         <tr>
                             <td id="TD_5_1" runat="server" width="10%" class="td2Dc_b">
                                 <!--課程編號-->
-                                <asp:Literal ID="LTL_MB_SEQ" runat="server" Text='<%#Container.DataItem("MB_SEQ")%>' />       
+                                <asp:Literal ID="LTL_MB_SEQ" runat="server" Text='<%#Container.DataItem("MB_SEQ")%>' />
+                                <input type="hidden" id="MB_BATCH" runat="server" value='<%#Container.DataItem("MB_BATCH")%>' />        
                             </td>
                             <td id="TD_5_2" runat="server" width="10%" class="td2Dc_b">
                                 <!--地點-->

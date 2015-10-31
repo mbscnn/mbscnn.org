@@ -988,10 +988,33 @@ Public Class MBMnt_Sign_01_v01
                 End If
             End If
             '手機
-            If Not IsNumeric(txt_MB_MOBIL.Text) Or Not txt_MB_MOBIL.Text.Trim.Length = 10 Then
-                UIUtility.alert("請輸入:手機或電話")
+            If Utility.isValidateData(txt_MB_MOBIL.Text) Then
+                If Not IsNumeric(txt_MB_MOBIL.Text) Then
+                    com.Azion.EloanUtility.UIUtility.alert("手機號碼應為10個數字，請檢查")
+                    com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "手機號碼應為10個數字，請檢查")
+                    Exit Sub
+                ElseIf IsNumeric(txt_MB_MOBIL.Text) AndAlso txt_MB_MOBIL.Text.Trim.Length <> 10 Then
+                    com.Azion.EloanUtility.UIUtility.alert("手機號碼應為10個數字，請檢查")
+                    com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "手機號碼應為10個數字，請檢查")
+                    Exit Sub
+                End If
+            ElseIf Not Utility.isValidateData(Me.txt_MB_MOBIL.Text) AndAlso Not Utility.isValidateData(Me.txt_MB_TEL.Text) Then
+                com.Azion.EloanUtility.UIUtility.alert("請輸入:手機或電話")
+                com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "請輸入:手機或電話")
                 Exit Sub
             End If
+            '電話
+            If Utility.isValidateData(Me.txt_MB_TEL.Text) Then
+                If Not IsNumeric(txt_MB_TEL.Text) Then
+                    com.Azion.EloanUtility.UIUtility.alert("電話號碼應為數字，請檢查")
+                    com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "電話號碼應為數字，請檢查")
+                    Exit Sub
+                End If
+            End If
+            'If Not IsNumeric(txt_MB_MOBIL.Text) Or Not txt_MB_MOBIL.Text.Trim.Length = 10 Then
+            '    UIUtility.alert("請輸入:手機或電話")
+            '    Exit Sub
+            'End If
             'e-mail
             If Not com.Azion.EloanUtility.ValidateUtility.isValidateData(txt_MB_EMAIL.Text.Trim) Then
                 UIUtility.alert("請輸入:e-mail")

@@ -252,12 +252,16 @@
                                     </asp:PlaceHolder>
                                 </div>
                                
-                            <div style="text-align:left">
+                            <div id="DIV_LTL_CNTHTML" runat="server" style="text-align:left">
                                 <asp:Literal ID="LTL_CNTHTML" runat="server" />
                             </div>
+                            <div id="DIV_LTL_CNTHTML_MORE" runat="server" style="text-align:left;display:none">
+                                <asp:Literal ID="LTL_CNTHTML_MORE" runat="server" />
+                            </div>
+
                                 <div>
                                     <div id="DIV_MORE" runat="server" visible="false" style="text-align:right" >
-                                        <asp:Button ID="btnReadMore" runat="server" Text="READ MORE »" class="btn btn-primary btn-readmore" Font-Bold="true" CommandName="MORE" />
+                                        <input type="button" ID="btnReadMore" runat="server" value="READ MORE »" class="btn btn-primary btn-readmore" Font-Bold="true" />
                                     </div>
                             </div>
                             
