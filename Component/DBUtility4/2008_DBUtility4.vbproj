@@ -137,6 +137,7 @@
     <Compile Include="com\ebutil\db\BosAttribute.vb" />
     <Compile Include="com\ebutil\db\BosAttributeList.vb" />
     <Compile Include="com\ebutil\db\BosAttrMeta.vb" />
+    <Compile Include="com\ebutil\db\BosBase.ex.vb" />
     <Compile Include="com\ebutil\db\BosBase.vb" />
     <Compile Include="com\ebutil\db\BosList.vb" />
     <Compile Include="com\ebutil\db\DatabaseManager.vb" />

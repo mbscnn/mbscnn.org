@@ -130,7 +130,7 @@
 					                <span></span>
 					                <br />
 					                <br />
-					                <asp:Button ID="btSign" runat="server" Text="成為會員" CssClass="mbscbt" Style="height:30px;width:200px;font-size:12pt" />
+					                <asp:Button ID="btSign" runat="server" Text="成為新會員" CssClass="mbscbt" Style="height:30px;width:200px;font-size:12pt" />
 					                <span></span>
 					                <br />
 					                <br />

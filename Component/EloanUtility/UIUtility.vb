@@ -812,7 +812,28 @@ Public NotInheritable Class UIUtility
         js += "</" & "script>" & vbCrLf
         page.Response.Write(js)
         'page.RegisterStartupScript()
-         
+
+        'com.Azion.EloanUtility.UIUtility.Redirect(UIUtility.getRootPath() & "/ss_mainpage.aspx?ftype=1")
+    End Sub
+
+    Shared Sub goMainPage(ByVal sMsg As String)
+        Dim js As String
+        js = "<script Language='JAVAScript'>" & vbCrLf
+        If com.Azion.EloanUtility.ValidateUtility.isValidateData(sMsg) Then
+            js += "alert('" & sMsg & "');"
+        End If
+
+        'If Not com.Azion.EloanUtility.UIUtility.isNewAuthorize() Then
+        '    js += "window.location.replace('" & UIUtility.getRootPath() & "/ss_mainpage.aspx?ftype=1')"
+        'Else
+        '    js += "window.location.replace('" & UIUtility.getSYPath() & "SY_CASELIST.aspx?ftype=1')"
+        'End If
+        js += "window.location.replace('" & UIUtility.getSYPath() & "SY_CASELIST.aspx?ftype=1')"
+
+        js += "</" & "script>" & vbCrLf
+        HttpContext.Current.Response.Write(js)
+        'page.RegisterStartupScript()
+
         'com.Azion.EloanUtility.UIUtility.Redirect(UIUtility.getRootPath() & "/ss_mainpage.aspx?ftype=1")
     End Sub
 
@@ -864,11 +885,12 @@ Public NotInheritable Class UIUtility
 #End Region
 
 #Region "開關視窗"
-
-    Public Shared Sub closeWindow(ByVal sMsg As String)
+    Public Shared Sub closeWindow(Optional ByVal sMsg As String = "")
         Dim sJscript As String
         sJscript = "<Script Language='JAVAScript'>" & vbCrLf
-        sJscript &= "alert('" & sMsg & "');"
+        If sMsg <> "" Then
+            sJscript &= "alert('" & sMsg & "');"
+        End If
         sJscript &= "window.self.close();" & vbCrLf
         sJscript &= "</Script>" & vbCrLf
         HttpContext.Current.Response.Write(sJscript)
@@ -1037,6 +1059,204 @@ Public NotInheritable Class UIUtility
             Return False
         End If
     End Function
+#End Region
+
+#End Region
+
+#Region "SY"
+    ''' <summary>
+    ''' 從左側進入時取得FuncCode
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Shared Function getFuncCode() As String
+        Dim currContext As System.Web.HttpContext = System.Web.HttpContext.Current
+        Dim sFuncCode As String = String.Empty
+
+        If IsNothing(currContext) OrElse IsNothing(currContext.Session) Then Return sFuncCode
+
+        If ValidateUtility.isValidateData(currContext.Request("FuncCode")) Then
+            sFuncCode = currContext.Request("FuncCode")
+        End If
+
+        Return UIUtility.getReqString(sFuncCode)
+    End Function
+
+    Public Shared Function getReqString(ByVal sReq As String) As String
+        Return HttpUtility.UrlDecode(sReq)
+    End Function
+
+    ''' <summary>
+    ''' 從左側進入時取得HoFlag總管理處(1) 區域中心(2) 單位(3) 外部單位(4) 海外單位(5) 系統功能(0)
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Shared Function getHoFlag() As String
+        Dim currContext As System.Web.HttpContext = System.Web.HttpContext.Current
+        Dim sHoFlag As String = String.Empty
+
+        If IsNothing(currContext) OrElse IsNothing(currContext.Session) Then Return sHoFlag
+
+        If ValidateUtility.isValidateData(currContext.Session("HOFLAG")) Then
+            sHoFlag = CStr(currContext.Session("HOFLAG"))
+        ElseIf ValidateUtility.isValidateData(currContext.Request("HOFLAG")) Then
+            sHoFlag = currContext.Request("HOFLAG")
+        End If
+
+        Return UIUtility.getReqString(sHoFlag)
+    End Function
+
+    Public Shared Function getSubFlowSeq() As String
+        Dim currContext As System.Web.HttpContext = System.Web.HttpContext.Current
+        Dim sSubFlowSeq As String = ""
+
+        If IsNothing(currContext) OrElse IsNothing(currContext.Session) Then Return sSubFlowSeq
+
+        If ValidateUtility.isValidateData(currContext.Request("subflowseq")) Then
+            sSubFlowSeq = currContext.Request("subflowseq")
+        ElseIf ValidateUtility.isValidateData(currContext.Request("subflowseq")) Then
+            sSubFlowSeq = CStr(currContext.Request("subflowseq"))
+        End If
+
+        Return UIUtility.getReqString(sSubFlowSeq)
+    End Function
+
+    ''' <summary>
+    ''' 從左側進入時取得系統別D(法金),F(消金),Z(系統管理),X(共同),..
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks>
+    ''' 當按下TOOLBAR時,SESSION["SYSID"]會變更為已被點選的SYSID
+    ''' [Tim] 	2011/03/07	Created
+    ''' </remarks>
+    Public Shared Function getSysId() As String
+        Dim currContext As System.Web.HttpContext = System.Web.HttpContext.Current
+        Dim sSysId As String = String.Empty
+
+        If IsNothing(currContext) OrElse IsNothing(currContext.Session) Then Return sSysId
+
+        If ValidateUtility.isValidateData(currContext.Session("SYSID")) Then
+            sSysId = CStr(currContext.Session("SYSID"))
+        ElseIf ValidateUtility.isValidateData(currContext.Request("SYSID")) Then
+            sSysId = currContext.Request("SYSID")
+        End If
+
+        Return UIUtility.getReqString(sSysId)
+    End Function
+
+    ''' <summary>
+    ''' 從左側進入時取得子系統別04(法金授信),05(消金授信),06(擔保品),00(共同),SY(系統管理)...
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Shared Function getSubSysId() As String
+        Dim currContext As System.Web.HttpContext = System.Web.HttpContext.Current
+        Dim sSubSysId As String = String.Empty
+
+        If IsNothing(currContext) OrElse IsNothing(currContext.Session) Then Return sSubSysId
+
+        If ValidateUtility.isValidateData(currContext.Session("SUBSYSID")) Then
+            sSubSysId = CStr(currContext.Session("SUBSYSID"))
+        ElseIf ValidateUtility.isValidateData(currContext.Request("SUBSYSID")) Then
+            sSubSysId = currContext.Request("SUBSYSID")
+        End If
+
+        Return UIUtility.getReqString(sSubSysId)
+    End Function
+
+    ''' <summary>
+    ''' 取得權限目錄
+    ''' </summary>
+    ''' <returns>String</returns>
+    ''' <remarks>
+    ''' [Titan] 	2012/07/04	Created
+    ''' </remarks>
+    Public Shared Function getSYPath() As String
+        Return getRootPath() & "/SY/"
+    End Function
+
+    ''' <summary>
+    ''' 由 session or Request 取得WorkingUserId
+    ''' 被代理人Client
+    ''' </summary>
+    ''' <returns>String</returns>
+    ''' <remarks>
+    ''' [Tim] 	2012/03/10	Created
+    ''' </remarks>
+    Public Shared Function getWorkingUserId() As String
+        Dim currContext As System.Web.HttpContext = System.Web.HttpContext.Current
+        Dim sWorkingUserId As String = String.Empty
+        Dim g_oUserInfo As StaffInfo = Nothing    '取得登入者信息
+
+        If IsNothing(currContext) OrElse IsNothing(currContext.Session) Then Return sWorkingUserId
+
+        If Not getStaffInfo() Is Nothing Then
+            g_oUserInfo = getStaffInfo()
+            sWorkingUserId = g_oUserInfo.WorkingStaffid
+        ElseIf ValidateUtility.isValidateData(currContext.Session("WorkingUserId")) Then
+            sWorkingUserId = CStr(currContext.Session("WorkingUserId"))
+        ElseIf ValidateUtility.isValidateData(currContext.Request("WorkingUserId")) Then
+            sWorkingUserId = currContext.Request("WorkingUserId")
+        End If
+
+        Return UIUtility.getReqString(sWorkingUserId)
+    End Function
+
+    ''' <summary>
+    ''' 取得登入者所有的資訊，包含角色、代理人、Functionlist(交易)、系統編號、
+    ''' 登入者對應所有單位、登入者對應所有部門...等等登入者相關資訊 
+    ''' </summary>
+    ''' <returns></returns>
+    ''' <remarks>
+    ''' [Titan] 	2012/05/28	Created
+    ''' </remarks>
+    Public Shared Function getStaffInfo() As StaffInfo
+        Dim g_oUserInfo As StaffInfo = Nothing    '取得登入者信息
+        Dim currContext As System.Web.HttpContext = System.Web.HttpContext.Current
+        If IsNothing(currContext) OrElse IsNothing(currContext.Session) Then Return Nothing
+        If Not currContext.Session("StaffInfo") Is Nothing AndAlso currContext.Session("StaffInfo").ToString() <> "" Then
+            g_oUserInfo = CType(currContext.Session("StaffInfo"), StaffInfo)
+        End If
+        Return g_oUserInfo
+    End Function
+
+    ''' <summary>
+    ''' 是否為Check模式
+    ''' </summary>
+    ''' <returns>Boolean</returns>
+    ''' <remarks>
+    ''' [Avril] 	2012/06/19	Created
+    ''' </remarks>
+    Public Shared Function isCheck() As Boolean
+        Dim sConfig As String = String.Empty
+        Dim currContext As System.Web.HttpContext = System.Web.HttpContext.Current
+        If Not IsNothing(currContext) Then
+            sConfig = CStr(System.Web.HttpContext.Current.Application("EloanConf"))
+            Return CBool(FileUtility.getAppSettings("Check", sConfig, "FALSE"))
+        End If
+
+        Return CBool(FileUtility.getAppSettings("Check", , "FALSE"))
+    End Function
+
+#Region ""
+    ''' <summary>
+    ''' 轉換5碼安泰員編為7碼系統員編
+    ''' </summary>
+    ''' <param name="sRMCD">安泰員編</param>
+    ''' <returns>7碼系統員編Sxxxxxx</returns>
+    ''' <remarks>
+    '''  [Titan] 2012/01/10	Created
+    ''' </remarks>
+    Public Shared Function convRMCD(ByVal sRMCD As String) As String
+        Try
+            If sRMCD <> Nothing Then
+                Return "S" & sRMCD.Trim.PadLeft(6, CType("0", Char))
+            End If
+        Catch ex As Exception
+        End Try
+        Return sRMCD
+    End Function
+
 #End Region
 
 #End Region

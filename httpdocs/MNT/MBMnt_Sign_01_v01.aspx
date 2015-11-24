@@ -374,6 +374,7 @@
 				</div>
 				<div class="col-md-4">
 					<asp:TextBox ID="txt_MB_NAME" runat="server" class="form-control"  />
+                    <span style="color:Red;font-weight:bold">請填入您個人的姓名</span>
 				</div>
 				<div class="col-md-2 thm">
 					<span style="color:Red">*</span>
@@ -692,6 +693,25 @@
 					<asp:TextBox ID="MB_AMTMEMO" runat="server" class="form-control" />
 				</div>
 			</div>
+            <div id="TR_G_16_T" runat="server" class="row">
+				<div class="col-md-2 thm">
+                    <span style="color:Red">*</span>
+					是否初學者
+				</div>
+                <div class="col-md-4">
+                    <asp:RadioButtonList ID="MB_BEGIN" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" >
+                        <asp:ListItem Text="是" Value="Y" class="radio-inline"  />
+                        <asp:ListItem Text="否" Value="N" class="radio-inline"  />
+                    </asp:RadioButtonList>
+                </div>
+				<div class="col-md-2 thm">
+					每次禪坐時間
+				</div>
+                <div class="col-md-4">
+                    <asp:TextBox ID="MB_SITIME" runat="server" Columns="3"  />
+                    分鐘
+                </div>
+            </div>
 		</div>
 
         <div id="tb_Page3_Button" runat="server" class="text-center" visible="false" >

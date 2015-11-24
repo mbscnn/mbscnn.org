@@ -355,7 +355,7 @@
                 filebrowserWindowWidth: '800',  //“瀏覽服務器”彈出框的size設置
                 filebrowserWindowHeight: '800',
                 htmlEncodeOutput: true,
-                height: '150px',
+                height: '450px',
                 skin: 'moono-dark',
                 toolbarGroups: [
 		                        { name: 'clipboard', groups: ['clipboard', 'undo'] },

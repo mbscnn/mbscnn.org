@@ -112,7 +112,7 @@
         <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
       </Borders>
       <Font ss:FontName="新細明體" x:CharSet="136" x:Family="Roman" ss:Color="#000000"/>
-    </Style>
+    </Style>  
     <Style ss:ID="m43607216">
       <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
       <Borders>
@@ -228,6 +228,16 @@
       </Borders>
       <Font ss:FontName="新細明體" x:CharSet="136" x:Family="Roman" ss:Color="#000000"/>
     </Style>
+    <Style ss:ID="s65">
+      <Alignment ss:Horizontal="Left" ss:Vertical="Center" ss:WrapText="1"/>
+      <Borders>
+        <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+        <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+      </Borders>
+      <Font ss:FontName="新細明體" x:CharSet="136" x:Family="Roman" ss:Color="#000000"/>
+    </Style>
     <Style ss:ID="s71">
       <Alignment ss:Horizontal="Center" ss:Vertical="Center" ss:WrapText="1"/>
       <Borders/>
@@ -235,53 +245,61 @@
     </Style>
   </Styles>
   <Worksheet ss:Name="Sheet1">
-    <Table ss:ExpandedColumnCount="10" ss:ExpandedRowCount="10000" x:FullColumns="1"
+    <Table ss:ExpandedColumnCount="12" ss:ExpandedRowCount="10000" x:FullColumns="1"
      x:FullRows="1" ss:StyleID="s62" ss:DefaultColumnWidth="54" ss:DefaultRowHeight="30">
       <Column ss:StyleID="s63" ss:Width="100" />
       <Column ss:StyleID="s63" ss:Width="100" />
+      <Column ss:StyleID="s63" ss:Width="100" />
+      <Column ss:StyleID="s63" ss:Width="100" />
+      <Column ss:StyleID="s63" ss:Width="100" />
+      <Column ss:StyleID="s63" ss:Width="100" />
+      <Column ss:StyleID="s63" ss:Width="150" />
       <Column ss:StyleID="s63" ss:Width="200" />
-      <Column ss:StyleID="s63" ss:Width="100" />
-      <Column ss:StyleID="s63" ss:Width="100" />
-      <Column ss:StyleID="s63" ss:Width="50" />
       <Column ss:StyleID="s63" ss:Width="200" />
       <Column ss:StyleID="s63" ss:Width="100" />
       <Column ss:StyleID="s63" ss:Width="100" />
       <Column ss:StyleID="s63" ss:Width="100" />
       <Row ss:AutoFitHeight="0">
-        <Cell ss:MergeAcross="9" ss:StyleID="m43607136">
+        <Cell ss:MergeAcross="11" ss:StyleID="m43607136">
           <Data ss:Type="String">課程報名查詢</Data>
         </Cell>
       </Row>
       <Row ss:AutoFitHeight="1" ss:Height="40" ss:StyleID="s71">
         <Cell ss:StyleID="m43607156">
-          <Data ss:Type="String">報課會員</Data>
+          <Data ss:Type="String">姓名</Data>
+        </Cell>
+        <Cell ss:StyleID="m43607156">
+          <Data ss:Type="String">法名</Data>
         </Cell>
         <Cell ss:StyleID="m43607156">
           <Data ss:Type="String">性別</Data>
         </Cell>
         <Cell ss:StyleID="m43607156">
-          <Data ss:Type="String">會員信箱</Data>
-        </Cell>
-        <Cell ss:StyleID="m43607156">
-          <Data ss:Type="String">會員電話</Data>
+          <Data ss:Type="String">出生年月日</Data>
         </Cell>
         <Cell ss:StyleID="m43607176">
-          <Data ss:Type="String">會員手機</Data>
+          <Data ss:Type="String">手機</Data>
         </Cell>
         <Cell ss:StyleID="m43607176">
-          <Data ss:Type="String">課程編號</Data>
+          <Data ss:Type="String">電話</Data>
         </Cell>
         <Cell ss:StyleID="m43607176">
-          <Data ss:Type="String">課程名稱</Data>
+          <Data ss:Type="String">電子郵件</Data>
         </Cell>
         <Cell ss:StyleID="m43607196">
-          <Data ss:Type="String">錄取</Data>
+          <Data ss:Type="String">通訊住址</Data>
         </Cell>
         <Cell ss:StyleID="m43607196">
-          <Data ss:Type="String">回信出席</Data>
+          <Data ss:Type="String">身心狀況</Data>
         </Cell>
         <Cell ss:StyleID="m43607196">
-          <Data ss:Type="String">未出席</Data>
+          <Data ss:Type="String">我是初學者</Data>
+        </Cell>
+        <Cell ss:StyleID="m43607196">
+          <Data ss:Type="String">每次禪坐時間</Data>
+        </Cell>
+        <Cell ss:StyleID="m43607196">
+          <Data ss:Type="String">参加梯次</Data>
         </Cell>
       </Row>
       {{DATAROW}}

@@ -205,6 +205,8 @@ Public Class MBMnt_Class_01_v01
             Me.CLASS_PLACE.Text = String.Empty
             '交通資訊說明
             Me.TRAFFIC_DESC.Text = String.Empty
+            '是否需填初學者
+            Me.MB_BEGIN.SelectedIndex = -1
         Catch ex As Exception
             UIShareFun.showErrMsg(Me, ex)
         End Try
@@ -470,6 +472,11 @@ Public Class MBMnt_Class_01_v01
                 Me.CLASS_PLACE.Text = MB_CLASS.getString("CLASS_PLACE")
                 '交通資訊說明
                 Me.TRAFFIC_DESC.Text = MB_CLASS.getString("TRAFFIC_DESC")
+                '是否需填初學者
+                Me.MB_BEGIN.SelectedIndex = -1
+                If Not IsNothing(Me.MB_BEGIN.Items.FindByValue(MB_CLASS.getString("MB_BEGIN"))) Then
+                    Me.MB_BEGIN.Items.FindByValue(MB_CLASS.getString("MB_BEGIN")).Selected = True
+                End If
                 lbl_sSEQ.Text = sSEQ
             End If
 
@@ -675,6 +682,8 @@ Public Class MBMnt_Class_01_v01
             MB_CLASS.setAttribute("CLASS_PLACE", Me.CLASS_PLACE.Text)
             '交通資訊說明
             MB_CLASS.setAttribute("TRAFFIC_DESC", Me.TRAFFIC_DESC.Text)
+            '是否初學者;Y是N:否
+            MB_CLASS.setAttribute("MB_BEGIN", Me.MB_BEGIN.SelectedValue)
 
             MB_CLASS.save()
 
@@ -878,6 +887,13 @@ Public Class MBMnt_Class_01_v01
             If Not Utility.isValidateData(Me.TRAFFIC_DESC.Text) Then
                 com.Azion.EloanUtility.UIUtility.showJSMsg(Me, "請輸入交通資訊說明")
                 com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "請輸入交通資訊說明")
+                Return False
+            End If
+
+            '是否初學者
+            If Not Utility.isValidateData(Me.MB_BEGIN.SelectedValue) Then
+                com.Azion.EloanUtility.UIUtility.showJSMsg(Me, "請選擇是否需填初學者")
+                com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "請選擇是否需填初學者")
                 Return False
             End If
 

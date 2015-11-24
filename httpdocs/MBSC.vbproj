@@ -28,6 +28,7 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -135,6 +136,7 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="CSS\ENbot.css" />
+    <Content Include="ErrorPage.aspx" />
     <Content Include="img\edit.gif" />
     <Content Include="img\first2.gif" />
     <Content Include="img\imgAdd.gif" />
@@ -176,8 +178,13 @@
     </Content>
     <Content Include="QRY\MBQry_TYPE_01_02_v01.aspx" />
     <Content Include="QRY\MBQry_TYPE_01_02_v01.xml" />
+    <Content Include="QRY\MBQry_TYPE_01_03_v02.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="QRY\MBQry_TYPE_01_03_v01.aspx" />
-    <Content Include="QRY\MBQry_TYPE_01_03_v01.xml" />
+    <Content Include="QRY\MBQry_TYPE_01_03_v01.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="QRY\MBQry_TYPE_01_04_v01.aspx" />
     <Content Include="QRY\MBQry_TYPE_01_04_v01.xml" />
     <Content Include="QRY\MBQry_TYPE_01_05_v01.aspx" />
@@ -192,6 +199,29 @@
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="SY\SY_CASELIST.aspx" />
+    <Content Include="SY\SY_CASEQUEUE.aspx" />
+    <Content Include="SY\SY_CHANGEUSER.aspx" />
+    <Content Include="SY\SY_DEFAULT.aspx" />
+    <Content Include="SY\SY_FLOWSTEP.aspx" />
+    <Content Include="SY\SY_FUNCTIONLIST.aspx" />
+    <Content Include="SY\SY_LOGINPWD.aspx" />
+    <Content Include="SY\SY_MAINFRAME.aspx" />
+    <Content Include="SY\SY_QRYAGENT.aspx" />
+    <Content Include="SY\SY_QRYAUTH.aspx" />
+    <Content Include="SY\SY_ROOT.aspx" />
+    <Content Include="SY\SY_SUBMAINFRAME.aspx" />
+    <Content Include="SY\SY_TOOLBAR.aspx" />
+    <Content Include="SY\SY_UPDAGENT.aspx" />
+    <Content Include="SY\SY_UPDBRANCH.aspx" />
+    <Content Include="SY\SY_UPDFUNCTION.aspx" />
+    <Content Include="SY\SY_UPDFUNCTIONGRANTROLE.aspx" />
+    <Content Include="SY\SY_UPDROLE.aspx" />
+    <Content Include="SY\SY_UPDSYSUSER.aspx" />
+    <Content Include="SY\SY_UPGBRANCHUSER.aspx" />
+    <Content Include="SY\SY_USERGRANTROLE.aspx" />
+    <Content Include="SY\SY_USERINFO.aspx" />
+    <Content Include="SY\SY_WEBAUTH.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -201,6 +231,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Component\EloanUtility\Dbg.vb">
+      <Link>SY\Dbg.vb</Link>
+    </Compile>
     <Compile Include="Account\ChangePassword.aspx.designer.vb">
       <DependentUpon>ChangePassword.aspx</DependentUpon>
     </Compile>
@@ -228,6 +261,13 @@
     <Compile Include="Account\Register.aspx.vb">
       <DependentUpon>Register.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ErrorPage.aspx.designer.vb">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ErrorPage.aspx.vb">
+      <DependentUpon>ErrorPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
@@ -419,6 +459,173 @@
       <DependentUpon>MBQry_TYPE_01_v01.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="SY\SYUIBase.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SY\SY_CASELIST.aspx.designer.vb">
+      <DependentUpon>SY_CASELIST.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SY\SY_CASELIST.aspx.vb">
+      <DependentUpon>SY_CASELIST.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SY\SY_CASEQUEUE.aspx.designer.vb">
+      <DependentUpon>SY_CASEQUEUE.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SY\SY_CASEQUEUE.aspx.vb">
+      <DependentUpon>SY_CASEQUEUE.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SY\SY_CHANGEUSER.aspx.designer.vb">
+      <DependentUpon>SY_CHANGEUSER.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SY\SY_CHANGEUSER.aspx.vb">
+      <DependentUpon>SY_CHANGEUSER.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SY\SY_DEFAULT.aspx.designer.vb">
+      <DependentUpon>SY_DEFAULT.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SY\SY_DEFAULT.aspx.vb">
+      <DependentUpon>SY_DEFAULT.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SY\SY_FLOWSTEP.aspx.designer.vb">
+      <DependentUpon>SY_FLOWSTEP.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SY\SY_FLOWSTEP.aspx.vb">
+      <DependentUpon>SY_FLOWSTEP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SY\SY_FUNCTIONLIST.aspx.designer.vb">
+      <DependentUpon>SY_FUNCTIONLIST.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SY\SY_FUNCTIONLIST.aspx.vb">
+      <DependentUpon>SY_FUNCTIONLIST.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SY\SY_LOGIN.vb">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SY\SY_LOGINPWD.aspx.designer.vb">
+      <DependentUpon>SY_LOGINPWD.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SY\SY_LOGINPWD.aspx.vb">
+      <DependentUpon>SY_LOGINPWD.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SY\SY_MAINFRAME.aspx.designer.vb">
+      <DependentUpon>SY_MAINFRAME.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SY\SY_MAINFRAME.aspx.vb">
+      <DependentUpon>SY_MAINFRAME.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SY\SY_QRYAGENT.aspx.designer.vb">
+      <DependentUpon>SY_QRYAGENT.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SY\SY_QRYAGENT.aspx.vb">
+      <DependentUpon>SY_QRYAGENT.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SY\SY_QRYAUTH.aspx.designer.vb">
+      <DependentUpon>SY_QRYAUTH.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SY\SY_QRYAUTH.aspx.vb">
+      <DependentUpon>SY_QRYAUTH.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SY\SY_ROOT.aspx.designer.vb">
+      <DependentUpon>SY_ROOT.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SY\SY_ROOT.aspx.vb">
+      <DependentUpon>SY_ROOT.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SY\SY_SUBMAINFRAME.aspx.designer.vb">
+      <DependentUpon>SY_SUBMAINFRAME.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SY\SY_SUBMAINFRAME.aspx.vb">
+      <DependentUpon>SY_SUBMAINFRAME.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SY\SY_TOOLBAR.aspx.designer.vb">
+      <DependentUpon>SY_TOOLBAR.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SY\SY_TOOLBAR.aspx.vb">
+      <DependentUpon>SY_TOOLBAR.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SY\SY_UPDAGENT.aspx.designer.vb">
+      <DependentUpon>SY_UPDAGENT.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SY\SY_UPDAGENT.aspx.vb">
+      <DependentUpon>SY_UPDAGENT.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SY\SY_UPDBRANCH.aspx.designer.vb">
+      <DependentUpon>SY_UPDBRANCH.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SY\SY_UPDBRANCH.aspx.vb">
+      <DependentUpon>SY_UPDBRANCH.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SY\SY_UPDFUNCTION.aspx.designer.vb">
+      <DependentUpon>SY_UPDFUNCTION.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SY\SY_UPDFUNCTION.aspx.vb">
+      <DependentUpon>SY_UPDFUNCTION.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SY\SY_UPDFUNCTIONGRANTROLE.aspx.designer.vb">
+      <DependentUpon>SY_UPDFUNCTIONGRANTROLE.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SY\SY_UPDFUNCTIONGRANTROLE.aspx.vb">
+      <DependentUpon>SY_UPDFUNCTIONGRANTROLE.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SY\SY_UPDROLE.aspx.designer.vb">
+      <DependentUpon>SY_UPDROLE.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SY\SY_UPDROLE.aspx.vb">
+      <DependentUpon>SY_UPDROLE.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SY\SY_UPDSYSUSER.aspx.designer.vb">
+      <DependentUpon>SY_UPDSYSUSER.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SY\SY_UPDSYSUSER.aspx.vb">
+      <DependentUpon>SY_UPDSYSUSER.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SY\SY_UPGBRANCHUSER.aspx.designer.vb">
+      <DependentUpon>SY_UPGBRANCHUSER.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SY\SY_UPGBRANCHUSER.aspx.vb">
+      <DependentUpon>SY_UPGBRANCHUSER.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SY\SY_USERGRANTROLE.aspx.designer.vb">
+      <DependentUpon>SY_USERGRANTROLE.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SY\SY_USERGRANTROLE.aspx.vb">
+      <DependentUpon>SY_USERGRANTROLE.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SY\SY_USERINFO.aspx.designer.vb">
+      <DependentUpon>SY_USERINFO.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SY\SY_USERINFO.aspx.vb">
+      <DependentUpon>SY_USERINFO.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SY\SY_WEBAUTH.aspx.designer.vb">
+      <DependentUpon>SY_WEBAUTH.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SY\SY_WEBAUTH.aspx.vb">
+      <DependentUpon>SY_WEBAUTH.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
@@ -444,6 +651,10 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Component\AUTH_OP\AUTH_OP.vbproj">
+      <Project>{c95543a2-d718-49d8-9c48-2cdc0161a2e1}</Project>
+      <Name>AUTH_OP</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Component\DBUtility4\2008_DBUtility4.vbproj">
       <Project>{52501E90-3AD3-4405-9D72-97B3CFD9031F}</Project>
       <Name>2008_DBUtility4</Name>
@@ -452,12 +663,16 @@
       <Project>{E489BF3A-4443-41DE-9183-04651F13F847}</Project>
       <Name>EloanUtility</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Component\FLOW_OP\FLOW_OP.vbproj">
+      <Project>{c64bdf2c-5bd1-4913-9cac-e114abaf9c89}</Project>
+      <Name>FLOW_OP</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Component\MB_OP\MB_OP.vbproj">
       <Project>{E27DCBEB-9E7D-4381-AE0E-A0B45CDA2F8F}</Project>
       <Name>MB_OP</Name>
     </ProjectReference>
     <ProjectReference Include="UICtl.vbproj">
-      <Project>{A3E39550-A83F-4076-AD17-A46D282BDE5A}</Project>
+      <Project>{a3e39550-a83f-4076-ad17-a46d282bde5a}</Project>
       <Name>UICtl</Name>
     </ProjectReference>
   </ItemGroup>

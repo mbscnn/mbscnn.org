@@ -74,10 +74,14 @@
     <Compile Include="com\AP\AP_AREATEAMList.vb" />
     <Compile Include="com\AP\AP_CODE.vb" />
     <Compile Include="com\AP\AP_CODEList.vb" />
+    <Compile Include="com\AP\AP_POST.vb" />
+    <Compile Include="com\AP\AP_POSTList.vb" />
     <Compile Include="com\AP\AP_ROADSEC.vb" />
     <Compile Include="com\AP\AP_ROADSECList.vb" />
     <Compile Include="com\FLOW\SUBSYS_CODE.vb" />
     <Compile Include="com\FLOW\SUBSYS_CODEList.vb" />
+    <Compile Include="com\GA\GA_CASEAPV.vb" />
+    <Compile Include="com\GA\GA_CASEAPVList.vb" />
     <Compile Include="com\MB\MB_ACCT.vb" />
     <Compile Include="com\MB\MB_ACCT_DTL.vb" />
     <Compile Include="com\MB\MB_ACCT_DTLList.vb" />

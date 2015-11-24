@@ -260,6 +260,17 @@
                         <asp:TextBox ID="TRAFFIC_DESC" runat="server" width="99%" />
                     </td>
                 </tr>
+                <tr>
+                    <td width="15%" class="th1c_b">
+                        <span style="color: red; font-weight: bold; font-size: medium">*</span>是否需填初學者
+                    </td>
+                    <td width="85%" class="td2_b" colspan="3">
+                        <asp:RadioButtonList ID="MB_BEGIN" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" >
+                            <asp:ListItem Text="是" Value="Y"  />
+                            <asp:ListItem Text="否" Value="N"  />
+                        </asp:RadioButtonList>
+                    </td>
+                </tr>
                 <tr runat="server" id="tr_Check">
                     <td colspan="4" class="th1c_b" align="center">
                         <asp:Button ID="btn_Add" runat="server" Text="新增課程" CssClass="bt" />

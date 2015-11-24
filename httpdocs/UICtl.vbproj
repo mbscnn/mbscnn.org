@@ -28,6 +28,7 @@
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -108,6 +109,8 @@
     <Content Include="Module\PageTab\PageTab.ascx" />
     <Content Include="Module\PageTab\Signin.ascx" />
     <Content Include="Module\PageTab\VTab.ascx" />
+    <Content Include="Module\UIControl\Addr\ZipCode.ascx" />
+    <Content Include="Module\UIControl\PagerMenu\PagerMenu.ascx" />
     <Content Include="Styles\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
@@ -153,6 +156,9 @@
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Module\CallBack\CallbackNextstepSendmail.vb" />
+    <Compile Include="Module\CallBack\ExportUserInfo.vb" />
+    <Compile Include="Module\FlowRollBack.vb" />
     <Compile Include="Module\MBSCEvent.ascx.designer.vb">
       <DependentUpon>MBSCEvent.ascx</DependentUpon>
     </Compile>
@@ -179,6 +185,20 @@
     </Compile>
     <Compile Include="Module\PageTab\VTab.ascx.vb">
       <DependentUpon>VTab.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\UIControl\Addr\ZipCode.ascx.designer.vb">
+      <DependentUpon>ZipCode.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\UIControl\Addr\ZipCode.ascx.vb">
+      <DependentUpon>ZipCode.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Module\UIControl\PagerMenu\PagerMenu.ascx.designer.vb">
+      <DependentUpon>PagerMenu.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Module\UIControl\PagerMenu\PagerMenu.ascx.vb">
+      <DependentUpon>PagerMenu.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Module\UIShareFun.vb" />
@@ -226,6 +246,10 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Component\AUTH_OP\AUTH_OP.vbproj">
+      <Project>{c95543a2-d718-49d8-9c48-2cdc0161a2e1}</Project>
+      <Name>AUTH_OP</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Component\DBUtility4\2008_DBUtility4.vbproj">
       <Project>{52501E90-3AD3-4405-9D72-97B3CFD9031F}</Project>
       <Name>2008_DBUtility4</Name>
@@ -233,6 +257,10 @@
     <ProjectReference Include="..\Component\EloanUtility\EloanUtility.vbproj">
       <Project>{E489BF3A-4443-41DE-9183-04651F13F847}</Project>
       <Name>EloanUtility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Component\FLOW_OP\FLOW_OP.vbproj">
+      <Project>{c64bdf2c-5bd1-4913-9cac-e114abaf9c89}</Project>
+      <Name>FLOW_OP</Name>
     </ProjectReference>
     <ProjectReference Include="..\Component\MB_OP\MB_OP.vbproj">
       <Project>{E27DCBEB-9E7D-4381-AE0E-A0B45CDA2F8F}</Project>

@@ -477,6 +477,22 @@ Public Class MBMnt_Member_01_v01
             If Not Utility.isValidateData(Trim(Me.MB_NAME.Text)) Then
                 com.Azion.EloanUtility.UIUtility.alert("請輸入法名/姓名!")
                 Return
+            Else
+                Dim pattern As String = "[\p{P}\p{S}-[._]]"
+                Dim mx As MatchCollection = Regex.Matches(Me.MB_NAME.Text.Trim, pattern)
+                If mx.Count > 0 Then
+                    com.Azion.EloanUtility.UIUtility.showJSMsg(Me, "法名/姓名不可輸入標點符號")
+                    com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "法名/姓名不可輸入標點符號")
+                    Exit Sub
+                End If
+
+                pattern = "[0-9]"
+                Dim mxn As MatchCollection = Regex.Matches(Me.MB_NAME.Text.Trim, pattern)
+                If mxn.Count > 0 Then
+                    com.Azion.EloanUtility.UIUtility.showJSMsg(Me, "法名/姓名不可輸入數字")
+                    com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "法名/姓名不可輸入數字")
+                    Exit Sub
+                End If
             End If
 
             If Not Utility.isValidateData(Me.MB_SEX.SelectedValue) Then

@@ -314,6 +314,39 @@ Public Class AP_ROADSECList
     End Function
 #End Region
 
+#Region "濟南昱勝添加"
+    ''' <summary>
+    ''' 傳入CITY_CD 資料, 取得縣市別資料
+    ''' </summary>
+    ''' <param name="sCityCd">縣市代碼</param>
+    ''' <returns>AREA_ID, AREA</returns>
+    ''' <remarks>
+    ''' [Avril] 2012/01/09
+    ''' </remarks>
+    ''' <history>
+    ''' </history>
+    Function loadDataByCityId(ByVal sCityCd As String) As Integer
+        Try
+            Dim sSQL As String = "select   DISTINCT AREA_ID, AREA   " &
+                                          "  from  AP_ROADSEC   " &
+                                          "  where CITY_CD=" & ProviderFactory.PositionPara & "CITY_CD" &
+                                          "  and   OPTYPE <> 'D'  " &
+                                          " order by AREA_ID  "
+
+            Dim paras(0) As System.Data.IDbDataParameter
+            paras(0) = ProviderFactory.CreateDataParameter("CITY_CD", sCityCd)
+            Return MyBase.loadBySQL(sSQL, paras)
+
+        Catch ex As ProviderException
+            Throw ex
+        Catch ex As BosException
+            Throw ex
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+#End Region
+
 End Class
 
 

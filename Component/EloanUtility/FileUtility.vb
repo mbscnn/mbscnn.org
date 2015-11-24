@@ -72,6 +72,22 @@ Imports System.IO
 Public Class FileUtility
 
 #Region "Configuration"
+
+#Region "Properties"
+    ''' <summary>
+    ''' eLoan設定檔路徑
+    ''' </summary>
+    ''' <remarks>
+    ''' [Titan] 	2012/03/05	Created
+    ''' </remarks>
+    Private Shared m_sConfiguration As String = String.Empty
+    Public Shared ReadOnly Property sConfiguration As String
+        Get
+            Return m_sConfiguration
+        End Get
+    End Property
+#End Region
+
     ''' <summary>
     ''' 取得目前應用程式預設組態的參數
     ''' AppSettingsSection 物件包含組態檔之 appSettings 區段的內容
@@ -84,15 +100,53 @@ Public Class FileUtility
     ''' <remarks>
     ''' [Titan] 	2011/07/19	Created
     ''' </remarks>  
-    Public Shared Function getAppSettings(ByVal sKey As String, Optional ByVal sFileName As String = Nothing) As String
-        If Not ValidateUtility.isValidateData(sFileName) Then
-            Dim currContext As System.Web.HttpContext = System.Web.HttpContext.Current
-            If Not IsNothing(currContext) Then
-                sFileName = currContext.Application("EloanConf").ToString
-            End If
-        End If
+    'Public Shared Function getAppSettings(ByVal sKey As String, Optional ByVal sFileName As String = Nothing) As String
+    '    If Not ValidateUtility.isValidateData(sFileName) Then
+    '        Dim currContext As System.Web.HttpContext = System.Web.HttpContext.Current
+    '        If Not IsNothing(currContext) Then
+    '            sFileName = currContext.Application("EloanConf").ToString
+    '        End If
+    '    End If
 
+    '    Dim sValue As String = System.Configuration.ConfigurationManager.AppSettings(sKey)
+
+    '    If IsNothing(sValue) And Not IsNothing(sFileName) Then
+    '        Dim fileMap As System.Configuration.ExeConfigurationFileMap = New System.Configuration.ExeConfigurationFileMap() With {.ExeConfigFilename = sFileName}
+
+    '        Dim configuration As System.Configuration.Configuration = System.Configuration.ConfigurationManager.OpenMappedExeConfiguration(fileMap, System.Configuration.ConfigurationUserLevel.None)
+
+    '        If Not IsNothing(configuration.AppSettings.Settings.Item(sKey)) Then
+    '            sValue = configuration.AppSettings.Settings.Item(sKey).Value
+    '        End If
+    '    End If
+
+    '    Return sValue
+    'End Function
+
+    ''' <summary>
+    ''' 取得目前應用程式預設組態的參數
+    ''' AppSettingsSection 物件包含組態檔之 appSettings 區段的內容
+    ''' com.Azion.EloanUtility.FileUtility.getAppSettings("skey",Application("EloanConf"))
+    ''' C:\eLoanConf\eloan_EnTie.config
+    ''' </summary>
+    ''' <param name="sKey">key</param>
+    ''' <param name="sFileName">String 設定檔的位置</param>
+    ''' <returns></returns>
+    ''' <remarks>
+    ''' [Titan] 	2011/07/19	Created
+    ''' </remarks>  
+    Public Shared Function getAppSettings(ByVal sKey As String, Optional ByVal sFileName As String = "", Optional ByVal sDefaultValue As String = "") As String
         Dim sValue As String = System.Configuration.ConfigurationManager.AppSettings(sKey)
+
+        Dim sBaseDirectory As String = AppDomain.CurrentDomain.BaseDirectory
+
+
+        If sFileName = "" Then
+            If m_sConfiguration = Nothing Then
+                m_sConfiguration = setConfiguration()
+            End If
+            sFileName = m_sConfiguration
+        End If
 
         If IsNothing(sValue) And Not IsNothing(sFileName) Then
             Dim fileMap As System.Configuration.ExeConfigurationFileMap = New System.Configuration.ExeConfigurationFileMap() With {.ExeConfigFilename = sFileName}
@@ -101,10 +155,38 @@ Public Class FileUtility
 
             If Not IsNothing(configuration.AppSettings.Settings.Item(sKey)) Then
                 sValue = configuration.AppSettings.Settings.Item(sKey).Value
+            Else
+                sValue = sDefaultValue
             End If
         End If
 
         Return sValue
+    End Function
+
+    Public Shared Function setConfiguration() As String
+        Dim sFileName As String = "C:\Inetpub\vhosts\mbscnn.org\httpdocs\MBSCConf\MBSC.config" 'production
+        Dim sBaseDirectory As String = AppDomain.CurrentDomain.BaseDirectory
+
+        Dim currContext As System.Web.HttpContext = System.Web.HttpContext.Current
+        If Not IsNothing(currContext) Then
+            sFileName = CStr(currContext.Application("EloanConf")) '依環境設定取得
+        Else
+            If sBaseDirectory.Contains("_P") Then '過版正式套
+                If Environment.MachineName = "WIN-QRLAKF0WDIF" Then
+                    sFileName = "C:\Inetpub\vhosts\mbscnn.org\httpdocs\MBSCConf\MBSC.config"
+                End If
+            ElseIf sBaseDirectory.Contains("_T") Then '過版測試套
+                sFileName = "C:\Inetpub\vhosts\mbscnn.org\httpdocs\MBSCConf\MBSC.config"
+            ElseIf sBaseDirectory.Contains("_D") Then '開發套
+                sFileName = "C:\Inetpub\vhosts\mbscnn.org\httpdocs\MBSCConf\MBSC.config"
+            ElseIf sBaseDirectory.Contains("_O") Then
+                sFileName = "C:\Inetpub\vhosts\mbscnn.org\httpdocs\MBSCConf\MBSC.config"
+            Else
+                sFileName = "C:\Inetpub\vhosts\mbscnn.org\httpdocs\MBSCConf\MBSC.config"
+            End If
+        End If
+
+        Return sFileName
     End Function
 
     ''' <summary>

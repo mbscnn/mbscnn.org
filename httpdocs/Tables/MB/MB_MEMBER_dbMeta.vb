@@ -381,6 +381,18 @@ Public Class MB_MEMBER_dbMeta
 			hMetaData63.add("PROVIDER_TYPE",254 )
 			hMetaData63.add("PROVIDER_TYPE_NAME", MySql.Data.MySqlClient.MySqlDbType.String )
 			arry.add(hMetaData63)
+			Static hMetaData64 As new System.Collections.Hashtable
+			hMetaData64.add("COLUMN_NAME", "MB_BEGIN" )
+			hMetaData64.add("DB_TYPE", 16 )
+			hMetaData64.add("PROVIDER_TYPE",254 )
+			hMetaData64.add("PROVIDER_TYPE_NAME", MySql.Data.MySqlClient.MySqlDbType.String )
+			arry.add(hMetaData64)
+			Static hMetaData65 As new System.Collections.Hashtable
+			hMetaData65.add("COLUMN_NAME", "MB_SITIME" )
+			hMetaData65.add("DB_TYPE", 11 )
+			hMetaData65.add("PROVIDER_TYPE",3 )
+			hMetaData65.add("PROVIDER_TYPE_NAME", MySql.Data.MySqlClient.MySqlDbType.Int32 )
+			arry.add(hMetaData65)
      End Sub
      Public Function getMetaArray() as System.Collections.ArrayList Implements com.Azion.NET.VB.DBMetaData.getMetaArray
          Return arry

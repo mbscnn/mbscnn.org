@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C64BDF2C-5BD1-4913-9CAC-E114ABAF9C89}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>FLOW_OP</RootNamespace>
+    <AssemblyName>FLOW_OP</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>FLOW_OP.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>FLOW_OP.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+    <Import Include="System.Threading.Tasks" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\EloanUtility\Dbg.vb">
+      <Link>Dbg.vb</Link>
+    </Compile>
+    <Compile Include="CallBack\IFlowCallBack.vb" />
+    <Compile Include="CallBack\IFlowSentNotification.vb" />
+    <Compile Include="Exception\SYException.vb" />
+    <Compile Include="Exception\SYMSG.vb" />
+    <Compile Include="Facade\FlowFacade.vb" />
+    <Compile Include="Flow\ELoanFlow.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Table\AUTH\SY_AUTHORITYBRANCH.vb" />
+    <Compile Include="Table\AUTH\SY_BRANCH.vb" />
+    <Compile Include="Table\AUTH\SY_FUNCTION_CODE.vb" />
+    <Compile Include="Table\AUTH\SY_REL_BRANCH_USER.vb" />
+    <Compile Include="Table\AUTH\SY_REL_ROLE_FLOWMAP.vb" />
+    <Compile Include="Table\AUTH\SY_REL_ROLE_USER.vb" />
+    <Compile Include="Table\AUTH\SY_REL_SYSID_SUBSYSID.vb" />
+    <Compile Include="Table\AUTH\SY_ROLE.vb" />
+    <Compile Include="Table\AUTH\SY_ROLESUITBRANCH.vb" />
+    <Compile Include="Table\AUTH\SY_ROLESUITSYS.vb" />
+    <Compile Include="Table\AUTH\SY_ROOT.vb" />
+    <Compile Include="Table\AUTH\SY_SUBSYSID.vb" />
+    <Compile Include="Table\AUTH\SY_SYSID.vb" />
+    <Compile Include="Table\AUTH\SY_USER.vb" />
+    <Compile Include="Table\AUTH\SY_USERPASSWORD.vb" />
+    <Compile Include="Table\AUTH\SY_USERROLEAGENT.vb" />
+    <Compile Include="Table\FLOW\SY_CASEID.vb" />
+    <Compile Include="Table\FLOW\SY_CASEREVISION.vb" />
+    <Compile Include="Table\FLOW\SY_CONDITION_ID.vb" />
+    <Compile Include="Table\FLOW\SY_CONFIGURATION.vb" />
+    <Compile Include="Table\FLOW\SY_DYNAMICSQL.vb" />
+    <Compile Include="Table\FLOW\SY_FLOWINCIDENT.vb" />
+    <Compile Include="Table\FLOW\SY_FLOWSTEP.vb" />
+    <Compile Include="Table\FLOW\SY_FLOW_DEF.vb" />
+    <Compile Include="Table\FLOW\SY_FLOW_ID.vb" />
+    <Compile Include="Table\FLOW\SY_FLOW_MAP.vb" />
+    <Compile Include="Table\FLOW\SY_NEXTFLOWSTEPRULE.vb" />
+    <Compile Include="Table\FLOW\SY_REL_FLOWMAP_SPANBRANCH.vb" />
+    <Compile Include="Table\FLOW\SY_STEP_NO.vb" />
+    <Compile Include="Table\FLOW\SY_TABLEBASE.vb" />
+    <Compile Include="Table\FLOW\SY_TEMPINFO.vb" />
+    <Compile Include="Table\SYS\SY_LOG.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DBUtility4\2008_DBUtility4.vbproj">
+      <Project>{52501e90-3ad3-4405-9d72-97b3cfd9031f}</Project>
+      <Name>2008_DBUtility4</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

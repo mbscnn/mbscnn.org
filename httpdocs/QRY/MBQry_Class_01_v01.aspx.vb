@@ -340,7 +340,6 @@ Public Class MBQry_Class_01_v01
                             sMailBody = Me.getMailBody_2(MB_CLASS, ROW("MB_MEMSEQ"), ROW("MB_NAME").ToString)
                         End If
 
-
                         If iMode = 1 Then
                             '台北中階精進二日禪  提醒通知函
                             sMailSub = MB_CLASS.getString("MB_CLASS_NAME") & " 提醒通知函"

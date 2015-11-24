@@ -1614,7 +1614,7 @@ Public Class MBQry_TYPE_01_v01
     '    End Try
     'End Function
 
-    Public Function getMB_CHKFLAG(ByVal iMB_SEQ As Object, ByVal iMB_BATCH As Object, ByVal iMB_MEMSEQ As Object, ByVal sMB_FWMK As Object, ByVal iMB_SORTNO As Object, ByVal sMB_CHKFLAG As Object, ByVal MB_CDATE As Object) As String
+    Public Function getMB_CHKFLAG(ByVal iMB_SEQ As Object, ByVal iMB_BATCH As Object, ByVal iMB_MEMSEQ As Object, ByVal sMB_FWMK As Object, ByVal iMB_SORTNO As Object, ByVal sMB_CHKFLAG As Object, ByVal MB_CDATE As Object, ByVal MB_CREDATETIME As Object) As String
         Dim DT_MB_MEMCLASS As DataTable = Nothing
         Dim DT_SEQ As DataTable = Nothing
         Dim DT_WAIT As DataTable = Nothing
@@ -1629,12 +1629,12 @@ Public Class MBQry_TYPE_01_v01
             'End If
 
             If Utility.isValidateData(sMB_FWMK) AndAlso sMB_FWMK = "3" Then
-                Return "取消報名" & MB_CDATE.ToString
+                Return "取消報名" & "<BR/>" & MB_CDATE.ToString
             ElseIf Utility.isValidateData(sMB_FWMK) AndAlso sMB_FWMK = "4" Then
                 Dim sSECCancel As String = String.Empty
                 sSECCancel = "第二次取消報名"
-                If IsDate(MB_CDATE) Then
-                    sSECCancel &= CDate(MB_CDATE).Year & "/" & CDate(MB_CDATE).Month & "/" & CDate(MB_CDATE).Day
+                If IsDate(MB_CDATE.ToString) Then
+                    sSECCancel &= "<BR/>" & CDate(MB_CDATE.ToString).Year & "/" & CDate(MB_CDATE.ToString).Month & "/" & CDate(MB_CDATE.ToString).Day
                 End If
                 Return sSECCancel
             Else
@@ -1663,10 +1663,14 @@ Public Class MBQry_TYPE_01_v01
                         Next
                         Dim ROW_FULL() As DataRow = Nothing
                         ROW_FULL = DT_FULL.Select("MB_MEMSEQ=" & iMB_MEMSEQ)
+                        Dim sMB_CREDATETIME As String = String.Empty
+                        If IsDate(MB_CREDATETIME.ToString) Then
+                            sMB_CREDATETIME = CDate(MB_CREDATETIME.ToString).Year & "/" & CDate(MB_CREDATETIME.ToString).Month & "/" & CDate(MB_CREDATETIME.ToString).Day
+                        End If
                         If Not IsNothing(ROW_FULL) AndAlso ROW_FULL.Length > 0 Then
-                            Return "正取"
+                            Return "正取" & "<BR/>" & sMB_CREDATETIME
                         Else
-                            Return "備取"
+                            Return "備取" & "<BR/>" & sMB_CREDATETIME
                         End If
                     End If
                 End If

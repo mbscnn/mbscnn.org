@@ -413,7 +413,7 @@
                                 </td>
                                 <td width="10%" class="td2c_b">
                                     <!--錄取-->
-                                    <%#getMB_CHKFLAG(Container.DataItem("MB_SEQ"),Container.DataItem("MB_BATCH"), Container.DataItem("MB_MEMSEQ"), Container.DataItem("MB_FWMK"), Container.DataItem("MB_SORTNO"), Container.DataItem("MB_CHKFLAG"), Container.DataItem("MB_CDATE"))%>
+                                    <%#getMB_CHKFLAG(Container.DataItem("MB_SEQ"), Container.DataItem("MB_BATCH"), Container.DataItem("MB_MEMSEQ"), Container.DataItem("MB_FWMK"), Container.DataItem("MB_SORTNO"), Container.DataItem("MB_CHKFLAG"), Container.DataItem("MB_CDATE"), Container.DataItem("MB_CREDATETIME"))%>
                                 </td>
                                 <td width="10%" class="td2c_b">
                                     <!--回信出席-->

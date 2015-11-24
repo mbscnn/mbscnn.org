@@ -530,4 +530,111 @@ Public Class AP_CODEList
         Return MyBase.loadBySQLOnlyDs(sSQL, paras)
     End Function
 #End Region
+
+#Region "濟南昱勝添加"
+    ''' <summary>
+    ''' 獲取財報幣別單位
+    ''' </summary>
+    ''' <param name="sUPCODE">1759</param>
+    ''' <returns>Boolean</returns>
+    ''' <remarks></remarks>
+    '''  <history>
+    ''' 	[Alicia]	2011/12/29 Created
+    ''' </history>
+    Public Function getCurUnit(ByVal sUPCODE As Integer) As Integer
+        Try
+            Dim sqlStr As String = "Select VALUE,TEXT,SORTNO" &
+                                    " FROM AP_CODE" &
+                                    " WHERE UPCODE =" & ProviderFactory.PositionPara & "UPCODE "
+
+            Dim para(0) As System.Data.IDbDataParameter
+            para(0) = ProviderFactory.CreateDataParameter("UPCODE", sUPCODE)
+
+            Return MyBase.loadBySQL(sqlStr, para)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' 取得[父類別代號]及不等於[Value]的資料
+    ''' </summary>
+    ''' <param name="sUpCode">父類別代號</param>
+    ''' <param name="sValue">Value</param>
+    ''' <returns>Integer 取得筆數</returns>
+    ''' <remarks>
+    ''' </remarks> 
+    ''' <history>
+    ''' 	[Nick]	2010/11/05 Created
+    ''' </history>
+    Function loadByUpcodeNotValue(ByVal sUpcode As String, ByVal sValue As String) As Integer
+
+        If Utility.isValidateData(sUpcode) Then
+            Try
+                Dim sSQL As String = "select * from AP_CODE where UPCODE=" & ProviderFactory.PositionPara & "UPCODE "
+                sSQL &= " and value <> " & ProviderFactory.PositionPara & "VALUE "
+
+                Dim paras(1) As System.Data.IDbDataParameter
+                paras(0) = ProviderFactory.CreateDataParameter("UPCODE", sUpcode)
+                paras(1) = ProviderFactory.CreateDataParameter("VALUE", sValue)
+
+                Return MyBase.loadBySQL(sSQL, paras)
+
+            Catch ex As ProviderException
+                Throw ex
+            Catch ex As BosException
+                Throw ex
+            Catch ex As Exception
+                Throw ex
+            End Try
+
+        End If
+    End Function
+
+    ''' <summary>
+    ''' 根據codeid查詢相關資料
+    ''' </summary>
+    ''' <param name="sCodeId">codeid</param>
+    ''' <returns></returns>
+    ''' <remarks>
+    ''' Add by Avril 2012/03/28
+    ''' </remarks>
+    Function loadDataByCodeId(ByVal sCodeId As String) As Boolean
+        Try
+            Dim sSQL As String = "SELECT * FROM AP_CODE" &
+                                   " WHERE CODEID = " & ProviderFactory.PositionPara & "CODEID "
+
+
+            Dim para(0) As System.Data.IDbDataParameter
+            para(0) = ProviderFactory.CreateDataParameter("CODEID", sCodeId)
+
+            Return MyBase.loadBySQL(sSQL, para)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' 根據Upcode查詢維護角色信息
+    ''' </summary>
+    ''' <param name="sUpcode">2283</param>
+    ''' <returns></returns>
+    ''' <remarks>
+    ''' Zack  2012-06-01 Create
+    ''' </remarks>
+    Function loadBuUpCodeValue(ByVal sUpcode As String) As Integer
+        Try
+            Dim sSQL As String = "SELECT * FROM AP_CODE WHERE UPCODE =" & ProviderFactory.PositionPara & "UPCODE" &
+                                 " AND VALUE != 1"
+
+            Dim para(0) As System.Data.IDbDataParameter
+            para(0) = ProviderFactory.CreateDataParameter("UPCODE", sUpcode)
+
+            Return MyBase.loadBySQL(sSQL, para)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
+#End Region
+
 End Class

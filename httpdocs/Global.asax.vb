@@ -11,16 +11,22 @@ Public Class Global_asax
         'Dim sConfigPath As String = "D:\MBSC\MBSCConf\MBSC.config"
 
         com.Azion.NET.VB.Properties.setConfiguration(sConfigPath)
-				
+
         'allow zero datetime=true
         '解决 unable to convert MySQL date/time value to System.DateTime
         '.NET DateTime：2007/01/01 12:00:00
         'MySQL DateTime：2007-01-01 12:00:00
         '只要將年月日中間的「/」符號換成「-」即可囉!
-        Application("BotDSN") = "allow zero datetime=true;server=" & com.Azion.EloanUtility.FileUtility.getAppSettings("DBSource", sConfigPath) & _
-                                ";database=" & com.Azion.EloanUtility.FileUtility.getAppSettings("DataBase", sConfigPath) & _
-                                ";uid=" & com.Azion.EloanUtility.FileUtility.getAppSettings("DBUserID", sConfigPath) & _
-                                ";pwd=" & com.Azion.EloanUtility.FileUtility.getAppSettings("DBPassword", sConfigPath) & _
+        Application("BotDSN") = "allow zero datetime=true;server=" & com.Azion.EloanUtility.FileUtility.getAppSettings("DBSource", sConfigPath) &
+                                ";database=" & com.Azion.EloanUtility.FileUtility.getAppSettings("DataBase", sConfigPath) &
+                                ";uid=" & com.Azion.EloanUtility.FileUtility.getAppSettings("DBUserID", sConfigPath) &
+                                ";pwd=" & com.Azion.EloanUtility.FileUtility.getAppSettings("DBPassword", sConfigPath) &
+                                ";CharSet=utf8;"
+
+        Application("EmpDSN") = "allow zero datetime=true;server=" & com.Azion.EloanUtility.FileUtility.getAppSettings("DBSource", sConfigPath) &
+                                ";database=" & com.Azion.EloanUtility.FileUtility.getAppSettings("DataBase", sConfigPath) &
+                                ";uid=" & com.Azion.EloanUtility.FileUtility.getAppSettings("DBUserID", sConfigPath) &
+                                ";pwd=" & com.Azion.EloanUtility.FileUtility.getAppSettings("DBPassword", sConfigPath) &
                                 ";CharSet=utf8;"
 
         '正式環境(雲端)

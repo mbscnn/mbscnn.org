@@ -3,9 +3,12 @@ Imports System.Linq
 Imports System.Text
 Imports System.Data
 Imports System.Diagnostics
+Imports com.Azion.EloanUtility
 
 '#If __MSSQL Then
 Imports System.Data.SqlClient
+
+
 '#End If
 
 
@@ -92,28 +95,81 @@ Namespace TinyDb
     ''' <remarks>
     ''' </remarks>
     Public Class DbTable
+
+#If Not _TINYDB Then
+        Protected m_dbManager As com.Azion.NET.VB.DatabaseManager
+#End If
+
         Protected m_dbTransaction As IDbTransaction
         Protected m_dbConnection As IDbConnection
         Protected m_queueDeferredSQL As New ArrayList
 
-#If _FULL_TINYDB Then
-        Public Sub New(dbConnection As IDbConnection)
+        ''' <summary>
+        ''' TABLE的名稱
+        ''' </summary>
+        ''' <remarks></remarks>
+        Public m_strTableName As String
+
+
+        ''' <summary>
+        ''' 當搜尋到指字串時，中斷執行 
+        ''' </summary>
+        ''' strDebugBreak(0) = "Update FlowStep S003835"
+        ''' strDebugBreak(1) = "Insert FlowStep S003835"
+        ''' 當更新或新增至FLOWSTEP內的記錄有S003835的員編就中斷
+        ''' <remarks></remarks>
+        Public Shared strDebugBreak(10) As String
+
+#If _TINYDB Then
+        Public Sub New(ByVal strTableName As String, ByVal dbConnection As IDbConnection)
+            m_strTableName = strTableName
             m_dbConnection = dbConnection
         End Sub
 
-        Public Sub New(dbTransaction As IDbTransaction)
+        Public Sub New(ByVal strTableName As String, ByVal dbTransaction As IDbTransaction)
+            m_strTableName = strTableName
             m_dbTransaction = dbTransaction
             m_dbConnection = dbTransaction.Connection
         End Sub
-#End If
 
 
-        Public Sub New(dbManager As com.Azion.NET.VB.DatabaseManager)
-            m_dbConnection = dbManager.getConnection()
-            If dbManager.isTransaction Then
-                m_dbTransaction = dbManager.getTransaction()
+        Public Sub New(ByVal dbConnection As IDbConnection)
+            m_dbConnection = dbConnection
+        End Sub
+
+        Public Sub New(ByVal dbTransaction As IDbTransaction)
+            m_dbTransaction = dbTransaction
+            m_dbConnection = dbTransaction.Connection
+        End Sub
+#Else
+        Public Sub New(ByVal strTableName As String, dbManager As com.Azion.NET.VB.DatabaseManager)
+            m_strTableName = strTableName
+            m_dbManager = dbManager
+
+            If Not IsNothing(dbManager) Then
+                m_dbConnection = dbManager.getConnection()
+                If dbManager.isTransaction Then
+                    m_dbTransaction = dbManager.getTransaction()
+                End If
             End If
         End Sub
+
+        Public Sub New(dbManager As com.Azion.NET.VB.DatabaseManager)
+            m_dbManager = dbManager
+
+            If Not IsNothing(dbManager) Then
+                m_dbConnection = dbManager.getConnection()
+                If dbManager.isTransaction Then
+                    m_dbTransaction = dbManager.getTransaction()
+                End If
+            End If
+        End Sub
+#End If
+
+        Public Shared Function getNewBosBase(ByVal databaseManager As DatabaseManager) As DbTable
+            Return New DbTable(databaseManager)
+        End Function
+
 
         Public Property DBTransaction() As IDbTransaction
             Get
@@ -121,7 +177,17 @@ Namespace TinyDb
             End Get
 
             Set(value As IDbTransaction)
+                Dbg.Assert(IsNothing(m_dbTransaction) OrElse IsNothing(m_dbTransaction.Connection))
+
+                If Not IsNothing(m_dbTransaction) Then
+                    If Not IsNothing(m_dbTransaction.Connection) Then
+                        m_dbTransaction.Connection.Dispose()
+                    End If
+                End If
+
+                m_dbConnection = value.Connection
                 m_dbTransaction = value
+                m_dbManager = Nothing
             End Set
         End Property
 
@@ -131,7 +197,43 @@ Namespace TinyDb
             End Get
 
             Set(value As IDbConnection)
+
+                Dbg.Assert(IsNothing(m_dbConnection))
+
+                If Not IsNothing(m_dbConnection) Then
+                    m_dbConnection.Dispose()
+                End If
+
                 m_dbConnection = value
+                m_dbTransaction = Nothing
+                m_dbManager = Nothing
+            End Set
+        End Property
+
+        Public Property DatabaseManager() As com.Azion.NET.VB.DatabaseManager
+            Get
+                Return m_dbManager
+            End Get
+
+            Set(value As com.Azion.NET.VB.DatabaseManager)
+
+                Dbg.Assert(IsNothing(m_dbManager))
+
+                If Not IsNothing(m_dbManager) Then
+                    m_dbManager.dispose()
+                End If
+
+                m_dbConnection = Nothing
+                m_dbTransaction = Nothing
+                m_dbManager = value
+
+                If Not IsNothing(m_dbManager) Then
+                    m_dbConnection = m_dbManager.getConnection()
+                    If m_dbManager.isTransaction Then
+                        m_dbTransaction = m_dbManager.getTransaction()
+                    End If
+                End If
+
             End Set
         End Property
 
@@ -140,10 +242,12 @@ Namespace TinyDb
                 Return m_queueDeferredSQL.Count
             End Get
         End Property
-        Protected Function GetParamter(ByVal parameterName As String, _
-                                       ByVal parameterValue As Object) As CmdParameter
+
+        Protected Function PARAMETER(ByVal parameterName As String, _
+                               ByVal parameterValue As Object) As CmdParameter
             Return New CmdParameter(parameterName, parameterValue)
         End Function
+
 
         Protected Function GetSqlCommandQueue(ByVal strSQL As String, _
                                          ByVal parameters As CmdParameter()) As SqlCommandQueueItem
@@ -172,9 +276,15 @@ Namespace TinyDb
                                     "@" & param.parameterName & "@", "'" & param.parameterValue.ToString() & "'", _
                                     CompareMethod.Text)
                     Else
-                        strDbg = Microsoft.VisualBasic.Strings.Replace(strDbg, _
-                                    "@" & param.parameterName & "@", param.parameterValue.ToString(), _
-                                    CompareMethod.Text)
+                        If Not IsDBNull(param.parameterValue) AndAlso Not IsNothing(param.parameterValue) Then
+                            strDbg = Microsoft.VisualBasic.Strings.Replace(strDbg, _
+                                        "@" & param.parameterName & "@", param.parameterValue.ToString(), _
+                                        CompareMethod.Text)
+                        Else
+                            strDbg = Microsoft.VisualBasic.Strings.Replace(strDbg, _
+                                        "@" & param.parameterName & "@", "NULL", _
+                                        CompareMethod.Text)
+                        End If
                     End If
 #End If
                 Next
@@ -182,6 +292,35 @@ Namespace TinyDb
 
 #If DEBUG Then
             Trace.WriteLine(strDbg) '顯示SQL在追踪視窗上
+
+            '當特定SQL語法時中斷執行
+            Dim bBreak As Boolean = False
+
+            For Each sBreak In strDebugBreak
+
+                If IsNothing(sBreak) OrElse sBreak.Length = 0 Then
+                    Continue For
+                End If
+
+                Dim sSplit() As String = Split(sBreak)
+                Dim bFound As Boolean = True
+
+                For Each ssSplit In sSplit
+                    If strDbg.IndexOf(ssSplit) = -1 Then
+                        bFound = False
+                        Exit For
+                    End If
+                Next
+
+                If bFound = True Then
+                    bBreak = True
+                    Exit For
+                End If
+            Next
+
+            If bBreak Then
+                Dbg.Break()
+            End If
 #End If
 
             sqlCommandQueue.strSQL = strSQL
@@ -242,9 +381,10 @@ Namespace TinyDb
         ''' <param name="parameters"></param>
         ''' <returns></returns>
         ''' <remarks></remarks>
-        Public Function GetDataTable(ByVal strSQL As String, _
-                                     ByVal parameters As CmdParameter()) As DataTable
-            Using dr As IDataReader = ExecuteReader(strSQL, parameters)
+        Public Overridable Function GetDataTable(ByVal strSQL As String, _
+                                     ByVal parameters As CmdParameter(), _
+                                     Optional ByVal commandType As CommandType = Nothing) As DataTable
+            Using dr As IDataReader = ExecuteReader(strSQL, parameters, commandType)
                 Dim dt As New DataTable()
                 dt.Load(dr)
                 Return dt
@@ -274,7 +414,7 @@ Namespace TinyDb
         '''      '是管理單位
         ''' End If        ''' 
         ''' </sample>
-        Public Function ExecuteScalar(ByVal strSQL As String, _
+        Public Overridable Function ExecuteScalar(ByVal strSQL As String, _
                                       ByVal parameters As CmdParameter(), _
                                       Optional ByVal commandType As CommandType = Nothing) As Object
             Return GetSqlCommand(strSQL, parameters, commandType).ExecuteScalar()
@@ -296,7 +436,7 @@ Namespace TinyDb
         '''                         New CmdParameter(){ New CmdParameter("USERID","S123456"),
         '''                                             New CmdParameter("USERNAME","S234567")   })
         ''' </SAMPLE>
-        Public Function ExecuteNonQuery(ByVal strSQL As String, _
+        Public Overridable Function ExecuteNonQuery(ByVal strSQL As String, _
                                         ByVal parameters As CmdParameter(), _
                                         Optional ByVal commandType As CommandType = Nothing, _
                                         Optional ByVal deferredExecute As Boolean = False) As Integer
@@ -357,7 +497,11 @@ Namespace TinyDb
 
             sqlCmd.CommandText = strAllSql.ToString()
             For Each param As CmdParameter In laParameters
-                sqlCmd.Parameters.AddWithValue(param.parameterName, param.parameterValue)
+                If Not IsDBNull(param.parameterValue) AndAlso Not IsNothing(param.parameterValue) Then
+                    sqlCmd.Parameters.AddWithValue(param.parameterName, param.parameterValue)
+                Else
+                    sqlCmd.Parameters.AddWithValue(param.parameterName, Convert.DBNull)
+                End If
             Next
 
             '清空DeferredSQL

@@ -111,8 +111,10 @@
   <ItemGroup>
     <Compile Include="CodeList.vb" />
     <Compile Include="DateUtility.vb" />
+    <Compile Include="Dbg.vb" />
     <Compile Include="DBSyntax.vb" />
     <Compile Include="EncryptUtility.vb" />
+    <Compile Include="FieldValidator.vb" />
     <Compile Include="ImgUtility.vb" />
     <Compile Include="NumUtility.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -135,10 +137,14 @@
     <Compile Include="Properties\AuthProperties.vb" />
     <Compile Include="Properties\ENProperties.vb" />
     <Compile Include="Properties\GAProperties.vb" />
+    <Compile Include="Rules.vb" />
+    <Compile Include="StaffInfo.vb" />
     <Compile Include="StrUtility.vb" />
     <Compile Include="TestMain.vb" />
     <Compile Include="UIUtility.vb" />
+    <Compile Include="ValidateType.vb" />
     <Compile Include="ValidateUtility.vb" />
+    <Compile Include="XmlUtility.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">

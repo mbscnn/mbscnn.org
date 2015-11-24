@@ -1,4 +1,4 @@
-ï»¿<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="PageTab.ascx.vb" Inherits="MBSC.UICtl.PageTab" %>
+<%@ Control Language="vb" AutoEventWireup="false" CodeBehind="PageTab.ascx.vb" Inherits="MBSC.UICtl.PageTab" %>
 
 <style>
     #header-inner 
@@ -22,7 +22,7 @@
     <div style="background: transparent">
         <div style="height: 70px;"></div>
         <div id="outer-wrapper" style="background: transparent; border-width: 0px; font-size:14pt;font-weight:bold;display:none">
-            <a href="http://mbscorg.blogspot.tw/">è«‹é€£çµ MBSC ä½›é™€åŸå§‹æ­£æ³•å­¸æœƒå®˜ç¶²http://mbscorg.blogspot.tw </a>
+            <a href="http://mbscorg.blogspot.tw/">½Ğ³sµ² MBSC ¦òªû­ì©l¥¿ªk¾Ç·|©xºôhttp://mbscorg.blogspot.tw </a>
         </div>
     </div>
 </div>
@@ -33,12 +33,8 @@
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header page-scroll">
                     
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-
+                        <button type="button" class="navbar-toggle" style="background-color:#F9BC83" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">                            
+                           <B>«ö§Ú</B>
                         </button>
                         <a class="navbar-brand page-scroll" href="#page-top"><img class="img-responsive" src="/img/logotext.png" alt="Responsive image"/></a>
                     </div>
