@@ -95,9 +95,11 @@ Public Class NewsList
                     Me.IMG_ADD.Visible = True
                 End If
 
+                Me.IMG_FST.ImageUrl = com.Azion.EloanUtility.UIUtility.getImgPath & "FST.png"
                 Me.IMG_LEFT.ImageUrl = com.Azion.EloanUtility.UIUtility.getImgPath & "LEFT.png"
 
                 Me.IMG_RIGHT.ImageUrl = com.Azion.EloanUtility.UIUtility.getImgPath & "RIGHT.png"
+                Me.IMG_LST.ImageUrl = com.Azion.EloanUtility.UIUtility.getImgPath & "LST.png"
 
                 Dim mbNEWS As New MB_NEWS(Me.m_DBManager)
 
@@ -197,7 +199,7 @@ Public Class NewsList
             If iMode = 1 Then
                 mbNEWSList.LoadByTIME_PREV(iSEQTIME, Me.m_iPageSize)
             Else
-                mbNEWSList.LoadByTIME_NEXT(iSEQTIME, Me.m_iPageSize)
+                mbNEWSList.LoadByTIME_NEXT_ASC(iSEQTIME, Me.m_iPageSize)
             End If
 
             If mbNEWSList.getCurrentDataSet.Tables(0).Rows.Count > 0 Then
@@ -698,6 +700,45 @@ Public Class NewsList
         End Try
     End Sub
 
+    Private Sub IMG_LST_Click(sender As Object, e As ImageClickEventArgs) Handles IMG_LST.Click
+        Try
+            Dim MB_NEWS As New MB_NEWS(Me.m_DBManager)
+            Dim iSEQTIME As Decimal = 0
+            If Me.m_sCODEID = Me.m_sNEWSODEID OrElse Not IsNumeric(Me.m_sCODEID) Then
+                iSEQTIME = MB_NEWS.getMIN_SEQTIME() - 1
+
+                Dim MB_NEWSList As New MB_NEWSList(Me.m_DBManager)
+                MB_NEWSList.LoadByTIME_NEXT_ASC(iSEQTIME, Me.m_iPageSize)
+                If MB_NEWSList.getCurrentDataSet.Tables(0).Rows.Count > 0 Then
+                    Me.RP_NEWS.DataSource = MB_NEWSList.getCurrentDataSet.Tables(0)
+                    Me.RP_NEWS.DataBind()
+                Else
+                    Me.RP_NEWS.DataSource = Nothing
+                    Me.RP_NEWS.DataBind()
+                End If
+
+                Me.RP_NEWS.Visible = True
+            Else
+                iSEQTIME = MB_NEWS.getMIN_SEQTIME_CODEID(CInt(Me.m_sCODEID)) - 1
+
+                Dim MB_NEWSList As New MB_NEWSList(Me.m_DBManager)
+                MB_NEWSList.LoadByCODEID_NEXT_ASC(CInt(Me.m_sCODEID), iSEQTIME, Me.m_iPageSize)
+
+                If MB_NEWSList.getCurrentDataSet.Tables(0).Rows.Count > 0 Then
+                    Me.RP_NEWS.DataSource = MB_NEWSList.getCurrentDataSet.Tables(0)
+                    Me.RP_NEWS.DataBind()
+                Else
+                    Me.RP_NEWS.DataSource = Nothing
+                    Me.RP_NEWS.DataBind()
+                End If
+
+                Me.RP_NEWS.Visible = True
+            End If
+        Catch ex As Exception
+            com.Azion.EloanUtility.UIUtility.showErrMsg(Me, ex)
+        End Try
+    End Sub
+
     Private Sub IMG_LEFT_Click(sender As Object, e As System.Web.UI.ImageClickEventArgs) Handles IMG_LEFT.Click
         Try
             If Me.RP_NEWS.Items.Count > 0 Then
@@ -718,8 +759,22 @@ Public Class NewsList
         End Try
     End Sub
 
+    Private Sub IMG_FST_Click(sender As Object, e As System.Web.UI.ImageClickEventArgs) Handles IMG_FST.Click
+        Try
+            If Me.m_sCODEID = Me.m_sNEWSODEID OrElse Not IsNumeric(Me.m_sCODEID) Then
+                Dim D_NOW As Date = Now
+                Me.Bind_RP_NEWSByTime(Me.getNEW_SEQTIME, 1)
+            Else
+                Dim mbNEWS As New MB_NEWS(Me.m_DBManager)
+                Me.Bind_RP_NEWS(CInt(Me.m_sCODEID), mbNEWS.getMAX_SEQTIME(CInt(Me.m_sCODEID)), 1)
+            End If
+        Catch ex As Exception
+            com.Azion.EloanUtility.UIUtility.showErrMsg(Me, ex)
+        End Try
+    End Sub
+
     Private Sub btAdd_Click()
-        If Not com.Azion.EloanUtility.ValidateUtility.isValidateData(Me.m_sCODEID) OrElse _
+        If Not com.Azion.EloanUtility.ValidateUtility.isValidateData(Me.m_sCODEID) OrElse
             Me.m_sCODEID = Me.m_sNEWSODEID Then
             com.Azion.EloanUtility.UIUtility.alert("無法在最新訊息頁籤內新增文章，請先點擊其他頁籤後再新增文章")
             com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "無法在最新訊息頁籤內新增文章，請先點擊其他頁籤後再新增文章")

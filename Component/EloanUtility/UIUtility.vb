@@ -545,33 +545,60 @@ Public NotInheritable Class UIUtility
     Private Shared Sub setCtlRead(ByVal ctl As Web.UI.Control)
         If TypeOf (ctl) Is TextBox Then
             Dim txt As TextBox = CType(ctl, TextBox)
-            'txt.ReadOnly = True
-            '發文字號Textbox調整大小
-            txt.Attributes.Add("ReadOnly", "ReadOnly")
-            txt.Columns = txt.Text.Length
-            'If txt.CssClass.Equals("bordernum") OrElse txt.CssClass.Equals("nobordernum") Then
-            '    txt.CssClass = "nobordernum1"
-            'Else
-            '    txt.CssClass = "bgnobordertxt"
-            'End If
-            'If txt.TextMode = TextBoxMode.MultiLine Then
-            '    txt.Attributes("Style") = "overflow: visible; border:none;"
-            'End If '
+            ''txt.ReadOnly = True
+            ''發文字號Textbox調整大小
+            'txt.Attributes.Add("ReadOnly", "ReadOnly")
+            'txt.Columns = txt.Text.Length
+            ''If txt.CssClass.Equals("bordernum") OrElse txt.CssClass.Equals("nobordernum") Then
+            ''    txt.CssClass = "nobordernum1"
+            ''Else
+            ''    txt.CssClass = "bgnobordertxt"
+            ''End If
+            ''If txt.TextMode = TextBoxMode.MultiLine Then
+            ''    txt.Attributes("Style") = "overflow: visible; border:none;"
+            ''End If '
 
-            Dim sPreCssClass As String = ""
+            'Dim sPreCssClass As String = ""
+            'sPreCssClass = txt.CssClass
+
+            'txt.Style.Item("overflow") = "visible"
+            'txt.Style.Item("border") = "none"
+
+            'If ValidateUtility.isValidateData(sPreCssClass) AndAlso InStr(UCase(sPreCssClass), "NUM") > 0 Then
+            '    If Not ValidateUtility.isValidateData(txt.Style.Item("text-align")) Then
+            '        txt.Style.Item("text-align") = "right"
+            '    End If
+
+            '    txt.Style.Item("background") = "transparent"
+            'Else
+            '    txt.CssClass = "td2"
+            'End If
+
+            txt.Attributes.Add("ReadOnly", "ReadOnly")
+            Dim sPreCssClass As String = String.Empty
             sPreCssClass = txt.CssClass
+
+            If txt.TextMode = TextBoxMode.SingleLine Then
+                txt.TextMode = TextBoxMode.MultiLine
+                txt.Rows = 1
+                If ValidateUtility.isValidateData(txt.Text) Then
+                    txt.Columns = UIUtility.getNVarcharLength(txt.Text)
+                End If
+                txt.Wrap = False
+            End If
 
             txt.Style.Item("overflow") = "visible"
             txt.Style.Item("border") = "none"
+            txt.Style.Item("background") = "transparent"
 
             If ValidateUtility.isValidateData(sPreCssClass) AndAlso InStr(UCase(sPreCssClass), "NUM") > 0 Then
                 If Not ValidateUtility.isValidateData(txt.Style.Item("text-align")) Then
                     txt.Style.Item("text-align") = "right"
                 End If
 
-                txt.Style.Item("background") = "transparent"
+                'txt.Style.Item("background") = "transparent"
             Else
-                txt.CssClass = "td2"
+                'txt.CssClass = "td2"
             End If
         ElseIf TypeOf (ctl) Is HtmlTextArea Then
             Dim txt As HtmlTextArea = CType(ctl, HtmlTextArea)
@@ -669,7 +696,7 @@ Public NotInheritable Class UIUtility
             '    End If
         ElseIf TypeOf (ctl) Is LinkButton Then
             Dim linkButton As LinkButton = CType(ctl, LinkButton)
-            If linkButton.ClientID.ToUpper.IndexOf("PAGETAB") = -1 AndAlso linkButton.ClientID.ToUpper.IndexOf("LBSERAIL") = -1 AndAlso _
+            If linkButton.ClientID.ToUpper.IndexOf("PAGETAB") = -1 AndAlso linkButton.ClientID.ToUpper.IndexOf("LBSERAIL") = -1 AndAlso
                 linkButton.ClientID.ToUpper.IndexOf("LBGOMAN") = -1 AndAlso linkButton.ClientID.ToUpper.IndexOf("LNKBTNQUERY") = -1 Then
                 linkButton.Visible = False
             End If
@@ -697,6 +724,41 @@ Public NotInheritable Class UIUtility
             End If
         End If
     End Sub
+
+    Public Shared Function getNVarcharLength(ByVal sNVarchar As Object) As Integer
+        Try
+            If Not IsDBNull(sNVarchar) AndAlso Not IsNothing(sNVarchar) AndAlso CStr(sNVarchar).Length > 0 Then
+                Dim sSOURCE As String = CStr(sNVarchar)
+
+                'Dim objByte() As Byte = System.Text.Encoding.GetEncoding("Utf-8").GetBytes(sSOURCE)
+
+                Dim sReturn As String = String.Empty
+
+                'ReDim objByte(iCHARLength)
+
+                'Dim encoding_ASCII As New System.Text.ASCIIEncoding()
+                'Dim encoding_UTF8 As New System.Text.UTF8Encoding
+
+                'sReturn = encoding_ASCII.GetString(objByte)
+                'sReturn = encoding_UTF8.GetString(objByte)
+
+                Dim iCount As Integer = 0
+                For i As Integer = 0 To sSOURCE.Length - 1
+                    Dim sTEMP As String = String.Empty
+                    sTEMP = sSOURCE.Substring(i, 1)
+                    'iCount += Encoding.GetEncoding("Big5").GetByteCount(sTEMP)
+
+                    iCount += System.Text.Encoding.ASCII.GetByteCount(sTEMP)
+                Next
+
+                Return iCount
+            End If
+
+            Return 0
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
 #End Region
 
 #Region " 顯示資訊(JS) "

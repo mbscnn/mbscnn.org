@@ -221,6 +221,15 @@ Partial Public Class NewsList
     Protected WithEvents btCancel As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
+    '''IMG_FST 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents IMG_FST As Global.System.Web.UI.WebControls.ImageButton
+    
+    '''<summary>
     '''HID_PAGE 控制項。
     '''</summary>
     '''<remarks>
@@ -255,4 +264,13 @@ Partial Public Class NewsList
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
     Protected WithEvents IMG_RIGHT As Global.System.Web.UI.WebControls.ImageButton
+    
+    '''<summary>
+    '''IMG_LST 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents IMG_LST As Global.System.Web.UI.WebControls.ImageButton
 End Class

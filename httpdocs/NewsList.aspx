@@ -397,19 +397,23 @@
 <!-- Portfolio Item Row -->
 
 <!-- Page number-->
-<div class="col-md-12 ">   
-        <div   class="col-md-4 col-xs-4">
+<div class="row">
+        <div   class="col-md-2 col-xs-2">
+            <asp:ImageButton class="img-responsive center-block" ID="IMG_FST" runat="server" AlternateText="第一頁" title="第一頁" />第一頁
+        </div>
+        <div   class="col-md-2 col-xs-2">
             <input type="hidden" id="HID_PAGE" runat="server" />
-            <asp:ImageButton class="img-responsive center-block" ID="IMG_LEFT" runat="server" AlternateText="較新的文章" title="較新的文章" />
+            <asp:ImageButton class="img-responsive center-block" ID="IMG_LEFT" runat="server" AlternateText="較新的文章" title="較新的文章" />較新的文章
         </div>
         <div class="col-md-4 col-xs-4" >
-
             <asp:ImageButton class="img-responsive center-block" ID="IMG_ADD" runat="server" AlternateText="新增文章" Visible="false" title="新增文章" />
         </div>                
-        <div  class="col-md-4 col-xs-4">
-            <asp:ImageButton class="img-responsive center-block" ID="IMG_RIGHT" runat="server" AlternateText="較舊的文章" title="較舊的文章" />
+        <div  class="col-md-2 col-xs-2">
+            <asp:ImageButton class="img-responsive center-block" ID="IMG_RIGHT" runat="server" AlternateText="較舊的文章" title="較舊的文章" />較舊的文章           
         </div>
-
+        <div  class="col-md-2 col-xs-2">            
+            <asp:ImageButton class="img-responsive center-block" ID="IMG_LST" runat="server" AlternateText="最後一頁" title="最後一頁" />最後一頁
+        </div>
 </div>
 <!-- /.Page number-->
 </div>

@@ -72,8 +72,30 @@ Public Class MB_NEWSList
         Try
             Dim sqlStr As String = String.Empty
 
-            sqlStr = "SELECT * FROM MB_NEWS WHERE CODEID = " & ProviderFactory.PositionPara & "CODEID " & _
+            sqlStr = "SELECT * FROM MB_NEWS WHERE CODEID = " & ProviderFactory.PositionPara & "CODEID " &
                      " AND SEQTIME >" & ProviderFactory.PositionPara & "SEQTIME AND IFNULL(CHGUID,' ') <> 'TEMP' ORDER BY SEQTIME DESC LIMIT " & iLIMIT
+
+            Dim paras(1) As IDbDataParameter
+            paras(0) = ProviderFactory.CreateDataParameter("CODEID", iCODEID)
+            paras(1) = ProviderFactory.CreateDataParameter("SEQTIME", iSEQTIME)
+
+            Return Me.loadBySQLOnlyDs(sqlStr, paras)
+        Catch ex As ProviderException
+            Throw
+        Catch ex As BosException
+            Throw
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+    Public Function LoadByCODEID_NEXT_ASC(ByVal iCODEID As Integer, ByVal iSEQTIME As Decimal, ByVal iLIMIT As Integer) As Integer
+        Try
+            Dim sqlStr As String = String.Empty
+
+            sqlStr = "SELECT X.* FROM (SELECT * FROM MB_NEWS WHERE CODEID = " & ProviderFactory.PositionPara & "CODEID " &
+                     " AND SEQTIME >" & ProviderFactory.PositionPara & "SEQTIME AND IFNULL(CHGUID,' ') <> 'TEMP' ORDER BY SEQTIME LIMIT " & iLIMIT &
+                     " ) X ORDER BY SEQTIME DESC "
 
             Dim paras(1) As IDbDataParameter
             paras(0) = ProviderFactory.CreateDataParameter("CODEID", iCODEID)
@@ -191,12 +213,39 @@ Public Class MB_NEWSList
 
             'CHGUID=TEMP為臨時連接MBSC Blog
             '將來需移除
-            sqlStr = "SELECT * " & _
-                     "  FROM MB_NEWS " & _
-                     " WHERE SEQTIME > " & ProviderFactory.PositionPara & "SEQTIME " & _
-                     "      AND IFNULL(CHGUID,' ') <> 'TEMP' " & _
-                     "ORDER BY SEQTIME DESC " & _
+            sqlStr = "SELECT * " &
+                     "  FROM MB_NEWS " &
+                     " WHERE SEQTIME > " & ProviderFactory.PositionPara & "SEQTIME " &
+                     "      AND IFNULL(CHGUID,' ') <> 'TEMP' " &
+                     "ORDER BY SEQTIME DESC " &
                      " LIMIT " & ProviderFactory.PositionPara & "LIMIT "
+
+            Dim paras(1) As IDbDataParameter
+            paras(0) = ProviderFactory.CreateDataParameter("SEQTIME", iSEQTIME)
+            paras(1) = ProviderFactory.CreateDataParameter("LIMIT", iLIMIT)
+
+            Return Me.loadBySQLOnlyDs(sqlStr, paras)
+        Catch ex As ProviderException
+            Throw
+        Catch ex As BosException
+            Throw
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+    Public Function LoadByTIME_NEXT_ASC(ByVal iSEQTIME As Decimal, ByVal iLIMIT As Integer) As Integer
+        Try
+            Dim sqlStr As String = String.Empty
+
+            'CHGUID=TEMP為臨時連接MBSC Blog
+            '將來需移除
+            sqlStr = "SELECT X.* FROM (SELECT * " &
+                     "  FROM MB_NEWS " &
+                     " WHERE SEQTIME > " & ProviderFactory.PositionPara & "SEQTIME " &
+                     "      AND IFNULL(CHGUID,' ') <> 'TEMP' " &
+                     "ORDER BY SEQTIME " &
+                     " LIMIT " & ProviderFactory.PositionPara & "LIMIT) X ORDER BY SEQTIME DESC "
 
             Dim paras(1) As IDbDataParameter
             paras(0) = ProviderFactory.CreateDataParameter("SEQTIME", iSEQTIME)

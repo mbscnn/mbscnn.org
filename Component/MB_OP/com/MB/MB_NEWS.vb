@@ -123,6 +123,65 @@ Public Class MB_NEWS
             Throw
         End Try
     End Function
+
+    Public Function getMIN_SEQTIME() As Decimal
+        Try
+            Dim sqlStr As String = String.Empty
+
+            sqlStr = "SELECT IFNULL(MIN(SEQTIME),0) FROM MB_NEWS "
+
+            Dim iCNT As Object = Convert.DBNull
+
+            If Me.getDatabaseManager.isTransaction Then
+                iCNT = DBObject.ExecuteScalar(Me.getDatabaseManager.getTransaction.Connection, CommandType.Text, sqlStr)
+            Else
+                iCNT = DBObject.ExecuteScalar(Me.getDatabaseManager.getConnection, CommandType.Text, sqlStr)
+            End If
+
+            If IsNumeric(iCNT) Then
+                Return iCNT
+            Else
+                Return 0
+            End If
+        Catch ex As ProviderException
+            Throw
+        Catch ex As BosException
+            Throw
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+    Public Function getMIN_SEQTIME_CODEID(ByVal iCODEID As Decimal) As Decimal
+        Try
+            Dim sqlStr As String = String.Empty
+
+            sqlStr = "SELECT IFNULL(MIN(SEQTIME),0) FROM MB_NEWS WHERE CODEID = " & ProviderFactory.PositionPara & "CODEID "
+
+            Dim para As IDbDataParameter = ProviderFactory.CreateDataParameter("CODEID", iCODEID)
+
+            Dim iCNT As Object = Convert.DBNull
+
+            If Me.getDatabaseManager.isTransaction Then
+                iCNT = DBObject.ExecuteScalar(Me.getDatabaseManager.getTransaction.Connection, CommandType.Text, sqlStr, para)
+            Else
+                iCNT = DBObject.ExecuteScalar(Me.getDatabaseManager.getConnection, CommandType.Text, sqlStr, para)
+            End If
+
+            If IsNumeric(iCNT) Then
+                Return iCNT
+            Else
+                Return 0
+            End If
+        Catch ex As ProviderException
+            Throw
+        Catch ex As BosException
+            Throw
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
 #End Region
 
 End Class
