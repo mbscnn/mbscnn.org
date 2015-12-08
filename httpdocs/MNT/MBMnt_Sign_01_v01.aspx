@@ -497,15 +497,6 @@
 			<div class="row" >
 				<div class="col-md-2 thm">
 					<span style="color:Red">*</span>
-					參加動機或目的
-				</div>
-				<div class="col-md-10">
-					<asp:TextBox ID="MB_OBJECT" runat="server" class="form-control" />
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-md-2 thm">
-					<span style="color:Red">*</span>
 					是否曾參加過本中心課程?
 				</div>
 				<div class="col-md-10">
@@ -513,6 +504,14 @@
                         <asp:ListItem Text="是" Value="Y" />
                         <asp:ListItem Text="否" Value="N" />
                     </asp:RadioButtonList>									
+				</div>
+			</div>
+			<div class="row" >
+				<div class="col-md-2 thm">
+					參加動機或目的
+				</div>
+				<div class="col-md-10">
+					<asp:TextBox ID="MB_OBJECT" runat="server" class="form-control" />
 				</div>
 			</div>
 			<div class="row" >
@@ -590,7 +589,6 @@
 			</div>
 			<div class="row" >
 				<div class="col-md-2 thm">
-					<span style="color:Red">*</span>
 					宗教信仰
 				</div>
 				<div id="TD_Y_7" runat="server"  class="col-md-4">

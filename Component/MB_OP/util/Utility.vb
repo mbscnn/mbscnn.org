@@ -1179,6 +1179,17 @@ Public Class Utility
             Return True
         ElseIf TypeOf obj Is Boolean Then
             Return obj
+        Else
+            Dim sObj As String = String.Empty
+            sObj = obj.ToString
+            If IsDate(sObj) Then
+                Dim oDate As Date = CType(sObj, Date)
+                If oDate.Year < 1911 AndAlso oDate.Month < 1 AndAlso oDate.Month > 12 Then
+                    Return False
+                Else
+                    Return True
+                End If
+            End If
         End If
         Return True
     End Function

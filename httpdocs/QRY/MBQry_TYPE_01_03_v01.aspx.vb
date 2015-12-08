@@ -59,7 +59,7 @@ Public Class MBQry_TYPE_01_03_v01
             End If
 
             Dim sContent As String = String.Empty
-            If sMB_APV = "Y" Then
+            If sMB_APV = "1" Then
                 sContent = Me.getMB_APV_Y(DBManager, DT_FF_DT_MB_MEMCLASS)
             Else
                 sContent = Me.getMB_APV_N(DBManager, DT_FF_DT_MB_MEMCLASS)

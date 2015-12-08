@@ -482,15 +482,6 @@ Partial Public Class MBMnt_Sign_01_v01
     Protected WithEvents txt_MB_ID As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''MB_OBJECT 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents MB_OBJECT As Global.System.Web.UI.WebControls.TextBox
-    
-    '''<summary>
     '''JOINMBSC 控制項。
     '''</summary>
     '''<remarks>
@@ -498,6 +489,15 @@ Partial Public Class MBMnt_Sign_01_v01
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
     Protected WithEvents JOINMBSC As Global.System.Web.UI.WebControls.RadioButtonList
+    
+    '''<summary>
+    '''MB_OBJECT 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents MB_OBJECT As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
     '''dd_MB_EDU 控制項。

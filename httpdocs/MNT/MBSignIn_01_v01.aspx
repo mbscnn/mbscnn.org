@@ -120,10 +120,10 @@
                     <div class="panel-body">
                         <div class="input-group" style="min-width: 100%;">
                                   
-					                <asp:TextBox ID="txt_UserId" runat="server" Width="175px" CssClass="mbsctxt" Text="帳號(e-Mail)" Style="color: Gray;height:30px;width:200px" />
+					                <asp:TextBox ID="txt_UserId" runat="server" Width="250px" CssClass="mbsctxt" Text="e-Mail【例:mbscnn@gmail.com】" onclick="this.value='';" Style="color: Gray;height:30px;width:250px" />
 					                <br />
-					                <input id="password-clear" type="text" value="密碼" autocomplete="off" size="20" class="mbsctxt" style="color: Gray;height:30px;width:200px" />
-					                <asp:TextBox ID="txt_Password" runat="server" CssClass="mbsctxt" TextMode="Password" Columns="20" style="height:30px;width:200px" />
+					                <input id="password-clear" type="text" value="密碼" autocomplete="off" size="20" class="mbsctxt" style="color: Gray;height:30px;width:250px" />
+					                <asp:TextBox ID="txt_Password" runat="server" CssClass="mbsctxt" TextMode="Password" Columns="20" style="height:30px;width:250px" />
 					                <br />
 					                <br />
 					                <asp:Button ID="btLogin" runat="server" Text="登入" CssClass="mbscbt" Style="height:30px;width:200px;font-size:12pt" />

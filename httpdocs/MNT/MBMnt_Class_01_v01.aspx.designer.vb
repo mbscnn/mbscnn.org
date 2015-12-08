@@ -401,6 +401,96 @@ Partial Public Class MBMnt_Class_01_v01
     Protected WithEvents MB_BEGIN As Global.System.Web.UI.WebControls.RadioButtonList
     
     '''<summary>
+    '''TR_CHARGE_1 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents TR_CHARGE_1 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+    
+    '''<summary>
+    '''TXT_CHARGE 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents TXT_CHARGE As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''TR_CHARGE_2 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents TR_CHARGE_2 As Global.System.Web.UI.HtmlControls.HtmlTableRow
+    
+    '''<summary>
+    '''EARLYDATE 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents EARLYDATE As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''TXT_FAVCHARGE 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents TXT_FAVCHARGE As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''btnPREC 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents btnPREC As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
+    '''TXT_MB_PREC_MEMO 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents TXT_MB_PREC_MEMO As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''PLH_PREC 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents PLH_PREC As Global.System.Web.UI.WebControls.PlaceHolder
+    
+    '''<summary>
+    '''RP_PREC 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents RP_PREC As Global.System.Web.UI.WebControls.Repeater
+    
+    '''<summary>
+    '''btnPREC_YES 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents btnPREC_YES As Global.System.Web.UI.WebControls.Button
+    
+    '''<summary>
     '''tr_Check 控制項。
     '''</summary>
     '''<remarks>

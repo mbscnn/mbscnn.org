@@ -59,6 +59,38 @@ Public Class MB_MEMBERList
         End Try
     End Function
 
+    Function loadByMB_EMAIL_FAMILY(ByVal sMB_EMAIL As String) As Integer
+        Try
+            Dim sqlStr As String = String.Empty
+
+            sqlStr = "SELECT A.*" &
+                     "  FROM MB_MEMBER A" &
+                     " WHERE A.MB_EMAIL = " & ProviderFactory.PositionPara & "MB_EMAIL_1 " &
+                     " UNION " &
+                     "SELECT A.*" &
+                     "  FROM MB_MEMBER A" &
+                     " WHERE A.MB_MEMSEQ IN" &
+                     "          (SELECT MB_FAMSEQ" &
+                     "             FROM mb_family" &
+                     "            WHERE MB_MEMSEQ IN (SELECT MB_MEMSEQ" &
+                     "                                  FROM MB_MEMBER" &
+                     "                                 WHERE MB_EMAIL = " & ProviderFactory.PositionPara & "MB_EMAIL_2))"
+
+            Dim paras(1) As IDbDataParameter
+            paras(0) = ProviderFactory.CreateDataParameter("MB_EMAIL_1", sMB_EMAIL)
+            paras(1) = ProviderFactory.CreateDataParameter("MB_EMAIL_2", sMB_EMAIL)
+
+            Return Me.loadBySQLOnlyDs(sqlStr, paras)
+        Catch ex As ProviderException
+            Throw
+        Catch ex As BosException
+            Throw
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+
     ''' <summary>
     ''' 根據會員編號取得家族資料
     ''' </summary>

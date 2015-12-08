@@ -177,6 +177,30 @@ Public Class MB_CLASS_dbMeta
 			hMetaData29.add("PROVIDER_TYPE",254 )
 			hMetaData29.add("PROVIDER_TYPE_NAME", MySql.Data.MySqlClient.MySqlDbType.String )
 			arry.add(hMetaData29)
+			Static hMetaData30 As new System.Collections.Hashtable
+			hMetaData30.add("COLUMN_NAME", "MB_PREC_MEMO" )
+			hMetaData30.add("DB_TYPE", 16 )
+			hMetaData30.add("PROVIDER_TYPE",253 )
+			hMetaData30.add("PROVIDER_TYPE_NAME", MySql.Data.MySqlClient.MySqlDbType.VarChar )
+			arry.add(hMetaData30)
+			Static hMetaData31 As new System.Collections.Hashtable
+			hMetaData31.add("COLUMN_NAME", "CHARGE" )
+			hMetaData31.add("DB_TYPE", 7 )
+			hMetaData31.add("PROVIDER_TYPE",246 )
+			hMetaData31.add("PROVIDER_TYPE_NAME", MySql.Data.MySqlClient.MySqlDbType.NewDecimal )
+			arry.add(hMetaData31)
+			Static hMetaData32 As new System.Collections.Hashtable
+			hMetaData32.add("COLUMN_NAME", "FAVCHARGE" )
+			hMetaData32.add("DB_TYPE", 7 )
+			hMetaData32.add("PROVIDER_TYPE",246 )
+			hMetaData32.add("PROVIDER_TYPE_NAME", MySql.Data.MySqlClient.MySqlDbType.NewDecimal )
+			arry.add(hMetaData32)
+			Static hMetaData33 As new System.Collections.Hashtable
+			hMetaData33.add("COLUMN_NAME", "EARLYDATE" )
+			hMetaData33.add("DB_TYPE", 6 )
+			hMetaData33.add("PROVIDER_TYPE",10 )
+			hMetaData33.add("PROVIDER_TYPE_NAME", MySql.Data.MySqlClient.MySqlDbType.Date )
+			arry.add(hMetaData33)
      End Sub
      Public Function getMetaArray() as System.Collections.ArrayList Implements com.Azion.NET.VB.DBMetaData.getMetaArray
          Return arry

@@ -9,6 +9,8 @@ Public Class MBMnt_Class_01_v01
 
     Dim m_sCRETIME As String = String.Empty
 
+    Dim m_sPREC As String = "預設詞彙之課程維護注意事項說明"
+
 #Region "Page Events"
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
@@ -17,6 +19,9 @@ Public Class MBMnt_Class_01_v01
             Me.m_DBManager = UIShareFun.getDataBaseManager
 
             If Not Page.IsPostBack Then
+                '預設詞彙之課程維護注意事項說明
+                Me.INIT_PREC()
+                Me.EARLYDATE.Attributes.Add("Readonly", "True")
                 Me.INIT_REGTIME_H()
                 Me.Bind_DDL_Type()
                 Me.Bind_DDL_Place()
@@ -33,6 +38,19 @@ Public Class MBMnt_Class_01_v01
 #End Region
 
 #Region "init"
+    Sub INIT_PREC()
+        Dim AP_CODEList As New AP_CODEList(Me.m_DBManager)
+        AP_CODEList.loadByText(Me.m_sPREC)
+        If AP_CODEList.size > 0 Then
+            Dim iUPCODE As Decimal = 0
+            iUPCODE = AP_CODEList.item(0).getDecimal("CODEID")
+            AP_CODEList.clear()
+            AP_CODEList.loadByUpCode(iUPCODE)
+            Me.RP_PREC.DataSource = AP_CODEList.getCurrentDataSet.Tables(0)
+            Me.RP_PREC.DataBind()
+        End If
+    End Sub
+
     Sub INIT_REGTIME_H()
         Try
             Me.REGTIME_H.Items.Clear()
@@ -207,6 +225,14 @@ Public Class MBMnt_Class_01_v01
             Me.TRAFFIC_DESC.Text = String.Empty
             '是否需填初學者
             Me.MB_BEGIN.SelectedIndex = -1
+            'MB_PREC_MEMO	varchar(2000)	utf8_general_ci	YES				select,insert,update,references	備註說明(注意事項)
+            Me.TXT_MB_PREC_MEMO.Text = String.Empty
+            'CHARGE	decimal(7,0)		YES				select,insert,update,references	課程費用
+            Me.TXT_CHARGE.Text = String.Empty
+            'FAVCHARGE	decimal(7,0)		YES				select,insert,update,references	優惠費用
+            Me.TXT_FAVCHARGE.Text = String.Empty
+            'EARLYDATE	date		YES				select,insert,update,references	早鳥日期
+            Me.EARLYDATE.Text = String.Empty
         Catch ex As Exception
             UIShareFun.showErrMsg(Me, ex)
         End Try
@@ -429,7 +455,17 @@ Public Class MBMnt_Class_01_v01
                 End If
 
                 txt_TEACHER.Text = MB_CLASS.getString("MB_TEACHER")
-                rbt_APV.SelectedValue = MB_CLASS.getString("MB_APV")
+                Me.rbt_APV.SelectedIndex = -1
+                If Not IsNothing(Me.rbt_APV.Items.FindByValue(MB_CLASS.getString("MB_APV"))) Then
+                    Me.rbt_APV.Items.FindByValue(MB_CLASS.getString("MB_APV")).Selected = True
+                End If
+                If MB_CLASS.getString("MB_APV") = "3" Then
+                    Me.TR_CHARGE_1.Visible = True
+                    Me.TR_CHARGE_2.Visible = True
+                Else
+                    Me.TR_CHARGE_1.Visible = False
+                    Me.TR_CHARGE_2.Visible = False
+                End If
                 txt_FULL.Text = MB_CLASS.getString("MB_FULL")
                 txt_WAIT.Text = MB_CLASS.getString("MB_WAIT")
                 rbt_YES.SelectedValue = MB_CLASS.getString("MB_YES")
@@ -476,6 +512,33 @@ Public Class MBMnt_Class_01_v01
                 Me.MB_BEGIN.SelectedIndex = -1
                 If Not IsNothing(Me.MB_BEGIN.Items.FindByValue(MB_CLASS.getString("MB_BEGIN"))) Then
                     Me.MB_BEGIN.Items.FindByValue(MB_CLASS.getString("MB_BEGIN")).Selected = True
+                End If
+                'MB_PREC_MEMO	varchar(2000)	utf8_general_ci	YES				select,insert,update,references	備註說明(注意事項)
+                Me.TXT_MB_PREC_MEMO.Text = MB_CLASS.getString("TXT_MB_PREC_MEMO")
+                If MB_CLASS.getString("MB_APV") = "3" Then
+                    'CHARGE	decimal(7,0)		YES				select,insert,update,references	課程費用
+                    If Utility.isValidateData(MB_CLASS.getAttribute("CHARGE")) Then
+                        Me.TXT_CHARGE.Text = Format(MB_CLASS.getAttribute("CHARGE"), "#,##0")
+                    Else
+                        Me.TXT_CHARGE.Text = String.Empty
+                    End If
+                    'FAVCHARGE	decimal(7,0)		YES				select,insert,update,references	優惠費用
+                    If Utility.isValidateData(MB_CLASS.getAttribute("FAVCHARGE")) Then
+                        Me.TXT_FAVCHARGE.Text = Format(MB_CLASS.getAttribute("FAVCHARGE"), "#,##0")
+                    Else
+                        Me.TXT_FAVCHARGE.Text = String.Empty
+                    End If
+                    'EARLYDATE   Date		YES				Select, insert, update, references	早鳥日期
+                    If Utility.isValidateData(MB_CLASS.getAttribute("EARLYDATE")) Then
+                        'Me.EARLYDATE.Text = MB_CLASS.getAttribute("EARLYDATE").ToString
+                        Me.EARLYDATE.Text = CDate(MB_CLASS.getAttribute("EARLYDATE").ToString).ToString("yyyy/MM/dd")
+                    Else
+                        Me.EARLYDATE.Text = String.Empty
+                    End If
+                Else
+                    Me.TXT_CHARGE.Text = String.Empty
+                    Me.TXT_FAVCHARGE.Text = String.Empty
+                    Me.EARLYDATE.Text = String.Empty
                 End If
                 lbl_sSEQ.Text = sSEQ
             End If
@@ -685,6 +748,27 @@ Public Class MBMnt_Class_01_v01
             '是否初學者;Y是N:否
             MB_CLASS.setAttribute("MB_BEGIN", Me.MB_BEGIN.SelectedValue)
 
+            'MB_PREC_MEMO	varchar(2000)	utf8_general_ci	YES				select,insert,update,references	備註說明(注意事項)
+            MB_CLASS.setAttribute("MB_PREC_MEMO", Me.TXT_MB_PREC_MEMO.Text)
+            'CHARGE	decimal(7,0)		YES				select,insert,update,references	課程費用
+            If rbt_APV.SelectedValue = "3" AndAlso IsNumeric(Me.TXT_CHARGE.Text) Then
+                MB_CLASS.setAttribute("CHARGE", CDec(Me.TXT_CHARGE.Text))
+            Else
+                MB_CLASS.setAttribute("CHARGE", Nothing)
+            End If
+            'FAVCHARGE	decimal(7,0)		YES				select,insert,update,references	優惠費用
+            If rbt_APV.SelectedValue = "3" AndAlso IsNumeric(Me.TXT_FAVCHARGE.Text) Then
+                MB_CLASS.setAttribute("CHARGE", CDec(Me.TXT_FAVCHARGE.Text))
+            Else
+                MB_CLASS.setAttribute("FAVCHARGE", Nothing)
+            End If
+            'EARLYDATE	date		YES				select,insert,update,references	早鳥日期
+            If rbt_APV.SelectedValue = "3" AndAlso IsDate(Me.EARLYDATE.Text) Then
+                MB_CLASS.setAttribute("EARLYDATE", CDate(Me.EARLYDATE.Text))
+            Else
+                MB_CLASS.setAttribute("EARLYDATE", Nothing)
+            End If
+
             MB_CLASS.save()
 
             Return dSEQ
@@ -817,6 +901,11 @@ Public Class MBMnt_Class_01_v01
 
             If rbt_APV.SelectedValue = "" Then
                 com.Azion.EloanUtility.UIUtility.alert("請選擇是否需核准")
+                Return False
+            End If
+
+            If Not Utility.isValidateData(Me.TXT_MB_PREC_MEMO.Text) Then
+                com.Azion.EloanUtility.UIUtility.alert("請輸入注意事項說明")
                 Return False
             End If
 
@@ -975,23 +1064,6 @@ Public Class MBMnt_Class_01_v01
             UIShareFun.showErrMsg(Me, ex)
         End Try
     End Sub
-#End Region
-
-    Function ChangeDate(ByVal dDate As Object) As String
-        Try
-            Dim sDate As String
-
-            If IsDate(dDate.ToString) Then
-                sDate = dDate.year & "." & dDate.Month & "." & dDate.Day
-            Else
-                sDate = ""
-            End If
-
-            Return sDate
-        Catch ex As Exception
-            Throw
-        End Try
-    End Function
 
     Private Sub btn_Batch_Click(sender As Object, e As EventArgs) Handles btn_Batch.Click
         Try
@@ -1043,4 +1115,59 @@ Public Class MBMnt_Class_01_v01
             com.Azion.EloanUtility.UIUtility.showErrMsg(Me, ex)
         End Try
     End Sub
+#End Region
+
+#Region "Utility"
+    Function ChangeDate(ByVal dDate As Object) As String
+        Try
+            Dim sDate As String
+
+            If IsDate(dDate.ToString) Then
+                sDate = dDate.year & "." & dDate.Month & "." & dDate.Day
+            Else
+                sDate = ""
+            End If
+
+            Return sDate
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+    Private Sub btnPREC_YES_Click(sender As Object, e As EventArgs) Handles btnPREC_YES.Click
+        Dim sPREC As String = String.Empty
+        sPREC = Me.TXT_MB_PREC_MEMO.Text
+        For i As Integer = 0 To Me.RP_PREC.Items.Count - 1
+            Dim CHB_PREC As CheckBox = Me.RP_PREC.Items(i).FindControl("CHB_PREC")
+            If CHB_PREC.Checked Then
+                Dim LTL_PREC As Literal = Me.RP_PREC.Items(i).FindControl("LTL_PREC")
+                Dim sNewLine As String = String.Empty
+                If Utility.isValidateData(sPREC) Then
+                    sNewLine = vbNewLine
+                End If
+                sPREC &= sNewLine & LTL_PREC.Text
+            End If
+        Next
+        Me.TXT_MB_PREC_MEMO.Text = sPREC
+        Me.PLH_PREC.Visible = False
+    End Sub
+
+    Private Sub btnPREC_Click(sender As Object, e As EventArgs) Handles btnPREC.Click
+        Me.PLH_PREC.Visible = True
+    End Sub
+
+    Private Sub rbt_APV_SelectedIndexChanged(sender As Object, e As EventArgs) Handles rbt_APV.SelectedIndexChanged
+        If Me.rbt_APV.SelectedValue = "3" Then
+            Me.TR_CHARGE_1.Visible = True
+            Me.TR_CHARGE_2.Visible = True
+        Else
+            Me.TR_CHARGE_1.Visible = False
+            Me.TR_CHARGE_2.Visible = False
+            Me.TXT_CHARGE.Text = String.Empty
+            Me.EARLYDATE.Text = String.Empty
+            Me.TXT_FAVCHARGE.Text = String.Empty
+        End If
+    End Sub
+#End Region
+
 End Class

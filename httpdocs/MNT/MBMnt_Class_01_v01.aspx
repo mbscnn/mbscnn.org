@@ -7,6 +7,8 @@
     <title></title>
     <!-- #include virtual="~/inc/MBSCCSS.inc" -->
     <!-- #include virtual="~/inc/MBSCJS.inc" -->
+    <link href="<%=com.Azion.EloanUtility.UIUtility.getRootPathClient() + "/js/jquery-ui-1.11.4.custom/jquery-ui.css"%>" rel="stylesheet" type="text/css" />
+    <script src="<%=com.Azion.EloanUtility.UIUtility.getRootPathClient() + "/js/jquery-ui-1.11.4.custom/jquery-ui.js"%>" type="text/javascript"></script>
     <script language="javascript" type="text/javascript">
         function doCheck(thisObj) {
             if (!confirm('您確定要刪除此筆資料？')) {
@@ -24,6 +26,12 @@
             list.attr('checked', false);
             list.closest('TR').removeClass('SelectedRowStyle');
         }
+
+        $(function () {
+            $("#EARLYDATE").datepicker({
+                dateFormat: "yy/mm/dd"
+            });
+        });
     </script>
     <base target="_self" />
 </head>
@@ -161,9 +169,10 @@
                         <span style="color: red; font-weight: bold; font-size: medium">*</span>是否需核准
                     </td>
                     <td width="35%" class="td2_b">
-                        <asp:RadioButtonList ID="rbt_APV" runat="server" RepeatDirection="Horizontal">
-                            <asp:ListItem Text="是" Value="Y"></asp:ListItem>
-                            <asp:ListItem Text="否" Value="N"></asp:ListItem>
+                        <asp:RadioButtonList ID="rbt_APV" runat="server" RepeatDirection="Horizontal" AutoPostBack="true" >
+                            <asp:ListItem Text="需核准不繳費" Value="1" Style="font-size:14pt"></asp:ListItem>
+                            <asp:ListItem Text="不需核准" Value="2" Style="font-size:14pt"></asp:ListItem>
+                            <asp:ListItem Text="需核准且要繳費" Value="3" Style="font-size:14pt"></asp:ListItem>
                         </asp:RadioButtonList>
                     </td>
                 </tr>
@@ -269,6 +278,49 @@
                             <asp:ListItem Text="是" Value="Y"  />
                             <asp:ListItem Text="否" Value="N"  />
                         </asp:RadioButtonList>
+                    </td>
+                </tr>
+                <tr id="TR_CHARGE_1" runat="server" visible="false">
+                    <td width="15%" class="th1c_b">
+                        課程費用
+                    </td>
+                    <td width="85%" class="td2_b" colspan="3">
+                        <asp:TextBox ID="TXT_CHARGE" runat="server" Columns="7" MaxLength="7" />
+                    </td>
+                </tr>
+                <tr id="TR_CHARGE_2" runat="server" visible="false">
+                    <td width="15%" class="th1c_b">
+                        早鳥日期
+                    </td>
+                    <td width="35%" class="td2_b">
+                        <asp:TextBox ID="EARLYDATE" runat="server" Columns="10" />
+                    </td>
+                    <td width="15%" class="th1c_b">
+                        優惠費用
+                    </td>
+                    <td width="35%" class="td2_b">
+                        <asp:TextBox ID="TXT_FAVCHARGE" runat="server" Columns="7" MaxLength="7" />
+                    </td>
+                </tr>
+                <tr>
+                    <td width="15%" class="th1c_b">
+                        <span style="color: red; font-weight: bold; font-size: medium">*</span>
+                        注意事項說明
+                        <asp:Button ID="btnPREC" runat="server" CssClass="bt" Text="挑選預設詞彙" />
+                    </td>
+                    <td width="85%" class="td2_b" colspan="3">
+                        <asp:TextBox ID="TXT_MB_PREC_MEMO" runat="server" TextMode="MultiLine" Width="99%" MaxLength="2000" Rows="3" />
+                        <asp:PlaceHolder ID="PLH_PREC" runat="server" Visible="false">
+                        <asp:Repeater ID="RP_PREC" runat="server" >
+                            <ItemTemplate>
+                                <div>
+                                    <asp:CheckBox ID="CHB_PREC" runat="server" />
+                                    <asp:Literal ID="LTL_PREC" runat="server" Text='<%#Container.DataItem("TEXT")%>' />
+                                </div>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                        <asp:Button ID="btnPREC_YES" runat="server" CssClass="bt" Text="確定挑選" />
+                        </asp:PlaceHolder>
                     </td>
                 </tr>
                 <tr runat="server" id="tr_Check">

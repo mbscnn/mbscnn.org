@@ -296,8 +296,9 @@
     <input type="hidden" id="HID_SEQTIME" runat="server" />
     <input type="hidden" id="HID_INDEX" runat="server" />
     <input type="hidden" id="HID_CODEID" runat="server" />
-    <div align="left">
-        選擇課程<asp:RadioButton ID="RB_CLASS_YES" runat="server" Text="是" GroupName="CLASS" onclick="document.all('btnChoose').style.display='';" />
+    <div align="left" style="font-size:16pt;color:sandybrown;font-weight:bold" >
+        選擇課程
+        <asp:RadioButton ID="RB_CLASS_YES" runat="server" Text="是" GroupName="CLASS" onclick="document.all('btnChoose').style.display='';" />
         <asp:RadioButton ID="RB_CLASS_NO" runat="server" Text="否" GroupName="CLASS" onclick="document.all('btnChoose').style.display='none';" />
         <asp:Button ID="btnChoose" runat="server" CssClass="bt" Text="選擇課程" style="display:none" />
     </div>

@@ -40,7 +40,7 @@ Public Class MBMnt_Sign_01_v01
 
                         Using m_DBManager As com.Azion.NET.VB.DatabaseManager = UIShareFun.getDataBaseManager
                             Dim mbMEMBERList As New MB_MEMBERList(m_DBManager)
-                            mbMEMBERList.loadByMB_EMAIL(com.Azion.EloanUtility.UIUtility.getLoginUserID)
+                            mbMEMBERList.loadByMB_EMAIL_FAMILY(com.Azion.EloanUtility.UIUtility.getLoginUserID)
                             If mbMEMBERList.getCurrentDataSet.Tables(0).Rows.Count > 0 Then
                                 Me.RP_MAIL_SAME.DataSource = mbMEMBERList.getCurrentDataSet.Tables(0)
                                 Me.RP_MAIL_SAME.DataBind()
@@ -73,7 +73,7 @@ Public Class MBMnt_Sign_01_v01
 
                         Using m_DBManager As com.Azion.NET.VB.DatabaseManager = UIShareFun.getDataBaseManager
                             Dim mbMEMBERList As New MB_MEMBERList(m_DBManager)
-                            mbMEMBERList.loadByMB_EMAIL(com.Azion.EloanUtility.UIUtility.getLoginUserID)
+                            mbMEMBERList.loadByMB_EMAIL_FAMILY(com.Azion.EloanUtility.UIUtility.getLoginUserID)
                             If mbMEMBERList.getCurrentDataSet.Tables(0).Rows.Count > 0 Then
                                 Me.RP_MAIL_SAME.DataSource = mbMEMBERList.getCurrentDataSet.Tables(0)
                                 Me.RP_MAIL_SAME.DataBind()
@@ -746,6 +746,8 @@ Public Class MBMnt_Sign_01_v01
     Protected Sub dd_MB_CITY_SelectedIndexChanged(sender As Object, e As EventArgs) Handles dd_MB_CITY.SelectedIndexChanged
         Try
             Bind_ddl_VLG(dd_MB_CITY.SelectedValue, dd_MB_VLG)
+
+            com.Azion.EloanUtility.UIUtility.setObjFocus(Me, Me.dd_MB_CITY.ClientID)
         Catch ex As Exception
             UIShareFun.showErrMsg(Me, ex)
         End Try
@@ -755,6 +757,8 @@ Public Class MBMnt_Sign_01_v01
     Protected Sub dd_MB_CITY1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles dd_MB_CITY1.SelectedIndexChanged
         Try
             Bind_ddl_VLG(dd_MB_CITY1.SelectedValue, dd_MB_VLG1)
+
+            com.Azion.EloanUtility.UIUtility.setObjFocus(Me, Me.dd_MB_CITY1.ClientID)
         Catch ex As Exception
             UIShareFun.showErrMsg(Me, ex)
         End Try
@@ -798,6 +802,7 @@ Public Class MBMnt_Sign_01_v01
                 'Bind_ddl_VLG(dd_MB_CITY1.SelectedValue, dd_MB_VLG1)
             End If
 
+            com.Azion.EloanUtility.UIUtility.setObjFocus(Me, Me.cb_Ditto.ClientID)
         Catch ex As Exception
             UIShareFun.showErrMsg(Me, ex)
         End Try
@@ -852,6 +857,12 @@ Public Class MBMnt_Sign_01_v01
             Dim mbCLASS As New MB_CLASS(dbManager)
             If mbCLASS.loadByPK(Me.m_sCLASS, Me.m_sMB_BATCH) Then
                 Me.DealPageFMT(mbCLASS.getString("MB_APV"))
+
+                If mbCLASS.getString("MB_BEGIN") = "Y" Then
+                    Me.TR_G_16_T.Visible = True
+                Else
+                    Me.TR_G_16_T.Visible = False
+                End If
             End If
 
             '開啟下一個畫面
@@ -874,7 +885,7 @@ Public Class MBMnt_Sign_01_v01
     Sub DealPageFMT(ByVal sMB_APV As String)
         Try
             sMB_APV = UCase(sMB_APV)
-            If sMB_APV = "N" Then
+            If sMB_APV = "2" Then
                 'Show 黃色區
                 '出生年月日
                 'Me.TD_Y_1.ColSpan = 3
@@ -961,10 +972,12 @@ Public Class MBMnt_Sign_01_v01
     Protected Sub btn_Save_Click(sender As Object, e As EventArgs) Handles btn_Save.Click
         Try
             Dim sMB_APV As String = String.Empty
+            Dim sMB_BEGIN As String = String.Empty
             Using m_DBManager As com.Azion.NET.VB.DatabaseManager = UIShareFun.getDataBaseManager
                 Dim mbCLASS As New MB_CLASS(m_DBManager)
                 mbCLASS.loadByPK(Me.m_sCLASS, Me.m_sMB_BATCH)
                 sMB_APV = mbCLASS.getString("MB_APV")
+                sMB_BEGIN = mbCLASS.getString("MB_BEGIN")
             End Using
             '===================================檢核===================================
             '法名/姓名
@@ -1004,7 +1017,7 @@ Public Class MBMnt_Sign_01_v01
                 Exit Sub
             End If
             '出家眾
-            If sMB_APV = "Y" Then
+            If sMB_APV = "1" Then
                 If Not rbt_MB_MONK_Y.Checked And Not rbt_MB_MONK_N.Checked Then
                     UIUtility.alert("請選擇是否為出家眾!")
                     Exit Sub
@@ -1013,12 +1026,12 @@ Public Class MBMnt_Sign_01_v01
             '手機
             If Utility.isValidateData(txt_MB_MOBIL.Text) Then
                 If Not IsNumeric(txt_MB_MOBIL.Text) Then
-                    com.Azion.EloanUtility.UIUtility.alert("手機號碼應為10個數字，請檢查")
-                    com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "手機號碼應為10個數字，請檢查")
+                    com.Azion.EloanUtility.UIUtility.alert("手機號碼應為10個數字【範例:0933123456】，請檢查")
+                    com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "手機號碼應為10個數字【範例:0933123456】，請檢查")
                     Exit Sub
                 ElseIf IsNumeric(txt_MB_MOBIL.Text) AndAlso txt_MB_MOBIL.Text.Trim.Length <> 10 Then
-                    com.Azion.EloanUtility.UIUtility.alert("手機號碼應為10個數字，請檢查")
-                    com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "手機號碼應為10個數字，請檢查")
+                    com.Azion.EloanUtility.UIUtility.alert("手機號碼應為10個數字【範例:0933123456】，請檢查")
+                    com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "手機號碼應為10個數字【範例:0933123456】，請檢查")
                     Exit Sub
                 End If
             ElseIf Not Utility.isValidateData(Me.txt_MB_MOBIL.Text) AndAlso Not Utility.isValidateData(Me.txt_MB_TEL.Text) Then
@@ -1044,24 +1057,25 @@ Public Class MBMnt_Sign_01_v01
                 Exit Sub
             End If
             '身分證字號
-            If sMB_APV = "Y" Then
+            If sMB_APV = "1" Then
                 If Not com.Azion.EloanUtility.ValidateUtility.isValidateData(txt_MB_ID.Text.Trim) Then
                     UIUtility.alert("請輸入:身分證字號")
                     Exit Sub
                 End If
             End If
             '通訊地址
-            If sMB_APV = "Y" Then
+            If sMB_APV = "1" Then
                 If dd_MB_CITY.SelectedValue = "請選擇" Or dd_MB_VLG.SelectedValue = "請選擇" Or txt_MB_ADDR.Text.Trim = "" Then
                     UIUtility.alert("請輸入:通訊地址")
                     Exit Sub
                 End If
             End If
+            '1041201大惠師不要必填
             '宗教信仰
-            If dd_MB_RELIGION.SelectedValue = "請選擇" Then
-                UIUtility.alert("請輸入:宗教信仰")
-                Exit Sub
-            End If
+            'If dd_MB_RELIGION.SelectedValue = "請選擇" Then
+            '    UIUtility.alert("請輸入:宗教信仰")
+            '    Exit Sub
+            'End If
             '身心狀況
             If Me.TR_G_8.Visible = True Then
                 Dim iMB_SICK As Integer = 0
@@ -1080,47 +1094,51 @@ Public Class MBMnt_Sign_01_v01
             End If
 
             '打鼾
-            If sMB_APV = "Y" Then
+            If sMB_APV = "1" Then
                 If rbtList_MB_SNORE.SelectedValue.Trim = "" Then
                     UIUtility.alert("請輸入:打鼾")
                     Exit Sub
                 End If
             End If
             '緊急聯絡人
-            If sMB_APV = "Y" Then
+            If sMB_APV = "1" Then
                 If txt_MB_EMGCONT.Text.Trim = "" Or Not IsNumeric(txt_MB_CONTMOBIL.Text) Then
                     UIUtility.alert("請輸入:緊急聯絡人")
                     Exit Sub
                 End If
             End If
+            '1041201大惠師不要必填
             '參加動機或目的
-            If Not Utility.isValidateData(Trim(Me.MB_OBJECT.Text)) Then
-                UIUtility.alert("請輸入:參加動機或目的")
-                Return
-            End If
+            'If Not Utility.isValidateData(Trim(Me.MB_OBJECT.Text)) Then
+            '    UIUtility.alert("請輸入:參加動機或目的")
+            '    Return
+            'End If
             '是否曾參加過本中心課程
             If Not Utility.isValidateData(Me.JOINMBSC.SelectedValue) Then
                 UIUtility.alert("請選擇:是否曾參加過本中心課程")
                 Return
             End If
+
             '是否初學者
-            If Not Utility.isValidateData(Me.MB_BEGIN.SelectedValue) Then
-                UIUtility.alert("請選擇:是否初學者")
-                Return
-            End If
-            '每次禪坐時間
-            If Me.MB_BEGIN.SelectedValue = "N" Then
-                If Not Utility.isValidateData(Me.MB_SITIME.Text) Then
-                    UIUtility.alert("請輸入:每次禪坐時間")
+            If sMB_BEGIN = "Y" Then
+                If Not Utility.isValidateData(Me.MB_BEGIN.SelectedValue) Then
+                    UIUtility.alert("請選擇:是否初學者")
                     Return
                 End If
+                '每次禪坐時間
+                If Me.MB_BEGIN.SelectedValue = "N" Then
+                    If Not Utility.isValidateData(Me.MB_SITIME.Text) Then
+                        UIUtility.alert("請輸入:每次禪坐時間")
+                        Return
+                    End If
 
-                If Not IsNumeric(Me.MB_SITIME.Text) Then
-                    UIUtility.alert("每次禪坐時間請輸入數字")
-                    Return
-                ElseIf CDec(Me.MB_SITIME.Text) > 999 Then
-                    UIUtility.alert("每次禪坐時間不可大於999分鐘")
-                    Return
+                    If Not IsNumeric(Me.MB_SITIME.Text) Then
+                        UIUtility.alert("每次禪坐時間請輸入數字")
+                        Return
+                    ElseIf CDec(Me.MB_SITIME.Text) > 999 Then
+                        UIUtility.alert("每次禪坐時間不可大於999分鐘")
+                        Return
+                    End If
                 End If
             End If
 
@@ -1336,7 +1354,11 @@ Public Class MBMnt_Sign_01_v01
                     If Me.MB_BEGIN.SelectedValue = "Y" Then
                         .setAttribute("MB_SITIME", 0)
                     Else
-                        .setAttribute("MB_SITIME", CInt(Me.MB_SITIME.Text))
+                        If IsNumeric(Me.MB_SITIME.Text) Then
+                            .setAttribute("MB_SITIME", CInt(Me.MB_SITIME.Text))
+                        Else
+                            .setAttribute("MB_SITIME", 0)
+                        End If
                     End If
                     .save()
                 End With
@@ -1393,7 +1415,7 @@ Public Class MBMnt_Sign_01_v01
                                     Dim sMailTos() As String = {Trim(mbMEMBER.getString("MB_EMAIL"))}
 
                                     Dim sMailSub As String = String.Empty
-                                    If MB_CLASS.getString("MB_APV") <> "Y" Then
+                                    If MB_CLASS.getString("MB_APV") <> "1" Then
                                         If isWait Then
                                             sMailSub = MB_CLASS.getString("MB_CLASS_NAME") & " 備取通知" '請務必回覆是否出席"
                                         Else
@@ -1408,6 +1430,10 @@ Public Class MBMnt_Sign_01_v01
                                     sMailBody = Me.getMailBody(lbl_MB_MEMSEQ.Text, Trim(mbMEMBER.getString("MB_NAME")), MB_CLASS, isWait)
 
                                     com.Azion.EloanUtility.NetUtility.GMail_Send(sMailTos, Nothing, sMailSub, sMailBody, True, Nothing, False)
+
+                                    Dim sMSG As String = String.Empty
+                                    sMSG = "請至您的信箱收信\n如未收到\n請確認是否被系統自動分入垃圾信箱,\n若確定信箱內找不到信件,\n麻煩您致電中心法工確認"
+                                    UIUtility.alert(sMSG)
                                 End If
                             Catch ex As Exception
 
@@ -1449,7 +1475,7 @@ Public Class MBMnt_Sign_01_v01
         Try
             Dim sb As New StringBuilder
 
-            If MB_CLASS.getString("MB_APV") = "Y" Then
+            If MB_CLASS.getString("MB_APV") = "1" Then
                 '發原來報名成功通知函
                 sb.Append("<P>")
                 sb.Append("親愛的" & sAPPNAME & "您好：<BR/>")
@@ -1643,7 +1669,7 @@ Public Class MBMnt_Sign_01_v01
                     '    D_MB_SDATE = New Date(1911, 1, 1)
                     'End If
 
-                    'If UCase(mbCLASS.getString("MB_APV")) = "Y" Then
+                    'If UCase(mbCLASS.getString("MB_APV")) = "1" Then
                     '    If D_MB_SDATE <= DateAdd(DateInterval.Day, 1, Now) Then
                     '        Return False
                     '    Else

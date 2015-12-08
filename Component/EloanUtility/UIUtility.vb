@@ -1300,6 +1300,22 @@ Public NotInheritable Class UIUtility
         Return CBool(FileUtility.getAppSettings("Check", , "FALSE"))
     End Function
 
+    Public Shared Sub setObjFocus(ByVal Page As System.Web.UI.Page, ByVal sClientid As String)
+        Dim script As String = String.Empty
+        script = "<script language='javascript'>"
+        'script &= "document.all('" & sClientid & "').scrollIntoView();"
+        script &= "var target = document.getElementById('" & sClientid & "');"
+        script &= "if (target!=undefined){"
+        'script &= "alert('" & sClientid & "');"
+        'script &= "target.parentNode.scrollTop = target.offsetTop;"
+        script &= "target.parentNode.scrollTop = target.offsetTop - target.parentNode.offsetTop;"
+        script &= "alert(target.parentNode.scrollTop);"
+        script &= "}"
+        script &= "</script>"
+
+        Page.RegisterStartupScript("onbeforeunload", script)
+    End Sub
+
 #Region ""
     ''' <summary>
     ''' 轉換5碼安泰員編為7碼系統員編

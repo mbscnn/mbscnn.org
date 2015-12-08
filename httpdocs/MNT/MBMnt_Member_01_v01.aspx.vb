@@ -123,7 +123,7 @@ Public Class MBMnt_Member_01_v01
 
                 Me.Bind_MB_EDU()
 
-                Me.Bind_MB_AREA()
+                Me.Bind_MB_AREA_P()
 
                 Me.Bind_MB_FAMILY()
 
@@ -541,7 +541,7 @@ Public Class MBMnt_Member_01_v01
             End If
 
             If Not Utility.isValidateData(Trim(Me.MB_LEADER.SelectedValue)) Then
-                com.Azion.EloanUtility.UIUtility.alert("請選擇所屬區委員!")
+                com.Azion.EloanUtility.UIUtility.alert("請選擇所屬區委員!\n若無區委員下拉\n請更動一下通訊地址縣市下拉後，\n應該就有區委員下拉清單了")
                 Return
             End If
 
@@ -631,6 +631,8 @@ Public Class MBMnt_Member_01_v01
 
                 If Me.HID_OTHSIGN.Value = "1" Then
                     Me.SAVE_MB_MEMBER_TEMP(sMB_IDENTIFY)
+
+                    com.Azion.EloanUtility.UIUtility.showJSMsg(Me, "請電話通知中心法工人員，以利盡速通過審核!")
                 Else
                     Me.SAVE_MB_MEMBER(sMB_IDENTIFY)
 
@@ -2200,7 +2202,7 @@ Public Class MBMnt_Member_01_v01
         End Try
     End Sub
 
-    Sub Bind_MB_AREA()
+    Sub Bind_MB_AREA_P()
         Try
             Me.MB_AREA.Items.Clear()
 

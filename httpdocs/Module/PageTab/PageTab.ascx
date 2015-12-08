@@ -34,7 +34,7 @@
                     <div class="navbar-header page-scroll">
                     
                         <button type="button" class="navbar-toggle" style="background-color:#F9BC83" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">                            
-                           <B>«ö§Ú</B>
+                           <B>½Ðµn¤J</B>
                         </button>
                         <a class="navbar-brand page-scroll" href="#page-top"><img class="img-responsive" src="/img/logotext.png" alt="Responsive image"/></a>
                     </div>
@@ -57,7 +57,7 @@
                 jQuery('.back-to-top').fadeIn(duration);
             } else {
                 jQuery('.back-to-top').fadeOut(duration);
-            }
+            }            
         });
 
         jQuery('.back-to-top').click(function (event) {

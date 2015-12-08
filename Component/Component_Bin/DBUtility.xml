@@ -14,7 +14,7 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosParameter.#ctor(System.String,System.Object)">
  <summary> 
- ¨Ï¥Î«ü©wªºparameterName©MparameterValue¡Aªì©l¤Æ CmdParameter Ãþ§Oªº·s°õ¦æ­ÓÅé¡C
+ 使用指定的parameterName和parameterValue，初始化 CmdParameter 類別的新執行個體。
  </summary>
  <param name="name"></param>
  <param name="value"></param>
@@ -22,23 +22,23 @@ DBUtility
 </member>
 <member name="T:com.Azion.NET.VB.BosBase">
  <summary>
-  The Business objects (BOS)¡C
+  The Business objects (BOS)。
  </summary>
  <remarks>
- Bosbase ¹ê§@IEnumerator¡BIEnumerable ¤¶­±
- ©Ò¦³¹ê§@³æµ§ Table Objectª«¥ó¶·Ä~©ÓBosbase¡C
+ Bosbase 實作IEnumerator、IEnumerable 介面
+ 所有實作單筆 Table Object物件須繼承Bosbase。
  
  </remarks>
  <example> This sample shows how to inherits the Bosbase class based on EN_CASEMAIN which has the primary key
  <code>
- '½Ðª`·N©R¦W¤èªk 
+ '請注意命名方法 
  '----------------------------------------------
  '|Table Name  | BosBase     |  BosList         |
  '|------------| ------------|  ----------------|
  '|EN_CASEMAIN | EN_CASEMAIN |  EN_CASEMAINList |
  '----------------------------------------------
  Public Class EN_CASEMAIN Inherits Bosbase
-     '«Øºc¤l
+     '建構子
      Sub New()
           MyBase.New()
           Me.setPrimaryKeys()
@@ -52,8 +52,8 @@ DBUtility
           Return New EN_CASEMAIN(MyBase.getDatabaseManager)
      End Function
      
-     '®×¨Ò¤@:¤£¼gSQL»yªk¡Aª½±µµ¹°Ñ¼Æ
-     '¤º³¡¹B§@»yªk:[select * from en_casemain where CaseID=sCaseID]
+     '案例一:不寫SQL語法，直接給參數
+     '內部運作語法:[select * from en_casemain where CaseID=sCaseID]
      Function loadByPK(ByVal sCaseID As String) As Integer
           Try
                If (Not IsNothing(sCaseID) AndAlso sCaseID.Length > 0) Then
@@ -72,8 +72,8 @@ DBUtility
           Return 0
      End Function
  
-     '®×¨Ò¤G:¼gSQL»yªk¡A¨Ãµ¹°Ñ¼Æ
-     '¤º³¡¹B§@»yªk:[programmer µ¹ªºSQL = select * from en_casemain where CaseID=sCaseID]
+     '案例二:寫SQL語法，並給參數
+     '內部運作語法:[programmer 給的SQL = select * from en_casemain where CaseID=sCaseID]
      Function loadByPK(ByVal sCaseID As String) As Integer
           Try
                If (Not IsNothing(sCaseID) AndAlso sCaseID.Length > 0) Then
@@ -93,22 +93,22 @@ DBUtility
           Return 0
      End Function
  
-    '®×¨Ò¤T:¼gJoin SQL»yªk¡A¨Ãµ¹°Ñ¼Æ
-    '¤º³¡¹B§@»yªk:[programmer µ¹ªºSQL = select  a.caseid,a.brid,b.caseitemid caseitemid,b.loanitem ±Â«H¶µ¥Ø¦WºÙ,b.datadate ¸ê®Æ¤é´Á from En_Casemain a ,En_Casedetailcond  b where a.caseid=b.caseid and b.caseid=sCaseID and b.caseitemid=1]
-    '¦pªG¬O¦h¦U¤£¦PTable Join¦b¤@°_®É¡A
-    '¦b¦¹ª«¥ó(EN_CASEMAINList)¶·¤â°Ê¼W¥[Äæ¦ìÄÝ©Ê¡A¤~¥i¨ú±o¤£¦PTable(En_Casedetailcond)ªºÄæ¦ì(caseitemid¡Bloanitem¡Bdatadate)
+    '案例三:寫Join SQL語法，並給參數
+    '內部運作語法:[programmer 給的SQL = select  a.caseid,a.brid,b.caseitemid caseitemid,b.loanitem 授信項目名稱,b.datadate 資料日期 from En_Casemain a ,En_Casedetailcond  b where a.caseid=b.caseid and b.caseid=sCaseID and b.caseitemid=1]
+    '如果是多各不同Table Join在一起時，
+    '在此物件(EN_CASEMAINList)須手動增加欄位屬性，才可取得不同Table(En_Casedetailcond)的欄位(caseitemid、loanitem、datadate)
      Function loadCaseItem(ByVal sCaseId As String) As Integer
           Try
                If (Not IsNothing(sCaseId) AndAlso sCaseId.Length > 0) Then
                     Dim sqlStr As String = ""
-                    sqlStr = "select  a.caseid,a.brid,b.caseitemid caseitemid,b.loanitem ±Â«H¶µ¥Ø¦WºÙ,b.datadate ¸ê®Æ¤é´Á from En_Casemain a ,En_Casedetailcond  b where a.caseid=b.caseid " + _
+                    sqlStr = "select  a.caseid,a.brid,b.caseitemid caseitemid,b.loanitem 授信項目名稱,b.datadate 資料日期 from En_Casemain a ,En_Casedetailcond  b where a.caseid=b.caseid " + _
                     " and CASEID=" + ProviderFactory.PositionPara + "CASEID and b.caseitemid=1 "
  
-                    '¤U­±³o¤T­ÓÄæ¦ìÄÝ©óEn_Casedetailcondªº¡A¨Ã«DÄÝ©óEn_CaseMainªºÄæ¦ì
-                    '¦]¦¹¶·±NEn_Casedetailcondªº¤T­ÓÄæ¦ì¤â°Ê¥[¤JEN_CASEMAINListªºª«¥ó¡A¦p¦¹¦¹¯à¨ú±o³o¤T¦UÄæ¦ìªº­È
-                    Me.addAttribute("caseitemid", System.Data.DbType.Decimal)'¦pªG¸ê®Æ«¬§O¬ONumber-->System.Data.DbType.Decimal
-                    Me.addAttribute("±Â«H¶µ¥Ø¦WºÙ", System.Data.DbType.String)'¦pªG¸ê®Æ«¬§O¬OString-->System.Data.DbType.String
-                    Me.addAttribute("¸ê®Æ¤é´Á", System.Data.DbType.Date)'¦pªG¸ê®Æ«¬§O¬ODate-->System.Data.DbType.Date
+                    '下面這三個欄位屬於En_Casedetailcond的，並非屬於En_CaseMain的欄位
+                    '因此須將En_Casedetailcond的三個欄位手動加入EN_CASEMAINList的物件，如此此能取得這三各欄位的值
+                    Me.addAttribute("caseitemid", System.Data.DbType.Decimal)'如果資料型別是Number-->System.Data.DbType.Decimal
+                    Me.addAttribute("授信項目名稱", System.Data.DbType.String)'如果資料型別是String-->System.Data.DbType.String
+                    Me.addAttribute("資料日期", System.Data.DbType.Date)'如果資料型別是Date-->System.Data.DbType.Date
  
                     Dim para As IDbDataParameter = ProviderFactory.CreateDataParameter("CASEID", sCaseId)
  
@@ -133,44 +133,44 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.GetDataTable(System.String,System.Object[])">
  <summary>
- ±N¬d¸ßªº¸ê°T¼g¤J¦ÜDataTable¤º¡A¥ÑDataReaderÂà¤J¦ÜDataTable
+ 將查詢的資訊寫入至DataTable內，由DataReader轉入至DataTable
  </summary>
- <param name="strSQL">­Y¬°NOTHING¡Aµ{¦¡·|¦Û¦æ²ÕSQL¦r¦ê</param>
+ <param name="strSQL">若為NOTHING，程式會自行組SQL字串</param>
  <param name="objs"></param>
  <returns></returns>
  <remarks></remarks>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.GetDataTable(System.String,com.Azion.NET.VB.BosParameter[],System.Data.CommandType)">
  <summary>
- ±N¬d¸ßªº¸ê°T¼g¤J¦ÜDataTable¤º¡A¥ÑDataReaderÂà¤J¦ÜDataTable
+ 將查詢的資訊寫入至DataTable內，由DataReader轉入至DataTable
  </summary>
- <param name="strSQL">­Y¬°NOTHING¡Aµ{¦¡·|¦Û¦æ²ÕSQL¦r¦ê</param>
+ <param name="strSQL">若為NOTHING，程式會自行組SQL字串</param>
  <param name="parameters"></param>
  <returns></returns>
  <remarks></remarks>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.InsertUpdate(com.Azion.NET.VB.BosParameter[])">
  <summary>
- ­Y¤w¦³°O¿ý¡A«h§ó·s°O¿ý¡C§_«h·s¼W°O¿ý¡C
+ 若已有記錄，則更新記錄。否則新增記錄。
  </summary>
  <param name="parameters"></param>
- <returns>¨ü¼vÅTªº¸ê®Æ¦C¼Æ¥Ø¡C</returns>
- <remarks>·|¥HPK¨Ó§PÂ_¬O§_¬O·s°O¿ýÁÙ¬OÂÂ°O¿ý</remarks>
+ <returns>受影響的資料列數目。</returns>
+ <remarks>會以PK來判斷是否是新記錄還是舊記錄</remarks>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.InsertUpdate(System.String,com.Azion.NET.VB.BosParameter[])">
  <summary>
- ­Y¤w¦³°O¿ý¡A«h§ó·s°O¿ý¡C§_«h·s¼W°O¿ý¡C
+ 若已有記錄，則更新記錄。否則新增記錄。
  </summary>
  <param name="tableName"></param>
  <param name="parameters"></param>
- <returns>¨ü¼vÅTªº¸ê®Æ¦C¼Æ¥Ø¡C</returns>
- <remarks>·|¥HPK¨Ó§PÂ_¬O§_¬O·s°O¿ýÁÙ¬OÂÂ°O¿ý</remarks>
+ <returns>受影響的資料列數目。</returns>
+ <remarks>會以PK來判斷是否是新記錄還是舊記錄</remarks>
  <SAMPLE>
  </SAMPLE>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.Insert(System.Object[])">
  <summary>
- ·s¸ê¸ê®Æ
+ 新資資料
  </summary>
  <param name="objs"></param>
  <returns></returns>
@@ -178,16 +178,16 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.Insert(System.String,com.Azion.NET.VB.BosParameter[])">
  <summary>
- ·s¼W°O¿ý
+ 新增記錄
  </summary>
  <param name="tableName"></param>
  <param name="parameters"></param>
- <returns>¨ü¼vÅTªº¸ê®Æ¦C¼Æ¥Ø</returns>
+ <returns>受影響的資料列數目</returns>
  <remarks></remarks>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.Update(com.Azion.NET.VB.BosParameter[])">
  <summary>
- §ó·s°O¿ý¡C
+ 更新記錄。
  </summary>
  <param name="parameters"></param>
  <returns></returns>
@@ -195,18 +195,18 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.Update(System.String,com.Azion.NET.VB.BosParameter[])">
  <summary>
- §ó·s°O¿ý¡C
+ 更新記錄。
  </summary>
  <param name="tableName"></param>
  <param name="parameters"></param>
- <returns>¨ü¼vÅTªº¸ê®Æ¦C¼Æ¥Ø¡C</returns>
+ <returns>受影響的資料列數目。</returns>
  <remarks></remarks>
  <SAMPLE>
  </SAMPLE>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.GetCount(com.Azion.NET.VB.BosParameter[])">
  <summary>
- ¨ú±o°O¿ýµ§¼Æ¡C
+ 取得記錄筆數。
  </summary>
  <param name="parameters"></param>
  <returns></returns>
@@ -214,46 +214,46 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.Delete(com.Azion.NET.VB.BosParameter[])">
  <summary>
- §R°£°O¿ý
+ 刪除記錄
  </summary>
  <param name="parameters"></param>
- <returns>¨ü¼vÅTªº¸ê®Æ¦C¼Æ¥Ø</returns>
+ <returns>受影響的資料列數目</returns>
  <remarks></remarks>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.Delete(System.String,com.Azion.NET.VB.BosParameter[])">
  <summary>
- §R°£°O¿ý
+ 刪除記錄
  </summary>
  <param name="tableName"></param>
  <param name="parameters"></param>
- <returns>¨ü¼vÅTªº¸ê®Æ¦C¼Æ¥Ø</returns>
+ <returns>受影響的資料列數目</returns>
  <remarks></remarks>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.GetCount(System.String,com.Azion.NET.VB.BosParameter[])">
  <summary>
- ¨ú±o°O¿ýµ§¼Æ¡C
+ 取得記錄筆數。
  </summary>
  <param name="tableName"></param>
  <param name="parameters"></param>
- <returns>¸ê®Æ¦C¼Æ¥Ø¡C</returns>
+ <returns>資料列數目。</returns>
  <remarks></remarks>
  <SAMPLE>
  </SAMPLE>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.GetDataRowCollection(System.String,System.Object[])">
  <summary>
- ¨ú±oDataRowCollection¡C­Y¤£¬°NOTHING¡A«h¤@©w¦Ü¤Ö¦³¤@µ§¸ê®Æ
+ 取得DataRowCollection。若不為NOTHING，則一定至少有一筆資料
  </summary>
- <param name="strSQL">­Y¬°NOTHING¡Aµ{¦¡·|¦Û¦æ²ÕSQL¦r¦ê</param>
+ <param name="strSQL">若為NOTHING，程式會自行組SQL字串</param>
  <param name="objs"></param>
  <returns></returns>
  <remarks></remarks>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.GetDataRowCollection(System.String,com.Azion.NET.VB.BosParameter[],System.Data.CommandType)">
  <summary>
- ¨ú±oDataRowCollection¡C­Y¤£¬°NOTHING¡A«h¤@©w¦Ü¤Ö¦³¤@µ§¸ê®Æ
+ 取得DataRowCollection。若不為NOTHING，則一定至少有一筆資料
  </summary>
- <param name="strSQL">­Y¬°NOTHING¡Aµ{¦¡·|¦Û¦æ²ÕSQL¦r¦ê</param>
+ <param name="strSQL">若為NOTHING，程式會自行組SQL字串</param>
  <param name="parameters"></param>
  <param name="commandType"></param>
  <returns></returns>
@@ -261,18 +261,18 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.GetDataRowCollection2(System.String,System.Object[])">
  <summary>
- ¨ú±oDataRowCollection¡C
+ 取得DataRowCollection。
  </summary>
- <param name="strSQL">­Y¬°NOTHING¡Aµ{¦¡·|¦Û¦æ²ÕSQL¦r¦ê</param>
+ <param name="strSQL">若為NOTHING，程式會自行組SQL字串</param>
  <param name="objs"></param>
  <returns></returns>
  <remarks></remarks>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.GetDataRowCollection2(System.String,com.Azion.NET.VB.BosParameter[],System.Data.CommandType)">
  <summary>
- ¨ú±oDataRowCollection¡C
+ 取得DataRowCollection。
  </summary>
- <param name="strSQL">­Y¬°NOTHING¡Aµ{¦¡·|¦Û¦æ²ÕSQL¦r¦ê</param>
+ <param name="strSQL">若為NOTHING，程式會自行組SQL字串</param>
  <param name="parameters"></param>
  <param name="commandType"></param>
  <returns></returns>
@@ -280,26 +280,26 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.GetDataRow(System.String,System.Object[])">
  <summary>
- ¨ú±oDataRow¡C­Y¤£¬°NOTHING¡A«h¤@©w¦Ü¤Ö¦³¤@µ§¸ê®Æ
+ 取得DataRow。若不為NOTHING，則一定至少有一筆資料
  </summary>
- <param name="strSQL">­Y¬°NOTHING¡Aµ{¦¡·|¦Û¦æ²ÕSQL¦r¦ê</param>
+ <param name="strSQL">若為NOTHING，程式會自行組SQL字串</param>
  <param name="objs"></param>
  <returns></returns>
  <remarks></remarks>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.GetDataRow(System.String,com.Azion.NET.VB.BosParameter[],System.Data.CommandType)">
  <summary>
- ¨ú±oDataRow¡C­Y¤£¬°NOTHING¡A«h¤@©w¥u¦³¤@µ§¸ê®Æ
+ 取得DataRow。若不為NOTHING，則一定只有一筆資料
  </summary>
- <param name="strSQL">­Y¬°NOTHING¡Aµ{¦¡·|¦Û¦æ²ÕSQL¦r¦ê</param>
+ <param name="strSQL">若為NOTHING，程式會自行組SQL字串</param>
  <param name="parameters"></param>
  <param name="commandType"></param>
- <returns>­Y¤£¬°NOTHING¡A«h¶Ç¦^¤@µ§¸ê®Æ</returns>
+ <returns>若不為NOTHING，則傳回一筆資料</returns>
  <remarks></remarks>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.GetSQLStatement(System.String,com.Azion.NET.VB.BosParameter[])">
  <summary>
- ¨ú±oSQL»yªk
+ 取得SQL語法
  </summary>
  <param name="strSQL"></param>
  <param name="parameters"></param>
@@ -308,14 +308,14 @@ DBUtility
 </member>
 <member name="P:com.Azion.NET.VB.BosBase.GetLastSQL">
  <summary>
- ¨ú±o³Ì«á°õ¦æªºSQL»yªk
+ 取得最後執行的SQL語法
  </summary>
  <returns></returns>
  <remarks></remarks>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.CDbType``1(System.Object)">
  <summary>
- ±N±qDBÅª¥X¨Óªº¸ê®ÆÂà¦¨«ü©wªº¸ê®ÆÃþ§O¡A¦pªG¬OªÅªº¡A«hÂà¦¨NOTHING
+ 將從DB讀出來的資料轉成指定的資料類別，如果是空的，則轉成NOTHING
  </summary>
  <typeparam name="T"></typeparam>
  <param name="Expression"></param>
@@ -324,7 +324,7 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.CDbType``1(System.Object,``0)">
  <summary>
- ±N±qDBÅª¥X¨Óªº¸ê®ÆÂà¦¨«ü©wªº¸ê®ÆÃþ§O¡A¦pªG¬OªÅªº¡A«hÂà¦¨¹w³]ªº­È(tDefault)
+ 將從DB讀出來的資料轉成指定的資料類別，如果是空的，則轉成預設的值(tDefault)
  </summary>
  <typeparam name="T"></typeparam>
  <param name="Expression"></param>
@@ -334,7 +334,7 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.QueryString(System.String,System.Object[])">
  <summary>
- ±qDBÅª¥X¸ê®Æ¨ÃÂà¦¨¦r¦ê¡A¦pªG¬ODBNULL¡A«hÂà¦¨NOTHING
+ 從DB讀出資料並轉成字串，如果是DBNULL，則轉成NOTHING
  </summary>
  <param name="strSQL_Field"></param>
  <param name="objs"></param>
@@ -343,7 +343,7 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.QueryValue``1(System.String,``0,System.Object[])">
  <summary>
- ±qDBÅª¥X¤@µ§¸ê®Æ¨ÃÂà¦¨«ü©wªº¸ê®ÆÃþ§O¡A¦pªG¬OªÅªº¡A«hÂà¦¨¹w³]ªº­È(DBNULLValue)
+ 從DB讀出一筆資料並轉成指定的資料類別，如果是空的，則轉成預設的值(DBNULLValue)
  </summary>
  <typeparam name="T"></typeparam>
  <param name="strSQL_Field"></param>
@@ -354,7 +354,7 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.QueryList``1(System.String,System.Object,System.Object[])">
  <summary>
- ±qDBÅª¥X¦hµ§¸ê®Æ¨ÃÂà¦¨«ü©wªº¸ê®ÆÃþ§O¡A¦pªG¬OªÅªº¡A«hÂà¦¨¹w³]ªº­È(DBNULLValue)
+ 從DB讀出多筆資料並轉成指定的資料類別，如果是空的，則轉成預設的值(DBNULLValue)
  </summary>
  <typeparam name="T"></typeparam>
  <param name="strSQL_Field"></param>
@@ -365,7 +365,7 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.QueryArray``1(System.String,System.Object,System.Object[])">
  <summary>
- ±qDBÅª¥X¦hµ§¸ê®Æ¨ÃÂà¦¨«ü©wªº¸ê®ÆÃþ§O¡A¦pªG¬OªÅªº¡A«hÂà¦¨¹w³]ªº­È(DBNULLValue)
+ 從DB讀出多筆資料並轉成指定的資料類別，如果是空的，則轉成預設的值(DBNULLValue)
  </summary>
  <typeparam name="T"></typeparam>
  <param name="strSQL_Field"></param>
@@ -376,7 +376,7 @@ DBUtility
 </member>
 <member name="F:com.Azion.NET.VB.BosBase.m_databaseManager">
  <summary>
- ³s½uª«¥ó
+ 連線物件
  </summary>
  <remarks></remarks>
 </member>
@@ -388,31 +388,31 @@ DBUtility
 </member>
 <member name="F:com.Azion.NET.VB.BosBase.m_attributes">
  <summary>
- ¦s©ñ Column Name »P BosAttribute Object
+ 存放 Column Name 與 BosAttribute Object
  </summary>
  <remarks></remarks>
 </member>
 <member name="F:com.Azion.NET.VB.BosBase.m_bosAttributeList">
  <summary>
- ¦s©ñ BosAttribute Object
+ 存放 BosAttribute Object
  </summary>
  <remarks></remarks>
 </member>
 <member name="F:com.Azion.NET.VB.BosBase.m_bIsLoaded">
  <summary>
- ª«¥ó¬O§_¸ü¤J
+ 物件是否載入
  </summary>
  <remarks></remarks>
 </member>
 <member name="F:com.Azion.NET.VB.BosBase.m_hashPrimaryKeys">
  <summary>
- ¦s©ñ PrimaryKey's Column Name »P value
+ 存放 PrimaryKey's Column Name 與 value
  </summary>
  <remarks></remarks>
 </member>
 <member name="F:com.Azion.NET.VB.BosBase.m_arrayPrimaryKeys">
  <summary>
- ¦s©ñ PrimaryKey's Column Name
+ 存放 PrimaryKey's Column Name
  </summary>
  <remarks></remarks>
 </member>
@@ -424,21 +424,21 @@ DBUtility
 </member>
 <member name="F:com.Azion.NET.VB.BosBase.m_currentIndex">
  <summary>
- ¥Ø«e°O¿ýªº«ü¼Ð
+ 目前記錄的指標
  </summary>
  <remarks></remarks>
 </member>
 <member name="F:com.Azion.NET.VB.BosBase.m_bloadPk">
  <summary>
- °O¿ýPK¬O§_¸ü¤J
+ 記錄PK是否載入
  </summary>
  <remarks></remarks>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.#ctor">
  <summary>
- ªì©l¤Æ BosBase Ãþ§Oªº·s°õ¦æ­ÓÅé (Instance)¡C
+ 初始化 BosBase 類別的新執行個體 (Instance)。
  </summary>
- <remarks>«Øºc¤l
+ <remarks>建構子
  </remarks>
  <history>
  	[Titan]	2009/01/20	modify
@@ -446,11 +446,11 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.#ctor(System.String,com.Azion.NET.VB.DatabaseManager)">
  <summary>
- ªì©l¤Æ BosBase Ãþ§Oªº·s°õ¦æ­ÓÅé (Instance)¡C
+ 初始化 BosBase 類別的新執行個體 (Instance)。
  </summary>
- <param name="sTableName">¶Ç¤JTable Name(¤j¼g)</param>
- <param name="databaseManager">¶Ç¤J DatabaseManager</param>
- <remarks>«Øºc¤l
+ <param name="sTableName">傳入Table Name(大寫)</param>
+ <param name="databaseManager">傳入 DatabaseManager</param>
+ <remarks>建構子
  </remarks>
  <history>
  	[Titan]	2009/01/20	modify
@@ -458,10 +458,10 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.loadBySQL(System.String)">
  <summary>
- ¨Ï¥ÎDataAdatpter.Fill(DataTable)¤èªk¡A¨úªº¬ÛÃöTableªº°O¿ý¡C
+ 使用DataAdatpter.Fill(DataTable)方法，取的相關Table的記錄。
  </summary>
- <param name="sSQL">¶Ç¤JSQL»yªk¡C</param>
- <returns>Integer ¶Ç¦^°O¿ýªºµ§¼Æ¡C</returns>
+ <param name="sSQL">傳入SQL語法。</param>
+ <returns>Integer 傳回記錄的筆數。</returns>
  <remarks>
  </remarks>
  <history>
@@ -470,10 +470,10 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.loadData(System.Data.IDataParameter[])">
  <summary>
- ¨Ï¥ÎDataAdatpter.Fill(DataTable)¤èªk¡A¨úªº¬ÛÃöTableªº°O¿ý¡C
+ 使用DataAdatpter.Fill(DataTable)方法，取的相關Table的記錄。
  </summary>
- <param name="commandParameters">¶Ç¤JIDataParameter°}¦C¡C</param>
- <returns>Integer ¶Ç¦^°O¿ýªºµ§¼Æ¡C</returns>
+ <param name="commandParameters">傳入IDataParameter陣列。</param>
+ <returns>Integer 傳回記錄的筆數。</returns>
  <remarks>
  </remarks>
  <history>
@@ -482,10 +482,10 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.loadBySQL(System.Data.IDataParameter[])">
  <summary>
- ¨Ï¥ÎDataAdatpter.Fill(DataTable)¤èªk¡A¨úªº¬ÛÃöTableªº°O¿ý¡C
+ 使用DataAdatpter.Fill(DataTable)方法，取的相關Table的記錄。
  </summary>
- <param name="commandParameters">¶Ç¤JIDataParameter°}¦C¡C</param>
- <returns>Integer ¶Ç¦^°O¿ýªºµ§¼Æ¡C</returns>
+ <param name="commandParameters">傳入IDataParameter陣列。</param>
+ <returns>Integer 傳回記錄的筆數。</returns>
  <remarks>
  </remarks>
  <history>
@@ -494,11 +494,11 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.loadBySQL(System.String,System.Data.IDataParameter[])">
  <summary>
- ¨Ï¥ÎDataAdatpter.Fill(DataTable)¤èªk¡A¨úªº¬ÛÃöTableªº°O¿ý¡C
+ 使用DataAdatpter.Fill(DataTable)方法，取的相關Table的記錄。
  </summary>
- <param name="sSQL">¶Ç¤JSQL»yªk¡C</param>
- <param name="commandParameters">¶Ç¤JIDataParameter°}¦C¡C</param>
- <returns>Integer ¶Ç¦^°O¿ýªºµ§¼Æ</returns>
+ <param name="sSQL">傳入SQL語法。</param>
+ <param name="commandParameters">傳入IDataParameter陣列。</param>
+ <returns>Integer 傳回記錄的筆數</returns>
  <remarks>
  </remarks>
  <history>
@@ -507,9 +507,9 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.setTableName(System.String)">
  <summary>
- ³]©wTable Name¡C
+ 設定Table Name。
  </summary>
- <param name="sTableName">¶Ç¤JTable Name¡C</param> 
+ <param name="sTableName">傳入Table Name。</param> 
  <remarks>
  </remarks>
  <history>
@@ -518,9 +518,9 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.getTableName">
  <summary>
- ¨ú±oTable Name¡C
+ 取得Table Name。
  </summary>
- <returns>String ¶Ç¦^Table Name</returns>
+ <returns>String 傳回Table Name</returns>
  <remarks>
  EN_CASEMAIN
  </remarks>
@@ -530,9 +530,9 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.getSchemaTableName">
  <summary>
- ¨ú±oSchema Table Name¡C
+ 取得Schema Table Name。
  </summary>
- <returns>String ¶Ç¦^Schema Table Name</returns>
+ <returns>String 傳回Schema Table Name</returns>
  <remarks>
  BOTELOAN.EN_CASEMAIN
  </remarks>
@@ -542,9 +542,9 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.getDataSet">
  <summary>
- ¨ú±oCurrent DataSet¡C
+ 取得Current DataSet。
  </summary>
- <returns>DataSet ¶Ç¦^ª«¥ó Current DataSet</returns>
+ <returns>DataSet 傳回物件 Current DataSet</returns>
  <remarks>
  </remarks>
  <history>
@@ -553,11 +553,11 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.setCurrentDataSet(System.Data.DataSet)">
  <summary>
- ³]©wCurrent DataSet¡C
+ 設定Current DataSet。
  </summary>
- <param name="dataSet">¶Ç¤JDataSet¡C</param>
+ <param name="dataSet">傳入DataSet。</param>
  <remarks>
- ±Nª«¥ó¥Ñmemory­«·s¸ü¤J
+ 將物件由memory重新載入
  </remarks>
  <history>
  	[Titan]	2009/01/20	modify
@@ -565,9 +565,9 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.setDatabaseManager(com.Azion.NET.VB.DatabaseManager)">
  <summary>
- ³]©wDatabaseManager Object¡C
+ 設定DatabaseManager Object。
  </summary>
- <param name="databaseManager">¶Ç¤JDatabaseManager¡C</param>
+ <param name="databaseManager">傳入DatabaseManager。</param>
  <remarks>
  </remarks>
  <history>
@@ -576,9 +576,9 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.getDatabaseManager">
  <summary>
- ¨ú±oDatabaseManager¡CObject
+ 取得DatabaseManager。Object
  </summary>
- <returns>DatabaseManager ¶Ç¦^DatabaseManager</returns>
+ <returns>DatabaseManager 傳回DatabaseManager</returns>
  <remarks>
  </remarks>
  <history>
@@ -587,70 +587,70 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.setPrimaryKeys">
  <summary>
- ³]©w PrimaryKeys
+ 設定 PrimaryKeys
  </summary>
  <remarks> 
- ¦pªGTable¨S¦³³]©wÄæ¦ì¡A¤@©w»Ý­nOverridable³o­ÓFunction¡A
- §_«h¦¹ª«¥óµL§@¥Î
+ 如果Table沒有設定欄位，一定需要Overridable這個Function，
+ 否則此物件無作用
  </remarks>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.getArrayPrimaryKeys">
  <summary>
  get PrimaryKeys
  </summary>
- <returns>ArrayList ¦^¶ÇPrimaryKey's Column Name </returns>
+ <returns>ArrayList 回傳PrimaryKey's Column Name </returns>
  <remarks></remarks>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.getHashPrimaryKeys">
  <summary>
  get PrimaryKeys
  </summary>
- <returns>Hashtable ¦^¶ÇPrimaryKey's key and Value </returns>
+ <returns>Hashtable 回傳PrimaryKey's key and Value </returns>
  <remarks></remarks>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.setHashPrimaryKeys(System.Collections.Hashtable)">
  <summary>
  set Hash PrimaryKeys
  </summary>
- <param name="hashtable">¶Ç¤JPrimaryKey's key and Value (Hashtable)</param>
+ <param name="hashtable">傳入PrimaryKey's key and Value (Hashtable)</param>
  <remarks></remarks>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.setIsLoaded(System.Boolean)">
  <summary>
- ³]©wª«¥ó¬O§_¸ü¤J
+ 設定物件是否載入
  </summary>
  <param name="bIsLoaded"></param>
  <remarks></remarks>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.isLoaded">
  <summary>
- ¨ú±oª«¥ó¬O§_¸ü¤J
+ 取得物件是否載入
  </summary>
- <returns>Boolean True:¸ü¤J¡AFalse:µL¸ü¤J</returns>
+ <returns>Boolean True:載入，False:無載入</returns>
  <remarks></remarks>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.setAttribute(System.String,System.Object)">
  <summary>
  set value of Column
  </summary>
- <param name="sAttrName">String ¶Ç¤JColumn Name</param>
- <param name="value">Object ¶Ç¤JColumn's value</param>
+ <param name="sAttrName">String 傳入Column Name</param>
+ <param name="value">Object 傳入Column's value</param>
  <remarks></remarks>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.getAttribute(System.String)">
  <summary>
  get value of Column
  </summary>
- <param name="sAttrName">String ¶Ç¤JColumn Name</param>
+ <param name="sAttrName">String 傳入Column Name</param>
  <returns>Object Column's Value</returns>
- <remarks>¦^¶Ç¸ê®Æ®w«¬§O</remarks>
+ <remarks>回傳資料庫型別</remarks>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.setLong(System.String,System.Int64)">
  <summary>
  set Long value of Column
  </summary>
- <param name="sAttrName">String ¶Ç¤JColumn Name</param>
- <param name="iAttrValue">Long ¶Ç¤JColumn's value</param>
+ <param name="sAttrName">String 傳入Column Name</param>
+ <param name="iAttrValue">Long 傳入Column's value</param>
  <remarks>
  OleDb.OleDbType.BigInt 
  </remarks>
@@ -659,7 +659,7 @@ DBUtility
  <summary>
  get Long value of Column
  </summary>
- <param name="sAttrName">String ¶Ç¤JColumn Name</param>
+ <param name="sAttrName">String 傳入Column Name</param>
  <returns>Long Column's Value</returns>
  <remarks>
  OleDb.OleDbType.BigInt
@@ -669,8 +669,8 @@ DBUtility
  <summary>
  set String value of Column
  </summary>
- <param name="sAttrName">String ¶Ç¤JColumn Name</param>
- <param name="sAttrValue">String ¶Ç¤JColumn's value</param>
+ <param name="sAttrName">String 傳入Column Name</param>
+ <param name="sAttrValue">String 傳入Column's value</param>
  <remarks>
  OleDb.OleDbType.BSTR
  OleDb.OleDbType.Char
@@ -685,7 +685,7 @@ DBUtility
  <summary>
  set String value of Column
  </summary>
- <param name="sAttrName">String ¶Ç¤JColumn Name</param>
+ <param name="sAttrName">String 傳入Column Name</param>
  <returns>String Column's Value</returns>
  <remarks>
  OleDb.OleDbType.BSTR
@@ -701,8 +701,8 @@ DBUtility
  <summary>
  set Integer value of Column
  </summary>
- <param name="sAttrName">String ¶Ç¤JColumn Name</param>
- <param name="iAttrValue">Integer ¶Ç¤JColumn's value</param>
+ <param name="sAttrName">String 傳入Column Name</param>
+ <param name="iAttrValue">Integer 傳入Column's value</param>
  <remarks>
  OleDb.OleDbType.Integer  
  </remarks>
@@ -711,7 +711,7 @@ DBUtility
  <summary>
  get Integer value of Column
  </summary>
- <param name="sAttrName">String ¶Ç¤JColumn Name</param>
+ <param name="sAttrName">String 傳入Column Name</param>
  <returns>Integer Column's Value</returns>
  <remarks>
  OleDb.OleDbType.Integer  
@@ -721,8 +721,8 @@ DBUtility
  <summary>
  set Decimal value of Column
  </summary>
- <param name="sAttrName">String ¶Ç¤JColumn Name</param>
- <param name="decAttrValue">Decimal ¶Ç¤JColumn's value</param>
+ <param name="sAttrName">String 傳入Column Name</param>
+ <param name="decAttrValue">Decimal 傳入Column's value</param>
  <remarks>
  OleDb.OleDbType.Numeric 
  OleDb.OleDbType.Decimal
@@ -732,7 +732,7 @@ DBUtility
  <summary>
  get Decimal value of Column
  </summary>
- <param name="sAttrName">String ¶Ç¤JColumn Name</param>
+ <param name="sAttrName">String 傳入Column Name</param>
  <returns>Decimal Column's Value</returns>
  <remarks>
  OleDb.OleDbType.Numeric 
@@ -743,8 +743,8 @@ DBUtility
  <summary>
  set Date value of Column
  </summary>
- <param name="sAttrName">String ¶Ç¤JColumn Name</param>
- <param name="dAttrValue">DateTime ¶Ç¤JColumn's value</param>
+ <param name="sAttrName">String 傳入Column Name</param>
+ <param name="dAttrValue">DateTime 傳入Column's value</param>
  <remarks>
  OleDb.OleDbType.Date
  OleDb.OleDbType.DBDate
@@ -755,7 +755,7 @@ DBUtility
  <summary>
  get Date value of Column
  </summary>
- <param name="sAttrName">String ¶Ç¤JColumn Name</param>
+ <param name="sAttrName">String 傳入Column Name</param>
  <returns>Date Column's Value</returns>
  <remarks>
  OleDb.OleDbType.Date
@@ -767,8 +767,8 @@ DBUtility
  <summary>
  set Int16 value of Column
  </summary>
- <param name="sAttrName">String ¶Ç¤JColumn Name</param>
- <param name="iAttrValue">Int16 ¶Ç¤JColumn's value</param>
+ <param name="sAttrName">String 傳入Column Name</param>
+ <param name="iAttrValue">Int16 傳入Column's value</param>
  <remarks>
  OleDb.OleDbType.SmallInt
  </remarks>
@@ -777,7 +777,7 @@ DBUtility
  <summary>
  get Int16 value of Column
  </summary>
- <param name="sAttrName">String ¶Ç¤JColumn Name</param>
+ <param name="sAttrName">String 傳入Column Name</param>
  <returns>Int16 Column's Value</returns>
  <remarks>
  OleDb.OleDbType.SmallInt
@@ -785,10 +785,10 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.setAttMeta(System.String,System.Data.DbType)">
  <summary>
- ´£¨Ñ«D¦¹ BosBase ª«¥ó¤§¥[¸üÄæ¦ìÄÝ©Ê­È
+ 提供非此 BosBase 物件之加載欄位屬性值
  </summary>
- <param name="sColName">¶Ç¤JColumn Name</param>
- <param name="DBType">¶Ç¤JSystem.Data.DbType</param>
+ <param name="sColName">傳入Column Name</param>
+ <param name="DBType">傳入System.Data.DbType</param>
  <remarks>
  </remarks>
  <history>
@@ -797,9 +797,9 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.addAttribute(com.Azion.NET.VB.BosAttribute)">
  <summary>
- ´£¨Ñ«D¦¹ BosBaseª«¥ó¤§¥[¸üÄæ¦ìÄÝ©Ê­È
+ 提供非此 BosBase物件之加載欄位屬性值
  </summary>
- <param name="attr">¶Ç¤JBosAttribute</param>
+ <param name="attr">傳入BosAttribute</param>
  <remarks>
  </remarks>
  <history>
@@ -808,10 +808,10 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.addAttribute(System.String,System.Data.DbType)">
  <summary>
- ´£¨Ñ«D¦¹ BosBase ª«¥ó¤§¥[¸üÄæ¦ìÄÝ©Ê­È
+ 提供非此 BosBase 物件之加載欄位屬性值
  </summary>
- <param name="sColName">¶Ç¤JColumn Name</param>
- <param name="DBType">¶Ç¤JSystem.Data.DbType</param>
+ <param name="sColName">傳入Column Name</param>
+ <param name="DBType">傳入System.Data.DbType</param>
  <remarks>
  </remarks>
  <history>
@@ -820,42 +820,42 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.initMetaData(System.String)">
  <summary>
- ªì©l¤ÆMetaData
+ 初始化MetaData
  </summary>
- <param name="sTableName">¶Ç¤J Table Name</param>
- <returns>Boolean MetaData¬O§_¸ü¤J</returns>
+ <param name="sTableName">傳入 Table Name</param>
+ <returns>Boolean MetaData是否載入</returns>
  <remarks>
- ¦pªG¦³¹w¥ý²£¥ýDBMeta.dll¡A«h±qDBMeta.dll¸ü¤J
- ¦pªG¨S¦³«hª½±µ±qDataBase¨ú±o
+ 如果有預先產先DBMeta.dll，則從DBMeta.dll載入
+ 如果沒有則直接從DataBase取得
  </remarks>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.loadAttrMeta(com.Azion.NET.VB.DBMetaData)">
  <summary>
- ªì©l¤ÆMetaData
+ 初始化MetaData
  </summary>
- <param name="dBMetaData">¶Ç¤J DBMetaData</param>
- <returns>Boolean MetaData¬O§_¸ü¤J</returns>
+ <param name="dBMetaData">傳入 DBMetaData</param>
+ <returns>Boolean MetaData是否載入</returns>
  <remarks>
- ¥ÑDBMeta.dll¸ü¤JMeta Data
+ 由DBMeta.dll載入Meta Data
  </remarks>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.loadAttrMeta(System.String)">
  <summary>
- ªì©l¤ÆMetaData
+ 初始化MetaData
  </summary>
- <param name="sTableName">¶Ç¤J Table Name</param>
- <returns>Boolean MetaData¬O§_¸ü¤J</returns>
+ <param name="sTableName">傳入 Table Name</param>
+ <returns>Boolean MetaData是否載入</returns>
  <remarks>
- ª½±µ¥ÑDataBase¨ú±o
+ 直接由DataBase取得
  </remarks>
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.ExecuteDataset(System.Data.CommandType,System.String,System.Data.IDataParameter[])">
  <summary>
  ExecuteDataset
  </summary>
- <param name="commandType">¶Ç¤JCommandType</param>
- <param name="commandText">¶Ç¤JcommandText</param>
- <param name="commandParameters">¶Ç¤JIDataParameter()</param>
+ <param name="commandType">傳入CommandType</param>
+ <param name="commandText">傳入commandText</param>
+ <param name="commandParameters">傳入IDataParameter()</param>
  <remarks>
  </remarks>
  <history>
@@ -866,9 +866,9 @@ DBUtility
  <summary>
  ExecuteNonQuery
  </summary>
- <param name="commandType">¶Ç¤JCommandType</param>
- <param name="commandText">¶Ç¤JcommandText</param>
- <param name="commandParameters">¶Ç¤JIDataParameter()</param>
+ <param name="commandType">傳入CommandType</param>
+ <param name="commandText">傳入commandText</param>
+ <param name="commandParameters">傳入IDataParameter()</param>
  <remarks>
  </remarks>
  <history>
@@ -879,9 +879,9 @@ DBUtility
  <summary>
  ExecuteScalar
  </summary>
- <param name="commandType">¶Ç¤JCommandType</param>
- <param name="commandText">¶Ç¤JcommandText</param>
- <param name="commandParameters">¶Ç¤JIDataParameter()</param>
+ <param name="commandType">傳入CommandType</param>
+ <param name="commandText">傳入commandText</param>
+ <param name="commandParameters">傳入IDataParameter()</param>
  <remarks>
  </remarks>
  <history>
@@ -892,9 +892,9 @@ DBUtility
  <summary>
  ExecuteReader
  </summary>
- <param name="commandType">¶Ç¤JCommandType</param>
- <param name="commandText">¶Ç¤JcommandText</param>
- <param name="commandParameters">¶Ç¤JIDataParameter()</param>
+ <param name="commandType">傳入CommandType</param>
+ <param name="commandText">傳入commandText</param>
+ <param name="commandParameters">傳入IDataParameter()</param>
  <remarks>
  </remarks>
  <history>
@@ -903,7 +903,7 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.showInsertSQL">
  <summary>
- Show Insert SQL¡C
+ Show Insert SQL。
  </summary> 
  <returns>String</returns>
  <remarks>
@@ -914,7 +914,7 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosBase.showUpdateSQL">
  <summary>
- Show Update SQL¡C
+ Show Update SQL。
  </summary> 
  <returns>String</returns>
  <remarks>
@@ -925,23 +925,23 @@ DBUtility
 </member>
 <member name="T:com.Azion.NET.VB.BosList">
  <summary>
-  The List of the Business objects (BOS)¡C
+  The List of the Business objects (BOS)。
  </summary>
  <remarks>
- BosList ¹ê§@IEnumerator¡BIEnumerable ¤¶­±
- ©Ò¦³¹ê§@¦hµ§ Table Objectª«¥ó¶·Ä~©ÓBosList¡C
+ BosList 實作IEnumerator、IEnumerable 介面
+ 所有實作多筆 Table Object物件須繼承BosList。
  
  </remarks>
  <example> This sample shows how to inherits the BosList class based on EN_CASEMAIN which has the primary key
  <code>
- '½Ðª`·N©R¦W¤èªk 
+ '請注意命名方法 
  '----------------------------------------------
  '|Table Name  | BosBase     |  BosList         |
  '|------------| ------------|  ----------------|
  '|EN_CASEMAIN | EN_CASEMAIN |  EN_CASEMAINList |
  '----------------------------------------------
  Public Class EN_CASEMAINList Inherits BosList
-     '«Øºc¤l
+     '建構子
      Sub New(ByVal dbManager As DatabaseManager)
           MyBase.New("EN_CASEMAIN", dbManager)
      End Sub
@@ -951,8 +951,8 @@ DBUtility
           Return New EN_CASEMAIN(MyBase.getDatabaseManager)
      End Function
      
-     '®×¨Ò¤@:¤£¼gSQL»yªk¡Aª½±µµ¹°Ñ¼Æ
-     '¤º³¡¹B§@»yªk:[select * from en_casemain where GOBRID=sBrId]
+     '案例一:不寫SQL語法，直接給參數
+     '內部運作語法:[select * from en_casemain where GOBRID=sBrId]
      Function loadByBrIdEx1(ByVal sBrId As String) As Integer
           Try
                If (Not IsNothing(sBrId) AndAlso sBrId.Length > 0) Then
@@ -971,8 +971,8 @@ DBUtility
           Return 0
      End Function
  
-     '®×¨Ò¤G:¼gSQL»yªk¡A¨Ãµ¹°Ñ¼Æ
-     '¤º³¡¹B§@»yªk:[programmer µ¹ªºSQL = select * from en_casemain where GOBRID=sBrId]
+     '案例二:寫SQL語法，並給參數
+     '內部運作語法:[programmer 給的SQL = select * from en_casemain where GOBRID=sBrId]
      Function loadByBrIdEx2(ByVal sBrId As String) As Integer
           Try
                If (Not IsNothing(sBrId) AndAlso sBrId.Length > 0) Then
@@ -992,22 +992,22 @@ DBUtility
           Return 0
      End Function
  
-    '®×¨Ò¤T:¼gJoin SQL»yªk¡A¨Ãµ¹°Ñ¼Æ
-    '¤º³¡¹B§@»yªk:[programmer µ¹ªºSQL = select  a.caseid,a.brid,b.caseitemid caseitemid,b.loanitem ±Â«H¶µ¥Ø¦WºÙ,b.datadate ¸ê®Æ¤é´Á from En_Casemain a ,En_Casedetailcond  b where a.caseid=b.caseid and b.caseid=sCaseID]
-    '¦pªG¬O¦h¦U¤£¦PTable Join¦b¤@°_®É¡A
-    '¦b¦¹ª«¥ó(EN_CASEMAINList)¶·¤â°Ê¼W¥[Äæ¦ìÄÝ©Ê¡A¤~¥i¨ú±o¤£¦PTable(En_Casedetailcond)ªºÄæ¦ì(caseitemid¡Bloanitem¡Bdatadate)
+    '案例三:寫Join SQL語法，並給參數
+    '內部運作語法:[programmer 給的SQL = select  a.caseid,a.brid,b.caseitemid caseitemid,b.loanitem 授信項目名稱,b.datadate 資料日期 from En_Casemain a ,En_Casedetailcond  b where a.caseid=b.caseid and b.caseid=sCaseID]
+    '如果是多各不同Table Join在一起時，
+    '在此物件(EN_CASEMAINList)須手動增加欄位屬性，才可取得不同Table(En_Casedetailcond)的欄位(caseitemid、loanitem、datadate)
      Function loadCaseItem(ByVal sCaseId As String) As Integer
           Try
                If (Not IsNothing(sCaseId) AndAlso sCaseId.Length > 0) Then
                     Dim sqlStr As String = ""
-                    sqlStr = "select  a.caseid,a.brid,b.caseitemid caseitemid,b.loanitem ±Â«H¶µ¥Ø¦WºÙ,b.datadate ¸ê®Æ¤é´Á from En_Casemain a ,En_Casedetailcond  b where a.caseid=b.caseid " + _
+                    sqlStr = "select  a.caseid,a.brid,b.caseitemid caseitemid,b.loanitem 授信項目名稱,b.datadate 資料日期 from En_Casemain a ,En_Casedetailcond  b where a.caseid=b.caseid " + _
                     " and CASEID=" + ProviderFactory.PositionPara + "CASEID "
  
-                    '¤U­±³o¤T­ÓÄæ¦ìÄÝ©óEn_Casedetailcondªº¡A¨Ã«DÄÝ©óEn_CaseMainªºÄæ¦ì
-                    '¦]¦¹¶·±NEn_Casedetailcondªº¤T­ÓÄæ¦ì¤â°Ê¥[¤JEN_CASEMAINListªºª«¥ó¡A¦p¦¹¦¹¯à¨ú±o³o¤T¦UÄæ¦ìªº­È
-                    Me.addAttribute("caseitemid", System.Data.DbType.Decimal)'¦pªG¸ê®Æ«¬§O¬ONumber-->System.Data.DbType.Decimal
-                    Me.addAttribute("±Â«H¶µ¥Ø¦WºÙ", System.Data.DbType.String)'¦pªG¸ê®Æ«¬§O¬OString-->System.Data.DbType.String
-                    Me.addAttribute("¸ê®Æ¤é´Á", System.Data.DbType.Date)'¦pªG¸ê®Æ«¬§O¬ODate-->System.Data.DbType.Date
+                    '下面這三個欄位屬於En_Casedetailcond的，並非屬於En_CaseMain的欄位
+                    '因此須將En_Casedetailcond的三個欄位手動加入EN_CASEMAINList的物件，如此此能取得這三各欄位的值
+                    Me.addAttribute("caseitemid", System.Data.DbType.Decimal)'如果資料型別是Number-->System.Data.DbType.Decimal
+                    Me.addAttribute("授信項目名稱", System.Data.DbType.String)'如果資料型別是String-->System.Data.DbType.String
+                    Me.addAttribute("資料日期", System.Data.DbType.Date)'如果資料型別是Date-->System.Data.DbType.Date
  
                     Dim para As IDbDataParameter = ProviderFactory.CreateDataParameter("CASEID", sCaseId)
  
@@ -1032,7 +1032,7 @@ DBUtility
 </member>
 <member name="F:com.Azion.NET.VB.BosList.m_databaseManager">
  <summary>
- ³s½uª«¥ó
+ 連線物件
  </summary>
  <remarks></remarks>
 </member>
@@ -1044,25 +1044,25 @@ DBUtility
 </member>
 <member name="F:com.Azion.NET.VB.BosList.m_objects">
  <summary>
- ¦s©ñBosBaseª«¥ó°}¦C
+ 存放BosBase物件陣列
  </summary>
  <remarks></remarks>
 </member>
 <member name="F:com.Azion.NET.VB.BosList.m_BosAttrMetas">
  <summary>
- ¦s©ñBosAttrMetaÄæ¦ìª«¥ó°}¦C
+ 存放BosAttrMeta欄位物件陣列
  </summary>
  <remarks></remarks>
 </member>
 <member name="F:com.Azion.NET.VB.BosList.m_sSQLCondition">
  <summary>
- ¨Ì»Ý¨D½Õ¾ãCondition
+ 依需求調整Condition
  </summary>
  <remarks></remarks>
 </member>
 <member name="F:com.Azion.NET.VB.BosList.m_currentIndex">
  <summary>
- ¥Ø«e°O¿ýªº«ü¼Ð
+ 目前記錄的指標
  </summary>
  <remarks></remarks>
 </member>
@@ -1080,11 +1080,11 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.#ctor(System.String,com.Azion.NET.VB.DatabaseManager)">
  <summary>
- ªì©l¤Æ BosList Ãþ§Oªº·s°õ¦æ­ÓÅé (Instance)¡C
+ 初始化 BosList 類別的新執行個體 (Instance)。
  </summary>
- <param name="sTableName">¶Ç¤JTable Name(¤j¼g)</param>
- <param name="databaseManager">¶Ç¤J DatabaseManager</param>
- <remarks>«Øºc¤l
+ <param name="sTableName">傳入Table Name(大寫)</param>
+ <param name="databaseManager">傳入 DatabaseManager</param>
+ <remarks>建構子
  </remarks>
  <history>
  	[Titan]	2009/01/20	modify
@@ -1092,9 +1092,9 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.loadAllData(System.Boolean)">
  <summary>
- ¨ú±o¬ÛÃöTableªº©Ò¦³°O¿ý¡C
+ 取得相關Table的所有記錄。
  </summary>
- <returns>Integer ¶Ç¦^°O¿ýªºµ§¼Æ¡C</returns>
+ <returns>Integer 傳回記錄的筆數。</returns>
  <remarks>
  select * from [your TABLE_NAME]
  </remarks>
@@ -1104,10 +1104,10 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.loadBySQL(System.String)">
  <summary>
- ¨Ï¥ÎDataAdatpter.Fill(DataTable)¤èªk¡A¨úªº¬ÛÃöTableªº°O¿ý¡C
+ 使用DataAdatpter.Fill(DataTable)方法，取的相關Table的記錄。
  </summary>
- <param name="sSQL">¶Ç¤JSQL»yªk¡C</param>
- <returns>Integer ¶Ç¦^°O¿ýªºµ§¼Æ¡C</returns>
+ <param name="sSQL">傳入SQL語法。</param>
+ <returns>Integer 傳回記錄的筆數。</returns>
  <remarks>
  </remarks>
  <history>
@@ -1116,10 +1116,10 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.loadBySQL(System.Data.IDataParameter[])">
  <summary>
- ¨Ï¥ÎDataAdatpter.Fill(DataTable)¤èªk¡A¨úªº¬ÛÃöTableªº°O¿ý¡C
+ 使用DataAdatpter.Fill(DataTable)方法，取的相關Table的記錄。
  </summary>
- <param name="commandParameters">¶Ç¤JIDataParameter°}¦C¡C</param>
- <returns>Integer ¶Ç¦^°O¿ýªºµ§¼Æ¡C</returns>
+ <param name="commandParameters">傳入IDataParameter陣列。</param>
+ <returns>Integer 傳回記錄的筆數。</returns>
  <remarks>
  </remarks>
  <history>
@@ -1128,11 +1128,11 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.loadBySQL(System.String,System.Data.IDataParameter[])">
  <summary>
- ¨Ï¥ÎDataAdatpter.Fill(DataTable)¤èªk¡A¨úªº¬ÛÃöTableªº°O¿ý¡C
+ 使用DataAdatpter.Fill(DataTable)方法，取的相關Table的記錄。
  </summary>
- <param name="sSQL">¶Ç¤JSQL»yªk¡C</param>
- <param name="commandParameters">¶Ç¤JIDataParameter°}¦C¡C</param>
- <returns>Integer ¶Ç¦^°O¿ýªºµ§¼Æ</returns>
+ <param name="sSQL">傳入SQL語法。</param>
+ <param name="commandParameters">傳入IDataParameter陣列。</param>
+ <returns>Integer 傳回記錄的筆數</returns>
  <remarks>
  </remarks>
  <history>
@@ -1141,10 +1141,10 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.loadBySQLOnlyDs(System.String)">
  <summary>
- ¨Ï¥ÎDataAdatpter.Fill(DataTable)¤èªk¡A¨úªº¬ÛÃöTableªº°O¿ý¡C
+ 使用DataAdatpter.Fill(DataTable)方法，取的相關Table的記錄。
  </summary>
- <param name="sSQL">¶Ç¤JSQL»yªk¡C</param>
- <returns>Integer ¶Ç¦^°O¿ýªºµ§¼Æ¡C</returns>
+ <param name="sSQL">傳入SQL語法。</param>
+ <returns>Integer 傳回記錄的筆數。</returns>
  <remarks>
  </remarks>
  <history>
@@ -1153,10 +1153,10 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.loadBySQLOnlyDs(System.Data.IDataParameter[])">
  <summary>
- ¨Ï¥ÎDataAdatpter.Fill(DataTable)¤èªk¡A¨úªº¬ÛÃöTableªº°O¿ý¡C
+ 使用DataAdatpter.Fill(DataTable)方法，取的相關Table的記錄。
  </summary>
- <param name="commandParameters">¶Ç¤JIDataParameter°}¦C¡C</param>
- <returns>Integer ¶Ç¦^°O¿ýªºµ§¼Æ¡C</returns>
+ <param name="commandParameters">傳入IDataParameter陣列。</param>
+ <returns>Integer 傳回記錄的筆數。</returns>
  <remarks>
  </remarks>
  <history>
@@ -1165,11 +1165,11 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.loadBySQLOnlyDs(System.String,System.Data.IDataParameter[])">
  <summary>
- ¨Ï¥ÎDataAdatpter.Fill(DataTable)¤èªk¡A¨úªº¬ÛÃöTableªº°O¿ý¡C
+ 使用DataAdatpter.Fill(DataTable)方法，取的相關Table的記錄。
  </summary>
- <param name="sSQL">¶Ç¤JSQL»yªk¡C</param>
- <param name="commandParameters">¶Ç¤JIDataParameter°}¦C¡C</param>
- <returns>Integer ¶Ç¦^°O¿ýªºµ§¼Æ</returns>
+ <param name="sSQL">傳入SQL語法。</param>
+ <param name="commandParameters">傳入IDataParameter陣列。</param>
+ <returns>Integer 傳回記錄的筆數</returns>
  <remarks>
  </remarks>
  <history>
@@ -1178,11 +1178,11 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.constructBosData(System.Data.IDataReader)">
  <summary>
- ±N¦hµ§ª«¥ó¦^¥R¶ñ¦Ü³æµ§Bosª«¥ó(ªì©l¤Æ³æµ§ª«¥ó)¡C¤£²£¥ÍDataTable
+ 將多筆物件回充填至單筆Bos物件(初始化單筆物件)。不產生DataTable
  </summary>
- <param name="IReader">¶Ç¤JIDataReader¡C</param>
+ <param name="IReader">傳入IDataReader。</param>
  <remarks>
- ¤j«¬ª«¥ó¡A¨«constructIRDData
+ 大型物件，走constructIRDData
  </remarks>
  <history>
  	[Titan]	2009/01/20	modify
@@ -1190,10 +1190,10 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.ShowSelectSQL(System.String,System.Data.IDataParameter[])">
  <summary>
- °»¿ù®É¡AShow Select SQL¡C
+ 偵錯時，Show Select SQL。
  </summary>
- <param name="sSQL">¶Ç¤JSQL»yªk¡C</param>
- <param name="commandParameters">¶Ç¤JIDataParameter°}¦C¡C</param>
+ <param name="sSQL">傳入SQL語法。</param>
+ <param name="commandParameters">傳入IDataParameter陣列。</param>
  <returns>String</returns>
  <remarks>
  </remarks>
@@ -1203,17 +1203,17 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.newBos">
  <summary>
- ¨C­ÓÄ~©ÓBosListªºª«¥ó¡AMust Override this Function
- ±N¦hµ§ª«¥ó¦^¥R¶ñ¦Ü³æµ§Bosª«¥ó(ªì©l¤Æ³æµ§ª«¥ó)
+ 每個繼承BosList的物件，Must Override this Function
+ 將多筆物件回充填至單筆Bos物件(初始化單筆物件)
  </summary>
  <remarks>
  </remarks>
 </member>
 <member name="M:com.Azion.NET.VB.BosList.setTableName(System.String)">
  <summary>
- ³]©wTable Name¡C
+ 設定Table Name。
  </summary>
- <param name="sTableName">¶Ç¤JTable Name¡C</param> 
+ <param name="sTableName">傳入Table Name。</param> 
  <remarks>
  </remarks>
  <history>
@@ -1222,9 +1222,9 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.getTableName">
  <summary>
- ¨ú±oTable Name¡C
+ 取得Table Name。
  </summary>
- <returns>String ¶Ç¦^Table Name</returns>
+ <returns>String 傳回Table Name</returns>
  <remarks>
  EN_CASEMAIN
  </remarks>
@@ -1234,9 +1234,9 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.getSchemaTableName">
  <summary>
- ¨ú±oSchema Table Name¡C
+ 取得Schema Table Name。
  </summary>
- <returns>String ¶Ç¦^Schema Table Name</returns>
+ <returns>String 傳回Schema Table Name</returns>
  <remarks>
  BOTELOAN.EN_CASEMAIN
  </remarks>
@@ -1246,7 +1246,7 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.setDataTableName">
  <summary>
- ³]©wCurr DataTable's Name¡C
+ 設定Curr DataTable's Name。
  </summary>
  <remarks>
  </remarks>
@@ -1256,11 +1256,11 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.setCurrentDataSet(System.Data.DataSet)">
  <summary>
- ³]©wCurrent DataSet¡C
+ 設定Current DataSet。
  </summary>
- <param name="dataSet">¶Ç¤JDataSet¡C</param>
+ <param name="dataSet">傳入DataSet。</param>
  <remarks>
- ±Nª«¥ó¥Ñmemory­«·s¸ü¤J
+ 將物件由memory重新載入
  </remarks>
  <history>
  	[Titan]	2009/01/20	modify
@@ -1268,9 +1268,9 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.getCurrentDataSet">
  <summary>
- ¨ú±oCurrent DataSet¡C
+ 取得Current DataSet。
  </summary>
- <returns>DataSet ¶Ç¦^ª«¥ó Current DataSet</returns>
+ <returns>DataSet 傳回物件 Current DataSet</returns>
  <remarks>
  </remarks>
  <history>
@@ -1279,9 +1279,9 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.setDatabaseManager(com.Azion.NET.VB.DatabaseManager)">
  <summary>
- ³]©wDatabaseManager Object¡C
+ 設定DatabaseManager Object。
  </summary>
- <param name="databaseManager">¶Ç¤JDatabaseManager¡C</param>
+ <param name="databaseManager">傳入DatabaseManager。</param>
  <remarks>
  </remarks>
  <history>
@@ -1290,9 +1290,9 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.getDatabaseManager">
  <summary>
- ¨ú±oDatabaseManager¡CObject
+ 取得DatabaseManager。Object
  </summary>
- <returns>DatabaseManager ¶Ç¦^DatabaseManager</returns>
+ <returns>DatabaseManager 傳回DatabaseManager</returns>
  <remarks>
  </remarks>
  <history>
@@ -1301,10 +1301,10 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.setSQLCondition(System.String)">
  <summary>
- ³]©wSQL Condition¡C
+ 設定SQL Condition。
  </summary>
- <param name="sSQLCondition">¶Ç¤JSQL Condition¡C</param>
- <remarks>¦¹ª«¥ó¥i­«½Æ¨Ï¥Î
+ <param name="sSQLCondition">傳入SQL Condition。</param>
+ <remarks>此物件可重複使用
  </remarks>
  <history>
  	[Titan]	2009/01/20	modify
@@ -1312,9 +1312,9 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.getSQLCondition">
  <summary>
- ¨ú±oSQL Condition¡C
+ 取得SQL Condition。
  </summary>
- <returns>String ¶Ç¦^SQL Condition</returns>
+ <returns>String 傳回SQL Condition</returns>
  <remarks>
  </remarks>
  <history>
@@ -1323,9 +1323,9 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.GetEnumerator">
  <summary>
- ¶Ç¦^¥i³z¹L¶°¦X¨Ó­«½Æªº¦CÁ|­È¡C
+ 傳回可透過集合來重複的列舉值。
  </summary>
- <remarks>¹ê§@IEnumerator¡BIEnumerable ¤¶­±¡C
+ <remarks>實作IEnumerator、IEnumerable 介面。
  </remarks>
  <history>
  	[Titan]	2009/01/20	modify
@@ -1333,9 +1333,9 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.Reset">
  <summary>
- ³]©w¦CÁ|­È¦Ü¥¦ªºªì©l¦ì¸m¡A³o¬O¦b¶°¦X¤¤²Ä¤@­Ó¤¸¯À¤§«e¡C
+ 設定列舉值至它的初始位置，這是在集合中第一個元素之前。
  </summary>
- <remarks>¹ê§@IEnumerator¡BIEnumerable ¤¶­±¡C
+ <remarks>實作IEnumerator、IEnumerable 介面。
  </remarks>
  <history>
  	[Titan]	2009/01/20	modify
@@ -1343,9 +1343,9 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.MoveNext">
  <summary>
- ±N¦CÁ|­È±À«e¦Ü¤U¤@­Ó¶°¦Xªº¤¸¯À¡C
+ 將列舉值推前至下一個集合的元素。
  </summary>
- <remarks>¹ê§@IEnumerator¡BIEnumerable ¤¶­±¡C
+ <remarks>實作IEnumerator、IEnumerable 介面。
  </remarks>
  <history>
  	[Titan]	2009/01/20	modify
@@ -1353,9 +1353,9 @@ DBUtility
 </member>
 <member name="P:com.Azion.NET.VB.BosList.Current">
  <summary>
- ¨ú±o¶°¦X¤¤¥Ø«eªº¶µ¥Ø¡C
+ 取得集合中目前的項目。
  </summary>
- <remarks>¹ê§@IEnumerator¡BIEnumerable ¤¶­±¡C
+ <remarks>實作IEnumerator、IEnumerable 介面。
  </remarks>
  <history>
  	[Titan]	2009/01/20	modify
@@ -1363,11 +1363,11 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.constructIRDData(System.Data.IDataReader)">
  <summary>
- ±N¦hµ§ª«¥ó¦^¥R¶ñ¦Ü³æµ§Bosª«¥ó(ªì©l¤Æ³æµ§ª«¥ó)¡C
+ 將多筆物件回充填至單筆Bos物件(初始化單筆物件)。
  </summary>
- <param name="IReader">¶Ç¤JIDataReader¡C</param>
+ <param name="IReader">傳入IDataReader。</param>
  <remarks>
- ¤j«¬ª«¥ó¡A¨«constructIRDData
+ 大型物件，走constructIRDData
  </remarks>
  <history>
  	[Titan]	2009/01/20	modify
@@ -1375,9 +1375,9 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.CreateDataColumns(System.Data.IDataReader)">
  <summary>
- ²£¥ÍDataTableªºÄæ¦ì
+ 產生DataTable的欄位
  </summary>
- <param name="IReader">¶Ç¤JIDataReader¡C</param>
+ <param name="IReader">傳入IDataReader。</param>
  <returns>DataColumn()</returns>
  <remarks>
  </remarks>
@@ -1387,12 +1387,12 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.constructData(System.Data.DataTable)">
  <summary>
- ±N¦hµ§ª«¥ó¦^¥R¶ñ¦Ü³æµ§Bosª«¥ó(ªì©l¤Æ³æµ§ª«¥ó)¡C
+ 將多筆物件回充填至單筆Bos物件(初始化單筆物件)。
  </summary>
- <param name="dataTable">¶Ç¤JDataTable¡C</param>
+ <param name="dataTable">傳入DataTable。</param>
  <remarks>
- ¥i¥H³QOverridable
- you can see EN_04_RPT_ATTACH04_ITEMList class¡C
+ 可以被Overridable
+ you can see EN_04_RPT_ATTACH04_ITEMList class。
  </remarks>
  <history>
  	[Titan]	2009/01/20	modify
@@ -1402,9 +1402,9 @@ DBUtility
  <summary>
  ExecuteReader
  </summary>
- <param name="commandType">¶Ç¤JCommandType</param>
- <param name="commandText">¶Ç¤JcommandText</param>
- <param name="commandParameters">¶Ç¤JIDataParameter()</param>
+ <param name="commandType">傳入CommandType</param>
+ <param name="commandText">傳入commandText</param>
+ <param name="commandParameters">傳入IDataParameter()</param>
  <remarks>
  </remarks>
  <history>
@@ -1415,9 +1415,9 @@ DBUtility
  <summary>
  ExecuteDataset
  </summary>
- <param name="commandType">¶Ç¤JCommandType</param>
- <param name="commandText">¶Ç¤JcommandText</param>
- <param name="commandParameters">¶Ç¤JIDataParameter()</param>
+ <param name="commandType">傳入CommandType</param>
+ <param name="commandText">傳入commandText</param>
+ <param name="commandParameters">傳入IDataParameter()</param>
  <remarks>
  </remarks>
  <history>
@@ -1426,9 +1426,9 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.addFields(com.Azion.NET.VB.BosBase)">
  <summary>
- ¥[¸üBos Object ªºÄæ¦ì¦WºÙ¡B­È¤Î¸ê®Æ«¬§Oµ¥ÄÝ©Ê­È
+ 加載Bos Object 的欄位名稱、值及資料型別等屬性值
  </summary>
- <param name="bos">¶Ç¤JBosBase</param>
+ <param name="bos">傳入BosBase</param>
  <remarks>
  </remarks>
  <history>
@@ -1437,9 +1437,9 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.addAttribute(com.Azion.NET.VB.BosAttrMeta)">
  <summary>
- ´£¨Ñ«D¦¹ BosList ª«¥ó¤§¥[¸üÄæ¦ìÄÝ©Ê­È¡A¦p®×¨Ò¤T
+ 提供非此 BosList 物件之加載欄位屬性值，如案例三
  </summary>
- <param name="attr">¶Ç¤JBosAttrMeta</param>
+ <param name="attr">傳入BosAttrMeta</param>
  <remarks>
  </remarks>
  <history>
@@ -1448,10 +1448,10 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.addAttribute(System.String,System.Data.DbType)">
  <summary>
- ´£¨Ñ«D¦¹ BosList ª«¥ó¤§¥[¸üÄæ¦ìÄÝ©Ê­È¡A¦p®×¨Ò¤T
+ 提供非此 BosList 物件之加載欄位屬性值，如案例三
  </summary>
- <param name="sColName">¶Ç¤JColumn Name</param>
- <param name="DBType">¶Ç¤JSystem.Data.DbType</param>
+ <param name="sColName">傳入Column Name</param>
+ <param name="DBType">傳入System.Data.DbType</param>
  <remarks>
  </remarks>
  <history>
@@ -1460,9 +1460,9 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.add(com.Azion.NET.VB.BosBase)">
  <summary>
- ¥[¸üBosList object
+ 加載BosList object
  </summary>
- <param name="bos">¶Ç¤JBosBase</param>
+ <param name="bos">傳入BosBase</param>
  <remarks>
  </remarks>
  <history>
@@ -1471,9 +1471,9 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.remove(com.Azion.NET.VB.BosBase)">
  <summary>
- ²¾°£³æµ§BosList object
+ 移除單筆BosList object
  </summary>
- <param name="bos">¶Ç¤JBosBase</param>
+ <param name="bos">傳入BosBase</param>
  <remarks>
  </remarks>
  <history>
@@ -1482,7 +1482,7 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.clear">
  <summary>
- ²M°£©Ò¦³BosList object
+ 清除所有BosList object
  </summary>
  <remarks>
  </remarks>
@@ -1492,9 +1492,9 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.item(System.Int32)">
  <summary>
- ¨ú±oBosList object
+ 取得BosList object
  </summary>
- <param name="index">¶Ç¤JInteger</param>
+ <param name="index">傳入Integer</param>
  <remarks>
  </remarks>
  <history>
@@ -1503,7 +1503,7 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.size">
  <summary>
- ¨ú±oBosList object size
+ 取得BosList object size
  </summary>
  <remarks>
  </remarks>
@@ -1513,9 +1513,9 @@ DBUtility
 </member>
 <member name="M:com.Azion.NET.VB.BosList.getSchemaName">
  <summary>
- ¨ú±oSchema Name(User ID)¡C
+ 取得Schema Name(User ID)。
  </summary>
- <returns>String ¶Ç¦^Schema Table Name</returns>
+ <returns>String 傳回Schema Table Name</returns>
  <remarks>
  BOTELOAN
  </remarks>
@@ -1527,9 +1527,9 @@ DBUtility
  <summary>
  This function will be removed from future Versions.Use another function 'loadReaderBySQL'
  </summary>
- <param name="sSQL">¶Ç¤JSQL»yªk¡C</param>
- <param name="commandParameters">¶Ç¤JIDataParameter°}¦C¡C</param>
- <returns>Integer ¶Ç¦^°O¿ýªºµ§¼Æ</returns>
+ <param name="sSQL">傳入SQL語法。</param>
+ <param name="commandParameters">傳入IDataParameter陣列。</param>
+ <returns>Integer 傳回記錄的筆數</returns>
  <remarks>
  </remarks>
  <history>

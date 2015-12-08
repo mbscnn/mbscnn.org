@@ -604,11 +604,15 @@ Public Class NewsList
 
     Sub RP_SIGN_OnItemCommand(source As Object, e As System.Web.UI.WebControls.RepeaterCommandEventArgs)
         Try
+            Dim sURL_Sign As String = String.Empty
+            sURL_Sign = com.Azion.EloanUtility.UIUtility.getRootPath & "/MNT/MBSignIn_01_v01.aspx"
+
             If UCase(e.CommandName) = "CLASS" Then
                 '我要報名
                 If Not com.Azion.EloanUtility.ValidateUtility.isValidateData(Session("USERID")) Then
                     com.Azion.EloanUtility.UIUtility.alert("請先登入或成為會員")
                     com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "請先登入或成為會員")
+                    Server.Transfer(sURL_Sign)
                     Return
                 End If
 
@@ -624,6 +628,7 @@ Public Class NewsList
                 If Not com.Azion.EloanUtility.ValidateUtility.isValidateData(Session("USERID")) Then
                     com.Azion.EloanUtility.UIUtility.alert("請先登入或成為會員")
                     com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "請先登入或成為會員")
+                    Server.Transfer(sURL_Sign)
                     Return
                 End If
 
