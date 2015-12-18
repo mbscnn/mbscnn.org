@@ -175,7 +175,7 @@ Public Class MBMnt_Class_01_v01
 
             ddl_EditPLACE.DataSource = DT_177
             ddl_EditPLACE.DataTextField = "TEXT"
-            ddl_EditPLACE.DataValueField = "VALUE"
+            ddl_EditPLACE.DataValueField = "CODEID"
             ddl_EditPLACE.DataBind()
 
             If Me.ddl_EditPLACE.Items.Count > 1 Then
@@ -220,7 +220,8 @@ Public Class MBMnt_Class_01_v01
             Me.CONTACT.Text = String.Empty
             Me.CONTEL.Text = String.Empty
             '上課地點
-            Me.CLASS_PLACE.Text = String.Empty
+            'Me.CLASS_PLACE.Text = String.Empty
+            Me.DDL_CLASS_PLACE.SelectedIndex = -1
             '交通資訊說明
             Me.TRAFFIC_DESC.Text = String.Empty
             '是否需填初學者
@@ -505,7 +506,20 @@ Public Class MBMnt_Class_01_v01
                 Me.CONTACT.Text = MB_CLASS.getString("CONTACT")
                 Me.CONTEL.Text = MB_CLASS.getString("CONTEL")
                 '上課地點
-                Me.CLASS_PLACE.Text = MB_CLASS.getString("CLASS_PLACE")
+                'Me.CLASS_PLACE.Text = MB_CLASS.getString("CLASS_PLACE")
+                Me.DDL_CLASS_PLACE.Items.Clear()
+                Dim AP_CODEList As New AP_CODEList(Me.m_DBManager)
+                AP_CODEList.loadByUpCode(Me.ddl_EditPLACE.SelectedValue)
+                Me.DDL_CLASS_PLACE.DataSource = AP_CODEList.getCurrentDataSet.Tables(0)
+                Me.DDL_CLASS_PLACE.DataValueField = "VALUE"
+                Me.DDL_CLASS_PLACE.DataTextField = "TEXT"
+                Me.DDL_CLASS_PLACE.DataBind()
+                Me.DDL_CLASS_PLACE.Items.Insert(0, New ListItem("請選擇", String.Empty))
+                Me.DDL_CLASS_PLACE.SelectedIndex = -1
+                If Not IsNothing(Me.DDL_CLASS_PLACE.Items.FindByText(MB_CLASS.getString("CLASS_PLACE"))) Then
+                    Me.DDL_CLASS_PLACE.Items.FindByText(MB_CLASS.getString("CLASS_PLACE")).Selected = True
+                End If
+
                 '交通資訊說明
                 Me.TRAFFIC_DESC.Text = MB_CLASS.getString("TRAFFIC_DESC")
                 '是否需填初學者
@@ -514,7 +528,7 @@ Public Class MBMnt_Class_01_v01
                     Me.MB_BEGIN.Items.FindByValue(MB_CLASS.getString("MB_BEGIN")).Selected = True
                 End If
                 'MB_PREC_MEMO	varchar(2000)	utf8_general_ci	YES				select,insert,update,references	備註說明(注意事項)
-                Me.TXT_MB_PREC_MEMO.Text = MB_CLASS.getString("TXT_MB_PREC_MEMO")
+                Me.TXT_MB_PREC_MEMO.Text = MB_CLASS.getString("MB_PREC_MEMO")
                 If MB_CLASS.getString("MB_APV") = "3" Then
                     'CHARGE	decimal(7,0)		YES				select,insert,update,references	課程費用
                     If Utility.isValidateData(MB_CLASS.getAttribute("CHARGE")) Then
@@ -742,7 +756,8 @@ Public Class MBMnt_Class_01_v01
             '聯絡人電話
             MB_CLASS.setAttribute("CONTEL", Me.CONTEL.Text)
             '上課地點
-            MB_CLASS.setAttribute("CLASS_PLACE", Me.CLASS_PLACE.Text)
+            'MB_CLASS.setAttribute("CLASS_PLACE", Me.CLASS_PLACE.Text)
+            MB_CLASS.setAttribute("CLASS_PLACE", Me.DDL_CLASS_PLACE.SelectedItem.Text)
             '交通資訊說明
             MB_CLASS.setAttribute("TRAFFIC_DESC", Me.TRAFFIC_DESC.Text)
             '是否初學者;Y是N:否
@@ -758,7 +773,7 @@ Public Class MBMnt_Class_01_v01
             End If
             'FAVCHARGE	decimal(7,0)		YES				select,insert,update,references	優惠費用
             If rbt_APV.SelectedValue = "3" AndAlso IsNumeric(Me.TXT_FAVCHARGE.Text) Then
-                MB_CLASS.setAttribute("CHARGE", CDec(Me.TXT_FAVCHARGE.Text))
+                MB_CLASS.setAttribute("FAVCHARGE", CDec(Me.TXT_FAVCHARGE.Text))
             Else
                 MB_CLASS.setAttribute("FAVCHARGE", Nothing)
             End If
@@ -967,9 +982,9 @@ Public Class MBMnt_Class_01_v01
                 Return False
             End If
             '上課地點
-            If Not Utility.isValidateData(Me.CLASS_PLACE.Text) Then
-                com.Azion.EloanUtility.UIUtility.showJSMsg(Me, "請輸入上課地點")
-                com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "請輸入上課地點")
+            If Not Utility.isValidateData(Me.DDL_CLASS_PLACE.SelectedValue) Then
+                com.Azion.EloanUtility.UIUtility.showJSMsg(Me, "請選擇上課地點")
+                com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "請選擇上課地點")
                 Return False
             End If
             '交通資訊說明
@@ -1167,6 +1182,25 @@ Public Class MBMnt_Class_01_v01
             Me.EARLYDATE.Text = String.Empty
             Me.TXT_FAVCHARGE.Text = String.Empty
         End If
+    End Sub
+
+    Private Sub ddl_EditPLACE_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddl_EditPLACE.SelectedIndexChanged
+        Try
+            Me.DDL_CLASS_PLACE.Items.Clear()
+
+            If Utility.isValidateData(Me.ddl_EditPLACE.SelectedValue) Then
+                Dim AP_CODEList As New AP_CODEList(Me.m_DBManager)
+                AP_CODEList.loadByUpCode(Me.ddl_EditPLACE.SelectedValue)
+                Me.DDL_CLASS_PLACE.DataTextField = "TEXT"
+                Me.DDL_CLASS_PLACE.DataValueField = "VALUE"
+                Me.DDL_CLASS_PLACE.DataSource = AP_CODEList.getCurrentDataSet.Tables(0)
+                Me.DDL_CLASS_PLACE.DataBind()
+
+                Me.DDL_CLASS_PLACE.Items.Insert(0, New ListItem("請選擇", String.Empty))
+            End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 #End Region
 

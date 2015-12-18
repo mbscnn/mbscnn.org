@@ -2024,7 +2024,7 @@ Public Class Utility
             Return 0
         End If
     End Function
-      
+
     '[轉換日期函式-西曆轉中曆 YYYY/MM/DD->YYY.MM.DD]
     Public Shared Function DateTransfer(ByVal pDate As Object) As String
         'MYSQL的Date型態和.NET不相容，所以先轉String
@@ -2043,6 +2043,14 @@ Public Class Utility
         'RtnStr = FillZero(Cyear, 3) & FillZero(CStr(Month(InDate)), 2) & FillZero(CStr(Day(InDate)), 2)
         If Cyear > 0 Then RtnStr = Cyear & "." & FillZero(CStr(Month(InDate)), 2) & "." & FillZero(CStr(Day(InDate)), 2)
         Return RtnStr
+    End Function
+
+    Public Shared Function FMT_MBSC_DATE(ByVal D_DATE As Object) As String
+        If IsDate(D_DATE.ToString) Then
+            Return CDate(D_DATE.ToString).Year & "/" & CDate(D_DATE.ToString).Month & "/" & CDate(D_DATE.ToString).Day
+        End If
+
+        Return String.Empty
     End Function
 
     '[轉換日期函式-西曆轉中曆 YYYY/MM/DD->YYYMMDD]

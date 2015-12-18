@@ -213,7 +213,10 @@
 
                                                         <asp:Panel ID="PNL_CLASS" runat="server" Visible="false">
                                                                     <input type="hidden" id="HID_MB_SEQ" runat="server" value='<%#Container.DataItem("MB_SEQ")%>' />
-                                                                    <asp:Repeater ID="RP_SIGN" runat="server" OnItemDataBound="RP_SIGN_OnItemDataBound" OnItemCommand="RP_SIGN_OnItemCommand">
+                                                                    <asp:Button ID="btnClass" runat="server" Text="我要報名" CommandName="CLASS" Font-Bold="true" class="btn btn-info " />
+                                                                    <asp:Button ID="btnCanClass" runat="server" Text="取消報名" CommandName="CANCLASS" Font-Bold="true" class="btn btn-info " />
+                                                                    <asp:Label ID="LTL_APLY" runat="server" Style="font-size: 16pt; font-weight: bold" />
+<%--                                                                    <asp:Repeater ID="RP_SIGN" runat="server" OnItemDataBound="RP_SIGN_OnItemDataBound" OnItemCommand="RP_SIGN_OnItemCommand">
                                                                         <ItemTemplate>
                                                                             <div style="text-align:right">
                                                                                 <asp:Label ID="LTL_MB_BATCH" runat="server" Style="vertical-align: top" />
@@ -228,7 +231,7 @@
                                                                                 </asp:PlaceHolder>
                                                                             </div>
                                                                         </ItemTemplate>
-                                                                    </asp:Repeater>
+                                                                    </asp:Repeater>--%>
                                                         </asp:Panel>
                                                     </div>
                                                 </small>
@@ -261,7 +264,7 @@
 
                                 <div>
                                     <div id="DIV_MORE" runat="server" visible="false" style="text-align:right" >
-                                        <input type="button" ID="btnReadMore" runat="server" value="READ MORE »" class="btn btn-primary btn-readmore" Font-Bold="true" />
+                                        <input type="button" ID="btnReadMore" runat="server" value="顯示全文 »" class="btn btn-primary btn-readmore" Font-Bold="true" />
                                     </div>
                             </div>
                             

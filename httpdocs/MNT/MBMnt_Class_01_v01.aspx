@@ -111,7 +111,7 @@
                         <span style="color: red; font-weight: bold; font-size: medium">*</span>地點
                     </td>
                     <td width="35%" class="td2_b">
-                        <asp:DropDownList ID="ddl_EditPLACE" runat="server"></asp:DropDownList>
+                        <asp:DropDownList ID="ddl_EditPLACE" runat="server" AutoPostBack="true" ></asp:DropDownList>
                     </td>
                     <td width="15%" class="th1c_b">
                         <span style="color: red; font-weight: bold; font-size: medium">*</span>課程名稱
@@ -258,7 +258,7 @@
                         <span style="color: red; font-weight: bold; font-size: medium">*</span>上課地點
                     </td>
                     <td width="85%" class="td2_b" colspan="3">
-                        <asp:TextBox ID="CLASS_PLACE" runat="server" width="99%" />
+                        <asp:DropDownList ID="DDL_CLASS_PLACE" runat="server" />
                     </td>
                 </tr>
                 <tr>

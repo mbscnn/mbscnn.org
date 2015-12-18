@@ -150,6 +150,43 @@ Public Class AP_CODE
         End Try
     End Function
 
+    ''' <summary>
+    ''' 根據[UPCODE],[TEXT]取得資料
+    ''' </summary>
+    ''' <param name="iUpCode">父類別</param>
+    ''' <param name="sVALUE">值</param>
+    ''' <returns>Boolean 是否有無取得資料</returns>
+    ''' <remarks>
+    ''' </remarks> 
+    ''' <history>
+    ''' 	[Willy]	2009/11/9 Created
+    ''' 	[Willy]	2009/11/12	Modified
+    ''' 	[Willy]	2009/11/30	Modified
+    ''' 	[Willy]	2009/12/22	Modified
+    ''' </history>
+    Function loadByValue(ByVal iUPCODE As Integer, ByVal sVALUE As String) As Boolean
+        Try
+            Dim sqlStr As String = String.Empty
+
+            sqlStr = "SELECT * FROM AP_CODE WHERE UPCODE = " & ProviderFactory.PositionPara & "UPCODE " &
+                     "  AND VALUE = " & ProviderFactory.PositionPara & "VALUE "
+
+            Dim paras(1) As IDbDataParameter
+
+            paras(0) = ProviderFactory.CreateDataParameter("UPCODE", iUPCODE)
+
+            paras(1) = ProviderFactory.CreateDataParameter("VALUE", sVALUE)
+
+            Return Me.loadBySQL(sqlStr, paras)
+        Catch ex As ProviderException
+            Throw
+        Catch ex As BosException
+            Throw
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
     ''' -----------------------------------------------------------------------------
     ''' <summary>
     ''' 根據[SUBSYSID],[UPCODE],[TEXT]取得資料

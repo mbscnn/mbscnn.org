@@ -809,6 +809,16 @@ Public Class MBQry_TYPE_01_v01
             mbMEMCLASSList.LoadQData(iStart, Me.m_PageSize, iMB_SEQ)
             DT_MB_MEMCLASS = mbMEMCLASSList.getCurrentDataSet.Tables(0)
 
+            Me.TD_MB_APV.Visible = False
+            Dim MB_CLASSList As New MB_CLASSList(Me.m_DBManager)
+            MB_CLASSList.LoadByMB_SEQ(iMB_SEQ)
+            If MB_CLASSList.getCurrentDataSet.Tables(0).Rows.Count > 0 Then
+                Dim ROW As DataRow = MB_CLASSList.getCurrentDataSet.Tables(0).Rows(0)
+                If ROW("MB_APV").ToString = "1" OrElse ROW("MB_APV").ToString = "3" Then
+                    Me.TD_MB_APV.Visible = True
+                End If
+            End If
+
             Me.RP_3.DataSource = DT_MB_MEMCLASS
             Me.RP_3.DataBind()
 
@@ -1614,11 +1624,7 @@ Public Class MBQry_TYPE_01_v01
     '    End Try
     'End Function
 
-    Public Function getMB_CHKFLAG(ByVal iMB_SEQ As Object, ByVal iMB_BATCH As Object, ByVal iMB_MEMSEQ As Object, ByVal sMB_FWMK As Object, ByVal iMB_SORTNO As Object, ByVal sMB_CHKFLAG As Object, ByVal MB_CDATE As Object, ByVal MB_CREDATETIME As Object) As String
-        Dim DT_MB_MEMCLASS As DataTable = Nothing
-        Dim DT_SEQ As DataTable = Nothing
-        Dim DT_WAIT As DataTable = Nothing
-        Dim DT_FULL As DataTable = Nothing
+    Public Function getMB_CHKFLAG(ByVal iMB_SEQ As Object, ByVal iMB_MEMSEQ As Object, ByVal sMB_FWMK As Object, ByVal MB_CDATE As Object, ByVal MB_CREDATETIME As Object, ByVal MB_APVDATETIME As Object) As String
         Try
             'If Utility.isValidateData(sMB_CHKFLAG) Then
             '    If sMB_CHKFLAG = "1" Then
@@ -1627,51 +1633,83 @@ Public Class MBQry_TYPE_01_v01
             '        Return "備取"
             '    End If
             'End If
-
-            If Utility.isValidateData(sMB_FWMK) AndAlso sMB_FWMK = "3" Then
-                Return "取消報名" & "<BR/>" & MB_CDATE.ToString
+            If Utility.isValidateData(sMB_FWMK) AndAlso sMB_FWMK = "0" Then
+                Return "審核中<BR/>" & Utility.FMT_MBSC_DATE(MB_CREDATETIME)
+                'ElseIf Utility.isValidateData(sMB_FWMK) AndAlso sMB_FWMK = "1" Then
+                '    Return "錄取"
+                'ElseIf Utility.isValidateData(sMB_FWMK) AndAlso sMB_FWMK = "2" Then
+                '    Return "錄取沒來上課"
+            ElseIf Utility.isValidateData(sMB_FWMK) AndAlso sMB_FWMK = "3" Then
+                Return "取消報名" & "<BR/>" & Utility.FMT_MBSC_DATE(MB_CDATE)
             ElseIf Utility.isValidateData(sMB_FWMK) AndAlso sMB_FWMK = "4" Then
                 Dim sSECCancel As String = String.Empty
                 sSECCancel = "第二次取消報名"
                 If IsDate(MB_CDATE.ToString) Then
-                    sSECCancel &= "<BR/>" & CDate(MB_CDATE.ToString).Year & "/" & CDate(MB_CDATE.ToString).Month & "/" & CDate(MB_CDATE.ToString).Day
+                    sSECCancel &= "<BR/>" & Utility.FMT_MBSC_DATE(MB_CDATE)
                 End If
                 Return sSECCancel
+            ElseIf Utility.isValidateData(sMB_FWMK) AndAlso sMB_FWMK = "5" Then
+                Return "不錄取(不核准)<BR/>" & Utility.FMT_MBSC_DATE(MB_APVDATETIME)
             Else
-                If IsNumeric(iMB_SEQ) AndAlso IsNumeric(iMB_BATCH) AndAlso IsNumeric(iMB_MEMSEQ) Then
-                    Dim mbCLASS As New MB_CLASS(Me.m_DBManager)
-                    If mbCLASS.loadByPK(iMB_SEQ, iMB_BATCH) Then
-                        Dim iMB_FULL As Decimal = 0
-                        iMB_FULL = mbCLASS.getDecimal("MB_FULL")
-                        Dim iMB_WAIT As Decimal = 0
-                        iMB_WAIT = mbCLASS.getDecimal("MB_WAIT")
-
-                        Dim mbMEMCLASSList As New MB_MEMCLASSList(Me.m_DBManager)
-                        mbMEMCLASSList.loadByMB_SEQ(iMB_SEQ, iMB_BATCH)
-                        DT_MB_MEMCLASS = mbMEMCLASSList.getCurrentDataSet.Tables(0)
-
-                        Dim DV_SEQ As New DataView(DT_MB_MEMCLASS, "ISNULL(MB_FWMK,' ') NOT IN ('3','4')", "MB_CREDATETIME", DataViewRowState.CurrentRows)
-                        DT_SEQ = DV_SEQ.ToTable
-                        DT_FULL = DT_SEQ.Clone
-                        Dim iFULL As Decimal = 0
-                        For i As Integer = 0 To DT_SEQ.Rows.Count - 1
-                            iFULL += 1
-
-                            If iFULL <= iMB_FULL Then
-                                DT_FULL.ImportRow(DT_SEQ.Rows(i))
+                If IsNumeric(iMB_SEQ) AndAlso IsNumeric(iMB_MEMSEQ) Then
+                    Dim sb As New System.Text.StringBuilder
+                    Dim MB_CLASSList As New MB_CLASSList(Me.m_DBManager)
+                    MB_CLASSList.setSQLCondition(" ORDER BY MB_BATCH ")
+                    MB_CLASSList.LoadByMB_SEQ(iMB_SEQ)
+                    For Each ROW As DataRow In MB_CLASSList.getCurrentDataSet.Tables(0).Rows
+                        Dim DT_SEQ As DataTable = Nothing
+                        Dim DT_FULL As DataTable = Nothing
+                        Try
+                            Dim sBATCH As String = String.Empty
+                            If ROW("MB_BATCH") > 0 Then
+                                sBATCH = "第" & ROW("MB_BATCH").ToString & "梯次"
                             End If
-                        Next
-                        Dim ROW_FULL() As DataRow = Nothing
-                        ROW_FULL = DT_FULL.Select("MB_MEMSEQ=" & iMB_MEMSEQ)
+                            Dim iMB_FULL As Decimal = 0
+                            iMB_FULL = Utility.CheckNumNull(ROW("MB_FULL"))
+                            Dim iMB_WAIT As Decimal = 0
+                            iMB_WAIT = Utility.CheckNumNull(ROW("MB_WAIT"))
+
+                            Dim mbMEMCLASSList As New MB_MEMCLASSList(Me.m_DBManager)
+                            mbMEMCLASSList.loadByMB_SEQ(iMB_SEQ, ROW("MB_BATCH"))
+                            Dim DV_SEQ As New DataView(mbMEMCLASSList.getCurrentDataSet.Tables(0), "ISNULL(MB_FWMK,' ') NOT IN ('3','4','5')", "MB_CREDATETIME", DataViewRowState.CurrentRows)
+                            DT_SEQ = DV_SEQ.ToTable
+                            DT_FULL = DT_SEQ.Clone
+                            Dim iFULL As Decimal = 0
+                            For i As Integer = 0 To DT_SEQ.Rows.Count - 1
+                                iFULL += 1
+
+                                If iFULL <= iMB_FULL Then
+                                    DT_FULL.ImportRow(DT_SEQ.Rows(i))
+                                End If
+                            Next
+                            Dim ROW_FULL() As DataRow = Nothing
+                            ROW_FULL = DT_FULL.Select("MB_MEMSEQ=" & iMB_MEMSEQ)
+                            If Not IsNothing(ROW_FULL) AndAlso ROW_FULL.Length > 0 Then
+                                sb.Append(sBATCH).Append("正取").Append("<BR/>")
+                            Else
+                                sb.Append(sBATCH).Append("備取").Append("<BR/>")
+                            End If
+                        Catch ex As Exception
+                            Throw
+                        Finally
+                            If Not IsNothing(DT_SEQ) Then
+                                DT_SEQ.Dispose()
+                            End If
+
+                            If Not IsNothing(DT_FULL) Then
+                                DT_FULL.Dispose()
+                            End If
+                        End Try
+                    Next
+
+                    Dim sMSG As String = String.Empty
+                    sMSG = sb.ToString
+                    If Utility.isValidateData(sMSG) Then
                         Dim sMB_CREDATETIME As String = String.Empty
                         If IsDate(MB_CREDATETIME.ToString) Then
-                            sMB_CREDATETIME = CDate(MB_CREDATETIME.ToString).Year & "/" & CDate(MB_CREDATETIME.ToString).Month & "/" & CDate(MB_CREDATETIME.ToString).Day
+                            sMSG &= Utility.FMT_MBSC_DATE(MB_CREDATETIME)
                         End If
-                        If Not IsNothing(ROW_FULL) AndAlso ROW_FULL.Length > 0 Then
-                            Return "正取" & "<BR/>" & sMB_CREDATETIME
-                        Else
-                            Return "備取" & "<BR/>" & sMB_CREDATETIME
-                        End If
+                        Return sMSG
                     End If
                 End If
             End If
@@ -1679,22 +1717,6 @@ Public Class MBQry_TYPE_01_v01
             Return String.Empty
         Catch ex As Exception
             Throw
-        Finally
-            If Not IsNothing(DT_MB_MEMCLASS) Then
-                DT_MB_MEMCLASS.Dispose()
-            End If
-
-            If Not IsNothing(DT_SEQ) Then
-                DT_SEQ.Dispose()
-            End If
-
-            If Not IsNothing(DT_WAIT) Then
-                DT_WAIT.Dispose()
-            End If
-
-            If Not IsNothing(DT_FULL) Then
-                DT_FULL.Dispose()
-            End If
         End Try
     End Function
 
@@ -2003,16 +2025,178 @@ Public Class MBQry_TYPE_01_v01
                 Dim LTL_MB_SEQ As Literal = e.Item.FindControl("LTL_MB_SEQ")
                 Dim sURL As String = String.Empty
                 Dim HID_MB_BATCH As HtmlInputHidden = e.Item.FindControl("HID_MB_BATCH")
-                sURL = com.Azion.EloanUtility.UIUtility.getRootPath & "/MNT/MBMnt_Sign_01_v01.aspx?MBSEQ=" & LTL_MB_SEQ.Text & "&MB_MEMSEQ=" & e.CommandArgument & _
+                sURL = com.Azion.EloanUtility.UIUtility.getRootPath & "/MNT/MBMnt_Sign_01_v01.aspx?MBSEQ=" & LTL_MB_SEQ.Text & "&MB_MEMSEQ=" & e.CommandArgument &
                        "&OPTYPE=QRY&MB_BATCH=" & HID_MB_BATCH.Value
 
                 com.Azion.EloanUtility.UIUtility.showOpen(sURL)
+            ElseIf e.CommandName = "5Y" Then
+                Dim LTL_MB_SEQ As Literal = e.Item.FindControl("LTL_MB_SEQ")
+                Dim MB_MEMCLASS As New MB_MEMCLASS(Me.m_DBManager)
+                If MB_MEMCLASS.LoadByPK(e.CommandArgument, LTL_MB_SEQ.Text) Then
+                    'mail 錄取通知
+                    Dim mbMEMBER As New MB_MEMBER(Me.m_DBManager)
+                    If mbMEMBER.loadByPK(e.CommandArgument) AndAlso Utility.isValidateData(mbMEMBER.getAttribute("MB_EMAIL")) Then
+                        Dim MB_CLASSList As New MB_CLASSList(Me.m_DBManager)
+                        MB_CLASSList.LoadByMB_SEQ(LTL_MB_SEQ.Text)
+                        If MB_CLASSList.getCurrentDataSet.Tables(0).Rows.Count > 0 Then
+                            Dim ROW_CLASS As DataRow = MB_CLASSList.getCurrentDataSet.Tables(0).Rows(0)
+
+                            Dim sMailTos() As String = {Trim(mbMEMBER.getString("MB_EMAIL"))}
+
+                            Dim sMailSub As String = String.Empty
+                            sMailSub = ROW_CLASS("MB_CLASS_NAME").ToString & " 錄取通知 請務必回覆是否出席"
+
+                            Dim sMailBody As String = String.Empty
+                            Dim sb As New System.Text.StringBuilder
+                            sb.Append("<DIV style='text-align:center;font-size:24pt;color:red' >").Append(ROW_CLASS("MB_CLASS_NAME").ToString).Append("</DIV>")
+                            Dim sForm As String = String.Empty
+                            'If isWait Then
+                            '    sForm = "備取通知"
+                            'Else
+                            '    sForm = "錄取通知"
+                            'End If
+                            sForm = "錄取通知"
+                            sb.Append("<DIV style='text-align:center;font-size:24pt;color:black;font-weight:bold;text-decoration:underline' >").Append(sForm).Append("</DIV>")
+                            sb.Append("<DIV style='font-size:12pt;color:black'>").Append("親愛的").Append(mbMEMBER.getString("MB_NAME")).Append("吉祥：").Append("</DIV>")
+
+                            sb.Append("<DIV style='font-size:12pt;color:black;'>").Append("　　  歡迎您報名參加")
+                            sb.Append("<span style='color:black'>")
+                            sb.Append(ROW_CLASS("MB_CLASS_NAME").ToString)
+                            sb.Append("</span>")
+                            sb.Append("！此通知函，乃透過系統發送。為使您在課程期間能順利進行，並獲得最大收穫，請務必閱讀下列注意事項：").Append("</DIV>")
+                            sb.Append("<ol type='1' style='font-size:12pt;color:black;' >")
+                            Dim sMB_SDATE As String = String.Empty
+                            If Utility.isValidateData(ROW_CLASS("MB_SDATE")) Then
+                                sMB_SDATE = CDate(ROW_CLASS("MB_SDATE").ToString).Year & "年" & CDate(ROW_CLASS("MB_SDATE").ToString).Month & "月" &
+                                    CDate(ROW_CLASS("MB_SDATE").ToString).Day & "日"
+                            End If
+                            Dim sREGTIME As String = String.Empty
+                            sREGTIME = Left(Utility.FillZero(ROW_CLASS("REGTIME"), 4), 2) & Right(Utility.FillZero(ROW_CLASS("REGTIME"), 4), 2)
+                            sb.Append("<li>")
+                            sb.Append("<span style='font-size:12pt;'>").Append("當您收到確認後，").Append("</span>")
+                            sb.Append("<span style='color:black;font-weight:bold;font-size:14pt'>").Append("請於開課五日前，按後面連結確定出席，").Append("</span>")
+                            Dim sC_URL As String = String.Empty
+                            sC_URL = "http://mbscnn.org/MNT/MBMnt_RESP_01_v01.aspx?MB_MEMSEQ=" & e.CommandArgument & "&MB_SEQ=" & ROW_CLASS("MB_SEQ").ToString & "&MB_BATCH=" & ROW_CLASS("MB_BATCH").ToString &
+                             "&OPTYPE=Y"
+                            sb.Append(Me.getEMail_BT(sC_URL, "確定出席"))
+                            sb.Append("<span style='font-weight:bold;font-size:12pt;'>").Append("，若決定不出席請到課程報名網頁點""取消報名""").Append("</span>")
+                            sb.Append(Me.getEMail_BT("http://mbscnn.org", "回MBSC首頁"))
+                            sb.Append("<span style='font-weight:bold;font-size:12pt;'>").Append("開課前五日內若有變動，請與電話告知聯絡人").Append("</span>")
+                            sb.Append("，以利增補候補學員，感謝您。")
+                            sb.Append("</li>")
+
+                            sb.Append("<li>").Append("本課程開始日期時間：").Append("<span style='color:black'>").Append(sMB_SDATE).Append("</span>")
+                            sb.Append("　報到時間：").Append("<span style='color:black'>").Append(sREGTIME).Append("</span>")
+                            sb.Append("</li>")
+                            sb.Append("<li>")
+                            sb.Append(" 課程地點：").Append("<span style='color:black'>MBSC").Append(ROW_CLASS("MB_PLACE").ToString).Append(" / ")
+                            sb.Append(ROW_CLASS("CLASS_PLACE").ToString).Append("<BR/>").Append(ROW_CLASS("TRAFFIC_DESC").ToString)
+                            sb.Append("</li>")
+
+                            sb.Append("<li>")
+                            sb.Append("<span style='color:black'>聯絡電話：</span>").Append(ROW_CLASS("CONTEL").ToString).Append("　　")
+                            sb.Append("<span style='color:black'>聯絡人：").Append(ROW_CLASS("CONTACT").ToString).Append("</span>")
+                            sb.Append("</li>")
+
+                            Dim sMB_PREC_MEMO As String = String.Empty
+                            sMB_PREC_MEMO = ROW_CLASS("MB_PREC_MEMO").ToString
+                            If Utility.isValidateData(sMB_PREC_MEMO) Then
+                                sMB_PREC_MEMO = ReplaceToBR(sMB_PREC_MEMO)
+                                sb.Append("<li>")
+                                sb.Append("<span style='color:black'>注意事項說明：</span>").Append("</span>")
+                                sb.Append("<span style='color:black'><BR/>")
+                                sb.Append(sMB_PREC_MEMO).Append("</span>")
+                                sb.Append("</li>")
+                            End If
+
+                            sb.Append("</ol>")
+
+
+                            sb.Append("<div style='color:black;font-size:12pt;'>")
+                            sb.Append("　祝您").Append("<BR/>")
+                            sb.Append("　　　學習愉快、收穫滿滿").Append("<BR/>").Append("<BR/>")
+                            sb.Append("　　　　　　　　　 MBSC 台北教育中心 敬邀合十")
+                            sb.Append("</div>")
+
+                            sMailBody = sb.ToString
+                            com.Azion.EloanUtility.NetUtility.GMail_Send(sMailTos, Nothing, sMailSub, sMailBody, True, Nothing, False)
+                        End If
+                    End If
+
+                    MB_MEMCLASS.setAttribute("MB_FWMK", "1")
+                    MB_MEMCLASS.setAttribute("MB_APVDATETIME", Now)
+                    MB_MEMCLASS.save()
+                End If
+
+                Dim iPage As Decimal = 1
+                If IsNumeric(Me.lblCurrentPage.Text) Then
+                    iPage = CDec(Me.lblCurrentPage.Text)
+                End If
+                Me.Bind_TYPE_3(iPage)
+            ElseIf e.CommandName = "5N" Then
+                Dim LTL_MB_SEQ As Literal = e.Item.FindControl("LTL_MB_SEQ")
+                Dim MB_MEMCLASS As New MB_MEMCLASS(Me.m_DBManager)
+                If MB_MEMCLASS.LoadByPK(e.CommandArgument, LTL_MB_SEQ.Text) Then
+                    MB_MEMCLASS.setAttribute("MB_FWMK", "5")
+                    MB_MEMCLASS.setAttribute("MB_APVDATETIME", Now)
+                    MB_MEMCLASS.save()
+                End If
+
+                Dim iPage As Decimal = 1
+                If IsNumeric(Me.lblCurrentPage.Text) Then
+                    iPage = CDec(Me.lblCurrentPage.Text)
+                End If
+                Me.Bind_TYPE_3(iPage)
+            ElseIf e.CommandName = "5C" Then
+                Dim LTL_MB_SEQ As Literal = e.Item.FindControl("LTL_MB_SEQ")
+                Dim MB_MEMCLASS As New MB_MEMCLASS(Me.m_DBManager)
+                If MB_MEMCLASS.LoadByPK(e.CommandArgument, LTL_MB_SEQ.Text) Then
+                    MB_MEMCLASS.setAttribute("MB_FWMK", "0")
+                    MB_MEMCLASS.setAttribute("MB_APVDATETIME", Now)
+                    MB_MEMCLASS.save()
+                End If
+
+                Dim iPage As Decimal = 1
+                If IsNumeric(Me.lblCurrentPage.Text) Then
+                    iPage = CDec(Me.lblCurrentPage.Text)
+                End If
+                Me.Bind_TYPE_3(iPage)
             End If
         Catch ex As System.Threading.ThreadAbortException
         Catch ex As Exception
             com.Azion.EloanUtility.UIUtility.showErrMsg(Me, ex)
         End Try
     End Sub
+
+    Function getEMail_BT(ByVal sURL As String, ByVal sTEXT As String) As String
+        Dim sBT As String = String.Empty
+        sBT = "<div><!--[if mso]>" &
+              "  <v:roundrect xmlns:v=""urn:schemas-microsoft-com:vml"" xmlns:w=""urn:schemas-microsoft-com:office:word"" href=""" & sURL &
+              """ style=""height:40px;v-text-anchor:middle;width:200px;"" arcsize=""10%"" strokecolor=""#1e3650"" fillcolor=""#5BC0DE""> " &
+              "    <w:anchorlock/> " &
+              "    <center style=""color:#ffffff;font-family:sans-serif;font-size:20pt;font-weight:bold;"">" & sTEXT & "</center>" &
+              "  </v:roundrect> " &
+              "<![endif]--><a href=""" & sURL & """style=""background-color:#5BC0DE;border:1px solid #1e3650;border-radius:4px;color:#ffffff;display:inline-block;font-family:sans-serif;font-size:20pt;font-weight:bold;line-height:40px;text-align:center;text-decoration:none;width:200px;-webkit-text-size-adjust:none;mso-hide:all;"">" &
+              sTEXT & "</a></div>"
+
+        Return sBT
+    End Function
+
+    Function ReplaceToBR(ByVal sInStr As Object) As String
+        Try
+            If Utility.isValidateData(sInStr) Then
+                sInStr = sInStr.Replace(Chr(13) + Chr(10), "<BR/>")
+                sInStr = sInStr.Replace(Chr(13), "<BR/>")
+                sInStr = sInStr.Replace(Chr(10), "<BR/>")
+
+                Return sInStr
+            End If
+
+            Return String.Empty
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
 
     Private Sub RP_3_ItemDataBound(sender As Object, e As Web.UI.WebControls.RepeaterItemEventArgs) Handles RP_3.ItemDataBound
         Try
@@ -2062,6 +2246,31 @@ Public Class MBQry_TYPE_01_v01
                         MB_FWMK.Visible = False
                     End If
                 End If
+
+                Dim TD_MB_APV As HtmlTableCell = e.Item.FindControl("TD_MB_APV")
+                If DRV("MB_APV").ToString = "1" OrElse DRV("MB_APV").ToString = "3" Then
+                    TD_MB_APV.Visible = True
+
+                    Dim btnMB_FWMK_5Y As Button = e.Item.FindControl("btnMB_FWMK_5Y")
+                    Dim btnMB_FWMK_5N As Button = e.Item.FindControl("btnMB_FWMK_5N")
+                    Dim btnMB_FWMK_5C As Button = e.Item.FindControl("btnMB_FWMK_5C")
+                    Dim LTL_MB_APV As Literal = e.Item.FindControl("LTL_MB_APV")
+                    Select Case DRV("MB_FWMK").ToString
+                        Case "0"
+                            btnMB_FWMK_5Y.Visible = True
+                            btnMB_FWMK_5N.Visible = True
+                        Case "1", "2"
+                            LTL_MB_APV.Text = "錄取"
+                            LTL_MB_APV.Visible = True
+                        Case "3", "4"
+                            LTL_MB_APV.Text = "取消報名"
+                            LTL_MB_APV.Visible = True
+                        Case "5"
+                            btnMB_FWMK_5C.Visible = True
+                    End Select
+                Else
+                    TD_MB_APV.Visible = False
+                End If
             End If
         Catch ex As Exception
             Throw
@@ -2079,7 +2288,7 @@ Public Class MBQry_TYPE_01_v01
                         Dim HID_MB_BATCH As HtmlInputHidden = Me.RP_3.Items(i).FindControl("HID_MB_BATCH")
                         Dim HID_MB_MEMSEQ As HtmlInputHidden = Me.RP_3.Items(i).FindControl("HID_MB_MEMSEQ")
                         Dim HID_MB_SEQ As HtmlInputHidden = Me.RP_3.Items(i).FindControl("HID_MB_SEQ")
-                        If MB_MEMCLASS.LoadByPK(HID_MB_MEMSEQ.Value, HID_MB_SEQ.Value, CDec(HID_MB_BATCH.Value)) Then
+                        If MB_MEMCLASS.LoadByPK(HID_MB_MEMSEQ.Value, HID_MB_SEQ.Value) Then
                             MB_MEMCLASS.setAttribute("MB_FWMK", "2")
                             MB_MEMCLASS.save()
                         End If

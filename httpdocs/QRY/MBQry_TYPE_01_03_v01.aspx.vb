@@ -37,7 +37,7 @@ Public Class MBQry_TYPE_01_03_v01
             mbMEMCLASSList.LoadQEXCELData(CDec(Me.m_sMB_SEQ))
             DT_MB_MEMCLASS = mbMEMCLASSList.getCurrentDataSet.Tables(0)
             If Not IsNothing(DT_MB_MEMCLASS) AndAlso DT_MB_MEMCLASS.Rows.Count > 0 Then
-                Dim DV_MB_MEMCLASS As New DataView(DT_MB_MEMCLASS, "ISNULL(MB_FWMK,' ') NOT IN ('3','4')", String.Empty, DataViewRowState.CurrentRows)
+                Dim DV_MB_MEMCLASS As New DataView(DT_MB_MEMCLASS, "ISNULL(MB_FWMK,' ') NOT IN ('3','4','5') AND ISNULL(MB_RESP,' ')<>'N' ", String.Empty, DataViewRowState.CurrentRows)
                 DT_F_DT_MB_MEMCLASS = DV_MB_MEMCLASS.ToTable
             Else
                 DT_F_DT_MB_MEMCLASS = DT_MB_MEMCLASS
@@ -59,7 +59,7 @@ Public Class MBQry_TYPE_01_03_v01
             End If
 
             Dim sContent As String = String.Empty
-            If sMB_APV = "1" Then
+            If sMB_APV = "1" OrElse sMB_APV = "3" Then
                 sContent = Me.getMB_APV_Y(DBManager, DT_FF_DT_MB_MEMCLASS)
             Else
                 sContent = Me.getMB_APV_N(DBManager, DT_FF_DT_MB_MEMCLASS)
@@ -170,8 +170,17 @@ Public Class MBQry_TYPE_01_03_v01
                 'End If
                 'objStringBuilder.Append("<Cell><Data ss:Type=""String"">" & sMB_CLASS_NAME & "</Data></Cell>")
                 Dim sMB_BATCH As String = String.Empty
-                If IsNumeric(ROW("MB_BATCH")) AndAlso CDec(ROW("MB_BATCH")) > 0 Then
-                    sMB_BATCH = ROW("MB_BATCH").ToString
+                'If IsNumeric(ROW("MB_BATCH")) AndAlso CDec(ROW("MB_BATCH")) > 0 Then
+                '    sMB_BATCH = ROW("MB_BATCH").ToString
+                'End If
+                Dim MB_MEMBATCHList As New MB_MEMBATCHList(DBManager)
+                MB_MEMBATCHList.setSQLCondition(" ORDER BY MB_BATCH ")
+                MB_MEMBATCHList.LoadBySEQ(ROW("MB_MEMSEQ"), ROW("MB_SEQ"))
+                For Each sqlRow As DataRow In MB_MEMBATCHList.getCurrentDataSet.Tables(0).Rows
+                    sMB_BATCH &= sqlRow("MB_BATCH").ToString & ","
+                Next
+                If Utility.isValidateData(sMB_BATCH) Then
+                    sMB_BATCH = Left(sMB_BATCH, sMB_BATCH.Length - 1)
                 End If
                 objStringBuilder.Append("<Cell><Data ss:Type=""String"">" & sMB_BATCH & "</Data></Cell>")
 
@@ -389,7 +398,7 @@ Public Class MBQry_TYPE_01_03_v01
                         mbMEMCLASSList.loadByMB_SEQ(iMB_SEQ, iMB_BATCH)
                         DT_MB_MEMCLASS = mbMEMCLASSList.getCurrentDataSet.Tables(0)
 
-                        Dim DV_SEQ As New DataView(DT_MB_MEMCLASS, "ISNULL(MB_FWMK,' ') NOT IN ('3','4')", "MB_CREDATETIME", DataViewRowState.CurrentRows)
+                        Dim DV_SEQ As New DataView(DT_MB_MEMCLASS, "ISNULL(MB_FWMK,' ') NOT IN ('3','4','5')", "MB_CREDATETIME", DataViewRowState.CurrentRows)
                         DT_SEQ = DV_SEQ.ToTable
                         DT_FULL = DT_SEQ.Clone
                         Dim iFULL As Decimal = 0

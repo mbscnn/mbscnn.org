@@ -24,11 +24,19 @@ Public Class MB_MEMCLASSList
     ''' </history>
     Function loadByMB_SEQ(ByVal iMB_SEQ As Decimal, ByVal iMB_BATCH As Decimal) As Integer
         Try
+            Dim sqlStr As String = String.Empty
+            sqlStr = "SELECT A.*, B.MB_BATCH " &
+                     "  FROM MB_MEMCLASS A, MB_MEMBATCH B " &
+                     " WHERE     A.MB_SEQ = " & ProviderFactory.PositionPara & "MB_SEQ " &
+                     "       AND A.MB_MEMSEQ = B.MB_MEMSEQ " &
+                     "       AND A.MB_SEQ = B.MB_SEQ " &
+                     "       AND B.MB_BATCH = " & ProviderFactory.PositionPara & "MB_BATCH "
+
             Dim paras(1) As IDbDataParameter
             paras(0) = ProviderFactory.CreateDataParameter("MB_SEQ", iMB_SEQ)
             paras(1) = ProviderFactory.CreateDataParameter("MB_BATCH", iMB_BATCH)
 
-            Return Me.loadBySQL(paras)
+            Return Me.loadBySQL(sqlStr, paras)
         Catch ex As ProviderException
             Throw
         Catch ex As BosException
@@ -54,13 +62,16 @@ Public Class MB_MEMCLASSList
         Try
             Dim sqlStr As String = String.Empty
 
-            sqlStr = "SELECT B.MB_EMAIL, B.MB_NAME, A.* " &
-                     "  FROM MB_MEMCLASS A, MB_MEMBER B " &
+            sqlStr = "SELECT B.MB_EMAIL, B.MB_NAME, A.*, C.MB_BATCH " &
+                     "  FROM MB_MEMCLASS A, MB_MEMBER B, MB_MEMBATCH C " &
                      " WHERE     A.MB_SEQ = " & ProviderFactory.PositionPara & "MB_SEQ " &
-                     "       AND A.MB_BATCH = " & ProviderFactory.PositionPara & "MB_BATCH " &
-                     "       AND IFNULL(A.MB_FWMK, ' ') NOT IN ('3', '4') " &
+                     "       AND C.MB_BATCH = " & ProviderFactory.PositionPara & "MB_BATCH " &
+                     "       AND IFNULL(A.MB_FWMK, ' ') NOT IN ('3', '4', '5') " &
                      "       AND IFNULL(MB_RESP,' ')<>'N' " &
-                     "       AND A.MB_MEMSEQ = B.MB_MEMSEQ "
+                     "       AND A.MB_MEMSEQ = B.MB_MEMSEQ " &
+                     "       AND A.MB_MEMSEQ = C.MB_MEMSEQ " &
+                     "       AND A.MB_SEQ = C.MB_SEQ " &
+                     "       AND B.MB_MEMSEQ = C.MB_MEMSEQ "
 
             Dim paras(1) As IDbDataParameter
 
@@ -91,20 +102,21 @@ Public Class MB_MEMCLASSList
         Try
             Dim sqlStr As String = String.Empty
 
-            sqlStr = "SELECT C.*, D.MB_CLASS_NAME " & _
-                     "  FROM (SELECT A.MB_SEQ, " & _
-                     "               A.MB_CHKFLAG, " & _
-                     "               A.MB_CREDATETIME, " & _
-                     "               A.MB_FWMK, " & _
-                     "               A.MB_SORTNO, " & _
-                     "               A.MB_CDATE," & _
-                     "               A.MB_BATCH," & _
-                     "               A.MB_RESP," & _
-                     "               B.* " & _
-                     "          FROM MB_MEMCLASS A, MB_MEMBER B " & _
-                     "         WHERE A.MB_SEQ = " & ProviderFactory.PositionPara & "MB_SEQ AND A.MB_MEMSEQ = B.MB_MEMSEQ) C " & _
-                     "       LEFT JOIN MB_CLASS D ON C.MB_SEQ = D.MB_SEQ AND C.MB_BATCH = D.MB_BATCH" & _
-                     " ORDER BY MB_CREDATETIME " & _
+            sqlStr = "SELECT C.*, (SELECT MAX(MB_CLASS_NAME) FROM MB_CLASS WHERE MB_SEQ=C.MB_SEQ) AS MB_CLASS_NAME,  " &
+                     "  (SELECT MAX(MB_APV) FROM MB_CLASS WHERE MB_SEQ=C.MB_SEQ) AS MB_APV " &
+                     "  FROM (SELECT A.MB_SEQ, " &
+                     "               A.MB_CHKFLAG, " &
+                     "               A.MB_CREDATETIME, " &
+                     "               A.MB_FWMK, " &
+                     "               A.MB_SORTNO, " &
+                     "               A.MB_CDATE," &
+                     "               A.MB_RESP," &
+                     "               A.MB_APVDATETIME," &
+                     "               NULL AS MB_BATCH, " &
+                     "               B.* " &
+                     "          FROM MB_MEMCLASS A, MB_MEMBER B" &
+                     "         WHERE A.MB_SEQ = " & ProviderFactory.PositionPara & "MB_SEQ AND A.MB_MEMSEQ = B.MB_MEMSEQ) C " &
+                     " ORDER BY MB_CREDATETIME " &
                      "   LIMIT " & iStart & ", " & iPageSize
 
             Dim para As IDbDataParameter = ProviderFactory.CreateDataParameter("MB_SEQ", iMB_SEQ)
@@ -123,21 +135,20 @@ Public Class MB_MEMCLASSList
         Try
             Dim sqlStr As String = String.Empty
 
-            sqlStr = "SELECT C.*, D.MB_CLASS_NAME " &
+            sqlStr = "SELECT C.*, (SELECT MAX(MB_CLASS_NAME) FROM MB_CLASS WHERE MB_SEQ = C.MB_SEQ) AS MB_CLASS_NAME " &
                      "  FROM (SELECT A.MB_SEQ, " &
                      "               A.MB_CHKFLAG, " &
                      "               A.MB_CREDATETIME, " &
                      "               A.MB_FWMK, " &
                      "               A.MB_SORTNO, " &
-                     "               A.MB_BATCH," &
+                     "               NULL AS MB_BATCH," &
                      "               A.MB_RESP," &
                      "               A.MB_CDATE," &
                      "               A.MB_OBJECT," &
                      "               B.* " &
                      "          FROM MB_MEMCLASS A, MB_MEMBER B " &
                      "         WHERE A.MB_SEQ = " & ProviderFactory.PositionPara & "MB_SEQ AND A.MB_MEMSEQ = B.MB_MEMSEQ) C " &
-                     "       LEFT JOIN MB_CLASS D ON C.MB_SEQ = D.MB_SEQ AND C.MB_BATCH = D.MB_BATCH " &
-                     " ORDER BY MB_MEMSEQ, MB_BATCH "
+                     " ORDER BY MB_MEMSEQ "
 
             Dim para As IDbDataParameter = ProviderFactory.CreateDataParameter("MB_SEQ", iMB_SEQ)
 

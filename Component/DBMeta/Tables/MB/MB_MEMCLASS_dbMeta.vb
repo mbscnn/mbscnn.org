@@ -82,23 +82,17 @@ Public Class MB_MEMCLASS_dbMeta
 			hMetaData13.add("PROVIDER_TYPE_NAME", MySql.Data.MySqlClient.MySqlDbType.Date )
 			arry.add(hMetaData13)
 			Static hMetaData14 As new System.Collections.Hashtable
-			hMetaData14.add("COLUMN_NAME", "MB_BATCH" )
-			hMetaData14.add("DB_TYPE", 7 )
-			hMetaData14.add("PROVIDER_TYPE",246 )
-			hMetaData14.add("PROVIDER_TYPE_NAME", MySql.Data.MySqlClient.MySqlDbType.NewDecimal )
+			hMetaData14.add("COLUMN_NAME", "MB_CHGDATE" )
+			hMetaData14.add("DB_TYPE", 6 )
+			hMetaData14.add("PROVIDER_TYPE",12 )
+			hMetaData14.add("PROVIDER_TYPE_NAME", MySql.Data.MySqlClient.MySqlDbType.DateTime )
 			arry.add(hMetaData14)
 			Static hMetaData15 As new System.Collections.Hashtable
-			hMetaData15.add("COLUMN_NAME", "MB_CHGDATE" )
-			hMetaData15.add("DB_TYPE", 6 )
-			hMetaData15.add("PROVIDER_TYPE",12 )
-			hMetaData15.add("PROVIDER_TYPE_NAME", MySql.Data.MySqlClient.MySqlDbType.DateTime )
+			hMetaData15.add("COLUMN_NAME", "MB_RESP" )
+			hMetaData15.add("DB_TYPE", 16 )
+			hMetaData15.add("PROVIDER_TYPE",254 )
+			hMetaData15.add("PROVIDER_TYPE_NAME", MySql.Data.MySqlClient.MySqlDbType.String )
 			arry.add(hMetaData15)
-			Static hMetaData16 As new System.Collections.Hashtable
-			hMetaData16.add("COLUMN_NAME", "MB_RESP" )
-			hMetaData16.add("DB_TYPE", 16 )
-			hMetaData16.add("PROVIDER_TYPE",254 )
-			hMetaData16.add("PROVIDER_TYPE_NAME", MySql.Data.MySqlClient.MySqlDbType.String )
-			arry.add(hMetaData16)
      End Sub
      Public Function getMetaArray() as System.Collections.ArrayList Implements com.Azion.NET.VB.DBMetaData.getMetaArray
          Return arry
@@ -106,7 +100,6 @@ Public Class MB_MEMCLASS_dbMeta
      Public sub setPrimaryKeys() Implements com.Azion.NET.VB.DBMetaData.setPrimaryKeys
        m_arryPrimaryKeys.add("MB_MEMSEQ")
        m_arryPrimaryKeys.add("MB_SEQ")
-       m_arryPrimaryKeys.add("MB_BATCH")
      End Sub
      Public Function getPrimaryKeys() as System.Collections.ArrayList Implements com.Azion.NET.VB.DBMetaData.getPrimaryKeys
          Return m_arryPrimaryKeys

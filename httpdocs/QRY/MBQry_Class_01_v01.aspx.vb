@@ -439,6 +439,17 @@ Public Class MBQry_Class_01_v01
             sb.Append(" 尚未回覆者，請盡快回覆。")
             sb.Append("</li>")
 
+            Dim sMB_PREC_MEMO As String = String.Empty
+            sMB_PREC_MEMO = MB_CLASS.getString("MB_PREC_MEMO")
+            If Utility.isValidateData(sMB_PREC_MEMO) Then
+                sMB_PREC_MEMO = ReplaceToBR(sMB_PREC_MEMO)
+                sb.Append("<li>")
+                sb.Append("<span style='color:red'>注意事項說明：</span>").Append("</span>")
+                sb.Append("<span style='color:red'><BR/>")
+                sb.Append(sMB_PREC_MEMO).Append("</span>")
+                sb.Append("</li>")
+            End If
+
             sb.Append("</ol>")
 
             sb.Append("<div style='color:#C80896;font-size:14pt;font-weight:bold'>")
@@ -470,7 +481,7 @@ Public Class MBQry_Class_01_v01
             sb.Append("<ol type='1' style='font-size:12pt;color:#7030A0;font-weight:bold' >")
             Dim sMB_SDATE As String = String.Empty
             If Utility.isValidateData(MB_CLASS.getAttribute("MB_SDATE")) Then
-                sMB_SDATE = CDate(MB_CLASS.getAttribute("MB_SDATE").ToString).Year & "年" & CDate(MB_CLASS.getAttribute("MB_SDATE").ToString).Month & "月" & _
+                sMB_SDATE = CDate(MB_CLASS.getAttribute("MB_SDATE").ToString).Year & "年" & CDate(MB_CLASS.getAttribute("MB_SDATE").ToString).Month & "月" &
                             CDate(MB_CLASS.getAttribute("MB_SDATE").ToString).Day & "日"
             End If
             Dim sREGTIME As String = String.Empty
@@ -516,6 +527,17 @@ Public Class MBQry_Class_01_v01
             sb.Append(" 可代訂素食便當（報到時登記即可，歡迎隨喜打齋）。")
             sb.Append("</li>")
 
+            Dim sMB_PREC_MEMO As String = String.Empty
+            sMB_PREC_MEMO = MB_CLASS.getString("MB_PREC_MEMO")
+            If Utility.isValidateData(sMB_PREC_MEMO) Then
+                sMB_PREC_MEMO = ReplaceToBR(sMB_PREC_MEMO)
+                sb.Append("<li>")
+                sb.Append("<span style='color:red'>注意事項說明：</span>").Append("</span>")
+                sb.Append("<span style='color:red'><BR/>")
+                sb.Append(sMB_PREC_MEMO).Append("</span>")
+                sb.Append("</li>")
+            End If
+
             sb.Append("</ol>")
 
             sb.Append("<div style='color:#C80896;font-size:14pt;font-weight:bold'>")
@@ -525,6 +547,22 @@ Public Class MBQry_Class_01_v01
             sb.Append("</div>")
 
             Return sb.ToString
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+    Function ReplaceToBR(ByVal sInStr As Object) As String
+        Try
+            If Utility.isValidateData(sInStr) Then
+                sInStr = sInStr.Replace(Chr(13) + Chr(10), "<BR/>")
+                sInStr = sInStr.Replace(Chr(13), "<BR/>")
+                sInStr = sInStr.Replace(Chr(10), "<BR/>")
+
+                Return sInStr
+            End If
+
+            Return String.Empty
         Catch ex As Exception
             Throw
         End Try

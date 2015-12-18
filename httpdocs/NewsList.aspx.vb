@@ -249,9 +249,14 @@ Public Class NewsList
                 If IsNumeric(HID_MB_SEQ.Value) Then
                     Dim mbCLASSList As New MB_CLASSList(Me.m_DBManager)
                     mbCLASSList.LoadByMB_SEQ(CDec(HID_MB_SEQ.Value))
-                    Dim RP_SIGN As Repeater = e.Item.FindControl("RP_SIGN")
-                    RP_SIGN.DataSource = mbCLASSList.getCurrentDataSet.Tables(0)
-                    RP_SIGN.DataBind()
+                    'Dim RP_SIGN As Repeater = e.Item.FindControl("RP_SIGN")
+                    'RP_SIGN.DataSource = mbCLASSList.getCurrentDataSet.Tables(0).Rows(0)
+                    'RP_SIGN.DataBind()
+
+                    Dim btnClass As Button = e.Item.FindControl("btnClass")
+                    Dim btnCanClass As Button = e.Item.FindControl("btnCanClass")
+                    Dim LTL_APLY As Label = e.Item.FindControl("LTL_APLY")
+                    Me.getAPLY_MSG(HID_MB_SEQ.Value, btnClass, btnCanClass, LTL_APLY)
 
                     Dim PNL_CLASS As Panel = e.Item.FindControl("PNL_CLASS")
                     PNL_CLASS.Visible = True
@@ -312,72 +317,150 @@ Public Class NewsList
         End Try
     End Sub
 
-    Sub RP_SIGN_OnItemDataBound(ByVal Sender As Object, ByVal e As RepeaterItemEventArgs)
-        Try
-            If e.Item.ItemType = ListItemType.Item OrElse e.Item.ItemType = ListItemType.AlternatingItem Then
-                Dim DRV As DataRowView = CType(e.Item.DataItem, DataRowView)
-                Dim LTL_MB_BATCH As Label = e.Item.FindControl("LTL_MB_BATCH")
-                If Not IsNumeric(DRV("MB_BATCH")) OrElse DRV("MB_BATCH") = 0 Then
-                    LTL_MB_BATCH.Visible = False
-                Else
-                    'LTL_MB_BATCH.Text = "第【" & DRV("MB_BATCH") & "】梯次"
-                    LTL_MB_BATCH.Text = "第" & DRV("MB_BATCH") & "梯次"
+    Sub getAPLY_MSG(ByVal iMB_SEQ As Decimal, ByVal btnClass As Button, ByVal btnCanClass As Button, ByVal LTL_APLY As Label)
+        Dim MB_CLASSList As New MB_CLASSList(Me.m_DBManager)
+        MB_CLASSList.setSQLCondition(" ORDER BY MB_BATCH ")
+        MB_CLASSList.LoadByMB_SEQ(iMB_SEQ)
+        Dim MB_MEMCLASSList As New MB_MEMCLASSList(Me.m_DBManager)
+        Dim iVadSign As Integer = 0
+        Dim iMB_YES As Integer = 0
+        Dim sb_APLY As New System.Text.StringBuilder
+        For Each ROW As DataRow In MB_CLASSList.getCurrentDataSet.Tables(0).Rows
+            MB_MEMCLASSList.clear()
+            MB_MEMCLASSList.setSQLCondition(" AND IFNULL(A.MB_FWMK,'') NOT IN ('3','4','5') AND IFNULL(A.MB_RESP,' ')<>'N' ")
+            MB_MEMCLASSList.loadByMB_SEQ(iMB_SEQ, ROW("MB_BATCH"))
+            Dim isFULL As Boolean = False
+            If MB_MEMCLASSList.size >= (Utility.CheckNumNull(ROW("MB_FULL")) + Utility.CheckNumNull(ROW("MB_WAIT"))) Then
+                '報名已額滿
+                isFULL = True
+            Else
+                If Now >= CDate(ROW("MB_SAPLY").ToString) AndAlso Now <= CDate(ROW("MB_EAPLY").ToString) Then
+                    iVadSign += 1
+                End If
+            End If
+
+            Dim isEndSign As Boolean = False
+            If ROW("MB_YES").ToString = "N" Then
+                isEndSign = True
+            Else
+                If IsDate(ROW("MB_EAPLY").ToString) Then
+                    If Now > CDate(ROW("MB_EAPLY").ToString) Then
+                        isEndSign = True
+                    End If
                 End If
 
-                Dim btnClass As Button = e.Item.FindControl("btnClass")
-                Dim HID_MB_BATCH As HtmlInputHidden = e.Item.FindControl("HID_MB_BATCH")
-                Dim MB_CLASS As New MB_CLASS(m_DBManager)
-                If MB_CLASS.loadByPK(DRV("MB_SEQ"), HID_MB_BATCH.Value) Then
-                    Dim MB_MEMCLASSList As New MB_MEMCLASSList(m_DBManager)
-                    MB_MEMCLASSList.setSQLCondition(" AND IFNULL(MB_FWMK,'') NOT IN ('3','4') ")
-                    MB_MEMCLASSList.loadByMB_SEQ(DRV("MB_SEQ"), HID_MB_BATCH.Value)
-
-                    If MB_MEMCLASSList.size >= (MB_CLASS.getInt("MB_FULL") + MB_CLASS.getInt("MB_WAIT")) Then
-                        btnClass.Text = "報名已額滿"
-                        btnClass.Enabled = False
-                    End If
+                If Not isEndSign Then
+                    iMB_YES += 1
                 End If
+            End If
 
-                Dim LTL_APLY As Label = e.Item.FindControl("LTL_APLY")
-                If MB_CLASS.getString("MB_YES") = "N" Then
-                    LTL_APLY.Text = "已截止報名"
-                    Dim PLH_APLY As PlaceHolder = e.Item.FindControl("PLH_APLY")
-                    PLH_APLY.Visible = True
-                    btnClass.Visible = False
-                    Dim btnCanClass As Button = e.Item.FindControl("btnCanClass")
-                    btnCanClass.Visible = False
+            Dim sBatch As String = String.Empty
+            If CDec(ROW("MB_BATCH")) > 0 Then
+                sBatch = "第" & ROW("MB_BATCH").ToString & "梯次"
+            End If
+            If isEndSign Then
+                sb_APLY.Append(sBatch).Append("已截止報名").Append("<BR/>")
+            Else
+                If isFULL Then
+                    sb_APLY.Append(sBatch).Append("報名已額滿").Append("<BR/>")
                 Else
-                    If IsDate(DRV("MB_SAPLY").ToString) Then
-                        'LTL_APLY.Text &= CDate(DRV("MB_SAPLY").ToString).Year - 1911 & "年" & CDate(DRV("MB_SAPLY").ToString).Month & "月" & CDate(DRV("MB_SAPLY").ToString).Day & "日"
-                        LTL_APLY.Text = CDate(DRV("MB_SAPLY").ToString).Month & "月" & CDate(DRV("MB_SAPLY").ToString).Day & "日開始報名"
-                    End If
-                    If IsDate(DRV("MB_EAPLY").ToString) Then
-                        If Now > CDate(DRV("MB_EAPLY").ToString) Then
-                            LTL_APLY.Text = "已截止報名"
-                        End If
-                    End If
-
-                    'If IsDate(DRV("MB_EAPLY").ToString) Then
-                    '    LTL_APLY.Text &= "~" & CDate(DRV("MB_EAPLY").ToString).Year - 1911 & "年" & CDate(DRV("MB_EAPLY").ToString).Month & "月" & CDate(DRV("MB_EAPLY").ToString).Day & "日"
-                    'End If
-
-                    Dim btnCanClass As Button = e.Item.FindControl("btnCanClass")
-                    Dim PLH_APLY As PlaceHolder = e.Item.FindControl("PLH_APLY")
-                    If Now >= CDate(DRV("MB_SAPLY").ToString) AndAlso Now <= CDate(DRV("MB_EAPLY").ToString) Then
-                        PLH_APLY.Visible = False
-                        btnClass.Visible = True
-                        btnCanClass.Visible = True
-                    Else
-                        PLH_APLY.Visible = True
-                        btnClass.Visible = False
-                        btnCanClass.Visible = False
+                    If IsDate(ROW("MB_SAPLY").ToString) Then
+                        sb_APLY.Append(sBatch).Append(CDate(ROW("MB_SAPLY").ToString).Month & "月" & CDate(ROW("MB_SAPLY").ToString).Day & "日開始報名").Append("<BR/>")
                     End If
                 End If
             End If
-        Catch ex As Exception
-            Throw
-        End Try
+        Next
+
+        If iMB_YES = 0 Then
+            LTL_APLY.Text = "已截止報名"
+            btnClass.Visible = False
+            btnCanClass.Visible = False
+        Else
+            Dim sBR As String = String.Empty
+            If iVadSign > 0 Then
+                btnClass.Visible = True
+                btnCanClass.Visible = True
+                sBR = "<BR/>"
+            Else
+                btnClass.Visible = False
+                btnCanClass.Visible = False
+            End If
+
+            Dim sAPLY As String = String.Empty
+            sAPLY = sb_APLY.ToString
+            If Utility.isValidateData(sAPLY) Then
+                sAPLY = Left(sAPLY, sAPLY.Length - 5)
+                LTL_APLY.Text = sBR & sAPLY
+            End If
+        End If
     End Sub
+
+    'Sub RP_SIGN_OnItemDataBound(ByVal Sender As Object, ByVal e As RepeaterItemEventArgs)
+    '    Try
+    '        If e.Item.ItemType = ListItemType.Item OrElse e.Item.ItemType = ListItemType.AlternatingItem Then
+    '            Dim DRV As DataRowView = CType(e.Item.DataItem, DataRowView)
+    '            Dim LTL_MB_BATCH As Label = e.Item.FindControl("LTL_MB_BATCH")
+    '            If Not IsNumeric(DRV("MB_BATCH")) OrElse DRV("MB_BATCH") = 0 Then
+    '                LTL_MB_BATCH.Visible = False
+    '            Else
+    '                'LTL_MB_BATCH.Text = "第【" & DRV("MB_BATCH") & "】梯次"
+    '                LTL_MB_BATCH.Text = "第" & DRV("MB_BATCH") & "梯次"
+    '            End If
+
+    '            Dim btnClass As Button = e.Item.FindControl("btnClass")
+    '            Dim HID_MB_BATCH As HtmlInputHidden = e.Item.FindControl("HID_MB_BATCH")
+    '            Dim MB_CLASS As New MB_CLASS(m_DBManager)
+    '            If MB_CLASS.loadByPK(DRV("MB_SEQ"), HID_MB_BATCH.Value) Then
+    '                Dim MB_MEMCLASSList As New MB_MEMCLASSList(m_DBManager)
+    '                MB_MEMCLASSList.setSQLCondition(" AND IFNULL(MB_FWMK,'') NOT IN ('3','4') ")
+    '                MB_MEMCLASSList.loadByMB_SEQ(DRV("MB_SEQ"), HID_MB_BATCH.Value)
+
+    '                If MB_MEMCLASSList.size >= (MB_CLASS.getInt("MB_FULL") + MB_CLASS.getInt("MB_WAIT")) Then
+    '                    btnClass.Text = "報名已額滿"
+    '                    btnClass.Enabled = False
+    '                End If
+    '            End If
+
+    '            Dim LTL_APLY As Label = e.Item.FindControl("LTL_APLY")
+    '            If MB_CLASS.getString("MB_YES") = "N" Then
+    '                LTL_APLY.Text = "已截止報名"
+    '                Dim PLH_APLY As PlaceHolder = e.Item.FindControl("PLH_APLY")
+    '                PLH_APLY.Visible = True
+    '                btnClass.Visible = False
+    '                Dim btnCanClass As Button = e.Item.FindControl("btnCanClass")
+    '                btnCanClass.Visible = False
+    '            Else
+    '                If IsDate(DRV("MB_SAPLY").ToString) Then
+    '                    'LTL_APLY.Text &= CDate(DRV("MB_SAPLY").ToString).Year - 1911 & "年" & CDate(DRV("MB_SAPLY").ToString).Month & "月" & CDate(DRV("MB_SAPLY").ToString).Day & "日"
+    '                    LTL_APLY.Text = CDate(DRV("MB_SAPLY").ToString).Month & "月" & CDate(DRV("MB_SAPLY").ToString).Day & "日開始報名"
+    '                End If
+    '                If IsDate(DRV("MB_EAPLY").ToString) Then
+    '                    If Now > CDate(DRV("MB_EAPLY").ToString) Then
+    '                        LTL_APLY.Text = "已截止報名"
+    '                    End If
+    '                End If
+
+    '                'If IsDate(DRV("MB_EAPLY").ToString) Then
+    '                '    LTL_APLY.Text &= "~" & CDate(DRV("MB_EAPLY").ToString).Year - 1911 & "年" & CDate(DRV("MB_EAPLY").ToString).Month & "月" & CDate(DRV("MB_EAPLY").ToString).Day & "日"
+    '                'End If
+
+    '                Dim btnCanClass As Button = e.Item.FindControl("btnCanClass")
+    '                Dim PLH_APLY As PlaceHolder = e.Item.FindControl("PLH_APLY")
+    '                If Now >= CDate(DRV("MB_SAPLY").ToString) AndAlso Now <= CDate(DRV("MB_EAPLY").ToString) Then
+    '                    PLH_APLY.Visible = False
+    '                    btnClass.Visible = True
+    '                    btnCanClass.Visible = True
+    '                Else
+    '                    PLH_APLY.Visible = True
+    '                    btnClass.Visible = False
+    '                    btnCanClass.Visible = False
+    '                End If
+    '            End If
+    '        End If
+    '    Catch ex As Exception
+    '        Throw
+    '    End Try
+    'End Sub
 
     Private Sub RP_NEWS_ItemCommand(source As Object, e As System.Web.UI.WebControls.RepeaterCommandEventArgs) Handles RP_NEWS.ItemCommand
         Try
@@ -435,14 +518,19 @@ Public Class NewsList
                 DIV_MORE.Visible = False
                 Dim HID_MB_SEQ As HtmlInputHidden = e.Item.FindControl("HID_MB_SEQ")
                 If IsNumeric(HID_MB_SEQ.Value) Then
-                    Dim mbCLASSList As New MB_CLASSList(Me.m_DBManager)
-                    mbCLASSList.LoadByMB_SEQ(CDec(HID_MB_SEQ.Value))
-                    Dim RP_SIGN As Repeater = e.Item.FindControl("RP_SIGN")
-                    RP_SIGN.DataSource = mbCLASSList.getCurrentDataSet.Tables(0)
-                    RP_SIGN.DataBind()
+                    'Dim mbCLASSList As New MB_CLASSList(Me.m_DBManager)
+                    'mbCLASSList.LoadByMB_SEQ(CDec(HID_MB_SEQ.Value))
+                    'Dim RP_SIGN As Repeater = e.Item.FindControl("RP_SIGN")
+                    'RP_SIGN.DataSource = mbCLASSList.getCurrentDataSet.Tables(0)
+                    'RP_SIGN.DataBind()
 
-                    Dim PNL_CLASS As Panel = e.Item.FindControl("PNL_CLASS")
-                    PNL_CLASS.Visible = True
+                    'Dim PNL_CLASS As Panel = e.Item.FindControl("PNL_CLASS")
+                    'PNL_CLASS.Visible = True
+
+                    Dim btnClass As Button = e.Item.FindControl("btnClass")
+                    Dim btnCanClass As Button = e.Item.FindControl("btnCanClass")
+                    Dim LTL_APLY As Label = e.Item.FindControl("LTL_APLY")
+                    Me.getAPLY_MSG(HID_MB_SEQ.Value, btnClass, btnCanClass, LTL_APLY)
                 End If
 
                 'Dim DIV_TITLE As HtmlGenericControl = e.Item.FindControl("DIV_TITLE")
@@ -460,6 +548,21 @@ Public Class NewsList
                 'sURL = com.Azion.EloanUtility.UIUtility.getRootPath & "/MNT/MBMnt_Sign_01_v01.aspx?MBSEQ=" & HID_MB_SEQ.Value
 
                 'Response.Redirect(sURL)
+
+                If Not com.Azion.EloanUtility.ValidateUtility.isValidateData(Session("USERID")) Then
+                    com.Azion.EloanUtility.UIUtility.alert("請先登入或成為會員")
+                    com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "請先登入或成為會員")
+                    Dim sURL_Sign As String = String.Empty
+                    sURL_Sign = com.Azion.EloanUtility.UIUtility.getRootPath & "/MNT/MBSignIn_01_v01.aspx"
+                    Server.Transfer(sURL_Sign)
+                    Return
+                End If
+                Dim sURL As String = String.Empty
+                Dim HID_MB_SEQ As HtmlInputHidden = e.Item.FindControl("HID_MB_SEQ")
+                sURL = com.Azion.EloanUtility.UIUtility.getRootPath &
+                       "/MNT/MBMnt_Sign_01_v01.aspx?MBSEQ=" & HID_MB_SEQ.Value '& "&MB_BATCH=" & HID_MB_BATCH.Value
+
+                Response.Redirect(sURL)
             ElseIf UCase(e.CommandName) = "CANCLASS" Then
                 '取消報名
                 'If Not com.Azion.EloanUtility.ValidateUtility.isValidateData(Session("USERID")) Then
@@ -473,6 +576,22 @@ Public Class NewsList
                 'sURL = com.Azion.EloanUtility.UIUtility.getRootPath & "/MNT/MBMnt_Sign_01_v01.aspx?MBSEQ=" & HID_MB_SEQ.Value
 
                 'Response.Redirect(sURL)
+
+                If Not com.Azion.EloanUtility.ValidateUtility.isValidateData(Session("USERID")) Then
+                    com.Azion.EloanUtility.UIUtility.alert("請先登入或成為會員")
+                    com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "請先登入或成為會員")
+                    Dim sURL_Sign As String = String.Empty
+                    sURL_Sign = com.Azion.EloanUtility.UIUtility.getRootPath & "/MNT/MBSignIn_01_v01.aspx"
+                    Server.Transfer(sURL_Sign)
+                    Return
+                End If
+
+                Dim HID_MB_SEQ As HtmlInputHidden = e.Item.FindControl("HID_MB_SEQ")
+                Dim sURL As String = String.Empty
+                sURL = com.Azion.EloanUtility.UIUtility.getRootPath &
+                       "/MNT/MBMnt_Sign_01_v01.aspx?OPTYPE=CANCEL&MBSEQ=" & HID_MB_SEQ.Value '& "&MB_BATCH=" & HID_MB_BATCH.Value
+
+                Response.Redirect(sURL)
             ElseIf UCase(e.CommandName) = "DEL" Then
                 Dim iINDEX As Integer = e.Item.ItemIndex
                 Dim HID_CRETIME As HtmlInputHidden = e.Item.FindControl("HID_CRETIME")
@@ -602,49 +721,49 @@ Public Class NewsList
         End Try
     End Sub
 
-    Sub RP_SIGN_OnItemCommand(source As Object, e As System.Web.UI.WebControls.RepeaterCommandEventArgs)
-        Try
-            Dim sURL_Sign As String = String.Empty
-            sURL_Sign = com.Azion.EloanUtility.UIUtility.getRootPath & "/MNT/MBSignIn_01_v01.aspx"
+    'Sub RP_SIGN_OnItemCommand(source As Object, e As System.Web.UI.WebControls.RepeaterCommandEventArgs)
+    '    Try
+    '        Dim sURL_Sign As String = String.Empty
+    '        sURL_Sign = com.Azion.EloanUtility.UIUtility.getRootPath & "/MNT/MBSignIn_01_v01.aspx"
 
-            If UCase(e.CommandName) = "CLASS" Then
-                '我要報名
-                If Not com.Azion.EloanUtility.ValidateUtility.isValidateData(Session("USERID")) Then
-                    com.Azion.EloanUtility.UIUtility.alert("請先登入或成為會員")
-                    com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "請先登入或成為會員")
-                    Server.Transfer(sURL_Sign)
-                    Return
-                End If
+    '        If UCase(e.CommandName) = "CLASS" Then
+    '            '我要報名
+    '            If Not com.Azion.EloanUtility.ValidateUtility.isValidateData(Session("USERID")) Then
+    '                com.Azion.EloanUtility.UIUtility.alert("請先登入或成為會員")
+    '                com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "請先登入或成為會員")
+    '                Server.Transfer(sURL_Sign)
+    '                Return
+    '            End If
 
-                Dim HID_MB_SEQ As HtmlInputHidden = e.Item.FindControl("HID_MB_SEQ")
-                Dim HID_MB_BATCH As HtmlInputHidden = e.Item.FindControl("HID_MB_BATCH")
+    '            Dim HID_MB_SEQ As HtmlInputHidden = e.Item.FindControl("HID_MB_SEQ")
+    '            Dim HID_MB_BATCH As HtmlInputHidden = e.Item.FindControl("HID_MB_BATCH")
 
-                Dim sURL As String = String.Empty
-                sURL = com.Azion.EloanUtility.UIUtility.getRootPath & "/MNT/MBMnt_Sign_01_v01.aspx?MBSEQ=" & HID_MB_SEQ.Value & "&MB_BATCH=" & HID_MB_BATCH.Value
+    '            Dim sURL As String = String.Empty
+    '            sURL = com.Azion.EloanUtility.UIUtility.getRootPath & "/MNT/MBMnt_Sign_01_v01.aspx?MBSEQ=" & HID_MB_SEQ.Value & "&MB_BATCH=" & HID_MB_BATCH.Value
 
-                Response.Redirect(sURL)
-            ElseIf UCase(e.CommandName) = "CANCLASS" Then
-                '取消報名
-                If Not com.Azion.EloanUtility.ValidateUtility.isValidateData(Session("USERID")) Then
-                    com.Azion.EloanUtility.UIUtility.alert("請先登入或成為會員")
-                    com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "請先登入或成為會員")
-                    Server.Transfer(sURL_Sign)
-                    Return
-                End If
+    '            Response.Redirect(sURL)
+    '        ElseIf UCase(e.CommandName) = "CANCLASS" Then
+    '            '取消報名
+    '            If Not com.Azion.EloanUtility.ValidateUtility.isValidateData(Session("USERID")) Then
+    '                com.Azion.EloanUtility.UIUtility.alert("請先登入或成為會員")
+    '                com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "請先登入或成為會員")
+    '                Server.Transfer(sURL_Sign)
+    '                Return
+    '            End If
 
-                Dim HID_MB_SEQ As HtmlInputHidden = e.Item.FindControl("HID_MB_SEQ")
-                Dim HID_MB_BATCH As HtmlInputHidden = e.Item.FindControl("HID_MB_BATCH")
+    '            Dim HID_MB_SEQ As HtmlInputHidden = e.Item.FindControl("HID_MB_SEQ")
+    '            Dim HID_MB_BATCH As HtmlInputHidden = e.Item.FindControl("HID_MB_BATCH")
 
-                Dim sURL As String = String.Empty
-                sURL = com.Azion.EloanUtility.UIUtility.getRootPath & "/MNT/MBMnt_Sign_01_v01.aspx?OPTYPE=CANCEL&MBSEQ=" & HID_MB_SEQ.Value & "&MB_BATCH=" & HID_MB_BATCH.Value
+    '            Dim sURL As String = String.Empty
+    '            sURL = com.Azion.EloanUtility.UIUtility.getRootPath & "/MNT/MBMnt_Sign_01_v01.aspx?OPTYPE=CANCEL&MBSEQ=" & HID_MB_SEQ.Value & "&MB_BATCH=" & HID_MB_BATCH.Value
 
-                Response.Redirect(sURL)
-            End If
-        Catch ex As System.Threading.ThreadAbortException
-        Catch ex As Exception
-            com.Azion.EloanUtility.UIUtility.showErrMsg(Me, ex)
-        End Try
-    End Sub
+    '            Response.Redirect(sURL)
+    '        End If
+    '    Catch ex As System.Threading.ThreadAbortException
+    '    Catch ex As Exception
+    '        com.Azion.EloanUtility.UIUtility.showErrMsg(Me, ex)
+    '    End Try
+    'End Sub
 
     Sub SAVE_NEXT_SEQTIME(ByVal sqlRow As DataRow, ByVal HID_CRETIME As HtmlInputHidden, ByVal HID_SEQTIME As HtmlInputHidden)
         Dim mbNEWS As New MB_NEWS(Me.m_DBManager)

@@ -2177,6 +2177,9 @@ Public Class MBMnt_Member_01_v01
             Me.MB_CITY1.DataSource = AP_ROADSECList.getCurrentDataSet.Tables(0)
             Me.MB_CITY1.DataBind()
 
+            Me.MB_CITY.Items.Insert(0, New ListItem("非本國", "非本國"))
+            Me.MB_CITY1.Items.Insert(0, New ListItem("非本國", "非本國"))
+
             Me.MB_CITY.Items.Insert(0, New ListItem("《縣/市》", ""))
             Me.MB_CITY1.Items.Insert(0, New ListItem("《縣/市》", ""))
         Catch ex As Exception
@@ -2351,14 +2354,19 @@ Public Class MBMnt_Member_01_v01
 
     Sub ReBind_DDL_Town_PostBack(ByVal DDL_VLG As DropDownList, ByVal sCity As String, ByVal sVLG As String)
         Try
-            Dim AP_ROADSECList As New AP_ROADSECList(Me.m_DBManager)
+            If sCity = "非本國" Then
+                DDL_VLG.Items.Clear()
+                DDL_VLG.Items.Insert(0, New ListItem("非本國", "非本國"))
+            Else
+                Dim AP_ROADSECList As New AP_ROADSECList(Me.m_DBManager)
 
-            AP_ROADSECList.loadByCityNOT_D(sCity)
+                AP_ROADSECList.loadByCityNOT_D(sCity)
 
-            DDL_VLG.DataSource = AP_ROADSECList.getCurrentDataSet.Tables(0)
-            DDL_VLG.DataTextField = "AREA"
-            DDL_VLG.DataValueField = "AREA_ID"
-            DDL_VLG.DataBind()
+                DDL_VLG.DataSource = AP_ROADSECList.getCurrentDataSet.Tables(0)
+                DDL_VLG.DataTextField = "AREA"
+                DDL_VLG.DataValueField = "AREA_ID"
+                DDL_VLG.DataBind()
+            End If
 
             DDL_VLG.Items.Insert(0, New ListItem("《鄉鎮市區》", ""))
 
@@ -2373,14 +2381,19 @@ Public Class MBMnt_Member_01_v01
 
     Sub ReBind_DDL_Town_PostBackByText(ByVal DDL_VLG As DropDownList, ByVal sCity As String, ByVal sVLG As String)
         Try
-            Dim AP_ROADSECList As New AP_ROADSECList(Me.m_DBManager)
+            If sCity = "非本國" Then
+                DDL_VLG.Items.Clear()
+                DDL_VLG.Items.Insert(0, New ListItem("非本國", "非本國"))
+            Else
+                Dim AP_ROADSECList As New AP_ROADSECList(Me.m_DBManager)
 
-            AP_ROADSECList.loadByCityNOT_D(sCity)
+                AP_ROADSECList.loadByCityNOT_D(sCity)
 
-            DDL_VLG.DataSource = AP_ROADSECList.getCurrentDataSet.Tables(0)
-            DDL_VLG.DataTextField = "AREA"
-            DDL_VLG.DataValueField = "AREA_ID"
-            DDL_VLG.DataBind()
+                DDL_VLG.DataSource = AP_ROADSECList.getCurrentDataSet.Tables(0)
+                DDL_VLG.DataTextField = "AREA"
+                DDL_VLG.DataValueField = "AREA_ID"
+                DDL_VLG.DataBind()
+            End If
 
             DDL_VLG.Items.Insert(0, New ListItem("《鄉鎮市區》", ""))
 
@@ -2421,34 +2434,42 @@ Public Class MBMnt_Member_01_v01
     End Sub
 
     '初始化鄉鎮市區
-    <System.Web.Services.WebMethod()> _
+    <System.Web.Services.WebMethod()>
     Public Shared Function Bind_DDL_Town(ByVal sCity As String) As String
-        Dim dbManager As DatabaseManager = UIShareFun.getDataBaseManager
-        Try
-            Dim AP_ROADSECList As New AP_ROADSECList(dbManager)
-
-            AP_ROADSECList.loadByCityNOT_D(sCity)
-
-            Dim DT As DataTable = AP_ROADSECList.getCurrentDataSet.Tables(0)
-
+        If sCity = "非本國" Then
             Dim tmpStr As New StringBuilder
-
             tmpStr.Append("{""AddrCode"":[")
-            For i As Integer = 0 To DT.Rows.Count - 1
-                If i <> DT.Rows.Count - 1 Then
-                    tmpStr.Append(GetJsonStr(DT.Rows(i).Item("AREA").ToString.Trim, DT.Rows(i).Item("AREA_ID").ToString.Trim) & ",")
-                Else
-                    tmpStr.Append(GetJsonStr(DT.Rows(i).Item("AREA").ToString.Trim, DT.Rows(i).Item("AREA_ID").ToString.Trim))
-                End If
-            Next
+            tmpStr.Append(GetJsonStr("非本國", "非本國"))
             tmpStr.Append("]}")
-
             Return tmpStr.ToString
-        Catch ex As Exception
-            Throw
-        Finally
-            UIShareFun.releaseConnection(dbManager)
-        End Try
+        Else
+            Dim dbManager As DatabaseManager = UIShareFun.getDataBaseManager
+            Try
+                Dim AP_ROADSECList As New AP_ROADSECList(dbManager)
+
+                AP_ROADSECList.loadByCityNOT_D(sCity)
+
+                Dim DT As DataTable = AP_ROADSECList.getCurrentDataSet.Tables(0)
+
+                Dim tmpStr As New StringBuilder
+
+                tmpStr.Append("{""AddrCode"":[")
+                For i As Integer = 0 To DT.Rows.Count - 1
+                    If i <> DT.Rows.Count - 1 Then
+                        tmpStr.Append(GetJsonStr(DT.Rows(i).Item("AREA").ToString.Trim, DT.Rows(i).Item("AREA_ID").ToString.Trim) & ",")
+                    Else
+                        tmpStr.Append(GetJsonStr(DT.Rows(i).Item("AREA").ToString.Trim, DT.Rows(i).Item("AREA_ID").ToString.Trim))
+                    End If
+                Next
+                tmpStr.Append("]}")
+
+                Return tmpStr.ToString
+            Catch ex As Exception
+                Throw
+            Finally
+                UIShareFun.releaseConnection(dbManager)
+            End Try
+        End If
     End Function
 
     Private Shared Function GetJsonStr(ByVal sAREA As String, ByVal sAREA_ID As String) As String
@@ -2456,8 +2477,12 @@ Public Class MBMnt_Member_01_v01
     End Function
 
     '初始化所屬區
-    <System.Web.Services.WebMethod()> _
+    <System.Web.Services.WebMethod()>
     Public Shared Function Bind_MB_AREA(ByVal sCITY_ID As String) As String
+        If sCITY_ID = "非本國" Then
+            sCITY_ID = "F"
+        End If
+
         Dim dbManager As DatabaseManager = UIShareFun.getDataBaseManager
         Try
             Dim apAREATEAM As New AP_AREATEAM(dbManager)
@@ -2495,6 +2520,15 @@ Public Class MBMnt_Member_01_v01
         Finally
             UIShareFun.releaseConnection(dbManager)
         End Try
+    End Function
+
+    <System.Web.Services.WebMethod()> _
+    Public Shared Function get23_NOTE(ByVal sMB_FEETYPE As String) As String
+        Using dbManager As DatabaseManager = DatabaseManager.getInstance
+            Dim AP_CODE As New AP_CODE(dbManager)
+            AP_CODE.loadByValue(m_sUpcode23, sMB_FEETYPE)
+            Return AP_CODE.getString("NOTE")
+        End Using
     End Function
 
     '身分證字號檢核

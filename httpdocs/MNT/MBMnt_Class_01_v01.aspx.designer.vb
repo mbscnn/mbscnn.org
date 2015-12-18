@@ -374,13 +374,13 @@ Partial Public Class MBMnt_Class_01_v01
     Protected WithEvents CONTEL As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''CLASS_PLACE 控制項。
+    '''DDL_CLASS_PLACE 控制項。
     '''</summary>
     '''<remarks>
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents CLASS_PLACE As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents DDL_CLASS_PLACE As Global.System.Web.UI.WebControls.DropDownList
     
     '''<summary>
     '''TRAFFIC_DESC 控制項。

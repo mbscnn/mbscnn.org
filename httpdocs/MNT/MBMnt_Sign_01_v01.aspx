@@ -675,7 +675,7 @@
 					<asp:TextBox ID="txt_MB_EMGCONT" runat="server" class="form-control" />
 				</div>
 				<div class="col-md-2 thm">
-					電話/手機
+					電話/手機<span style="color:Red"><BR/>請勿輸入非數字</span>
 				</div>
 				<div class="col-md-4">
 					<asp:TextBox ID="txt_MB_CONTMOBIL" runat="server" class="form-control" />
@@ -708,6 +708,36 @@
                 <div class="col-md-4">
                     <asp:TextBox ID="MB_SITIME" runat="server" Columns="3"  />
                     分鐘
+                </div>
+            </div>
+            <div id="TR_BATCH" runat="server" class="row">
+                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 thm" >
+                    <span style="color:Red">*</span>
+                    參加梯次
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+                	<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 thm" style="border-top:none">
+                	    選取
+                	</div>
+                	<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 thm" style="border-top:none">
+                	    梯次
+                	</div>
+                	<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 thm" style="border-top:none">
+                	    課程時間
+                	</div>
+                    <asp:Repeater ID="RP_BATCH" runat="server" >
+                        <ItemTemplate>
+                	        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" >
+                                <asp:CheckBox ID="CB_BATCH" runat="server" CssClass="checkbox" />
+                	        </div>
+                	        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" >
+                	            <asp:Literal ID="MB_BATCH" runat="server" Text='<%#Container.DataItem("MB_BATCH")%>' />
+                	        </div>
+                	        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                	            <asp:Literal ID="MB_SEDATE" runat="server" />
+                	        </div>
+                        </ItemTemplate>
+                    </asp:Repeater>
                 </div>
             </div>
 		</div>

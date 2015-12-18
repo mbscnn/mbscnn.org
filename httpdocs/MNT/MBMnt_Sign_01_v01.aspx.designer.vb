@@ -914,6 +914,24 @@ Partial Public Class MBMnt_Sign_01_v01
     Protected WithEvents MB_SITIME As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''TR_BATCH 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents TR_BATCH As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    
+    '''<summary>
+    '''RP_BATCH 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents RP_BATCH As Global.System.Web.UI.WebControls.Repeater
+    
+    '''<summary>
     '''tb_Page3_Button 控制項。
     '''</summary>
     '''<remarks>

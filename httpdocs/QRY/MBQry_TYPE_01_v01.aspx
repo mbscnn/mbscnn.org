@@ -349,7 +349,7 @@
                         <td width="10%" class="th1c_b">
                             報課會員
                         </td>
-                        <td width="10%" class="th1c_b">
+                        <td width="7%" class="th1c_b">
                             性別
                         </td>
                         <td width="10%" class="th1c_b">
@@ -361,7 +361,7 @@
                         <td width="10%" class="th1c_b">
                             會員手機
                         </td>
-                        <td width="10%" class="th1c_b">
+                        <td width="7%" class="th1c_b">
                             課程編號
                         </td>
                         <td width="10%" class="th1c_b">
@@ -370,10 +370,13 @@
                         <td width="10%" class="th1c_b">
                             錄取
                         </td>
-                        <td width="10%" class="th1c_b">
+                        <td id="TD_MB_APV" runat="server" width="10%" class="th1c_b">
+                            是否核准
+                        </td>
+                        <td width="8%" class="th1c_b">
                             回信出席
                         </td>
-                        <td width="10%" class="th1c_b">
+                        <td width="8%" class="th1c_b">
                             未出席
                         </td>
                     </tr>
@@ -387,7 +390,7 @@
                                     <input type="hidden" id="HID_MB_MEMSEQ" runat="server" value='<%#Container.DataItem("MB_MEMSEQ")%>' />
                                     <input type="hidden" id="HID_MB_SEQ" runat="server" value='<%#Container.DataItem("MB_SEQ")%>' />
                                 </td>
-                                <td width="10%" class="td2c_b">
+                                <td width="7%" class="td2c_b">
                                     <!--性別-->
                                     <asp:Literal ID="LTL_MB_SEX" runat="server" />
                                 </td>
@@ -403,7 +406,7 @@
                                     <!--會員手機-->
                                     <%#Container.DataItem("MB_MOBIL")%>
                                 </td>
-                                <td width="10%" class="td2c_b">
+                                <td width="7%" class="td2c_b">
                                     <!--課程編號-->
                                     <asp:Literal ID="LTL_MB_SEQ" runat="server" Text='<%#Container.DataItem("MB_SEQ")%>' />                                
                                 </td>
@@ -413,13 +416,20 @@
                                 </td>
                                 <td width="10%" class="td2c_b">
                                     <!--錄取-->
-                                    <%#getMB_CHKFLAG(Container.DataItem("MB_SEQ"), Container.DataItem("MB_BATCH"), Container.DataItem("MB_MEMSEQ"), Container.DataItem("MB_FWMK"), Container.DataItem("MB_SORTNO"), Container.DataItem("MB_CHKFLAG"), Container.DataItem("MB_CDATE"), Container.DataItem("MB_CREDATETIME"))%>
+                                    <%#getMB_CHKFLAG(Container.DataItem("MB_SEQ"), Container.DataItem("MB_MEMSEQ"), Container.DataItem("MB_FWMK"), Container.DataItem("MB_CDATE"), Container.DataItem("MB_CREDATETIME"), Container.DataItem("MB_APVDATETIME"))%>
                                 </td>
-                                <td width="10%" class="td2c_b">
+                                <td id="TD_MB_APV" runat="server"  width="10%" class="td2c_b">
+                                    <!--是否核准-->
+                                    <asp:Button ID="btnMB_FWMK_5Y" runat="server" Text="是" CssClass="bt" CommandName="5Y" Visible="false" CommandArgument='<%#Container.DataItem("MB_MEMSEQ")%>' />
+                                    <asp:Button ID="btnMB_FWMK_5N" runat="server" Text="否" CssClass="bt" CommandName="5N" Visible="false" CommandArgument='<%#Container.DataItem("MB_MEMSEQ")%>' />
+                                    <asp:Button ID="btnMB_FWMK_5C" runat="server" Text="取消" CssClass="bt" CommandName="5C" Visible="false" CommandArgument='<%#Container.DataItem("MB_MEMSEQ")%>' />
+                                    <asp:Literal ID="LTL_MB_APV" runat="server" Visible="false" />
+                                </td>
+                                <td width="8%" class="td2c_b">
                                     <!--回信出席-->
                                     <asp:Literal ID="LTL_MB_RESP" runat="server" />
                                 </td>
-                                <td width="10%" class="td2c_b">
+                                <td width="8%" class="td2c_b">
                                     <!--未出席-->
                                     <asp:CheckBox ID="MB_FWMK" runat="server" />
                                 </td>

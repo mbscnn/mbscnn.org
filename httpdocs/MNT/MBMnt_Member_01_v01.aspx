@@ -53,15 +53,17 @@
                             $("<option value='" + value.AREA_ID + "'>" + value.AREA + "</option>").appendTo("#MB_VLG");
                         });
 
-                        if ($("#MB_ADDR2_SAME").attr('checked')) {
+                        if (document.all("MB_ADDR2_SAME").change == true)
+                        {
                             //alert($('option:selected', '#MB_CITY').index());
-                            $('#MB_CITY1 option')[$('option:selected', '#MB_CITY').index()].selected = true;
+                            //$('#MB_CITY1 option')[$('option:selected', '#MB_CITY').index()].selected = true;
 
-                            $("#MB_VLG1").empty();
-                            $("<option value='" + "" + "'>" + "《鄉鎮市區》" + "</option>").appendTo("#MB_VLG1");
-                            $.each(obj.AddrCode, function (n, value) {
-                                $("<option value='" + value.AREA_ID + "'>" + value.AREA + "</option>").appendTo("#MB_VLG1");
-                            });
+                            //$("#MB_VLG1").empty();
+                            //$("<option value='" + "" + "'>" + "《鄉鎮市區》" + "</option>").appendTo("#MB_VLG1");
+                            //$.each(obj.AddrCode, function (n, value) {
+                            //    $("<option value='" + value.AREA_ID + "'>" + value.AREA + "</option>").appendTo("#MB_VLG1");
+                            //});
+                            doSame();
                         }
                     },
                     error: function (jqXHR) {
@@ -120,15 +122,17 @@
                             $("<option value='" + value.AREA_ID + "'>" + value.AREA + "</option>").appendTo("#MB_VLG1");
                         });
 
-                        if ($("#MB_ADDR2_SAME").attr('checked')) {
+                        if (document.all("MB_ADDR2_SAME").checked == true)
+                        {
                             //alert($('option:selected', '#MB_CITY').index());
-                            $('#MB_CITY option')[$('option:selected', '#MB_CITY1').index()].selected = true;
+                            //$('#MB_CITY1 option')[$('option:selected', '#MB_CITY').index()].selected = true;
 
-                            $("#MB_VLG").empty();
-                            $("<option value='" + "" + "'>" + "《鄉鎮市區》" + "</option>").appendTo("#MB_VLG");
-                            $.each(obj.AddrCode, function (n, value) {
-                                $("<option value='" + value.AREA_ID + "'>" + value.AREA + "</option>").appendTo("#MB_VLG");
-                            });
+                            //$("#MB_VLG1").empty();
+                            //$("<option value='" + "" + "'>" + "《鄉鎮市區》" + "</option>").appendTo("#MB_VLG");
+                            //$.each(obj.AddrCode, function (n, value) {
+                            //    $("<option value='" + value.AREA_ID + "'>" + value.AREA + "</option>").appendTo("#MB_VLG1");
+                            //});
+                            doSame();
                         }
                     },
                     error: function (jqXHR) {
@@ -137,7 +141,7 @@
                     }
                 });
 
-                if ($("#MB_ADDR2_SAME").attr('checked')) {
+                if (document.all("MB_ADDR2_SAME").checked==true) {
                     var data2 = { 'sCITY_ID': $("#MB_CITY1>option:selected").get(0).value };
                     $("#MB_LEADER").empty();
                     $('#MB_AREA option')[0].selected = true;
@@ -250,15 +254,15 @@
                     return false;
                 }
 
-                if ($("#MB_FEETYPE input:checked").val() == "A" || $("#MB_FEETYPE input:checked").val() == "B" || $("#MB_FEETYPE input:checked").val() == "C")
-                {
-                    if ($.isNumeric($("#MB_MEMFEE_SY").val()) == false || $.isNumeric($("#MB_MEMFEE_SM").val()) == false)
-                    {
-                        alert("請先輸入會費期間起日");
+                //if ($("#MB_FEETYPE input:checked").val() == "A" || $("#MB_FEETYPE input:checked").val() == "B" || $("#MB_FEETYPE input:checked").val() == "C")
+                //{
+                //    if ($.isNumeric($("#MB_MEMFEE_SY").val()) == false || $.isNumeric($("#MB_MEMFEE_SM").val()) == false)
+                //    {
+                //        alert("請先輸入會費期間起日");
 
-                        return false;
-                    }
-                }
+                //        return false;
+                //    }
+                //}
 
                 $("#MB_MEMFEE_EY").attr("readonly", false);
                 $("#MB_MEMFEE_EM").attr("readonly", false);
@@ -289,35 +293,56 @@
                 {
                     if ($("#MB_FEETYPE input:checked").val() == "A")
                     {
-                        $("#MB_MEMFEE_EY").val($("#MB_MEMFEE_SY").val());
-                        $("#MB_MEMFEE_EM").val($("#MB_MEMFEE_SM").val());
-                        $("#MB_MEMFEE_EY").attr("readonly", true);
-                        $("#MB_MEMFEE_EM").attr("readonly", true);
+                        //$("#MB_MEMFEE_EY").val($("#MB_MEMFEE_SY").val());
+                        //$("#MB_MEMFEE_EM").val($("#MB_MEMFEE_SM").val());
+                        //$("#MB_MEMFEE_EY").attr("readonly", true);
+                        //$("#MB_MEMFEE_EM").attr("readonly", true);
                     }
                     else if ($("#MB_FEETYPE input:checked").val() == "B")
                     {
-                        var sSDate = (parseInt($("#MB_MEMFEE_SY").val())) + "/" + $("#MB_MEMFEE_SM").val() + "/1";
-                        var D = new Date(sSDate);
-                        D.setMonth(D.getMonth() + 3);
-                        $("#MB_MEMFEE_EY").val(D.getFullYear());
-                        $("#MB_MEMFEE_EM").val(D.getMonth()+1);
-                        $("#MB_MEMFEE_EY").attr("readonly", true);
-                        $("#MB_MEMFEE_EM").attr("readonly", true);
+                        //var sSDate = (parseInt($("#MB_MEMFEE_SY").val())) + "/" + $("#MB_MEMFEE_SM").val() + "/1";
+                        //var D = new Date(sSDate);
+                        //D.setMonth(D.getMonth() + 3);
+                        //$("#MB_MEMFEE_EY").val(D.getFullYear());
+                        //$("#MB_MEMFEE_EM").val(D.getMonth()+1);
+                        //$("#MB_MEMFEE_EY").attr("readonly", true);
+                        //$("#MB_MEMFEE_EM").attr("readonly", true);
                     }
                     else if ($("#MB_FEETYPE input:checked").val() == "C") {
-                        var sSDate = (parseInt($("#MB_MEMFEE_SY").val())) + "/" + $("#MB_MEMFEE_SM").val() + "/1";
-                        var D = new Date(sSDate);
-                        D.setMonth(D.getMonth() + 12);
-                        $("#MB_MEMFEE_EY").val(D.getFullYear());
-                        $("#MB_MEMFEE_EM").val(D.getMonth()+1);
-                        $("#MB_MEMFEE_EY").attr("readonly", true);
-                        $("#MB_MEMFEE_EM").attr("readonly", true);
+                        //var sSDate = (parseInt($("#MB_MEMFEE_SY").val())) + "/" + $("#MB_MEMFEE_SM").val() + "/1";
+                        //var D = new Date(sSDate);
+                        //D.setMonth(D.getMonth() + 12);
+                        //$("#MB_MEMFEE_EY").val(D.getFullYear());
+                        //$("#MB_MEMFEE_EM").val(D.getMonth()+1);
+                        //$("#MB_MEMFEE_EY").attr("readonly", true);
+                        //$("#MB_MEMFEE_EM").attr("readonly", true);
                     }
 
                     $("#MB_TOTFEE").val("");
+                    var sMB_FEETYPE = { 'sMB_FEETYPE': $("#MB_FEETYPE input:checked").val() };
+                    $.ajax({
+                        type: "POST",
+                        url: 'MBMnt_Member_01_v01.aspx/get23_NOTE',
+                        data: JSON.stringify(sMB_FEETYPE),
+                        contentType: "application/json; charset=utf-8",
+                        async: false,
+                        dataType: "json",
+                        success: function (msg) {
+                            if (msg != undefined) {
+                                //alert(msg.d);
+                                $("#MB_TOTFEE").val(msg.d);
+                            }
+                        },
+                        error: function (jqXHR) {
+                            var response = JSON.parse(jqXHR.responseText);
+                            alert(response.Message);
+                        }
+                    });
+                    
                     $("#MB_TOTFEE").attr("readonly", true);
                     $("#MB_TOTFEE_MM").val("");
-                    $("#PLH_MB_TOTFEE_MM").css("display", "");
+                    //$("#PLH_MB_TOTFEE_MM").css("display", "");
+                    $("#PLH_MB_TOTFEE_MM").css("display", "none");
                 }
             });
             $("#MB_TOTFEE_MM").bind("input propertychange", function () {
@@ -345,7 +370,8 @@
         });
 
         function doSame() {
-            if ($("#MB_ADDR2_SAME").attr('checked')) {
+            if (document.all("MB_ADDR2_SAME").checked == true)
+            {
                 //alert($('option:selected', '#MB_CITY').index());
                 $('#MB_CITY1 option')[$('option:selected', '#MB_CITY').index()].selected = true;
                 $("#MB_VLG1").empty();
@@ -364,27 +390,31 @@
         }
 
         function MB_VLG_onChange() {
-            if ($("#MB_ADDR2_SAME").attr('checked')) {
-                $('#MB_VLG1 option')[$('option:selected', '#MB_VLG').index()].selected = true;
-            }
+            //if (document.all("MB_ADDR2_SAME").checked==true) {
+            //    $('#MB_VLG1 option')[$('option:selected', '#MB_VLG').index()].selected = true;
+            //}
+            doSame();
         }
 
         function MB_VLG1_onChange() {
-            if ($("#MB_ADDR2_SAME").attr('checked')) {
-                $('#MB_VLG option')[$('option:selected', '#MB_VLG1').index()].selected = true;
-            }
+            //if (document.all("MB_ADDR2_SAME").checked == true) {
+            //    $('#MB_VLG1 option')[$('option:selected', '#MB_VLG').index()].selected = true;
+            //}
+            doSame();
         }
 
         function MB_ADDR_onChange() {
-            if ($("#MB_ADDR2_SAME").attr('checked')) {
-                $("#MB_ADDR2").val($("#MB_ADDR").val());
-            }
+            //if (document.all("MB_ADDR2_SAME").checked == true) {
+            //    $("#MB_ADDR2").val($("#MB_ADDR").val());
+            //}
+            doSame();
         }
 
         function MB_ADDR2_onChange() {
-            if ($("#MB_ADDR2_SAME").attr('checked')) {
-                $("#MB_ADDR").val($("#MB_ADDR2").val());
-            }
+            //if (document.all("MB_ADDR2_SAME").checked == true) {
+            //    $("#MB_ADDR2").val($("#MB_ADDR").val());
+            //}
+            doSame();
         }
 
         function MB_ITEMID_onchange(thisObj) {

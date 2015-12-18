@@ -13,7 +13,6 @@ Public Class MB_MEMCLASS
     End Sub
 
 #Region "Ted Function"
-    ''' ----------------------------------------------------------------------------
     ''' <summary>
     ''' 根據 "學員編號" , "課程序號" 取得資料
     ''' </summary>
@@ -24,12 +23,11 @@ Public Class MB_MEMCLASS
     ''' </remarks> 
     ''' <history>
     ''' </history>
-    Public Function LoadByPK(ByVal sMB_MEMSEQ As String, ByVal sMB_SEQ As String, ByVal iMB_BATCH As Decimal) As Boolean
+    Public Function LoadByPK(ByVal sMB_MEMSEQ As String, ByVal sMB_SEQ As String) As Boolean
         Try
-            Dim paras(2) As IDbDataParameter
+            Dim paras(1) As IDbDataParameter
             paras(0) = ProviderFactory.CreateDataParameter("MB_MEMSEQ", sMB_MEMSEQ)
             paras(1) = ProviderFactory.CreateDataParameter("MB_SEQ", sMB_SEQ)
-            paras(2) = ProviderFactory.CreateDataParameter("MB_BATCH", iMB_BATCH)
             Return Me.loadBySQL(paras)
         Catch ex As ProviderException
             Throw
@@ -39,11 +37,6 @@ Public Class MB_MEMCLASS
             Throw
         End Try
     End Function
-
 #End Region
-
-    Sub LoadByPK(p1 As String, m_sCLASS As String)
-        Throw New NotImplementedException
-    End Sub
 
 End Class

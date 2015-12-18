@@ -95,6 +95,8 @@
     <Compile Include="com\MB\MB_FNCAUTHList.vb" />
     <Compile Include="com\MB\MB_MBIMP.vb" />
     <Compile Include="com\MB\MB_MBIMPList.vb" />
+    <Compile Include="com\MB\MB_MEMBATCH.vb" />
+    <Compile Include="com\MB\MB_MEMBATCHList.vb" />
     <Compile Include="com\MB\MB_MEMBER.vb" />
     <Compile Include="com\MB\MB_MEMBERList.vb" />
     <Compile Include="com\MB\MB_MEMBER_TEMP.vb" />
