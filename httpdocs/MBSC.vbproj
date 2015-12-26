@@ -169,6 +169,7 @@
     <Content Include="MNT\MBMnt_Sign_01_v01.aspx" />
     <Content Include="MNT\MBSignIn_01_v01.aspx" />
     <Content Include="NewsList.aspx" />
+    <Content Include="QRY\MBQry_BKSEQ.aspx" />
     <Content Include="QRY\MBQry_Class_01_v01.aspx" />
     <Content Include="QRY\MBQry_Member_01_v01.aspx" />
     <Content Include="QRY\MBQry_NEWs_01_v01.aspx" />
@@ -387,6 +388,13 @@
     </Compile>
     <Compile Include="NewsList.aspx.vb">
       <DependentUpon>NewsList.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="QRY\MBQry_BKSEQ.aspx.designer.vb">
+      <DependentUpon>MBQry_BKSEQ.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QRY\MBQry_BKSEQ.aspx.vb">
+      <DependentUpon>MBQry_BKSEQ.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="QRY\MBQry_Class_01_v01.aspx.designer.vb">

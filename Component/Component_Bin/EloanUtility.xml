@@ -742,6 +742,24 @@ EloanUtility
  <returns>民國年月日</returns>
  <remarks></remarks>
 </member>
+<member name="M:com.Azion.EloanUtility.StrUtility.TrimNVarcharToCHARLength(System.Object,System.Decimal)">
+ <summary>
+ 轉換NVarchar String to Char length
+ </summary>
+ <param name="sNVarchar">NVarchar String</param>
+ <param name="iCHARLength">DB CHAR長度</param>
+ <returns>string</returns>
+ <remarks></remarks>
+</member>
+<member name="M:com.Azion.EloanUtility.StrUtility.getNVarcharLength(System.Object)">
+ <summary>
+ 轉換NVarchar String to Char length
+ </summary>
+ <param name="sNVarchar">NVarchar String</param>
+ <param name="iCHARLength">DB CHAR長度</param>
+ <returns>string</returns>
+ <remarks></remarks>
+</member>
 <member name="M:com.Azion.EloanUtility.UIUtility.isTesting">
  <summary>
  是否為測試模式

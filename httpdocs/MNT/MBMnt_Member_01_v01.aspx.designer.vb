@@ -212,6 +212,15 @@ Partial Public Class MBMnt_Member_01_v01
     Protected WithEvents LTL_MB_MEMSEQ As Global.System.Web.UI.WebControls.Literal
     
     '''<summary>
+    '''MB_BKSEQ 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents MB_BKSEQ As Global.System.Web.UI.WebControls.Literal
+    
+    '''<summary>
     '''MB_NAME 控制項。
     '''</summary>
     '''<remarks>
@@ -320,6 +329,15 @@ Partial Public Class MBMnt_Member_01_v01
     Protected WithEvents MB_ID As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
+    '''TD_MB_AREA_1 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents TD_MB_AREA_1 As Global.System.Web.UI.HtmlControls.HtmlTableCell
+    
+    '''<summary>
     '''MB_EDU 控制項。
     '''</summary>
     '''<remarks>
@@ -327,6 +345,24 @@ Partial Public Class MBMnt_Member_01_v01
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
     Protected WithEvents MB_EDU As Global.System.Web.UI.WebControls.DropDownList
+    
+    '''<summary>
+    '''TD_MB_AREA_2 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents TD_MB_AREA_2 As Global.System.Web.UI.HtmlControls.HtmlTableCell
+    
+    '''<summary>
+    '''TD_MB_AREA_3 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents TD_MB_AREA_3 As Global.System.Web.UI.HtmlControls.HtmlTableCell
     
     '''<summary>
     '''MB_AREA 控制項。
@@ -435,6 +471,15 @@ Partial Public Class MBMnt_Member_01_v01
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
     Protected WithEvents TXT_MB_ZIP1 As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''TR_MB_FAMILY 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents TR_MB_FAMILY As Global.System.Web.UI.HtmlControls.HtmlTableRow
     
     '''<summary>
     '''MB_FAMILY 控制項。

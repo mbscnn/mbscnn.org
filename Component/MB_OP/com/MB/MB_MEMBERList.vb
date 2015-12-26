@@ -321,7 +321,7 @@ Public Class MB_MEMBERList
         Try
             Dim sqlStr As String = String.Empty
 
-            sqlStr = "SELECT * FROM MB_MEMBER WHERE MB_NAME = " & ProviderFactory.PositionPara & "MB_NAME " & _
+            sqlStr = "SELECT * FROM MB_MEMBER WHERE MB_NAME = " & ProviderFactory.PositionPara & "MB_NAME " &
                      "  AND MB_EMAIL = " & ProviderFactory.PositionPara & "MB_EMAIL "
 
             Dim paras(1) As IDbDataParameter
@@ -331,6 +331,93 @@ Public Class MB_MEMBERList
             paras(1) = ProviderFactory.CreateDataParameter("MB_EMAIL", sMB_EMAIL)
 
             Return Me.loadBySQLOnlyDs(sqlStr, paras)
+        Catch ex As ProviderException
+            Throw
+        Catch ex As BosException
+            Throw
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' 根據[手機]取得會員及台銀會員編號資料
+    ''' </summary>
+    ''' <param name="sMB_MOBIL">MB_MOBIL手機</param>
+    ''' <returns>integer取得筆數</returns>
+    ''' <remarks>
+    ''' </remarks> 
+    ''' <history>
+    ''' </history>
+    Public Function Load_BKSEQ_MB_MOBIL(ByVal sMB_MOBIL As String) As Integer
+        Try
+            Dim sqlStr As String = String.Empty
+
+            sqlStr = "SELECT B.MB_BKSEQ, A.* " &
+                     "  FROM MB_MEMBER A, MB_MEMMAP B " &
+                     " WHERE A.MB_MOBIL = " & ProviderFactory.PositionPara & "MB_MOBIL AND A.MB_MEMSEQ = B.MB_MEMSEQ"
+
+            Dim para As IDbDataParameter = ProviderFactory.CreateDataParameter("MB_MOBIL", sMB_MOBIL)
+
+            Return Me.loadBySQLOnlyDs(sqlStr, para)
+        Catch ex As ProviderException
+            Throw
+        Catch ex As BosException
+            Throw
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' 根據[電話]取得會員及台銀會員編號資料
+    ''' </summary>
+    ''' <param name="sMB_TEL">電話</param>
+    ''' <returns>integer取得筆數</returns>
+    ''' <remarks>
+    ''' </remarks> 
+    ''' <history>
+    ''' </history>
+    Public Function Load_BKSEQ_MB_TEL(ByVal sMB_TEL As String) As Integer
+        Try
+            Dim sqlStr As String = String.Empty
+
+            sqlStr = "SELECT B.MB_BKSEQ, A.* " &
+                     "  FROM MB_MEMBER A, MB_MEMMAP B " &
+                     " WHERE A.MB_TEL = " & ProviderFactory.PositionPara & "MB_TEL AND A.MB_MEMSEQ = B.MB_MEMSEQ"
+
+            Dim para As IDbDataParameter = ProviderFactory.CreateDataParameter("MB_TEL", sMB_TEL)
+
+            Return Me.loadBySQLOnlyDs(sqlStr, para)
+        Catch ex As ProviderException
+            Throw
+        Catch ex As BosException
+            Throw
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' 根據[姓名]取得會員及台銀會員編號資料
+    ''' </summary>
+    ''' <param name="sMB_NAME">MB_MOBIL手機</param>
+    ''' <returns>integer取得筆數</returns>
+    ''' <remarks>
+    ''' </remarks> 
+    ''' <history>
+    ''' </history>
+    Public Function Load_BKSEQ_MB_NAME(ByVal sMB_NAME As String) As Integer
+        Try
+            Dim sqlStr As String = String.Empty
+
+            sqlStr = "SELECT B.MB_BKSEQ, A.* " &
+                     "  FROM MB_MEMBER A, MB_MEMMAP B " &
+                     " WHERE A.MB_NAME LIKE " & ProviderFactory.PositionPara & "MB_NAME AND A.MB_MEMSEQ = B.MB_MEMSEQ"
+
+            Dim para As IDbDataParameter = ProviderFactory.CreateDataParameter("MB_NAME", sMB_NAME & "%")
+
+            Return Me.loadBySQLOnlyDs(sqlStr, para)
         Catch ex As ProviderException
             Throw
         Catch ex As BosException

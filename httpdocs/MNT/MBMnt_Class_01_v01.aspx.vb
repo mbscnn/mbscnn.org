@@ -181,8 +181,19 @@ Public Class MBMnt_Class_01_v01
             If Me.ddl_EditPLACE.Items.Count > 1 Then
                 Me.ddl_EditPLACE.Items.Insert(0, New ListItem("請選擇", ""))
             End If
+
+            '地點
+            Me.DDL_CLASS_PLACE.Items.Clear()
+            AP_CODEList.clear()
+            AP_CODEList.loadByUpCode(Me.ddl_EditPLACE.SelectedValue)
+            Me.DDL_CLASS_PLACE.DataSource = AP_CODEList.getCurrentDataSet.Tables(0)
+            Me.DDL_CLASS_PLACE.DataValueField = "VALUE"
+            Me.DDL_CLASS_PLACE.DataTextField = "TEXT"
+            Me.DDL_CLASS_PLACE.DataBind()
+            Me.DDL_CLASS_PLACE.Items.Insert(0, New ListItem("請選擇", String.Empty))
+            Me.DDL_CLASS_PLACE.SelectedIndex = -1
         Catch ex As Exception
-            UIShareFun.showErrMsg(Me, ex)
+            Throw
         Finally
             If Not IsNothing(DT_177) Then
                 DT_177.Dispose()

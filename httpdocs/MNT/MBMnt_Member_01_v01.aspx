@@ -683,6 +683,7 @@
 
             <asp:PlaceHolder ID="PLH_MB_MEMBER" runat="server" Visible=false >
                 <span style="font-weight:bold;" >會員編號:<asp:Literal ID="LTL_MB_MEMSEQ" runat="server" /></span>
+                <div style="font-weight:bold;">台銀編號:<asp:Literal ID="MB_BKSEQ" runat="server" ></asp:Literal></div>
                 <table class="CRTable_Top" width="100%" cellspacing="0">
                     <tr>
                         <td width="15%" class="th1c_b">
@@ -763,14 +764,14 @@
                         <td width="15%" class="th1c_b">
                             學歷
                         </td>
-                        <td width="35%" class="td2_b">
+                        <td id="TD_MB_AREA_1" runat="server" width="35%" class="td2_b">
                             <asp:DropDownList ID="MB_EDU" runat="server">
                             </asp:DropDownList>
                         </td>
-                        <td width="15%" class="th1c_b">
+                        <td id="TD_MB_AREA_2" runat="server" width="15%" class="th1c_b">
                             <span style="color: red; font-weight: bold; font-size: medium">*</span>&nbsp;所屬區
                         </td>
-                        <td width="35%" class="td2_b">
+                        <td id="TD_MB_AREA_3" runat="server" width="35%" class="td2_b">
                             <asp:DropDownList ID="MB_AREA" runat="server" onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;">
                             </asp:DropDownList>
                             <span style="color: red; font-weight: bold; font-size: medium">*</span>&nbsp;委員
@@ -814,7 +815,7 @@
                             <asp:TextBox ID="TXT_MB_ZIP1" runat="server" Columns="3" CssClass="bordernum" />
                         </td>
                     </tr>
-                    <tr>
+                    <tr id="TR_MB_FAMILY" runat="server" visible="false">
                         <td width="15%" class="th1c_b">
                             會員類別
                         </td>

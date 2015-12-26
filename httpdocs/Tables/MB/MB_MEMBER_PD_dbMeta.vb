@@ -1,4 +1,4 @@
-Public Class MB_MEMBER_1041119_dbMeta
+Public Class MB_MEMBER_PD_dbMeta
         Implements com.Azion.NET.VB.DBMetaData
    Private  arry As New System.Collections.ArrayList
    Private  m_arryPrimaryKeys As New System.Collections.ArrayList
@@ -398,6 +398,7 @@ Public Class MB_MEMBER_1041119_dbMeta
          Return arry
      End Function
      Public sub setPrimaryKeys() Implements com.Azion.NET.VB.DBMetaData.setPrimaryKeys
+       m_arryPrimaryKeys.add("MB_MEMSEQ")
      End Sub
      Public Function getPrimaryKeys() as System.Collections.ArrayList Implements com.Azion.NET.VB.DBMetaData.getPrimaryKeys
          Return m_arryPrimaryKeys

@@ -286,15 +286,15 @@ Public Class AP_CODEList
         Try
             Dim sqlStr As String = String.Empty
 
-            sqlStr = "SELECT A.* " & _
-                     "  FROM AP_CODE A " & _
-                     " WHERE     A.UPCODE = " & ProviderFactory.PositionPara & "UPCODE " & _
-                     "       AND (   A.LEVEL = 0 " & _
-                     "            OR (    A.LEVEL > 0 " & _
-                     "                AND EXISTS " & _
-                     "                       (SELECT * " & _
-                     "                          FROM MB_FNCAUTH " & _
-                     "                         WHERE MB_ACCT = " & ProviderFactory.PositionPara & "MB_ACCT " & _
+            sqlStr = "SELECT A.* " &
+                     "  FROM AP_CODE A " &
+                     " WHERE     A.UPCODE = " & ProviderFactory.PositionPara & "UPCODE " &
+                     "       AND (   A.LEVEL <=1 " &
+                     "            OR (    A.LEVEL > 1 " &
+                     "                AND EXISTS " &
+                     "                       (SELECT * " &
+                     "                          FROM MB_FNCAUTH " &
+                     "                         WHERE MB_ACCT = " & ProviderFactory.PositionPara & "MB_ACCT " &
                      "                              AND MB_UPCODE=A.UPCODE AND MB_FUCCODE = A.VALUE)))"
 
             Dim paras(1) As IDbDataParameter

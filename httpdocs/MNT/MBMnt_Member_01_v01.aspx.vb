@@ -90,6 +90,11 @@ Public Class MBMnt_Member_01_v01
                         Me.MB_EMAIL.Text = com.Azion.EloanUtility.UIUtility.getLoginUserID
                         Me.HID_OTHSIGN.Value = "2"
                     End If
+
+                    '非維護人員所屬分區invisible
+                    Me.TD_MB_AREA_1.ColSpan = 4
+                    Me.TD_MB_AREA_2.Style.Item("display")="none"
+                    Me.TD_MB_AREA_3.Style.Item("display")="none"
                 End If
 
                 If Me.m_sOPTYPE = "A" Then
@@ -423,7 +428,7 @@ Public Class MBMnt_Member_01_v01
 
                 '同上
                 Me.MB_ADDR2_SAME.Checked = False
-                If Utility.isValidateData(Me.MB_CITY.SelectedValue) AndAlso Utility.isValidateData(Me.MB_VLG.SelectedValue) AndAlso Utility.isValidateData(Me.MB_ADDR.Text) AndAlso _
+                If Utility.isValidateData(Me.MB_CITY.SelectedValue) AndAlso Utility.isValidateData(Me.MB_VLG.SelectedValue) AndAlso Utility.isValidateData(Me.MB_ADDR.Text) AndAlso
                     Utility.isValidateData(Me.MB_CITY1.SelectedValue) AndAlso Utility.isValidateData(Me.MB_VLG1.SelectedValue) AndAlso Utility.isValidateData(Me.MB_ADDR2.Text) Then
 
                     If Me.MB_CITY.SelectedValue = Me.MB_CITY1.SelectedValue Then
@@ -444,6 +449,10 @@ Public Class MBMnt_Member_01_v01
 
                 '會員編號
                 Me.LTL_MB_MEMSEQ.Text = getMB_MEMSEQ(iMB_MEMSEQ, mbMEMBER.getString("MB_AREA"))
+                '台銀編號
+                Dim MB_MEMMAP As New MB_MEMMAP(Me.m_DBManager)
+                MB_MEMMAP.LoadByPK(iMB_MEMSEQ)
+                MB_BKSEQ.Text = MB_MEMMAP.getString("MB_BKSEQ")
 
                 '護持會員
                 Dim mbVIPList As New MB_VIPList(Me.m_DBManager)
@@ -535,15 +544,18 @@ Public Class MBMnt_Member_01_v01
                 Return
             End If
 
-            If Not Utility.isValidateData(Trim(Me.MB_AREA.SelectedValue)) Then
-                com.Azion.EloanUtility.UIUtility.alert("請選擇所屬區!")
-                Return
-            End If
+            '1041226
+            'AMY
+            '所屬分區  (非必輸入)
+            'If Not Utility.isValidateData(Trim(Me.MB_AREA.SelectedValue)) Then
+            '    com.Azion.EloanUtility.UIUtility.alert("請選擇所屬區!")
+            '    Return
+            'End If
 
-            If Not Utility.isValidateData(Trim(Me.MB_LEADER.SelectedValue)) Then
-                com.Azion.EloanUtility.UIUtility.alert("請選擇所屬區委員!\n若無區委員下拉\n請更動一下通訊地址縣市下拉後，\n應該就有區委員下拉清單了")
-                Return
-            End If
+            'If Not Utility.isValidateData(Trim(Me.MB_LEADER.SelectedValue)) Then
+            '    com.Azion.EloanUtility.UIUtility.alert("請選擇所屬區委員!\n若無區委員下拉\n請更動一下通訊地址縣市下拉後，\n應該就有區委員下拉清單了")
+            '    Return
+            'End If
 
             '1040120
             '護持會員不檢核必勾選
@@ -565,10 +577,13 @@ Public Class MBMnt_Member_01_v01
                 Return
             End If
 
-            If Not Utility.isValidateData(Trim(Me.MB_FAMILY.SelectedValue)) Then
-                com.Azion.EloanUtility.UIUtility.alert("請選擇會員類別!")
-                Return
-            End If
+            '1041226
+            'AMY
+            '會員類別刪除
+            'If Not Utility.isValidateData(Trim(Me.MB_FAMILY.SelectedValue)) Then
+            '    com.Azion.EloanUtility.UIUtility.alert("請選擇會員類別!")
+            '    Return
+            'End If
 
             If Utility.isValidateData(Me.MB_BIRTH_YYY.Text) OrElse Utility.isValidateData(Me.MB_BIRTH_MM.Text) OrElse Utility.isValidateData(Me.MB_BIRTH_DD.Text) Then
                 Dim sYYYY As String = String.Empty
@@ -629,6 +644,7 @@ Public Class MBMnt_Member_01_v01
             Try
                 Me.m_DBManager.beginTran()
 
+                Dim sMB_BKSEQ As String = String.Empty
                 If Me.HID_OTHSIGN.Value = "1" Then
                     Me.SAVE_MB_MEMBER_TEMP(sMB_IDENTIFY)
 
@@ -641,6 +657,37 @@ Public Class MBMnt_Member_01_v01
                     mbFAMILY.setAttribute("MB_MEMSEQ", CDec(Me.HID_MB_MEMSEQ.Value))
                     mbFAMILY.setAttribute("MB_FAMSEQ", CDec(Me.HID_MB_MEMSEQ.Value))
                     mbFAMILY.save()
+
+                    Dim MB_MEMMAP As New MB_MEMMAP(Me.m_DBManager)
+                    MB_MEMMAP.LoadByPK(CDec(Me.HID_MB_MEMSEQ.Value))
+                    'MB_MEMSEQ	decimal(7,0)		NO	PRI	0		select,insert,update,references	會員編號
+                    MB_MEMMAP.setAttribute("MB_MEMSEQ", CDec(Me.HID_MB_MEMSEQ.Value))
+                    If Not MB_MEMMAP.isLoaded Then
+                        'MB_BKSEQ	decimal(16,0)		YES				select,insert,update,references	台銀編號
+                        '7106800010100723
+                        '710680 + BBB + 01 + 5 碼序號(MB_MEMSEQ )不足錢補0
+                        'BBB==> 區代碼 用AP_CODE.VALUE (請將區代碼 1==> 001其餘比照)
+                        Dim sBBB As String = String.Empty
+                        Select Case Me.MB_AREA.SelectedValue
+                            Case "A"
+                                sBBB = "001"
+                            Case "B"
+                                sBBB = "002"
+                            Case "C"
+                                sBBB = "003"
+                            Case "D"
+                                sBBB = "004"
+                            Case Else
+                                sBBB = "001"
+                        End Select
+                        sMB_BKSEQ = "710680" & sBBB & "01" & Utility.FillZero(Me.HID_MB_MEMSEQ.Value, 5)
+                        MB_MEMMAP.setAttribute("MB_BKSEQ", sMB_BKSEQ)
+                    Else
+                        sMB_BKSEQ = MB_MEMMAP.getString("MB_BKSEQ")
+                    End If
+                    'MB_NAME	varchar(50)	utf8_general_ci	YES				select,insert,update,references	會員名稱
+                    MB_MEMMAP.setAttribute("MB_NAME", Trim(Me.MB_NAME.Text))
+                    MB_MEMMAP.save()
                 End If
 
                 Me.m_DBManager.commit()
@@ -648,6 +695,7 @@ Public Class MBMnt_Member_01_v01
                 UIShareFun.showErrMsg(Me, "儲存成功!")
 
                 Me.LTL_MB_MEMSEQ.Text = Me.MB_AREA.SelectedValue & "-" & Me.HID_MB_MEMSEQ.Value
+                Me.MB_BKSEQ.Text = sMB_BKSEQ
 
                 If Me.HID_OTHSIGN.Value = "1" Then
                     com.Azion.EloanUtility.UIUtility.showJSMsg(Me, "儲存成功!")
@@ -1046,6 +1094,7 @@ Public Class MBMnt_Member_01_v01
             Me.HID_MB_MEMSEQ.Value = String.Empty
             Me.HID_MB_LEADER.Value = String.Empty
             Me.LTL_MB_MEMSEQ.Text = String.Empty
+            Me.MB_BKSEQ.Text = String.Empty
 
             '法名/姓名
             Me.MB_NAME.Text = String.Empty
@@ -1311,7 +1360,7 @@ Public Class MBMnt_Member_01_v01
         End Try
     End Sub
 
-    <System.Web.Services.WebMethod()> _
+    <System.Web.Services.WebMethod()>
     Public Shared Function getMB_TOTFEE(ByVal sFEETYPE As String) As String
         Dim dbManager As DatabaseManager = UIShareFun.getDataBaseManager
         Try
@@ -2522,7 +2571,7 @@ Public Class MBMnt_Member_01_v01
         End Try
     End Function
 
-    <System.Web.Services.WebMethod()> _
+    <System.Web.Services.WebMethod()>
     Public Shared Function get23_NOTE(ByVal sMB_FEETYPE As String) As String
         Using dbManager As DatabaseManager = DatabaseManager.getInstance
             Dim AP_CODE As New AP_CODE(dbManager)
@@ -2532,7 +2581,7 @@ Public Class MBMnt_Member_01_v01
     End Function
 
     '身分證字號檢核
-    <System.Web.Services.WebMethod()> _
+    <System.Web.Services.WebMethod()>
     Public Shared Function CHK_MB_ID(ByVal sMB_ID As String) As String
         Try
             Dim sChPersonalID As String = UCase(com.Azion.EloanUtility.ValidateUtility.ChPersonalID1(Trim(sMB_ID)))
@@ -2923,4 +2972,5 @@ Public Class MBMnt_Member_01_v01
             If Not IsNothing(DT_MB_MEMBER) Then DT_MB_MEMBER.Dispose()
         End Try
     End Sub
+
 End Class

@@ -105,6 +105,7 @@
     <Compile Include="com\MB\MB_MEMCLASSList.vb" />
     <Compile Include="com\MB\MB_MEMFEE.vb" />
     <Compile Include="com\MB\MB_MEMFEEList.vb" />
+    <Compile Include="com\MB\MB_MEMMAP.vb" />
     <Compile Include="com\MB\MB_MEMREV.vb" />
     <Compile Include="com\MB\MB_MEMREVList.vb" />
     <Compile Include="com\MB\MB_NEWS.vb" />

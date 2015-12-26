@@ -360,6 +360,7 @@
                             <BR />
                             您的帳號已經啟用
                         </div>
+                        <asp:Literal ID="LTL_SCRIPT" runat="server" Visible="false" />
                     </asp:PlaceHolder>
                 </td>
             </tr>

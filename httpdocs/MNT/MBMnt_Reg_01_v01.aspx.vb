@@ -37,9 +37,26 @@ Public Class MBMnt_Reg_01_v01
                             Me.HID_USERID.Value = mbACCT.getString("MB_ACCT")
 
                             Me.PLH_APV.Visible = True
+
+                            Dim MB_MEMBERList As New MB_MEMBERList(dbManage)
+                            MB_MEMBERList.loadByMB_EMAIL(mbACCT.getString("MB_ACCT"))
+                            If MB_MEMBERList.getCurrentDataSet.Tables(0).Rows.Count = 0 Then
+                                '直接導頁到入會申請單
+                                Dim sURL As String = String.Empty
+                                sURL = com.Azion.EloanUtility.UIUtility.getRootPath &
+                                       "/MNT/MBMnt_Member_01_v01.aspx.aspx"
+
+                                LTL_SCRIPT.Text = "<script language='javascript' >" & vbCrLf
+                                LTL_SCRIPT.Text &= "alert('e-Mail驗證成功\n\n請記得填寫入會申請單\n\n【按確定後系統將連結入會申請單】');" & vbCrLf
+                                LTL_SCRIPT.Text &= "window.location.href='MBMnt_Member_01_v01.aspx';" & vbCrLf
+                                LTL_SCRIPT.Text &= "</" & "script>"
+
+                                LTL_SCRIPT.Visible = True
+                            End If
                         Else
                             com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "e-Mail驗證失敗，無法註冊為會員")
                         End If
+                    Catch ex As System.Threading.ThreadAbortException
                     Catch ex As Exception
                         Throw
                     Finally

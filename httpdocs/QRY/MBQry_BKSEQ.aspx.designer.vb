@@ -11,7 +11,7 @@ Option Strict On
 Option Explicit On
 
 
-Partial Public Class MBMnt_Reg_01_v01
+Partial Public Class MBQry_BKSEQ
     
     '''<summary>
     '''form1 控制項。
@@ -23,155 +23,137 @@ Partial Public Class MBMnt_Reg_01_v01
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
     
     '''<summary>
-    '''HID_USERID 控制項。
+    '''DIV_Paras 控制項。
     '''</summary>
     '''<remarks>
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents HID_USERID As Global.System.Web.UI.HtmlControls.HtmlInputHidden
+    Protected WithEvents DIV_Paras As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
-    '''PLH_MB_ACCT 控制項。
+    '''rbt_Cel 控制項。
     '''</summary>
     '''<remarks>
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents PLH_MB_ACCT As Global.System.Web.UI.WebControls.PlaceHolder
+    Protected WithEvents rbt_Cel As Global.System.Web.UI.WebControls.RadioButton
     
     '''<summary>
-    '''LTL_TITLE 控制項。
+    '''TXT_MB_MOBIL 控制項。
     '''</summary>
     '''<remarks>
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents LTL_TITLE As Global.System.Web.UI.WebControls.Literal
+    Protected WithEvents TXT_MB_MOBIL As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''TXT_EMAIL 控制項。
+    '''rbt_Tel 控制項。
     '''</summary>
     '''<remarks>
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TXT_EMAIL As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents rbt_Tel As Global.System.Web.UI.WebControls.RadioButton
     
     '''<summary>
-    '''TXT_PASSWORD 控制項。
+    '''TXT_MB_TEL_ZIP 控制項。
     '''</summary>
     '''<remarks>
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TXT_PASSWORD As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents TXT_MB_TEL_ZIP As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''TXT_VARIFY 控制項。
+    '''TXT_MB_TEL 控制項。
     '''</summary>
     '''<remarks>
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TXT_VARIFY As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents TXT_MB_TEL As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''TXT_APPNAME 控制項。
+    '''rbt_Name 控制項。
     '''</summary>
     '''<remarks>
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TXT_APPNAME As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents rbt_Name As Global.System.Web.UI.WebControls.RadioButton
     
     '''<summary>
-    '''RBL_MB_SEX 控制項。
+    '''TXT_MB_NAME 控制項。
     '''</summary>
     '''<remarks>
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents RBL_MB_SEX As Global.System.Web.UI.WebControls.RadioButtonList
+    Protected WithEvents TXT_MB_NAME As Global.System.Web.UI.WebControls.TextBox
     
     '''<summary>
-    '''TXT_NUMBER 控制項。
+    '''btn_Qry 控制項。
     '''</summary>
     '''<remarks>
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents TXT_NUMBER As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents btn_Qry As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''IMG_Vad 控制項。
+    '''PLH_DATA 控制項。
     '''</summary>
     '''<remarks>
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents IMG_Vad As Global.System.Web.UI.HtmlControls.HtmlImage
+    Protected WithEvents PLH_DATA As Global.System.Web.UI.WebControls.PlaceHolder
     
     '''<summary>
-    '''PLH_Send 控制項。
+    '''RP_BKSEQ 控制項。
     '''</summary>
     '''<remarks>
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents PLH_Send As Global.System.Web.UI.WebControls.PlaceHolder
+    Protected WithEvents RP_BKSEQ As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
-    '''btSend 控制項。
+    '''DIV_NODATA 控制項。
     '''</summary>
     '''<remarks>
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents btSend As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents DIV_NODATA As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
-    '''PLH_REPASS 控制項。
+    '''btnSingin 控制項。
     '''</summary>
     '''<remarks>
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents PLH_REPASS As Global.System.Web.UI.WebControls.PlaceHolder
+    Protected WithEvents btnSingin As Global.System.Web.UI.WebControls.Button
     
     '''<summary>
-    '''bntRePASS 控制項。
+    '''DIV_BACK 控制項。
     '''</summary>
     '''<remarks>
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents bntRePASS As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents DIV_BACK As Global.System.Web.UI.HtmlControls.HtmlGenericControl
     
     '''<summary>
-    '''PLH_MAILSend 控制項。
+    '''btnBack 控制項。
     '''</summary>
     '''<remarks>
     '''自動產生的欄位。
     '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
     '''</remarks>
-    Protected WithEvents PLH_MAILSend As Global.System.Web.UI.WebControls.PlaceHolder
-    
-    '''<summary>
-    '''PLH_APV 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents PLH_APV As Global.System.Web.UI.WebControls.PlaceHolder
-    
-    '''<summary>
-    '''LTL_SCRIPT 控制項。
-    '''</summary>
-    '''<remarks>
-    '''自動產生的欄位。
-    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
-    '''</remarks>
-    Protected WithEvents LTL_SCRIPT As Global.System.Web.UI.WebControls.Literal
+    Protected WithEvents btnBack As Global.System.Web.UI.WebControls.Button
 End Class

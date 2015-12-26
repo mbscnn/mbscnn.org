@@ -117,12 +117,15 @@
     <Compile Include="Tables\MB\MB_FNCAUTH_dbMeta.vb" />
     <Compile Include="Tables\MB\MB_MAXID_dbMeta.vb" />
     <Compile Include="Tables\MB\MB_MBIMP_dbMeta.vb" />
+    <Compile Include="Tables\MB\MB_MEMBATCH_dbMeta.vb" />
     <Compile Include="Tables\MB\MB_MEMBER_dbMeta.vb" />
     <Compile Include="Tables\MB\MB_MEMBER_TEMP_dbMeta.vb" />
     <Compile Include="Tables\MB\MB_MEMCLASS_dbMeta.vb" />
     <Compile Include="Tables\MB\MB_MEMFEE_dbMeta.vb" />
+    <Compile Include="Tables\MB\MB_MEMMAP_dbMeta.vb" />
     <Compile Include="Tables\MB\MB_MEMREV_dbMeta.vb" />
     <Compile Include="Tables\MB\MB_NEWS_dbMeta.vb" />
+    <Compile Include="Tables\MB\MB_TEMP_dbMeta.vb" />
     <Compile Include="Tables\MB\MB_VIP_dbMeta.vb" />
     <Compile Include="Tables\MB\MB_VIP_TEMP_dbMeta.vb" />
     <Compile Include="Tables\SUBSYS\SUBSYS_CODE_dbMeta.vb" />

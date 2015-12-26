@@ -178,4 +178,91 @@ Public Class StrUtility
 
         Return sRtnStr
     End Function
+
+    ''' <summary>
+    ''' 轉換NVarchar String to Char length
+    ''' </summary>
+    ''' <param name="sNVarchar">NVarchar String</param>
+    ''' <param name="iCHARLength">DB CHAR長度</param>
+    ''' <returns>string</returns>
+    ''' <remarks></remarks>
+    Public Shared Function TrimNVarcharToCHARLength(ByVal sNVarchar As Object, ByVal iCHARLength As Decimal) As String
+        Try
+            If Not IsDBNull(sNVarchar) AndAlso Not IsNothing(sNVarchar) AndAlso CStr(sNVarchar).Length > 0 Then
+                Dim sSOURCE As String = CStr(sNVarchar)
+
+                'Dim objByte() As Byte = System.Text.Encoding.GetEncoding("Utf-8").GetBytes(sSOURCE)
+
+                Dim sReturn As String = String.Empty
+
+                'ReDim objByte(iCHARLength)
+
+                'Dim encoding_ASCII As New System.Text.ASCIIEncoding()
+                'Dim encoding_UTF8 As New System.Text.UTF8Encoding
+
+                'sReturn = encoding_ASCII.GetString(objByte)
+                'sReturn = encoding_UTF8.GetString(objByte)
+
+                Dim iCount As Decimal = 0
+                For i As Integer = 0 To sSOURCE.Length - 1
+                    Dim sTEMP As String = String.Empty
+                    sTEMP = sSOURCE.Substring(i, 1)
+                    iCount += Encoding.GetEncoding("Big5").GetByteCount(sTEMP)
+                    If iCount <= iCHARLength Then
+                        sReturn &= sTEMP
+                    Else
+                        Exit For
+                    End If
+                Next
+
+                Return sReturn
+            End If
+
+            Return String.Empty
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' 轉換NVarchar String to Char length
+    ''' </summary>
+    ''' <param name="sNVarchar">NVarchar String</param>
+    ''' <param name="iCHARLength">DB CHAR長度</param>
+    ''' <returns>string</returns>
+    ''' <remarks></remarks>
+    Public Shared Function getNVarcharLength(ByVal sNVarchar As Object) As Decimal
+        Try
+            If Not IsDBNull(sNVarchar) AndAlso Not IsNothing(sNVarchar) AndAlso CStr(sNVarchar).Length > 0 Then
+                Dim sSOURCE As String = CStr(sNVarchar)
+
+                'Dim objByte() As Byte = System.Text.Encoding.GetEncoding("Utf-8").GetBytes(sSOURCE)
+
+                Dim sReturn As String = String.Empty
+
+                'ReDim objByte(iCHARLength)
+
+                'Dim encoding_ASCII As New System.Text.ASCIIEncoding()
+                'Dim encoding_UTF8 As New System.Text.UTF8Encoding
+
+                'sReturn = encoding_ASCII.GetString(objByte)
+                'sReturn = encoding_UTF8.GetString(objByte)
+
+                Dim iCount As Decimal = 0
+                For i As Integer = 0 To sSOURCE.Length - 1
+                    Dim sTEMP As String = String.Empty
+                    sTEMP = sSOURCE.Substring(i, 1)
+                    iCount += Encoding.GetEncoding("Big5").GetByteCount(sTEMP)
+
+                    'iCount += Encoding.ASCII.GetByteCount(sTEMP)
+                Next
+
+                Return iCount
+            End If
+
+            Return 0
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
 End Class

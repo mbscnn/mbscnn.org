@@ -57,7 +57,7 @@ Public Class VTab
                 Dim ROW_LV2() As DataRow = Nothing
                 If DRV("CODEID") = Me.m_iUPCODE_78 AndAlso Utility.isValidateData(Session("UserId")) Then
                     apCODEList.Load_TAB_AUTH(DRV("CODEID"), Session("UserId"))
-                    ROW_LV2 = apCODEList.getCurrentDataSet.Tables(0).Select("DISABLED='1'")
+                    ROW_LV2 = apCODEList.getCurrentDataSet.Tables(0).Select("DISABLED='1' AND LEVEL<=" & Me.m_iLEVEL)
                 Else
                     apCODEList.loadByUpCode(DRV("CODEID"))
                     ROW_LV2 = apCODEList.getCurrentDataSet.Tables(0).Select("DISABLED='1' AND LEVEL<=" & Me.m_iLEVEL)
@@ -119,7 +119,7 @@ Public Class VTab
                 Dim ROW_LV3() As DataRow = Nothing
                 If DRV("CODEID") = Me.m_iUPCODE_78 AndAlso Utility.isValidateData(Session("UserId")) Then
                     apCODEList.Load_TAB_AUTH(DRV("CODEID"), Session("UserId"))
-                    ROW_LV3 = apCODEList.getCurrentDataSet.Tables(0).Select("DISABLED='1'")
+                    ROW_LV3 = apCODEList.getCurrentDataSet.Tables(0).Select("DISABLED='1' AND LEVEL<=" & Me.m_iLEVEL)
                 Else
                     apCODEList.loadByUpCode(DRV("CODEID"))
                     ROW_LV3 = apCODEList.getCurrentDataSet.Tables(0).Select("DISABLED='1' AND LEVEL<=" & Me.m_iLEVEL)
@@ -182,7 +182,7 @@ Public Class VTab
                 Dim ROW_LV4() As DataRow = Nothing
                 If DRV("CODEID") = Me.m_iUPCODE_78 AndAlso Utility.isValidateData(Session("UserId")) Then
                     apCODEList.Load_TAB_AUTH(DRV("CODEID"), Session("UserId"))
-                    ROW_LV4 = apCODEList.getCurrentDataSet.Tables(0).Select("DISABLED='1'")
+                    ROW_LV4 = apCODEList.getCurrentDataSet.Tables(0).Select("DISABLED='1' AND LEVEL<=" & Me.m_iLEVEL)
                 Else
                     apCODEList.loadByUpCode(DRV("CODEID"))
                     ROW_LV4 = apCODEList.getCurrentDataSet.Tables(0).Select("DISABLED='1' AND LEVEL<=" & Me.m_iLEVEL)
