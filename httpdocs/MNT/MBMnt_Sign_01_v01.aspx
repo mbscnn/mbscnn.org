@@ -473,9 +473,9 @@
 					電話<span style="color:Red"><BR/>請勿輸入非數字</span>
 				</div>
 				<div class="col-md-4">
-					<asp:TextBox ID="txt_MB_TEL_ZIP" runat="server" Columns="2"  MaxLength="2" />
+					<asp:TextBox ID="txt_MB_TEL_ZIP" runat="server" Columns="2"  />
 					&nbsp;─&nbsp;
-					<asp:TextBox ID="txt_MB_TEL" runat="server" Columns="10" />
+					<asp:TextBox ID="txt_MB_TEL" runat="server" />
 				</div>
 			</div>
 			<div class="row" >
@@ -711,31 +711,39 @@
                 </div>
             </div>
             <div id="TR_BATCH" runat="server" class="row">
-                <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 thm" >
+                <div class="col-xs-12 col-sm-12 col-md-1 col-lg-1 thm" >
                     <span style="color:Red">*</span>
                     參加梯次
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+                <div class="col-xs-12 col-sm-12 col-md-11 col-lg-11">
                 	<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 thm" style="border-top:none">
                 	    選取
                 	</div>
-                	<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 thm" style="border-top:none">
+                	<div class="col-xs-1 col-sm-1 col-md-2 col-lg-2 thm" style="border-top:none">
                 	    梯次
                 	</div>
-                	<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 thm" style="border-top:none">
+                	<div class="col-xs-7 col-sm-7 col-md-5 col-lg-5 thm" style="border-top:none">
                 	    課程時間
+                	</div>
+                	<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 thm" style="border-top:none">
+                	    核准狀態
                 	</div>
                     <asp:Repeater ID="RP_BATCH" runat="server" >
                         <ItemTemplate>
                 	        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" >
-                                <asp:CheckBox ID="CB_BATCH" runat="server" CssClass="checkbox" />
+                                <label Class="checkbox-inline" style="vertical-align: top;float: none;" >
+                                    <asp:CheckBox ID="CB_BATCH" runat="server" /> 
+                                </label>                                
                 	        </div>
-                	        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" >
-                	            <asp:Literal ID="MB_BATCH" runat="server" Text='<%#Container.DataItem("MB_BATCH")%>' />
+                	        <div class="col-xs-1 col-sm-1 col-md-2 col-lg-2" >
+          	                    <asp:Literal ID="MB_BATCH" runat="server" Text='<%#Container.DataItem("MB_BATCH")%>' />
                 	        </div>
-                	        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-                	            <asp:Literal ID="MB_SEDATE" runat="server" />
+                	        <div class="col-xs-7 col-sm-7 col-md-5 col-lg-5">
+         	                    <asp:Literal ID="MB_SEDATE" runat="server" />
                 	        </div>
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" >
+                                <asp:Literal ID="MB_CHKFLAG" runat="server" />&nbsp;
+                            </div>
                         </ItemTemplate>
                     </asp:Repeater>
                 </div>

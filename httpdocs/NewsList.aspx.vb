@@ -327,7 +327,7 @@ Public Class NewsList
         Dim sb_APLY As New System.Text.StringBuilder
         For Each ROW As DataRow In MB_CLASSList.getCurrentDataSet.Tables(0).Rows
             MB_MEMCLASSList.clear()
-            MB_MEMCLASSList.setSQLCondition(" AND IFNULL(A.MB_FWMK,'') NOT IN ('3','4','5') AND IFNULL(A.MB_RESP,' ')<>'N' ")
+            MB_MEMCLASSList.setSQLCondition(" AND IFNULL(A.MB_FWMK,'') NOT IN ('3','4','5') AND IFNULL(B.MB_ELECT,' ')='1' AND IFNULL(B.MB_RESP,' ')<>'N' ")
             MB_MEMCLASSList.loadByMB_SEQ(iMB_SEQ, ROW("MB_BATCH"))
             Dim isFULL As Boolean = False
             If MB_MEMCLASSList.size >= (Utility.CheckNumNull(ROW("MB_FULL")) + Utility.CheckNumNull(ROW("MB_WAIT"))) Then
@@ -1190,7 +1190,8 @@ Public Class NewsList
 
             Dim sURLClass As String = String.Empty
             sURLClass = com.Azion.EloanUtility.UIUtility.getRootPath & "/MNT/MBMnt_Class_01_v01.aspx?OPTYPE=Q&CRETIME=" & Me.HID_CRETIME.Value
-            com.Azion.EloanUtility.UIUtility.showOpen(sURLClass)
+            'com.Azion.EloanUtility.UIUtility.showOpen(sURLClass)
+            Response.Redirect(sURLClass)
         Catch ex As System.Threading.ThreadAbortException
         Catch ex As Exception
             com.Azion.EloanUtility.UIUtility.showErrMsg(Me, ex)

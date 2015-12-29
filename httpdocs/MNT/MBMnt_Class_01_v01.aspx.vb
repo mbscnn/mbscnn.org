@@ -184,14 +184,16 @@ Public Class MBMnt_Class_01_v01
 
             '地點
             Me.DDL_CLASS_PLACE.Items.Clear()
-            AP_CODEList.clear()
-            AP_CODEList.loadByUpCode(Me.ddl_EditPLACE.SelectedValue)
-            Me.DDL_CLASS_PLACE.DataSource = AP_CODEList.getCurrentDataSet.Tables(0)
-            Me.DDL_CLASS_PLACE.DataValueField = "VALUE"
-            Me.DDL_CLASS_PLACE.DataTextField = "TEXT"
-            Me.DDL_CLASS_PLACE.DataBind()
-            Me.DDL_CLASS_PLACE.Items.Insert(0, New ListItem("請選擇", String.Empty))
-            Me.DDL_CLASS_PLACE.SelectedIndex = -1
+            If Utility.isValidateData(Me.ddl_EditPLACE.SelectedValue) Then
+                AP_CODEList.clear()
+                AP_CODEList.loadByUpCode(Me.ddl_EditPLACE.SelectedValue)
+                Me.DDL_CLASS_PLACE.DataSource = AP_CODEList.getCurrentDataSet.Tables(0)
+                Me.DDL_CLASS_PLACE.DataValueField = "VALUE"
+                Me.DDL_CLASS_PLACE.DataTextField = "TEXT"
+                Me.DDL_CLASS_PLACE.DataBind()
+                Me.DDL_CLASS_PLACE.Items.Insert(0, New ListItem("請選擇", String.Empty))
+                Me.DDL_CLASS_PLACE.SelectedIndex = -1
+            End If
         Catch ex As Exception
             Throw
         Finally
@@ -1081,11 +1083,17 @@ Public Class MBMnt_Class_01_v01
 
             Dim sJscript As String = String.Empty
             sJscript = "<script language='javascript'>" & vbCrLf
-            'sJscript &= "window.returnValue='" & sSEQ & "';" & vbCrLf
-            sJscript &= "window.close();" & vbCrLf
+            sJscript &= "var strFullPath = window.document.location.href;"
+            sJscript &= "var strPath = window.document.location.pathname;"
+            sJscript &= "var pos = strFullPath.indexOf(strPath);"
+            sJscript &= "var prePath = strFullPath.substring(0, pos);"
+            sJscript &= "var postPath = strPath.substring(0, strPath.substr(1).indexOf('/') + 1);"
+
+            sJscript &= "window.location.href=prePath+'/NewsList.aspx'" & vbCrLf
             sJscript &= "</script" & ">" & vbCrLf
 
             Response.Write(sJscript)
+        Catch ex As System.Threading.ThreadAbortException
         Catch ex As Exception
             UIShareFun.showErrMsg(Me, ex)
         End Try

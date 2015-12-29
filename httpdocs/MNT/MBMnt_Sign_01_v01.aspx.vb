@@ -1426,7 +1426,7 @@ Public Class MBMnt_Sign_01_v01
                         If CB_BATCH.Checked Then
                             Dim MB_BATCH As Literal = ITEM.FindControl("MB_BATCH")
                             MB_MEMCLASSList.clear()
-                            MB_MEMCLASSList.setSQLCondition(" AND IFNULL(MB_FWMK,' ') NOT IN ('3','4', '5') AND IFNULL(MB_RESP,' ')<>'N' ")
+                            MB_MEMCLASSList.setSQLCondition(" AND IFNULL(A.MB_FWMK,' ') NOT IN ('3','4', '5') AND IFNULL(B.MB_ELECT,' ')='1' AND IFNULL(B.MB_RESP,' ')<>'N' ")
                             MB_MEMCLASSList.loadByMB_SEQ(m_sCLASS, CDec(MB_BATCH.Text))
 
                             MB_CLASS.clear()
@@ -1448,7 +1448,7 @@ Public Class MBMnt_Sign_01_v01
                 Else
                     If Not IsNothing(ROW_CLASS) Then
                         MB_MEMCLASSList.clear()
-                        MB_MEMCLASSList.setSQLCondition(" AND IFNULL(MB_FWMK,' ') NOT IN ('3','4', '5') AND IFNULL(MB_RESP,' ')<>'N' ")
+                        MB_MEMCLASSList.setSQLCondition(" AND IFNULL(A.MB_FWMK,' ') NOT IN ('3','4', '5') AND IFNULL(B.MB_ELECT,' ')='1' AND IFNULL(B.MB_RESP,' ')<>'N' ")
                         MB_MEMCLASSList.loadByMB_SEQ(m_sCLASS, ROW_CLASS("MB_BATCH"))
 
                         If MB_MEMCLASSList.size < (Utility.CheckNumNull(ROW_CLASS("MB_FULL")) + Utility.CheckNumNull(ROW_CLASS("MB_WAIT"))) Then
@@ -1499,11 +1499,24 @@ Public Class MBMnt_Sign_01_v01
                         .save()
                     End With
 
-                    For i As Integer = 0 To AL_MB_BATCH.Count - 1
+                    For Each ITEM As RepeaterItem In Me.RP_BATCH.Items
+                        Dim CB_BATCH As CheckBox = ITEM.FindControl("CB_BATCH")
+                        Dim MB_BATCH As Literal = ITEM.FindControl("MB_BATCH")
                         Dim MB_MEMBATCH As New MB_MEMBATCH(m_DBManager)
                         MB_MEMBATCH.setAttribute("MB_MEMSEQ", lbl_MB_MEMSEQ.Text)
                         MB_MEMBATCH.setAttribute("MB_SEQ", m_sCLASS)
-                        MB_MEMBATCH.setAttribute("MB_BATCH", AL_MB_BATCH.Item(i))
+                        MB_MEMBATCH.setAttribute("MB_BATCH", MB_BATCH.Text)
+                        'MB_ELECT	char(1)	latin1_swedish_ci	YES				select,insert,update,references	選取註記;1: 選取;null:未選
+                        If AL_MB_BATCH.Contains(CDec(MB_BATCH.Text)) Then
+                            MB_MEMBATCH.setAttribute("MB_ELECT", "1")
+                        Else
+                            MB_MEMBATCH.setAttribute("MB_ELECT", Nothing)
+                        End If
+                        'MB_CHKFLAG	char(1)	latin1_swedish_ci	YES				select,insert,update,references	是否核准;1:核准;2.不准;3.核准未出席
+                        If sMB_APV = "2" Then
+                            MB_MEMBATCH.setAttribute("MB_CHKFLAG", "1")
+                        End If
+                        'MB_RESP	char(1)	latin1_swedish_ci	YES				select,insert,update,references	回信是否出席;Y:出席;N:不出席
                         MB_MEMBATCH.save()
                     Next
 
@@ -1513,7 +1526,7 @@ Public Class MBMnt_Sign_01_v01
                         Dim AL_RIGHT As New ArrayList
                         For i As Integer = 0 To AL_MB_BATCH.Count - 1
                             MB_MEMCLASSList.clear()
-                            MB_MEMCLASSList.setSQLCondition(" AND IFNULL(MB_FWMK,' ') NOT IN ('3','4', '5') AND IFNULL(MB_RESP,' ')<>'N' ")
+                            MB_MEMCLASSList.setSQLCondition(" AND IFNULL(A.MB_FWMK,' ') NOT IN ('3','4', '5') AND IFNULL(B.MB_ELECT,' ')='1' AND IFNULL(B.MB_RESP,' ')<>'N' ")
                             MB_MEMCLASSList.loadByMB_SEQ(m_sCLASS, AL_MB_BATCH.Item(i))
 
                             If Not MB_MEMCLASS.isLoaded Then
@@ -1867,6 +1880,7 @@ Public Class MBMnt_Sign_01_v01
             Try
                 Dim sb As New System.Text.StringBuilder
                 Dim MB_MEMBATCHList As New MB_MEMBATCHList(dbManager)
+                MB_MEMBATCHList.setSQLCondition(" AND IFNULL(MB_ELECT,' ') = '1' ")
                 MB_MEMBATCHList.LoadBySEQ(iMB_MEMSEQ, Me.m_sCLASS)
                 Dim MB_CLASS As New MB_CLASS(dbManager)
                 For Each ROW As DataRow In MB_MEMBATCHList.getCurrentDataSet.Tables(0).Rows
@@ -1927,7 +1941,22 @@ Public Class MBMnt_Sign_01_v01
                     Dim MB_MEMBATCH As New MB_MEMBATCH(m_DBManager)
                     If MB_MEMBATCH.LoadByPK(sMB_MEMSEQ, Me.m_sCLASS, DRV("MB_BATCH")) Then
                         Dim CB_BATCH As CheckBox = e.Item.FindControl("CB_BATCH")
-                        CB_BATCH.Checked = True
+
+                        If MB_MEMBATCH.getString("MB_CHKFLAG") = "1" Then
+                            CB_BATCH.Enabled = False
+                        End If
+
+                        If MB_MEMBATCH.getString("MB_ELECT") = "1" Then
+                            CB_BATCH.Checked = True
+                        End If
+
+                        Dim MB_CHKFLAG As Literal = e.Item.FindControl("MB_CHKFLAG")
+                        Select Case MB_MEMBATCH.getString("MB_CHKFLAG")
+                            Case "1", "3"
+                                MB_CHKFLAG.Text = "錄取"
+                            Case "2"
+                                MB_CHKFLAG.Text = "不錄取"
+                        End Select
                     End If
                 End Using
             End If

@@ -389,6 +389,7 @@
                                     <input type="hidden" id="HID_MB_BATCH" runat="server" value='<%#Container.DataItem("MB_BATCH")%>' />
                                     <input type="hidden" id="HID_MB_MEMSEQ" runat="server" value='<%#Container.DataItem("MB_MEMSEQ")%>' />
                                     <input type="hidden" id="HID_MB_SEQ" runat="server" value='<%#Container.DataItem("MB_SEQ")%>' />
+                                    <input type="hidden" id="HID_MB_APV" runat="server" value='<%#Container.DataItem("MB_APV")%>' />
                                 </td>
                                 <td width="7%" class="td2c_b">
                                     <!--性別-->
@@ -416,18 +417,34 @@
                                 </td>
                                 <td width="10%" class="td2c_b">
                                     <!--錄取-->
-                                    <%#getMB_CHKFLAG(Container.DataItem("MB_SEQ"), Container.DataItem("MB_MEMSEQ"), Container.DataItem("MB_FWMK"), Container.DataItem("MB_CDATE"), Container.DataItem("MB_CREDATETIME"), Container.DataItem("MB_APVDATETIME"))%>
+                                    <%#getMB_CHKFLAG(Container.DataItem("MB_SEQ"), Container.DataItem("MB_MEMSEQ"), Container.DataItem("MB_APV"), Container.DataItem("MB_FWMK"), Container.DataItem("MB_CDATE"), Container.DataItem("MB_CREDATETIME"), Container.DataItem("MB_APVDATETIME"))%>
                                 </td>
-                                <td id="TD_MB_APV" runat="server"  width="10%" class="td2c_b">
+                                <td id="TD_MB_APV" runat="server"  width="10%" class="td2_b">
                                     <!--是否核准-->
-                                    <asp:Button ID="btnMB_FWMK_5Y" runat="server" Text="是" CssClass="bt" CommandName="5Y" Visible="false" CommandArgument='<%#Container.DataItem("MB_MEMSEQ")%>' />
-                                    <asp:Button ID="btnMB_FWMK_5N" runat="server" Text="否" CssClass="bt" CommandName="5N" Visible="false" CommandArgument='<%#Container.DataItem("MB_MEMSEQ")%>' />
-                                    <asp:Button ID="btnMB_FWMK_5C" runat="server" Text="取消" CssClass="bt" CommandName="5C" Visible="false" CommandArgument='<%#Container.DataItem("MB_MEMSEQ")%>' />
-                                    <asp:Literal ID="LTL_MB_APV" runat="server" Visible="false" />
+                                    <asp:Repeater ID="RP_MB_MEMBATCH" runat="server" OnItemDataBound="RP_MB_MEMBATCH_OnItemDataBound" OnItemCommand="RP_MB_MEMBATCH_OnItemCommand" >
+                                        <ItemTemplate>
+                                            <DIV>
+                                                <input type="hidden" id="HID_MB_MEMSEQ" runat="server" value='<%#Container.DataItem("MB_MEMSEQ")%>' />
+                                                <input type="hidden" id="HID_MB_SEQ" runat="server" value='<%#Container.DataItem("MB_SEQ")%>' />
+                                                <asp:Label ID="LTL_MB_BATCH" runat="server" style="font-weight:bold;color:red" Text='<%#Container.DataItem("MB_BATCH")%>' />
+                                                <asp:Button ID="btnMB_FWMK_5Y" runat="server" Text="是" CssClass="bt" CommandName="5Y" Visible="false" CommandArgument='<%#Container.DataItem("MB_MEMSEQ")%>' />
+                                                <asp:Button ID="btnMB_FWMK_5N" runat="server" Text="否" CssClass="bt" CommandName="5N" Visible="false" CommandArgument='<%#Container.DataItem("MB_MEMSEQ")%>' />
+                                                <asp:Button ID="btnMB_FWMK_5C" runat="server" Text="取消不准" CssClass="bt" CommandName="5C" Visible="false" CommandArgument='<%#Container.DataItem("MB_MEMSEQ")%>' />
+                                                &nbsp;<asp:Literal ID="LTL_MB_APV" runat="server" Visible="false" />
+                                            </DIV>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
                                 </td>
-                                <td width="8%" class="td2c_b">
+                                <td width="8%" class="td2_b">
                                     <!--回信出席-->
-                                    <asp:Literal ID="LTL_MB_RESP" runat="server" />
+                                    <asp:Repeater ID="RP_MB_RESP" runat="server" OnItemDataBound="RP_MB_RESP_OnItemDataBound" >
+                                        <ItemTemplate>
+                                            <DIV>
+                                                <asp:Label ID="LTL_MB_BATCH" runat="server" style="font-weight:bold;color:red" Text='<%#Container.DataItem("MB_BATCH")%>' />
+                                                &nbsp;<asp:Literal ID="LTL_MB_RESP" runat="server" Visible="false" />
+                                            </DIV>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
                                 </td>
                                 <td width="8%" class="td2c_b">
                                     <!--未出席-->

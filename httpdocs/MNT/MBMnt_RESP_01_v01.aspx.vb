@@ -25,10 +25,11 @@ Public Class MBMnt_RESP_01_v01
             Me.m_sOPTYPE = "" & Request.QueryString("OPTYPE")
 
             If IsNumeric(Me.m_sMB_MEMSEQ) AndAlso IsNumeric(Me.m_sMB_SEQ) AndAlso Utility.isValidateData(Me.m_sOPTYPE) Then
-                Dim MB_MEMCLASS As New MB_MEMCLASS(Me.m_DBManager)
-                If MB_MEMCLASS.LoadByPK(Me.m_sMB_MEMSEQ, Me.m_sMB_SEQ) Then
-                    MB_MEMCLASS.setAttribute("MB_RESP", UCase(Me.m_sOPTYPE))
-                    MB_MEMCLASS.save()
+                'Dim MB_MEMCLASS As New MB_MEMCLASS(Me.m_DBManager)
+                Dim MB_MEMBATCH As New MB_MEMBATCH(Me.m_DBManager)
+                If MB_MEMBATCH.LoadByPK(Me.m_sMB_MEMSEQ, Me.m_sMB_SEQ, Me.m_sMB_BATCH) Then
+                    MB_MEMBATCH.setAttribute("MB_RESP", UCase(Me.m_sOPTYPE))
+                    MB_MEMBATCH.save()
 
                     Dim MB_CLASS As New MB_CLASS(Me.m_DBManager)
                     MB_CLASS.loadByPK(Me.m_sMB_SEQ, Me.m_sMB_BATCH)

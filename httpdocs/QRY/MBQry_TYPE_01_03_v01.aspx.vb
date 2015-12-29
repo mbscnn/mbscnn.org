@@ -176,9 +176,13 @@ Public Class MBQry_TYPE_01_03_v01
                 Dim MB_MEMBATCHList As New MB_MEMBATCHList(DBManager)
                 MB_MEMBATCHList.setSQLCondition(" ORDER BY MB_BATCH ")
                 MB_MEMBATCHList.LoadBySEQ(ROW("MB_MEMSEQ"), ROW("MB_SEQ"))
-                For Each sqlRow As DataRow In MB_MEMBATCHList.getCurrentDataSet.Tables(0).Rows
-                    sMB_BATCH &= sqlRow("MB_BATCH").ToString & ","
-                Next
+                Dim ROW_1() As DataRow = Nothing
+                ROW_1 = MB_MEMBATCHList.getCurrentDataSet.Tables(0).Select("ISNULL(MB_ELECT,' ')='1'")
+                If Not IsNothing(ROW_1) AndAlso ROW_1.Length > 0 Then
+                    For Each sqlRow As DataRow In ROW_1
+                        sMB_BATCH &= sqlRow("MB_BATCH").ToString & ","
+                    Next
+                End If
                 If Utility.isValidateData(sMB_BATCH) Then
                     sMB_BATCH = Left(sMB_BATCH, sMB_BATCH.Length - 1)
                 End If
@@ -398,7 +402,7 @@ Public Class MBQry_TYPE_01_03_v01
                         mbMEMCLASSList.loadByMB_SEQ(iMB_SEQ, iMB_BATCH)
                         DT_MB_MEMCLASS = mbMEMCLASSList.getCurrentDataSet.Tables(0)
 
-                        Dim DV_SEQ As New DataView(DT_MB_MEMCLASS, "ISNULL(MB_FWMK,' ') NOT IN ('3','4','5')", "MB_CREDATETIME", DataViewRowState.CurrentRows)
+                        Dim DV_SEQ As New DataView(DT_MB_MEMCLASS, "ISNULL(MB_FWMK,' ') NOT IN ('3','4','5') AND ISNULL(MB_ELECT,' ')='1' AND ISNULL(MB_RESP,' ')<>'N' ", "MB_CREDATETIME", DataViewRowState.CurrentRows)
                         DT_SEQ = DV_SEQ.ToTable
                         DT_FULL = DT_SEQ.Clone
                         Dim iFULL As Decimal = 0

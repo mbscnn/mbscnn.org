@@ -21,6 +21,30 @@ Public Class MB_MEMBATCH_dbMeta
 			hMetaData3.add("PROVIDER_TYPE",246 )
 			hMetaData3.add("PROVIDER_TYPE_NAME", MySql.Data.MySqlClient.MySqlDbType.NewDecimal )
 			arry.add(hMetaData3)
+			Static hMetaData4 As new System.Collections.Hashtable
+			hMetaData4.add("COLUMN_NAME", "MB_ELECT" )
+			hMetaData4.add("DB_TYPE", 16 )
+			hMetaData4.add("PROVIDER_TYPE",254 )
+			hMetaData4.add("PROVIDER_TYPE_NAME", MySql.Data.MySqlClient.MySqlDbType.String )
+			arry.add(hMetaData4)
+			Static hMetaData5 As new System.Collections.Hashtable
+			hMetaData5.add("COLUMN_NAME", "MB_CHKFLAG" )
+			hMetaData5.add("DB_TYPE", 16 )
+			hMetaData5.add("PROVIDER_TYPE",254 )
+			hMetaData5.add("PROVIDER_TYPE_NAME", MySql.Data.MySqlClient.MySqlDbType.String )
+			arry.add(hMetaData5)
+			Static hMetaData6 As new System.Collections.Hashtable
+			hMetaData6.add("COLUMN_NAME", "MB_RESP" )
+			hMetaData6.add("DB_TYPE", 16 )
+			hMetaData6.add("PROVIDER_TYPE",254 )
+			hMetaData6.add("PROVIDER_TYPE_NAME", MySql.Data.MySqlClient.MySqlDbType.String )
+			arry.add(hMetaData6)
+			Static hMetaData7 As new System.Collections.Hashtable
+			hMetaData7.add("COLUMN_NAME", "MB_APVDATE" )
+			hMetaData7.add("DB_TYPE", 6 )
+			hMetaData7.add("PROVIDER_TYPE",10 )
+			hMetaData7.add("PROVIDER_TYPE_NAME", MySql.Data.MySqlClient.MySqlDbType.Date )
+			arry.add(hMetaData7)
      End Sub
      Public Function getMetaArray() as System.Collections.ArrayList Implements com.Azion.NET.VB.DBMetaData.getMetaArray
          Return arry

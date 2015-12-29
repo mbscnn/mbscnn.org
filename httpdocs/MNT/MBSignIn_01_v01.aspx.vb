@@ -100,7 +100,7 @@ Public Class MBSignIn_01_v01
                         com.Azion.EloanUtility.UIUtility.alert("帳號(e-Mail)尚未啟用，請到您的信箱點集本中心驗證信連結啟用")
                     End If
                 Else
-                    com.Azion.EloanUtility.UIUtility.alert("帳號(e-Mail)不存在，請先註冊為會員")
+                    com.Azion.EloanUtility.UIUtility.alert("帳號(e-Mail)不存在，請先註冊為會員\n\n或檢查e-Mail是否輸入錯誤")
                 End If
             End If
         Catch ex As System.Threading.ThreadAbortException

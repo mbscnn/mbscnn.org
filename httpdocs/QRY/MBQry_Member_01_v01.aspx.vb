@@ -48,7 +48,7 @@ Public Class MBQry_Member_01_v01
                     lbl_CLASSNAME.Text = MB_CLASS.getString("MB_CLASS_NAME")
                     lbl_BATCH.Text = MB_CLASS.getString("MB_BATCH")
                 End If
-                dg_Member.DataSource = MB_MEMCLASSList.getCurrentDataSet.Tables(0).Select("ISNULL(MB_FWMK,' ')<>'3'")
+                dg_Member.DataSource = MB_MEMCLASSList.getCurrentDataSet.Tables(0).Select("ISNULL(MB_FWMK,' ') NOT IN ('3','4','5') AND ISNULL(MB_ELECT,' ')='1'")
                 dg_Member.DataBind()
 
                 divResult.Style.Item("display") = ""

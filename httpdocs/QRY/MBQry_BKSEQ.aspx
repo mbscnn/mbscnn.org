@@ -277,7 +277,7 @@
 		    td:nth-of-type(1):before { content: "姓名"; }
 		    td:nth-of-type(2):before { content: "通訊地址"; }
 		    td:nth-of-type(3):before { content: "手機/電話"; }
-		    td:nth-of-type(4):before { content: "台銀會員編號"; }
+		    td:nth-of-type(4):before { content: "護法會員編號"; }
 		    td:nth-of-type(5):before { content: "是否為會員"; }
 	    }
 	
@@ -311,7 +311,7 @@
                 社團法人台灣佛陀原始正法學會
             </h2>
             <h3 style="color:black; font-family: 標楷體;font-weight:bold">
-                護法會會員編號查詢
+                護法會員編號查詢
             </h3>
         </div>
         <!--錯誤訊息區-->
@@ -346,13 +346,13 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 col-md-12">
-                    16碼台銀會員編號用途
+                    16碼護法會員編號用途
                     <ol type="1">                
                         <li>台銀代扣善款授權書</li>
                         <li>上台銀網銀網路ATM轉帳給佛陀正法中心善款(不須付轉帳費用)</li>
-                        <li>到任何ATM轉帳給佛陀正法中心善款(須付轉帳費用15元)</li>
-                        <li>報名佛陀正法中心課程</li>
-                        <li>提供繳善款及上課報名查詢</li>
+                        <li>到任何ATM轉帳給佛陀正法中心善款(捐贈者須付轉帳費用15元)</li>
+                        <li>報名佛陀正法中心各類課程</li>
+                        <li>提供捐贈善款及上課報名查詢</li>
                     </ol>
                 </div>
             </div>
@@ -364,7 +364,7 @@
                     <th>姓名</th>
                     <th>通訊地址</th>
                     <th>手機/電話</th>
-                    <th>台銀會員編號</th>
+                    <th>護法會員編號</th>
                     <th>是否為會員</th>
                 </tr>
             </thead>
@@ -388,7 +388,7 @@
                                 &nbsp;
                             </td>
                             <td>
-                                <!--台銀會員編號-->
+                                <!--護法會員編號-->
                                 <asp:Literal ID="LTL_MB_BKSEQ" runat="server" Text='<%#Container.DataItem("MB_BKSEQ")%>' />
                                 &nbsp;
                             </td>
@@ -410,7 +410,7 @@
                     <ol type="1">
                         <li>在佛陀原始正法中心官網上方<asp:Button ID="btnSingin" runat="server" Text="會員登入" CssClass="btn btn-info" />成為新會員</li>
                         <li>回e-mail信箱確認會員信函</li>
-                        <li>會員信函確認完成,到佛陀原始正法中心官網<span style="color:blue;font-weight:bold">點選會員系統</span>填入<span style="color:blue;font-weight:bold">入會申請單</span>取得台銀會員編號</li>
+                        <li>會員信函確認完成,到佛陀原始正法中心官網<span style="color:blue;font-weight:bold">點選會員系統</span>填入<span style="color:blue;font-weight:bold">入會申請單</span>取得護法會員編號</li>
                         <li>若不清楚請來電中心02-23627968查問</li>
                     </ol>
                 </div>
