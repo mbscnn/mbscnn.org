@@ -2228,12 +2228,33 @@ Public Class MB_MEMREVList
         Try
             Dim sqlStr As String = String.Empty
 
-            sqlStr = "SELECT A.*, B.MB_AREA, B.MB_LEADER, B.MB_NAME " & _
-                     "  FROM MB_MEMREV A, MB_MEMBER B" & _
-                     " WHERE A.MB_MEMSEQ = 8 AND A.MB_ITEMID = 'A' AND A.MB_MEMTYP = '2' AND A.MB_MEMSEQ = B.MB_MEMSEQ " & _
+            sqlStr = "SELECT A.*, B.MB_AREA, B.MB_LEADER, B.MB_NAME " &
+                     "  FROM MB_MEMREV A, MB_MEMBER B" &
+                     " WHERE A.MB_MEMSEQ = 8 AND A.MB_ITEMID = 'A' AND A.MB_MEMTYP = '2' AND A.MB_MEMSEQ = B.MB_MEMSEQ " &
                      " ORDER BY A.MB_MEMSEQ, A.MB_TX_DATE "
 
             Dim para As IDbDataParameter = ProviderFactory.CreateDataParameter("MB_MEMSEQ", iMB_MEMSEQ)
+
+            Return Me.loadBySQLOnlyDs(sqlStr, para)
+        Catch ex As ProviderException
+            Throw
+        Catch ex As BosException
+            Throw
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+    Function Load_MB_BKSEQ(ByVal iMB_BKSEQ As Decimal)
+        Try
+            Dim sqlStr As String = String.Empty
+
+            sqlStr = "SELECT B.* " &
+                     "  FROM MB_MEMMAP A, MB_MEMREV B " &
+                     " WHERE A.MB_BKSEQ = " & ProviderFactory.PositionPara & "MB_BKSEQ " &
+                     "  AND A.MB_MEMSEQ = B.MB_MEMSEQ "
+
+            Dim para As IDbDataParameter = ProviderFactory.CreateDataParameter("MB_BKSEQ", iMB_BKSEQ)
 
             Return Me.loadBySQLOnlyDs(sqlStr, para)
         Catch ex As ProviderException

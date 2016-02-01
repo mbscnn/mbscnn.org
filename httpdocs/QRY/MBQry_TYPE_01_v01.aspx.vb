@@ -2141,7 +2141,7 @@ Public Class MBQry_TYPE_01_v01
                             sb.Append("<div style='color:black;font-size:12pt;'>")
                             sb.Append("　祝您").Append("<BR/>")
                             sb.Append("　　　學習愉快、收穫滿滿").Append("<BR/>").Append("<BR/>")
-                            sb.Append("　　　　　　　　　 MBSC 台北教育中心 敬邀合十")
+                            sb.Append("　　　　　　　　　 MBSC原始正法中心 敬邀合十")
                             sb.Append("</div>")
 
                             sMailBody = sb.ToString
@@ -2473,7 +2473,7 @@ Public Class MBQry_TYPE_01_v01
                             sb.Append("<div style='color:black;font-size:12pt;'>")
                             sb.Append("　祝您").Append("<BR/>")
                             sb.Append("　　　學習愉快、收穫滿滿").Append("<BR/>").Append("<BR/>")
-                            sb.Append("　　　　　　　　　 MBSC 台北教育中心 敬邀合十")
+                            sb.Append("　　　　　　　　　 MBSC原始正法中心 敬邀合十")
                             sb.Append("</div>")
 
                             sMailBody = sb.ToString

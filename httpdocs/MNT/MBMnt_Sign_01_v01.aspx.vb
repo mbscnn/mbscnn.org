@@ -886,10 +886,11 @@ Public Class MBMnt_Sign_01_v01
                 End If
             End If
 
+            Me.RP_BATCH.DataSource = MB_CLASSList.getCurrentDataSet.Tables(0)
+            Me.RP_BATCH.DataBind()
+
             If MB_CLASSList.getCurrentDataSet.Tables(0).Rows.Count > 1 Then
                 Me.TR_BATCH.Visible = True
-                Me.RP_BATCH.DataSource = MB_CLASSList.getCurrentDataSet.Tables(0)
-                Me.RP_BATCH.DataBind()
             Else
                 Me.TR_BATCH.Visible = False
             End If
@@ -1136,11 +1137,6 @@ Public Class MBMnt_Sign_01_v01
             End If
             '緊急聯絡人
             If sMB_APV = "1" Then
-                If txt_MB_EMGCONT.Text.Trim = "" OrElse Not IsNumeric(txt_MB_CONTMOBIL.Text) Then
-                    UIUtility.alert("請輸入:緊急聯絡人")
-                    Exit Sub
-                End If
-
                 If Not Utility.isValidateData(Trim(Me.txt_MB_EMGCONT.Text)) Then
                     UIUtility.alert("請輸入:緊急聯絡人")
                     Exit Sub
@@ -1407,6 +1403,38 @@ Public Class MBMnt_Sign_01_v01
                     End If
                     .save()
                 End With
+
+                Dim MB_MEMMAP As New MB_MEMMAP(m_DBManager)
+                MB_MEMMAP.LoadByPK(MB_MEMBER.getDecimal("MB_MEMSEQ"))
+                Dim sMB_BKSEQ As String = String.Empty
+                If Not MB_MEMMAP.isLoaded Then
+                    'MB_BKSEQ	decimal(16,0)		YES				select,insert,update,references	台銀編號
+                    '7106800010100723
+                    '710680 + BBB + 01 + 5 碼序號(MB_MEMSEQ )不足錢補0
+                    'BBB==> 區代碼 用AP_CODE.VALUE (請將區代碼 1==> 001其餘比照)
+                    Dim sBBB As String = String.Empty
+                    Select Case MB_MEMBER.getString("MB_AREA")
+                        Case "A"
+                            sBBB = "001"
+                        Case "B"
+                            sBBB = "002"
+                        Case "C"
+                            sBBB = "003"
+                        Case "D"
+                            sBBB = "004"
+                        Case Else
+                            sBBB = "001"
+                    End Select
+                    sMB_BKSEQ = "710680" & sBBB & "01" & Utility.FillZero(MB_MEMBER.getDecimal("MB_MEMSEQ"), 5)
+                    MB_MEMMAP.setAttribute("MB_BKSEQ", sMB_BKSEQ)
+                Else
+                    sMB_BKSEQ = MB_MEMMAP.getString("MB_BKSEQ")
+                End If
+                'MB_NAME	varchar(50)	utf8_general_ci	YES				select,insert,update,references	會員名稱
+                MB_MEMMAP.setAttribute("MB_NAME", Trim(MB_MEMBER.getString("MB_NAME")))
+                'MB_MEMSEQ	decimal(7,0)		NO	PRI	0		select,insert,update,references	會員編號
+                MB_MEMMAP.setAttribute("MB_MEMSEQ", MB_MEMBER.getDecimal("MB_MEMSEQ"))
+                MB_MEMMAP.save()
 
                 '課程檔寫入
                 Dim MB_CLASS As New MB_CLASS(m_DBManager)
@@ -1728,21 +1756,33 @@ Public Class MBMnt_Sign_01_v01
                     sb.Append("<span style='color:black'>聯絡人：").Append(ROW_CLASS("CONTACT").ToString).Append("</span>")
                     sb.Append("</li>")
 
-                    sb.Append("<li>")
-                    sb.Append("<span style='color:black'>請穿著寬鬆衣褲；男女眾皆請勿穿著短褲。女眾請勿穿著貼身衣裙。</span>")
-                    sb.Append("</li>")
+                    '1050119 AMY 錄取通知刪除 5,6,7,8項 新增 注意事項說明: MB_CLASS.FAVCHARGE
+                    'sb.Append("<li>")
+                    'sb.Append("<span style='color:black'>請穿著寬鬆衣褲；男女眾皆請勿穿著短褲。女眾請勿穿著貼身衣裙。</span>")
+                    'sb.Append("</li>")
 
-                    sb.Append("<li>")
-                    sb.Append("請攜帶環保杯、筷子。")
-                    sb.Append("</li>")
+                    'sb.Append("<li>")
+                    'sb.Append("請攜帶環保杯、筷子。")
+                    'sb.Append("</li>")
 
-                    sb.Append("<li>")
-                    sb.Append("歡迎隨喜發心贊助場地或推廣教育課程費用。")
-                    sb.Append("</li>")
+                    'sb.Append("<li>")
+                    'sb.Append("歡迎隨喜發心贊助場地或推廣教育課程費用。")
+                    'sb.Append("</li>")
 
-                    sb.Append("<li>")
-                    sb.Append("可代訂素食便當（報到時登記即可，歡迎隨喜打齋）。")
-                    sb.Append("</li>")
+                    'sb.Append("<li>")
+                    'sb.Append("可代訂素食便當（報到時登記即可，歡迎隨喜打齋）。")
+                    'sb.Append("</li>")
+
+                    Dim sMB_PREC_MEMO As String = String.Empty
+                    sMB_PREC_MEMO = ROW_CLASS("MB_PREC_MEMO").ToString
+                    If Utility.isValidateData(sMB_PREC_MEMO) Then
+                        sMB_PREC_MEMO = ReplaceToBR(sMB_PREC_MEMO)
+                        sb.Append("<li>")
+                        sb.Append("<span style='color:red'>注意事項說明：</span>").Append("</span>")
+                        sb.Append("<span style='color:red'><BR/>")
+                        sb.Append(sMB_PREC_MEMO).Append("</span>")
+                        sb.Append("</li>")
+                    End If
 
                     sb.Append("</ol>")
                 End If
@@ -1750,11 +1790,27 @@ Public Class MBMnt_Sign_01_v01
                 sb.Append("<div style='color:black;font-size:12pt;'>")
                 sb.Append("　祝您").Append("<BR/>")
                 sb.Append("　　　學習愉快、收穫滿滿").Append("<BR/>").Append("<BR/>")
-                sb.Append("　　　　　　　　　 MBSC 台北教育中心 敬邀合十")
+                sb.Append("　　　　　　　　　 MBSC佛陀原始正法中心 敬邀合十")
                 sb.Append("</div>")
             End If
 
             Return sb.ToString
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+    Function ReplaceToBR(ByVal sInStr As Object) As String
+        Try
+            If Utility.isValidateData(sInStr) Then
+                sInStr = sInStr.Replace(Chr(13) + Chr(10), "<BR/>")
+                sInStr = sInStr.Replace(Chr(13), "<BR/>")
+                sInStr = sInStr.Replace(Chr(10), "<BR/>")
+
+                Return sInStr
+            End If
+
+            Return String.Empty
         Catch ex As Exception
             Throw
         End Try

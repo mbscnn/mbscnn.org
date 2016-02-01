@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>護法會會員編號查詢</title>
 
-     <!-- Bootstrap Core CSS -->
+    <!-- Bootstrap Core CSS -->
     <link href="<%=com.Azion.EloanUtility.UIUtility.getRootPathClient() + "/css/bootstrap.css"%>" rel="stylesheet" type="text/css" />
     <!-- Custom CSS -->
     <link href="<%=com.Azion.EloanUtility.UIUtility.getRootPathClient() + "/css/portfolio-item.css"%>" rel="stylesheet" type="text/css" />
@@ -276,9 +276,10 @@
 		    */
 		    td:nth-of-type(1):before { content: "姓名"; }
 		    td:nth-of-type(2):before { content: "通訊地址"; }
-		    td:nth-of-type(3):before { content: "手機/電話"; }
-		    td:nth-of-type(4):before { content: "護法會員編號"; }
-		    td:nth-of-type(5):before { content: "是否為會員"; }
+            td:nth-of-type(3):before { content: "e-mail"; }
+		    td:nth-of-type(4):before { content: "手機/電話"; }
+		    td:nth-of-type(5):before { content: "護法會員編號"; }
+		    td:nth-of-type(6):before { content: "是否為會員"; }
 	    }
 	
 	    /* Smartphones (portrait and landscape) ----------- */
@@ -316,7 +317,7 @@
         </div>
         <!--錯誤訊息區-->
         <!-- #include virtual="~/inc/MBSCErrorMsg.inc" -->
-        <div id="DIV_Paras" runat="server" class="container-fluid grid-container">
+        <div id="DIV_Paras" runat="server" class="container-fluid grid-container" >
             <div class="row">
                 <div class="col-xs-4 col-md-1 thm">
                     <asp:RadioButton ID="rbt_Cel" runat="server" Text="手機：" GroupName="SelectType" />
@@ -363,13 +364,14 @@
                 <tr>
                     <th>姓名</th>
                     <th>通訊地址</th>
+                    <th>e-mail</th>
                     <th>手機/電話</th>
                     <th>護法會員編號</th>
                     <th>是否為會員</th>
                 </tr>
             </thead>
             <tbody>
-                <asp:Repeater ID="RP_BKSEQ" runat="server">
+                <asp:Repeater ID="RP_BKSEQ" runat="server" >
                     <ItemTemplate>
                         <tr>
                             <td>
@@ -379,8 +381,12 @@
                             </td>
                             <td>
                                 <!--通訊地址-->
-                                <asp:Literal ID="MB_ADDR" runat="server" />
+                                <asp:Literal ID="MB_ADDR" runat="server"  />
                                 &nbsp;
+                            </td>
+                            <td>
+                                <!--e-mail-->
+                                <asp:Literal ID="MB_EMAIL" runat="server" Text='<%#Container.DataItem("MB_EMAIL")%>' />
                             </td>
                             <td>
                                 <!--手機/電話-->
@@ -395,6 +401,7 @@
                             <td>
                                 <!--是否為會員-->
                                 <asp:Literal ID="LTL_MB_ACCT" runat="server" />
+                                <asp:Button ID="btnSign" runat="server" Text="成為新會員" CssClass="bt btn-info" Visible="false" CommandName="SIGN" CommandArgument='<%#Container.DataItem("MB_MEMSEQ")%>' />
                                 &nbsp;
                             </td>
                         </tr>

@@ -361,7 +361,7 @@ Public Class MBQry_Class_01_v01
                 Else
                     sMsg = sMailSub & "(二)，已發送完畢"
                 End If
-                com.Azion.EloanUtility.UIUtility.showErrMsg(Me, sMailSub)
+                com.Azion.EloanUtility.UIUtility.showErrMsg(Me, sMsg)
             End If
         Catch ex As Exception
             Throw
@@ -419,25 +419,26 @@ Public Class MBQry_Class_01_v01
             sb.Append("<span style='color:red'>聯絡人：").Append(MB_CLASS.getString("CONTACT")).Append("</span>")
             sb.Append("</li>")
 
-            sb.Append("<li>")
-            sb.Append("<span style='color:red'>請穿著寬鬆衣褲；男女眾皆請勿穿著短褲。女眾請勿穿著貼身衣裙。</span>")
-            sb.Append("</li>")
+            '1050119 AMY 提醒信一刪除 4,5,6,7,8項 新增 注意事項說明: MB_CLASS.FAVCHARGE
+            'sb.Append("<li>")
+            'sb.Append("<span style='color:red'>請穿著寬鬆衣褲；男女眾皆請勿穿著短褲。女眾請勿穿著貼身衣裙。</span>")
+            'sb.Append("</li>")
 
-            sb.Append("<li>")
-            sb.Append("請攜帶環保杯、筷子。")
-            sb.Append("</li>")
+            'sb.Append("<li>")
+            'sb.Append("請攜帶環保杯、筷子。")
+            'sb.Append("</li>")
 
-            sb.Append("<li>")
-            sb.Append("歡迎隨喜發心贊助場地或推廣教育課程費用。")
-            sb.Append("</li>")
+            'sb.Append("<li>")
+            'sb.Append("歡迎隨喜發心贊助場地或推廣教育課程費用。")
+            'sb.Append("</li>")
 
-            sb.Append("<li>")
-            sb.Append(" 可代訂素食便當（報到時登記即可，歡迎隨喜打齋）。")
-            sb.Append("</li>")
+            'sb.Append("<li>")
+            'sb.Append(" 可代訂素食便當（報到時登記即可，歡迎隨喜打齋）。")
+            'sb.Append("</li>")
 
-            sb.Append("<li>")
-            sb.Append(" 尚未回覆者，請盡快回覆。")
-            sb.Append("</li>")
+            'sb.Append("<li>")
+            'sb.Append(" 尚未回覆者，請盡快回覆。")
+            'sb.Append("</li>")
 
             Dim sMB_PREC_MEMO As String = String.Empty
             sMB_PREC_MEMO = MB_CLASS.getString("MB_PREC_MEMO")
@@ -454,8 +455,8 @@ Public Class MBQry_Class_01_v01
 
             sb.Append("<div style='color:#C80896;font-size:14pt;font-weight:bold'>")
             sb.Append("　祝您").Append("<BR/>")
-            sb.Append("　　　禪修愉快、收穫滿滿").Append("<BR/>").Append("<BR/>")
-            sb.Append("　　　　　　　　　 MBSC 台北教育中心 敬邀合十")
+            sb.Append("　　　學習愉快、收穫滿滿").Append("<BR/>").Append("<BR/>")
+            sb.Append("　　　　　　　　　 MBSC原始正法中心 敬邀合十")
             sb.Append("</div>")
 
             Return sb.ToString
@@ -511,21 +512,22 @@ Public Class MBQry_Class_01_v01
             sb.Append("<span style='color:red'>聯絡人：").Append(MB_CLASS.getString("CONTACT")).Append("</span>")
             sb.Append("</li>")
 
-            sb.Append("<li>")
-            sb.Append("<span style='color:red'>請穿著寬鬆衣褲；男女眾皆請勿穿著短褲。女眾請勿穿著貼身衣裙。</span>")
-            sb.Append("</li>")
+            '1050119 AMY 提醒信二刪除 4,5,6,7項 新增 注意事項說明: MB_CLASS.FAVCHARGE
+            'sb.Append("<li>")
+            'sb.Append("<span style='color:red'>請穿著寬鬆衣褲；男女眾皆請勿穿著短褲。女眾請勿穿著貼身衣裙。</span>")
+            'sb.Append("</li>")
 
-            sb.Append("<li>")
-            sb.Append("請攜帶環保杯、筷子。")
-            sb.Append("</li>")
+            'sb.Append("<li>")
+            'sb.Append("請攜帶環保杯、筷子。")
+            'sb.Append("</li>")
 
-            sb.Append("<li>")
-            sb.Append("歡迎隨喜發心贊助場地或推廣教育課程費用。")
-            sb.Append("</li>")
+            'sb.Append("<li>")
+            'sb.Append("歡迎隨喜發心贊助場地或推廣教育課程費用。")
+            'sb.Append("</li>")
 
-            sb.Append("<li>")
-            sb.Append(" 可代訂素食便當（報到時登記即可，歡迎隨喜打齋）。")
-            sb.Append("</li>")
+            'sb.Append("<li>")
+            'sb.Append(" 可代訂素食便當（報到時登記即可，歡迎隨喜打齋）。")
+            'sb.Append("</li>")
 
             Dim sMB_PREC_MEMO As String = String.Empty
             sMB_PREC_MEMO = MB_CLASS.getString("MB_PREC_MEMO")
@@ -542,8 +544,8 @@ Public Class MBQry_Class_01_v01
 
             sb.Append("<div style='color:#C80896;font-size:14pt;font-weight:bold'>")
             sb.Append("　祝您").Append("<BR/>")
-            sb.Append("　　　禪修愉快、收穫滿滿").Append("<BR/>").Append("<BR/>")
-            sb.Append("　　　　　　　　　 MBSC 台北教育中心 敬邀合十")
+            sb.Append("　　　學習愉快、收穫滿滿").Append("<BR/>").Append("<BR/>")
+            sb.Append("　　　　　　　　　 MBSC原始正法中心 敬邀合十")
             sb.Append("</div>")
 
             Return sb.ToString

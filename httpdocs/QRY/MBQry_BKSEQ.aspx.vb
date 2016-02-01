@@ -134,9 +134,11 @@ Public Class MBQry_BKSEQ
             Dim DRV As DataRowView = CType(e.Item.DataItem, DataRowView)
             '通訊地址
             Dim MB_ADDR As Literal = e.Item.FindControl("MB_ADDR")
-            Dim sMB_ADDR As String = DRV("MB_CITY").ToString & DRV("MB_VLG").ToString & DRV("MB_ADDR").ToString
-            If com.Azion.EloanUtility.StrUtility.getNVarcharLength(sMB_ADDR) > 14 Then
-                sMB_ADDR = com.Azion.EloanUtility.StrUtility.TrimNVarcharToCHARLength(sMB_ADDR, 14) & "XXXX"
+            Dim sMB_ADDR As String = DRV("MB_CITY").ToString & DRV("MB_VLG").ToString
+            If com.Azion.EloanUtility.StrUtility.getNVarcharLength(DRV("MB_ADDR").ToString) > 0 Then
+                'sMB_ADDR = com.Azion.EloanUtility.StrUtility.TrimNVarcharToCHARLength(sMB_ADDR, 14) & "XXXX"
+                sMB_ADDR &= com.Azion.EloanUtility.StrUtility.TrimNVarcharToCHARLength(DRV("MB_ADDR").ToString, 6) & "XXXX"
+                sMB_ADDR &= com.Azion.EloanUtility.StrUtility.TrimRVNVToB5Lg(DRV("MB_ADDR").ToString, 6)
             End If
             MB_ADDR.Text = sMB_ADDR
 
@@ -156,9 +158,13 @@ Public Class MBQry_BKSEQ
                     LTL_MB_ACCT.Text = "是"
                 Else
                     LTL_MB_ACCT.Text = "否"
+                    Dim btnSign As Button = e.Item.FindControl("btnSign")
+                    btnSign.Visible = True
                 End If
             Else
                 LTL_MB_ACCT.Text = "否"
+                Dim btnSign As Button = e.Item.FindControl("btnSign")
+                btnSign.Visible = True
             End If
         End If
     End Sub
@@ -180,6 +186,19 @@ Public Class MBQry_BKSEQ
             sURL = com.Azion.EloanUtility.UIUtility.getRootPath & "/MNT/MBSignIn_01_v01.aspx"
 
             Response.Redirect(sURL)
+        Catch ex As System.Threading.ThreadAbortException
+        Catch ex As Exception
+            com.Azion.EloanUtility.UIUtility.showErrMsg(Me, ex)
+        End Try
+    End Sub
+
+    Private Sub RP_BKSEQ_ItemCommand(source As Object, e As RepeaterCommandEventArgs) Handles RP_BKSEQ.ItemCommand
+        Try
+            If e.CommandName = "SIGN" Then
+                Dim sURL As String = String.Empty
+                sURL = com.Azion.EloanUtility.UIUtility.getRootPath & "/MNT/MBMnt_Reg_01_v01.aspx?MB_MEMSEQ=" & e.CommandArgument
+                Response.Redirect(sURL)
+            End If
         Catch ex As System.Threading.ThreadAbortException
         Catch ex As Exception
             com.Azion.EloanUtility.UIUtility.showErrMsg(Me, ex)

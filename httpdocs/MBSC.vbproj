@@ -169,6 +169,7 @@
     <Content Include="MNT\MBMnt_Sign_01_v01.aspx" />
     <Content Include="MNT\MBSignIn_01_v01.aspx" />
     <Content Include="NewsList.aspx" />
+    <Content Include="QRY\MBQry_BKFC.aspx" />
     <Content Include="QRY\MBQry_BKSEQ.aspx" />
     <Content Include="QRY\MBQry_Class_01_v01.aspx" />
     <Content Include="QRY\MBQry_Member_01_v01.aspx" />
@@ -195,6 +196,7 @@
     <Content Include="QRY\MBQry_TYPE_01_06_v01.aspx" />
     <Content Include="QRY\MBQry_TYPE_01_06_v01.xml" />
     <Content Include="QRY\MBQry_TYPE_01_v01.aspx" />
+    <Content Include="QRY\MBQry_Year_ENT.aspx" />
     <Content Include="Styles\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
@@ -390,6 +392,13 @@
       <DependentUpon>NewsList.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="QRY\MBQry_BKFC.aspx.designer.vb">
+      <DependentUpon>MBQry_BKFC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QRY\MBQry_BKFC.aspx.vb">
+      <DependentUpon>MBQry_BKFC.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="QRY\MBQry_BKSEQ.aspx.designer.vb">
       <DependentUpon>MBQry_BKSEQ.aspx</DependentUpon>
     </Compile>
@@ -465,6 +474,13 @@
     </Compile>
     <Compile Include="QRY\MBQry_TYPE_01_v01.aspx.vb">
       <DependentUpon>MBQry_TYPE_01_v01.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="QRY\MBQry_Year_ENT.aspx.designer.vb">
+      <DependentUpon>MBQry_Year_ENT.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="QRY\MBQry_Year_ENT.aspx.vb">
+      <DependentUpon>MBQry_Year_ENT.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="SY\SYUIBase.vb">

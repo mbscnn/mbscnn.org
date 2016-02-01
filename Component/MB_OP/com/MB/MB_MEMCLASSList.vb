@@ -62,12 +62,12 @@ Public Class MB_MEMCLASSList
         Try
             Dim sqlStr As String = String.Empty
 
-            sqlStr = "SELECT B.MB_EMAIL, B.MB_NAME, A.*, C.MB_BATCH, CB.MB_ELECT, C.MB_CHKFLAG, C.MB_RESP " &
+            sqlStr = "SELECT B.MB_EMAIL, B.MB_NAME, A.*, C.MB_BATCH, C.MB_ELECT, C.MB_CHKFLAG, C.MB_RESP " &
                      "  FROM MB_MEMCLASS A, MB_MEMBER B, MB_MEMBATCH C " &
                      " WHERE     A.MB_SEQ = " & ProviderFactory.PositionPara & "MB_SEQ " &
                      "       AND C.MB_BATCH = " & ProviderFactory.PositionPara & "MB_BATCH " &
                      "       AND IFNULL(A.MB_FWMK, ' ') NOT IN ('3', '4', '5') " &
-                     "       AND IFNULL(MB_RESP,' ')<>'N' " &
+                     "       AND IFNULL(C.MB_RESP,' ')<>'N' " &
                      "       AND A.MB_MEMSEQ = B.MB_MEMSEQ " &
                      "       AND A.MB_MEMSEQ = C.MB_MEMSEQ " &
                      "       AND A.MB_SEQ = C.MB_SEQ " &
@@ -167,8 +167,8 @@ Public Class MB_MEMCLASSList
         Try
             Dim sqlStr As String = String.Empty
 
-            sqlStr = "SELECT IFNULL(COUNT(*), 0) " & _
-                     "  FROM MB_MEMCLASS " & _
+            sqlStr = "SELECT IFNULL(COUNT(*), 0) " &
+                     "  FROM MB_MEMCLASS " &
                      " WHERE MB_SEQ = " & ProviderFactory.PositionPara & "MB_SEQ "
 
             Dim para As IDbDataParameter = ProviderFactory.CreateDataParameter("MB_SEQ", iMB_SEQ)
@@ -178,6 +178,41 @@ Public Class MB_MEMCLASSList
             Else
                 Return DBObject.ExecuteScalar(Me.getDatabaseManager.getConnection, CommandType.Text, sqlStr, para)
             End If
+        Catch ex As ProviderException
+            Throw
+        Catch ex As BosException
+            Throw
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+    Function Load_MB_BKSEQ(ByVal iMB_BKSEQ As Decimal)
+        Try
+            Dim sqlStr As String = String.Empty
+
+            'sqlStr = "SELECT B.* " &
+            '         "  FROM MB_MEMMAP A, " &
+            '         "       MB_MEMCLASS B " &
+            '         " WHERE A.MB_BKSEQ = " & ProviderFactory.PositionPara & "MB_BKSEQ AND A.MB_MEMSEQ = B.MB_MEMSEQ "
+
+            sqlStr = "SELECT B.* " &
+                     "  FROM MB_MEMMAP A, MB_MEMCLASS B " &
+                     " WHERE     A.MB_BKSEQ = " & ProviderFactory.PositionPara & "MB_BKSEQ " &
+                     "       AND A.MB_MEMSEQ = B.MB_MEMSEQ " &
+                     "       AND IFNULL(B.MB_FWMK, ' ') NOT IN ('3', '4', '5') " &
+                     "       AND EXISTS " &
+                     "              (SELECT * " &
+                     "                 FROM MB_MEMBATCH " &
+                     "                WHERE     MB_MEMSEQ = A.MB_MEMSEQ " &
+                     "                      AND MB_MEMSEQ = B.MB_MEMSEQ " &
+                     "                      AND MB_SEQ = B.MB_SEQ " &
+                     "                      AND IFNULL(MB_ELECT, ' ') = '1' " &
+                     "                      AND IFNULL(MB_RESP, ' ') <> 'N') "
+
+            Dim para As IDbDataParameter = ProviderFactory.CreateDataParameter("MB_BKSEQ", iMB_BKSEQ)
+
+            Return Me.loadBySQLOnlyDs(sqlStr, para)
         Catch ex As ProviderException
             Throw
         Catch ex As BosException

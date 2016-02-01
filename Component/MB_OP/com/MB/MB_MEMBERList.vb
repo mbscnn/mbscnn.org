@@ -427,6 +427,27 @@ Public Class MB_MEMBERList
         End Try
     End Function
 
+    Function Load_MB_EMAIL_BKSEQ(ByVal sMB_EMAIL As String) As Integer
+        Try
+            Dim sqlStr As String = String.Empty
+
+            sqlStr = "SELECT A.*, B.MB_BKSEQ " &
+                     "  FROM MB_MEMBER A, MB_MEMMAP B " &
+                     " WHERE A.MB_EMAIL = " & ProviderFactory.PositionPara & "MB_EMAIL " &
+                     "  AND A.MB_MEMSEQ = B.MB_MEMSEQ "
+
+            Dim para As IDbDataParameter = ProviderFactory.CreateDataParameter("MB_EMAIL", sMB_EMAIL)
+
+            Return Me.loadBySQLOnlyDs(sqlStr, para)
+        Catch ex As ProviderException
+            Throw
+        Catch ex As BosException
+            Throw
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
 #Region "報表查詢"
     Public Function QRY_1(ByVal iSTART As Decimal, ByVal iPageSize As Decimal) As Integer
         Try

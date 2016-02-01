@@ -169,7 +169,13 @@
             </ItemTemplate>
         </asp:Repeater>        
         </div>
-
+        
+        <a id="A_YEAR_ENT" runat="server" class="list-group-item" style="text-decoration:underline;color:blue" >
+            <h4 class="panel-title" style="font-size:16pt">
+                <asp:Literal ID="LTL_YEAR_ENT" runat="server" />&nbsp;
+                MBSC年度活動一覽表
+            </h4>
+        </a>        
 </div>    
 <!-- /.carousel end-->
 

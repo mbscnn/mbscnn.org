@@ -128,6 +128,7 @@
     <Compile Include="Tables\MB\MB_TEMP_dbMeta.vb" />
     <Compile Include="Tables\MB\MB_VIP_dbMeta.vb" />
     <Compile Include="Tables\MB\MB_VIP_TEMP_dbMeta.vb" />
+    <Compile Include="Tables\MB\MB_YENT_dbMeta.vb" />
     <Compile Include="Tables\SUBSYS\SUBSYS_CODE_dbMeta.vb" />
     <Compile Include="Tables\SY\SY_AUTHORITYBRANCH_dbMeta.vb" />
     <Compile Include="Tables\SY\SY_BRANCHMGR_dbMeta.vb" />

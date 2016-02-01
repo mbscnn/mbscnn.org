@@ -55,6 +55,12 @@ Public Class NewsList
             End If
 
             If Not Page.IsPostBack Then
+                Dim sYear As String = String.Empty
+                Dim MB_YENT As New MB_YENT(Me.m_DBManager)
+                sYear = MB_YENT.getMAX_SDATE
+                Me.LTL_YEAR_ENT.Text = sYear
+                Me.A_YEAR_ENT.Attributes("href") = com.Azion.EloanUtility.UIUtility.getRootPath & "/QRY/MBQry_Year_ENT.aspx?YEAR=" & sYear
+
                 Dim DT_FILES As New DataTable
                 Try
                     DT_FILES.Columns.Add("NAME", Type.GetType("System.String"))

@@ -660,8 +660,6 @@ Public Class MBMnt_Member_01_v01
 
                     Dim MB_MEMMAP As New MB_MEMMAP(Me.m_DBManager)
                     MB_MEMMAP.LoadByPK(CDec(Me.HID_MB_MEMSEQ.Value))
-                    'MB_MEMSEQ	decimal(7,0)		NO	PRI	0		select,insert,update,references	會員編號
-                    MB_MEMMAP.setAttribute("MB_MEMSEQ", CDec(Me.HID_MB_MEMSEQ.Value))
                     If Not MB_MEMMAP.isLoaded Then
                         'MB_BKSEQ	decimal(16,0)		YES				select,insert,update,references	台銀編號
                         '7106800010100723
@@ -680,19 +678,26 @@ Public Class MBMnt_Member_01_v01
                             Case Else
                                 sBBB = "001"
                         End Select
-                        sMB_BKSEQ = "710680" & sBBB & "01" & Utility.FillZero(Me.HID_MB_MEMSEQ.Value, 5)
+                        sMB_BKSEQ = "710680" & sBBB & "01" & Utility.FillZero(CDec(Me.HID_MB_MEMSEQ.Value), 5)
                         MB_MEMMAP.setAttribute("MB_BKSEQ", sMB_BKSEQ)
                     Else
                         sMB_BKSEQ = MB_MEMMAP.getString("MB_BKSEQ")
                     End If
                     'MB_NAME	varchar(50)	utf8_general_ci	YES				select,insert,update,references	會員名稱
                     MB_MEMMAP.setAttribute("MB_NAME", Trim(Me.MB_NAME.Text))
+                    'MB_MEMSEQ	decimal(7,0)		NO	PRI	0		select,insert,update,references	會員編號
+                    MB_MEMMAP.setAttribute("MB_MEMSEQ", CDec(Me.HID_MB_MEMSEQ.Value))
                     MB_MEMMAP.save()
                 End If
 
                 Me.m_DBManager.commit()
 
-                UIShareFun.showErrMsg(Me, "儲存成功!")
+                Dim sMsg_BKSEQ As String = String.Empty
+                If Utility.isValidateData(sMB_BKSEQ) Then
+                    com.Azion.EloanUtility.UIUtility.showJSMsg(Me, "您的台銀編號為【" & sMB_BKSEQ & "】")
+                    sMsg_BKSEQ = "<BR/><BR/>您的台銀編號為【" & sMB_BKSEQ & "】"
+                End If
+                UIShareFun.showErrMsg(Me, "儲存成功!" & sMsg_BKSEQ)
 
                 Me.LTL_MB_MEMSEQ.Text = Me.MB_AREA.SelectedValue & "-" & Me.HID_MB_MEMSEQ.Value
                 Me.MB_BKSEQ.Text = sMB_BKSEQ

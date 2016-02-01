@@ -11,6 +11,8 @@ Public Class MBMnt_Reg_01_v01
 
     Dim m_sMAIL As String = String.Empty
 
+    Dim m_sMB_MEMSEQ As String = String.Empty
+
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
             Me.m_sMOD = "" & Request.QueryString("MOD")
@@ -18,6 +20,8 @@ Public Class MBMnt_Reg_01_v01
             Me.m_sUID = "" & Request.QueryString("UID")
 
             Me.m_sMAIL = "" & Request.QueryString("MAIL")
+
+            Me.m_sMB_MEMSEQ = "" & Request.QueryString("MB_MEMSEQ")
 
             If Not Page.IsPostBack Then
                 If Me.m_sMOD = "APV" AndAlso com.Azion.EloanUtility.ValidateUtility.isValidateData(m_sUID) Then
@@ -93,6 +97,22 @@ Public Class MBMnt_Reg_01_v01
                         dbManage.releaseConnection()
                     End Try
                 Else
+                    If IsNumeric(Me.m_sMB_MEMSEQ) Then
+                        Using dbManager As com.Azion.NET.VB.DatabaseManager = UICtl.UIShareFun.getDataBaseManager
+                            Dim MB_MEMBER As New MB_MEMBER(dbManager)
+                            If MB_MEMBER.loadByPK(Me.m_sMB_MEMSEQ) Then
+                                Me.TXT_EMAIL.Text = MB_MEMBER.getString("MB_EMAIL")
+                                Me.TXT_APPNAME.Text = MB_MEMBER.getString("MB_NAME")
+                                Me.RBL_MB_SEX.SelectedIndex = -1
+                                If MB_MEMBER.getString("MB_SEX") = "1" Then
+                                    Me.RBL_MB_SEX.Items.FindByValue("M").Selected = True
+                                ElseIf MB_MEMBER.getString("MB_SEX") = "2" Then
+                                    Me.RBL_MB_SEX.Items.FindByValue("F").Selected = True
+                                End If
+                            End If
+                        End Using
+                    End If
+
                     Me.IMG_Vad.Src = com.Azion.EloanUtility.UIUtility.getRootPath & "/Module/ValidateNumber.ashx"
 
                     '點圖片重新整理

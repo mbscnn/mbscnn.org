@@ -59,6 +59,24 @@ Partial Public Class NewsList
     Protected WithEvents RP_CLASS_2 As Global.System.Web.UI.WebControls.Repeater
     
     '''<summary>
+    '''A_YEAR_ENT 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents A_YEAR_ENT As Global.System.Web.UI.HtmlControls.HtmlAnchor
+    
+    '''<summary>
+    '''LTL_YEAR_ENT 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents LTL_YEAR_ENT As Global.System.Web.UI.WebControls.Literal
+    
+    '''<summary>
     '''RP_NEWS 控制項。
     '''</summary>
     '''<remarks>

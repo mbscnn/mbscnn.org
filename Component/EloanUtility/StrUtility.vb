@@ -231,6 +231,41 @@ Public Class StrUtility
     ''' <param name="iCHARLength">DB CHAR長度</param>
     ''' <returns>string</returns>
     ''' <remarks></remarks>
+    Public Shared Function TrimRVNVToB5Lg(ByVal sNVarchar As Object, ByVal iCHARLength As Decimal) As String
+        Try
+            If Not IsDBNull(sNVarchar) AndAlso Not IsNothing(sNVarchar) AndAlso CStr(sNVarchar).Length > 0 Then
+                Dim sSOURCE As String = CStr(sNVarchar)
+
+                Dim sReturn As String = String.Empty
+
+                Dim iCount As Decimal = 0
+                For i As Integer = sSOURCE.Length - 1 To 0 Step -1
+                    Dim sTEMP As String = String.Empty
+                    sTEMP = sSOURCE.Substring(i, 1)
+                    iCount += Encoding.GetEncoding("Big5").GetByteCount(sTEMP)
+                    If iCount <= iCHARLength Then
+                        sReturn &= sTEMP
+                    Else
+                        Exit For
+                    End If
+                Next
+
+                Return sReturn
+            End If
+
+            Return String.Empty
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' 轉換NVarchar String to Char length
+    ''' </summary>
+    ''' <param name="sNVarchar">NVarchar String</param>
+    ''' <param name="iCHARLength">DB CHAR長度</param>
+    ''' <returns>string</returns>
+    ''' <remarks></remarks>
     Public Shared Function getNVarcharLength(ByVal sNVarchar As Object) As Decimal
         Try
             If Not IsDBNull(sNVarchar) AndAlso Not IsNothing(sNVarchar) AndAlso CStr(sNVarchar).Length > 0 Then

@@ -114,6 +114,8 @@
     <Compile Include="com\MB\MB_VIPList.vb" />
     <Compile Include="com\MB\MB_VIP_TEMP.vb" />
     <Compile Include="com\MB\MB_VIP_TEMPList.vb" />
+    <Compile Include="com\MB\MB_YENT.vb" />
+    <Compile Include="com\MB\MB_YENTList.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

@@ -682,8 +682,12 @@
             </asp:PlaceHolder>
 
             <asp:PlaceHolder ID="PLH_MB_MEMBER" runat="server" Visible=false >
-                <span style="font-weight:bold;" >會員編號:<asp:Literal ID="LTL_MB_MEMSEQ" runat="server" /></span>
-                <div style="font-weight:bold;">台銀編號:<asp:Literal ID="MB_BKSEQ" runat="server" ></asp:Literal></div>
+                <span style="font-weight:bold;font-size:14pt" >
+                    會員編號:<asp:Literal ID="LTL_MB_MEMSEQ" runat="server" />
+                </span>
+                <div style="font-weight:bold;font-size:14pt;color:red">
+                    台銀編號:<asp:Literal ID="MB_BKSEQ" runat="server" ></asp:Literal>
+                </div>
                 <table class="CRTable_Top" width="100%" cellspacing="0">
                     <tr>
                         <td width="15%" class="th1c_b">
