@@ -76,6 +76,7 @@
 		    background: #333; 
 		    color: white; 
 		    font-weight: bold; 
+            font-size:14pt;
 		    padding: 6px; 
 		    border: 1px solid #ccc; 
 		    text-align: center; 
@@ -85,6 +86,7 @@
 		    padding: 6px; 
 		    border: 1px solid #ccc; 
 		    text-align: center; 
+            font-size:12pt;
 	    }
     </style>
     <!--[if !IE]><!-->
