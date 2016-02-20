@@ -387,6 +387,27 @@ Public Class MBQry_Class_01_v01
             sb.Append("！此通知函，提醒您，別在忙碌中流逝，忘了學習或放棄初衷，期待與您相見。").Append("</DIV>")
 
             sb.Append("<ol type='1' style='font-size:12pt;color:#7030A0;font-weight:bold' >")
+
+            sb.Append("<li>")
+            sb.Append("當您收到確認後，若尚未回覆者，請於開課五日前，按後面連結確定出席，")
+            Dim sC_URL As String = String.Empty
+            sC_URL = "http://mbscnn.org/MNT/MBMnt_RESP_01_v01.aspx?MB_MEMSEQ=" & iMB_MEMSEQ & "&MB_SEQ=" & MB_CLASS.getString("MB_SEQ") & "&MB_BATCH=" & MB_CLASS.getString("MB_BATCH") &
+                     "&OPTYPE=Y"
+            'sb.Append("<a style='color:#000040;font-size:20pt;font-weight:bold;' href='").Append(sC_URL).Append("' >確定出席</a>").Append("　　")
+            sb.Append(Me.getEMail_BT(sC_URL, "確定出席"))
+
+            'Dim sN_URL As String = String.Empty
+            'sN_URL = "http://mbscnn.org/MNT/MBMnt_RESP_01_v01.aspx?MB_MEMSEQ=" & iMB_MEMSEQ & "&MB_SEQ=" & MB_CLASS.getString("MB_SEQ") & "&MB_BATCH=" & MB_CLASS.getString("MB_BATCH") & _
+            '         "&OPTYPE=N"
+            'sb.Append("<a style='color:#000040;font-size:20pt;font-weight:bold;' href='").Append(sN_URL).Append("' >確定不出席</a>").Append("　　，")
+            sb.Append("<BR/>").Append("，若決定不出席請回到課程報名網頁點""取消報名""").Append("<BR/>")
+            'Dim sHome_URL As String = String.Empty
+            'sHome_URL = "http://mbscnn.org"
+            'sb.Append("<a style='color:#000040;font-size:20pt;font-weight:bold;' href='").Append(sHome_URL).Append("' >回MBSC首頁</a>").Append("　　")
+            sb.Append(Me.getEMail_BT("http://mbscnn.org", "回MBSC首頁"))
+            sb.Append("<BR/>").Append("開課前五日內若有變動，請與電話告知聯絡人，以利增補候補學員，感謝您。")
+            sb.Append("</li>")
+
             Dim sMB_SDATE As String = String.Empty
             If Utility.isValidateData(MB_CLASS.getAttribute("MB_SDATE")) Then
                 sMB_SDATE = CDate(MB_CLASS.getAttribute("MB_SDATE").ToString).Year & "年" & CDate(MB_CLASS.getAttribute("MB_SDATE").ToString).Month & "月" & _
@@ -394,25 +415,13 @@ Public Class MBQry_Class_01_v01
             End If
             Dim sREGTIME As String = String.Empty
             sREGTIME = Left(Utility.FillZero(MB_CLASS.getString("REGTIME"), 4), 2) & Right(Utility.FillZero(MB_CLASS.getString("REGTIME"), 4), 2)
-            sb.Append("<li>").Append("本課程開始日期時間：").Append("<span style='color:red'>").Append(sMB_SDATE).Append("</span>")
+            sb.Append("<li>").Append("本課程開始日期時間： ").Append("<span style='color:red'>").Append(sMB_SDATE).Append("</span>")
             sb.Append("　報到時間：").Append("<span style='color:red'>").Append(sREGTIME).Append("</span>")
             sb.Append("</li>")
             sb.Append("<li>")
             sb.Append(" 課程地點：").Append("<span style='color:#F335CF'>MBSC").Append(MB_CLASS.getString("MB_PLACE")).Append(" / ")
             sb.Append(MB_CLASS.getString("CLASS_PLACE")).Append("<BR/>").Append(MB_CLASS.getString("TRAFFIC_DESC"))
             sb.Append("</li>")
-            'sb.Append("<li>")
-            'sb.Append("當您收到確認後，").Append("<span style='color:red;font-weight:bold;font-size:24pt'>").Append("請按確定出席/不出席，").Append("</span>")
-            'Dim sC_URL As String = String.Empty
-            'sC_URL = "http://mbscnn.org/MNT/MBMnt_RESP_01_v01.aspx?MB_MEMSEQ=" & iMB_MEMSEQ & "&MB_SEQ=" & MB_CLASS.getString("MB_SEQ") & "&MB_BATCH=" & MB_CLASS.getString("MB_BATCH") & _
-            '         "&OPTYPE=Y"
-            'Dim sN_URL As String = String.Empty
-            'sN_URL = "http://mbscnn.org/MNT/MBMnt_RESP_01_v01.aspx?MB_MEMSEQ=" & iMB_MEMSEQ & "&MB_SEQ=" & MB_CLASS.getString("MB_SEQ") & "&MB_BATCH=" & MB_CLASS.getString("MB_BATCH") & _
-            '         "&OPTYPE=N"
-            'sb.Append("<a style='color:#000040;font-size:20pt;font-weight:bold;' href='").Append(sC_URL).Append("' >確定出席</a>").Append("　　")
-            'sb.Append("<a style='color:#000040;font-size:20pt;font-weight:bold;' href='").Append(sN_URL).Append("' >確定不出席</a>").Append("　　，")
-            'sb.Append("以利增補候補學員，感謝您。")
-            'sb.Append("</li>")
 
             sb.Append("<li>")
             sb.Append("<span style='color:red'>聯絡電話：</span>").Append(MB_CLASS.getString("CONTEL")).Append("　　")
@@ -463,6 +472,20 @@ Public Class MBQry_Class_01_v01
         Catch ex As Exception
             Throw
         End Try
+    End Function
+
+    Function getEMail_BT(ByVal sURL As String, ByVal sTEXT As String) As String
+        Dim sBT As String = String.Empty
+        sBT = "<div><!--[if mso]>" &
+              "  <v:roundrect xmlns:v=""urn:schemas-microsoft-com:vml"" xmlns:w=""urn:schemas-microsoft-com:office:word"" href=""" & sURL &
+              """ style=""height:40px;v-text-anchor:middle;width:200px;"" arcsize=""10%"" strokecolor=""#1e3650"" fillcolor=""#5BC0DE""> " &
+              "    <w:anchorlock/> " &
+              "    <center style=""color:#ffffff;font-family:sans-serif;font-size:20pt;font-weight:bold;"">" & sTEXT & "</center>" &
+              "  </v:roundrect> " &
+              "<![endif]--><a href=""" & sURL & """style=""background-color:#5BC0DE;border:1px solid #1e3650;border-radius:4px;color:#ffffff;display:inline-block;font-family:sans-serif;font-size:20pt;font-weight:bold;line-height:40px;text-align:center;text-decoration:none;width:200px;-webkit-text-size-adjust:none;mso-hide:all;"">" &
+              sTEXT & "</a></div>"
+
+        Return sBT
     End Function
 
     Function getMailBody_2(ByVal MB_CLASS As MB_CLASS, ByVal iMB_MEMSEQ As Decimal, ByVal sMB_NAME As String) As String

@@ -339,6 +339,10 @@ Public Class NewsList
             If MB_MEMCLASSList.size >= (Utility.CheckNumNull(ROW("MB_FULL")) + Utility.CheckNumNull(ROW("MB_WAIT"))) Then
                 '報名已額滿
                 isFULL = True
+
+                '1050217 AMY
+                '報名已額滿仍顯示報名及取消報名
+                iVadSign += 1
             Else
                 If Now >= CDate(ROW("MB_SAPLY").ToString) AndAlso Now <= CDate(ROW("MB_EAPLY").ToString) Then
                     iVadSign += 1
@@ -368,7 +372,7 @@ Public Class NewsList
                 sb_APLY.Append(sBatch).Append("已截止報名").Append("<BR/>")
             Else
                 If isFULL Then
-                    sb_APLY.Append(sBatch).Append("報名已額滿").Append("<BR/>")
+                    'sb_APLY.Append(sBatch).Append("報名已額滿").Append("<BR/>")
                 Else
                     If IsDate(ROW("MB_SAPLY").ToString) Then
                         sb_APLY.Append(sBatch).Append(CDate(ROW("MB_SAPLY").ToString).Month & "月" & CDate(ROW("MB_SAPLY").ToString).Day & "日開始報名").Append("<BR/>")
@@ -555,6 +559,33 @@ Public Class NewsList
 
                 'Response.Redirect(sURL)
 
+                Dim HID_MB_SEQ As HtmlInputHidden = e.Item.FindControl("HID_MB_SEQ")
+                Dim MB_CLASSList As New MB_CLASSList(Me.m_DBManager)
+                MB_CLASSList.setSQLCondition(" ORDER BY MB_BATCH ")
+                MB_CLASSList.LoadByMB_SEQ(CDec(HID_MB_SEQ.Value))
+                Dim MB_MEMCLASSList As New MB_MEMCLASSList(Me.m_DBManager)
+                
+                Dim iVadSign As Integer = 0 
+                For Each ROW As DataRow In MB_CLASSList.getCurrentDataSet.Tables(0).Rows
+                    MB_MEMCLASSList.clear()
+                    MB_MEMCLASSList.setSQLCondition(" AND IFNULL(A.MB_FWMK,'') NOT IN ('3','4','5') AND IFNULL(B.MB_ELECT,' ')='1' AND IFNULL(B.MB_RESP,' ')<>'N' ")
+                    MB_MEMCLASSList.loadByMB_SEQ(CDec(HID_MB_SEQ.Value), ROW("MB_BATCH"))
+
+                    If MB_MEMCLASSList.size >= (Utility.CheckNumNull(ROW("MB_FULL")) + Utility.CheckNumNull(ROW("MB_WAIT"))) Then
+                        '報名已額滿
+                    Else
+                        If Now >= CDate(ROW("MB_SAPLY").ToString) AndAlso Now <= CDate(ROW("MB_EAPLY").ToString) Then
+                            iVadSign += 1
+                        End If                        
+                    End If
+                Next
+
+                If iVadSign=0 Then
+                    com.Azion.EloanUtility.UIUtility.showJSMsg(Me,"報名已額滿")
+                    com.Azion.EloanUtility.UIUtility.showErrMsg(Me,"報名已額滿")
+                    Return
+                End If
+
                 If Not com.Azion.EloanUtility.ValidateUtility.isValidateData(Session("USERID")) Then
                     com.Azion.EloanUtility.UIUtility.alert("請先登入或成為會員")
                     com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "請先登入或成為會員")
@@ -564,7 +595,6 @@ Public Class NewsList
                     Return
                 End If
                 Dim sURL As String = String.Empty
-                Dim HID_MB_SEQ As HtmlInputHidden = e.Item.FindControl("HID_MB_SEQ")
                 sURL = com.Azion.EloanUtility.UIUtility.getRootPath &
                        "/MNT/MBMnt_Sign_01_v01.aspx?MBSEQ=" & HID_MB_SEQ.Value '& "&MB_BATCH=" & HID_MB_BATCH.Value
 

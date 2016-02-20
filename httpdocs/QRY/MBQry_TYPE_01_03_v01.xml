@@ -245,7 +245,7 @@
     </Style>
   </Styles>
   <Worksheet ss:Name="Sheet1">
-    <Table ss:ExpandedColumnCount="12" ss:ExpandedRowCount="10000" x:FullColumns="1"
+    <Table ss:ExpandedColumnCount="13" ss:ExpandedRowCount="10000" x:FullColumns="1"
      x:FullRows="1" ss:StyleID="s62" ss:DefaultColumnWidth="54" ss:DefaultRowHeight="30">
       <Column ss:StyleID="s63" ss:Width="100" />
       <Column ss:StyleID="s63" ss:Width="100" />
@@ -259,8 +259,9 @@
       <Column ss:StyleID="s63" ss:Width="100" />
       <Column ss:StyleID="s63" ss:Width="100" />
       <Column ss:StyleID="s63" ss:Width="100" />
+      <Column ss:StyleID="s63" ss:Width="100" />
       <Row ss:AutoFitHeight="0">
-        <Cell ss:MergeAcross="11" ss:StyleID="m43607136">
+        <Cell ss:MergeAcross="12" ss:StyleID="m43607136">
           <Data ss:Type="String">課程報名查詢</Data>
         </Cell>
       </Row>
@@ -297,6 +298,9 @@
         </Cell>
         <Cell ss:StyleID="m43607196">
           <Data ss:Type="String">每次禪坐時間</Data>
+        </Cell>
+        <Cell ss:StyleID="m43607196">
+          <Data ss:Type="String">打鼾與否</Data>
         </Cell>
         <Cell ss:StyleID="m43607196">
           <Data ss:Type="String">参加梯次</Data>

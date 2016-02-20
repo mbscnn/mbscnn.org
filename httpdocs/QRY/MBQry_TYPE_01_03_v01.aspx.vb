@@ -161,6 +161,18 @@ Public Class MBQry_TYPE_01_03_v01
                     objStringBuilder.Append("<Cell><Data ss:Type=""String""></Data></Cell>")
                 End If
 
+                '打鼾與否
+                Dim sMB_SNORE As String = String.Empty
+                Select Case ROW("MB_SNORE").ToString
+                    Case "1"
+                        sMB_SNORE = "是"
+                    Case "2"
+                        sMB_SNORE = "否"
+                    Case "3"
+                        sMB_SNORE = "不知道"
+                End Select
+                objStringBuilder.Append("<Cell><Data ss:Type=""String"">" & sMB_SNORE & "</Data></Cell>")
+
                 '参加梯次
                 '課程名稱
                 'Dim sMB_CLASS_NAME As String = String.Empty
@@ -335,6 +347,18 @@ Public Class MBQry_TYPE_01_03_v01
                 Else
                     objStringBuilder.Append("<Cell><Data ss:Type=""String""></Data></Cell>")
                 End If
+
+                '打鼾與否
+                Dim sMB_SNORE As String = String.Empty
+                Select Case ROW("MB_SNORE").ToString
+                    Case "1"
+                        sMB_SNORE = "是"
+                    Case "2"
+                        sMB_SNORE = "否"
+                    Case "3"
+                        sMB_SNORE = "不知道"
+                End Select
+                objStringBuilder.Append("<Cell><Data ss:Type=""String"">" & sMB_SNORE & "</Data></Cell>")
 
                 '錄取
                 'Dim sMB_CHKFLAG As String = String.Empty

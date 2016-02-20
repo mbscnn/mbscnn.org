@@ -184,7 +184,7 @@ Public Class MB_CLASSList
                      " WHERE SYSDATE() >= MB_SAPLY " & _
                      "   AND SYSDATE() < MB_EAPLY " & _
                      "   AND IFNULL(MB_YES,'Y') = 'Y' " & _
-                     "      GROUP BY MB_SEQ ORDER BY MB_SAPLY "
+                     "      GROUP BY MB_SEQ ORDER BY MB_SDATE "
 
             Return Me.loadBySQLOnlyDs(sqlStr)
         Catch ex As ProviderException

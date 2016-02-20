@@ -1647,7 +1647,7 @@ Public Class MBMnt_Sign_01_v01
                 sb.Append("<P>")
                 sb.Append("親愛的" & sAPPNAME & "吉祥：<BR/>")
                 sb.Append("已收到您的線上報名【" & ROW_CLASS("MB_CLASS_NAME").ToString & "】。<BR/>")
-                sb.Append("感謝您﹗若獲錄取將於開課前十日內寄發錄取通知。<BR/>")
+                sb.Append("感謝您﹗若獲錄取將於開課前14日內寄發錄取通知。<BR/>")
                 sb.Append("若要取消報名，請於").Append(Me.getMB_CDAYS(ROW_CLASS("MB_SDATE"), ROW_CLASS("MB_CDAYS"))).Append("前取消!若超過期限欲取消報名，請聯絡中心<BR/>")
                 sb.Append("<SPAN STYLE='color:red'>此信函為系統所發出，請勿直接回覆。</SPAN><BR/>")
                 sb.Append("&nbsp;&nbsp;&nbsp;MBSC原始正法中心 合十")

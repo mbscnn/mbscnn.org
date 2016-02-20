@@ -574,7 +574,7 @@ Public Class BosBase
             Dim value As Object = attr.getValue()
             If Not IsNothing(value) AndAlso Not IsDBNull(value) Then
                 If attr.getDataType = System.Data.DbType.String Then
-                    Return Titan.Utility.transferNCRToUnicode(value.ToString) 'coding.transferNCRToUnicode(value)
+                    Return Titan.Utility.transferNCRToUnicode(value.ToString) 'coding.transferNCRToUnicode(value)                
                 End If
             End If
             Return value
@@ -648,8 +648,11 @@ Public Class BosBase
     ''' OleDb.OleDbType.WChar
     ''' </remarks>
     Function getString(ByVal sAttrName As String) As String
-
-        Return DbUtility.getField(CType(getAttribute(sAttrName), String)).Trim
+        If Titan.Utility.isValidateData(getAttribute(sAttrName)) andalso IsDate(getAttribute(sAttrName).ToString) Then
+            Return DbUtility.getField(getAttribute(sAttrName).ToString).Trim
+        Else
+            Return DbUtility.getField(CType(getAttribute(sAttrName), String)).Trim
+        End If        
     End Function
 
 #End Region
