@@ -314,6 +314,39 @@ Public Class MBMnt_APV_01_v01
         Try
             Dim mbMEMBER_TEMP As New MB_MEMBER_TEMP(Me.m_DBManager)
             If mbMEMBER_TEMP.LoadByPK(CType(Me.MB_DATE.Value, Long)) Then
+                Dim MB_MEMBERList As New MB_MEMBERList(m_DBManager)
+                If Utility.isValidateData(mbMEMBER_TEMP.getString("MB_NAME")) AndAlso Utility.isValidateData(mbMEMBER_TEMP.getString("MB_MOBIL")) Then
+                    MB_MEMBERList.Load_MB_NAME_MB_MOBIL(mbMEMBER_TEMP.getString("MB_NAME"), mbMEMBER_TEMP.getString("MB_MOBIL"))
+                    If MB_MEMBERList.getCurrentDataSet.Tables(0).Rows.Count > 0 Then
+                        com.Azion.EloanUtility.UIUtility.showJSMsg("【" & mbMEMBER_TEMP.getString("MB_NAME") & "】【" & mbMEMBER_TEMP.getString("MB_MOBIL") & "】已經是會員了，請再確認看看")
+                        com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "【" & mbMEMBER_TEMP.getString("MB_NAME") & "】【" & mbMEMBER_TEMP.getString("MB_MOBIL") & "】已經是會員了，請再確認看看")
+
+                        Return
+                    End If
+                End If
+
+                If Utility.isValidateData(mbMEMBER_TEMP.getString("MB_NAME")) AndAlso Utility.isValidateData(mbMEMBER_TEMP.getString("MB_TEL")) Then
+                    MB_MEMBERList.clear()
+                    MB_MEMBERList.Load_MB_NAME_MB_TEL(mbMEMBER_TEMP.getString("MB_NAME"), mbMEMBER_TEMP.getString("MB_TEL"))
+                    If MB_MEMBERList.getCurrentDataSet.Tables(0).Rows.Count > 0 Then
+                        com.Azion.EloanUtility.UIUtility.showJSMsg("【" & mbMEMBER_TEMP.getString("MB_NAME") & "】【" & mbMEMBER_TEMP.getString("MB_TEL") & "】已經是會員了，請再確認看看")
+                        com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "【" & mbMEMBER_TEMP.getString("MB_NAME") & "】【" & mbMEMBER_TEMP.getString("MB_TEL") & "】已經是會員了，請再確認看看")
+
+                        Return
+                    End If
+                End If
+
+                If Utility.isValidateData(mbMEMBER_TEMP.getString("MB_NAME")) AndAlso Utility.isValidateData(mbMEMBER_TEMP.getString("MB_EMAIL")) Then
+                    MB_MEMBERList.clear()
+                    MB_MEMBERList.Load_MB_NAME_MB_EMAIL(mbMEMBER_TEMP.getString("MB_NAME"), mbMEMBER_TEMP.getString("MB_EMAIL"))
+                    If MB_MEMBERList.getCurrentDataSet.Tables(0).Rows.Count > 0 Then
+                        com.Azion.EloanUtility.UIUtility.showJSMsg("【" & mbMEMBER_TEMP.getString("MB_NAME") & "】【" & mbMEMBER_TEMP.getString("MB_EMAIL") & "】已經是會員了，請再確認看看")
+                        com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "【" & mbMEMBER_TEMP.getString("MB_NAME") & "】【" & mbMEMBER_TEMP.getString("MB_EMAIL") & "】已經是會員了，請再確認看看")
+
+                        Return
+                    End If
+                End If
+
                 Dim sProcName As String = String.Empty
                 sProcName = LCase(com.Azion.NET.VB.Properties.getSchemaName) & ".MB_GET_MAXID"
                 Dim inParaAL As New ArrayList

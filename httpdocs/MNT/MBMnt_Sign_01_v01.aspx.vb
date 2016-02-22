@@ -1204,11 +1204,18 @@ Public Class MBMnt_Sign_01_v01
                         End If
 
                         If Utility.isValidateData(txt_MB_NAME.Text.Trim) AndAlso Utility.isValidateData(txt_MB_TEL.Text.Trim) Then
+                            Dim sMB_TEL As String = String.Empty
+                            If Utility.isValidateData(Trim(Me.txt_MB_TEL_ZIP.Text)) Then
+                                sMB_TEL = Trim(Me.txt_MB_TEL_ZIP.Text) & "-" & Trim(Me.txt_MB_TEL.Text)
+                            Else
+                                sMB_TEL = Trim(Me.txt_MB_TEL.Text)
+                            End If
+
                             MB_MEMBERList.clear()
-                            MB_MEMBERList.Load_MB_NAME_MB_TEL(txt_MB_NAME.Text.Trim, txt_MB_TEL.Text.Trim)
+                            MB_MEMBERList.Load_MB_NAME_MB_TEL(txt_MB_NAME.Text.Trim, sMB_TEL)
                             If MB_MEMBERList.getCurrentDataSet.Tables(0).Rows.Count > 0 Then
-                                com.Azion.EloanUtility.UIUtility.showJSMsg("【" & txt_MB_NAME.Text.Trim & "】【" & txt_MB_TEL.Text.Trim & "】已經是會員了，請再確認看看\n如果要修改電話號碼，請由頁首下拉【會員系統->入會申請單】修改")
-                                com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "【" & txt_MB_NAME.Text.Trim & "】【" & txt_MB_TEL.Text.Trim & "】已經是會員了，請再確認看看<BR/>如果要修改電話號碼，請由頁首下拉【會員系統->入會申請單】修改")
+                                com.Azion.EloanUtility.UIUtility.showJSMsg("【" & txt_MB_NAME.Text.Trim & "】【" & sMB_TEL & "】已經是會員了，請再確認看看\n如果要修改電話號碼，請由頁首下拉【會員系統->入會申請單】修改")
+                                com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "【" & txt_MB_NAME.Text.Trim & "】【" & sMB_TEL & "】已經是會員了，請再確認看看<BR/>如果要修改電話號碼，請由頁首下拉【會員系統->入會申請單】修改")
 
                                 Return
                             End If

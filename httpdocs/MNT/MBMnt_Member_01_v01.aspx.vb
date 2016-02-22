@@ -620,11 +620,18 @@ Public Class MBMnt_Member_01_v01
                 End If
 
                 If Utility.isValidateData(Me.MB_NAME.Text.Trim) AndAlso Utility.isValidateData(Me.MB_TEL.Text.Trim) Then
+                    Dim sMB_TEL As String = String.Empty
+                    If Utility.isValidateData(Trim(Me.MB_TEL_Pre.Text)) Then
+                        sMB_TEL = Trim(Me.MB_TEL_Pre.Text) & "-" & Trim(Me.MB_TEL.Text)
+                    Else
+                        sMB_TEL = Trim(Me.MB_TEL.Text)
+                    End If
+
                     MB_MEMBERList.clear()
-                    MB_MEMBERList.Load_MB_NAME_MB_TEL(Me.MB_NAME.Text.Trim, Me.MB_TEL.Text.Trim)
+                    MB_MEMBERList.Load_MB_NAME_MB_TEL(Me.MB_NAME.Text.Trim, sMB_TEL)
                     If MB_MEMBERList.getCurrentDataSet.Tables(0).Rows.Count > 0 Then
-                        com.Azion.EloanUtility.UIUtility.showJSMsg("【" & Me.MB_NAME.Text.Trim & "】【" & Me.MB_TEL.Text.Trim & "】已經是會員了，請再確認看看")
-                        com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "【" & Me.MB_NAME.Text.Trim & "】【" & Me.MB_TEL.Text.Trim & "】已經是會員了，請再確認看看")
+                        com.Azion.EloanUtility.UIUtility.showJSMsg("【" & Me.MB_NAME.Text.Trim & "】【" & sMB_TEL & "】已經是會員了，請再確認看看")
+                        com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "【" & Me.MB_NAME.Text.Trim & "】【" & sMB_TEL & "】已經是會員了，請再確認看看")
 
                         Return
                     End If
