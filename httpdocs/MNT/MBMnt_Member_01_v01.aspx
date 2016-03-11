@@ -721,7 +721,7 @@
                             日
                         </td>
                         <td width="15%" class="th1c_b">
-                            <span style="color: red; font-weight: bold; font-size: medium">*</span>&nbsp;身分別
+                            身分別
                         </td>
                         <td width="35%" class="td2_b">
                             <asp:CheckBoxList ID="MB_IDENTIFY" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow">
@@ -773,12 +773,12 @@
                             </asp:DropDownList>
                         </td>
                         <td id="TD_MB_AREA_2" runat="server" width="15%" class="th1c_b">
-                            <span style="color: red; font-weight: bold; font-size: medium">*</span>&nbsp;所屬區
+                            所屬區
                         </td>
                         <td id="TD_MB_AREA_3" runat="server" width="35%" class="td2_b">
                             <asp:DropDownList ID="MB_AREA" runat="server" onfocus="this.defaultIndex=this.selectedIndex;" onchange="this.selectedIndex=this.defaultIndex;">
                             </asp:DropDownList>
-                            <span style="color: red; font-weight: bold; font-size: medium">*</span>&nbsp;委員
+                            &nbsp;委員
                             <asp:DropDownList ID="MB_LEADER" runat="server" onchange='$("#HID_MB_LEADER").val($(this).val());'>
                             </asp:DropDownList>
                             <input type="hidden" id="HID_MB_LEADER" runat="server" />

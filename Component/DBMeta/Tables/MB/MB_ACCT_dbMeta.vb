@@ -57,6 +57,24 @@ Public Class MB_ACCT_dbMeta
 			hMetaData9.add("PROVIDER_TYPE",253 )
 			hMetaData9.add("PROVIDER_TYPE_NAME", MySql.Data.MySqlClient.MySqlDbType.VarChar )
 			arry.add(hMetaData9)
+			Static hMetaData10 As new System.Collections.Hashtable
+			hMetaData10.add("COLUMN_NAME", "MB_MOBIL" )
+			hMetaData10.add("DB_TYPE", 16 )
+			hMetaData10.add("PROVIDER_TYPE",253 )
+			hMetaData10.add("PROVIDER_TYPE_NAME", MySql.Data.MySqlClient.MySqlDbType.VarChar )
+			arry.add(hMetaData10)
+			Static hMetaData11 As new System.Collections.Hashtable
+			hMetaData11.add("COLUMN_NAME", "MB_TEL" )
+			hMetaData11.add("DB_TYPE", 16 )
+			hMetaData11.add("PROVIDER_TYPE",253 )
+			hMetaData11.add("PROVIDER_TYPE_NAME", MySql.Data.MySqlClient.MySqlDbType.VarChar )
+			arry.add(hMetaData11)
+			Static hMetaData12 As new System.Collections.Hashtable
+			hMetaData12.add("COLUMN_NAME", "MB_MEMSEQ" )
+			hMetaData12.add("DB_TYPE", 7 )
+			hMetaData12.add("PROVIDER_TYPE",246 )
+			hMetaData12.add("PROVIDER_TYPE_NAME", MySql.Data.MySqlClient.MySqlDbType.NewDecimal )
+			arry.add(hMetaData12)
      End Sub
      Public Function getMetaArray() as System.Collections.ArrayList Implements com.Azion.NET.VB.DBMetaData.getMetaArray
          Return arry

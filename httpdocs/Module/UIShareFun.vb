@@ -182,7 +182,7 @@ Public Class UIShareFun
         Return sBrid
     End Function
 
-    Public Shared Function getMailBody(ByVal sUID As String, ByVal sMail As String, ByVal sAPPNAME As String) As String
+    Public Shared Function getMailBody(ByVal sUID As String, ByVal sMail As String, ByVal sAPPNAME As String,Byval sMB_MEMSEQ As string) As String
         Try
             Dim sb As New StringBuilder
             sb.Append("<P>")
@@ -193,7 +193,11 @@ Public Class UIShareFun
             'sb.Append("<a href='http://www.mbscnn.org/mbsc/mnt/MBMnt_Reg_01_v01.aspx?MOD=APV&UID=" & sUID & "&MAIL=" & sMail & "'>http://www.mbscnn.org/mbsc/mnt/MBMnt_Reg_01_v01.aspx?MOD=APV&UID=" & sUID & "&MAIL=" & sMail & "</a>")
             'sb.Append("<a href='http://www.mbscnn.org/mbsc/mnt/MBMnt_Reg_01_v01.aspx?MOD=APV&UID=" & sUID & "'>http://www.mbscnn.org/mbsc/mnt/MBMnt_Reg_01_v01.aspx?MOD=APV&UID=" & sUID & "</a>")
             'sb.Append("http://www.mbscnn.org/mbsc/mnt/MBMnt_Reg_01_v01.aspx?MOD=APV&UID=" & sUID)
-            sb.Append("<a href='http://www.mbscnn.org/mnt/MBMnt_Reg_01_v01.aspx?MOD=APV&UID=" & sUID & "'>http://www.mbscnn.org/mnt/MBMnt_Reg_01_v01.aspx?MOD=APV&UID=" & sUID & "</a>")
+            Dim sMB_MEMSEQ_URL As String = String.Empty
+            If IsNumeric(sMB_MEMSEQ) Then
+                sMB_MEMSEQ_URL = "&MB_MEMSEQ=" & sMB_MEMSEQ
+            End If
+            sb.Append("<a href='http://www.mbscnn.org/mnt/MBMnt_Reg_01_v01.aspx?MOD=APV&UID=" & sUID & "'>http://www.mbscnn.org/mnt/MBMnt_Reg_01_v01.aspx?MOD=APV&UID=" & sUID & sMB_MEMSEQ_URL & "</a>")
             sb.Append("<BR/>")
             sb.Append("<span style='color:red'>(如果上面不是連結形式，請將該位址貼到瀏覽器網址欄)</span>")
             sb.Append("<BR/>")

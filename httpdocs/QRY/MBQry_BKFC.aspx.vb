@@ -23,6 +23,9 @@ Public Class MBQry_BKFC
                         Me.PLH_MEMBER.Visible = False
                         Me.PLH_Paras.Visible = True
                     Else
+                        Me.MB_BKSEQ.Attributes("Readonly")=true
+                        Me.MB_BKSEQ.Style.Item("border") = "none"
+                        Me.MB_BKSEQ.Style.Item("background") = "transparent"
                         Using dbManager As DatabaseManager = UIShareFun.getDataBaseManager
                             Dim MB_MEMBERList As New MB_MEMBERList(dbManager)
                             MB_MEMBERList.Load_MB_EMAIL_BKSEQ(Me.m_sUSERID)

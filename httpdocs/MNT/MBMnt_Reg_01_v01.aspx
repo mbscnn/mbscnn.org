@@ -64,20 +64,25 @@
             //var isChecked1 = $('#RBL_MB_SEX_1').attr('checked') ? true : false;
 
             var isChecked0 = false;
-            if (document.all("RBL_MB_SEX_0") != undefinde)
+            if (document.all("RBL_MB_SEX_0") != undefined)
             {
                 if (document.all("RBL_MB_SEX_0").checked) {
                     isChecked0 = true
                 }
             }
             var isChecked1 = false;
-            if (document.all("RBL_MB_SEX_1") != undefinde) {
+            if (document.all("RBL_MB_SEX_1") != undefined) {
                 if (document.all("RBL_MB_SEX_1").checked) {
                     isChecked1 = true
                 }
             }
             if (isChecked0 == false && isChecked1 ==false) {
                 alert("請選擇性別");
+                return false;
+            }
+
+            if ($.trim($("#MB_MOBIL").val()) == "" && $.trim($("#MB_TEL").val()) == "") {
+                alert("手機或電話請則一輸入");
                 return false;
             }
 
@@ -169,6 +174,11 @@
                 return false;
             }
 
+            if ($.trim($("#MB_MOBIL").val()) == "" && $.trim($("#MB_TEL").val()) == "") {
+                alert("手機或電話請則一輸入");
+                return false;
+            }
+
             $.ajax({
                 type: "POST",
                 url: 'MBMnt_Reg_01_v01.aspx/RE_ValidINPUT',
@@ -241,11 +251,11 @@
                                 <div class="rfm">
                                     <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                         <tr>
-                                            <TD width="10%" valign="top" style="background:transparent" >
+                                            <TD width="15%" valign="top" style="background:transparent" >
                                                 <span style="color:red">*</span>
                                                 <span style="font-size:11pt;">Email</span>
                                             </TD>
-                                            <td width="90%" valign="top" style="background:transparent" >
+                                            <td width="85%" valign="top" style="background:transparent" >
                                                 <asp:TextBox ID="TXT_EMAIL" runat="server" CssClass="mbsctxt" Columns="30" />
                                                 <span id="span_EMAIL" style="color:red" />
                                             </td>
@@ -255,11 +265,11 @@
                                 <div class="rfm">
                                     <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                         <tr>
-                                            <TD width="10%" valign="top" style="background:transparent" >
+                                            <TD width="15%" valign="top" style="background:transparent" >
                                                 <span style="color:red">*</span>
                                                 <span style="font-size:11pt;">密碼</span>
                                             </TD>
-                                            <td width="90%" valign="top" style="background:transparent" >
+                                            <td width="85%" valign="top" style="background:transparent" >
                                                 <asp:TextBox ID="TXT_PASSWORD" runat="server" CssClass="mbsctxt" Style="IME-MODE: disabled;" Columns="30" TextMode=Password />
                                                 <span id="span_PASSWORD" style="color:red" />
                                             </td>
@@ -274,11 +284,11 @@
                                 <div class="rfm">
                                     <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                         <tr>
-                                            <TD width="10%" valign="top" style="background:transparent" >
+                                            <TD width="15%" valign="top" style="background:transparent" >
                                                 <span style="color:red">*</span>
                                                 <span style="font-size:11pt;">確認密碼</span>
                                             </TD>
-                                            <td width="90%" valign="top" style="background:transparent" >
+                                            <td width="85%" valign="top" style="background:transparent" >
                                                 <asp:TextBox ID="TXT_VARIFY" runat="server" CssClass="mbsctxt" Style="IME-MODE: disabled;" Columns="30" TextMode=Password />
                                             </td>
                                         </tr>
@@ -287,11 +297,11 @@
                                 <div class="rfm">
                                     <table width="100%" cellpadding="0" cellspacing="0" border="0" >
                                         <tr>
-                                            <TD width="10%" valign="top" style="background:transparent" >
+                                            <TD width="15%" valign="top" style="background:transparent" >
                                                 <span style="color:red">*</span>
                                                 <span style="font-size:11pt;">姓名</span>                            
                                             </TD>
-                                            <td width="90%" valign="top" style="background:transparent" >
+                                            <td width="85%" valign="top" style="background:transparent" >
                                                 <asp:TextBox ID="TXT_APPNAME" runat="server" CssClass="mbsctxt" Columns="30" />
                                             </td>
                                         </tr>
@@ -300,19 +310,40 @@
                                 <div class="rfm">
                                     <table width="100%" cellpadding="0" cellspacing="0" border="0" >
                                         <tr>
-                                            <TD width="10%" valign="top" style="background:transparent" >
+                                            <TD width="15%" valign="top" style="background:transparent" >
                                                 <span style="color:red">*</span>
                                                 <span style="font-size:11pt;">性別</span>                            
                                             </TD>
-                                            <td width="90%" valign="top" style="background:transparent" >
+                                            <td width="85%" valign="top" style="background:transparent" >
                                                 <asp:RadioButtonList ID="RBL_MB_SEX" runat="server" RepeatLayout="Flow" RepeatDirection="Horizontal" >
-                                                    <asp:ListItem Value="M">男</asp:ListItem>
-                                                    <asp:ListItem Value="F">女</asp:ListItem>
+                                                    <asp:ListItem Value="M"><span style="font-size:11pt;">男</span></asp:ListItem>
+                                                    <asp:ListItem Value="F"><span style="font-size:11pt;">女</span></asp:ListItem>
                                                 </asp:RadioButtonList>
                                             </td>
                                         </tr>
                                     </table>                        
-                                </div>                                                                               
+                                </div>
+                                <div class="rfm">
+                                    <table width="100%" cellpadding="0" cellspacing="0" border="0" >
+                                        <tr>
+                                            <TD width="15%" valign="top" style="background:transparent" >
+                                                <span style="color:red">*</span>
+                                                <span style="font-size:11pt;">手機或電話</span>  
+                                            </TD>
+                                            <td width="85%" valign="top" style="background:transparent" >
+                                                <span style="font-size:11pt;">手機</span>
+                                                <BR/>
+                                                <asp:TextBox ID="MB_MOBIL" runat="server" CssClass="bordernum" style="text-align:left" />
+                                                <BR/>
+                                                <span style="font-size:11pt;">電話</span>
+                                                <BR/>
+                                                <asp:TextBox ID="MB_TEL_Pre" runat="server" CssClass="bordernum" Columns="2" />
+                                                ─
+                                                <asp:TextBox ID="MB_TEL" runat="server" CssClass="bordernum" style="text-align:left" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>                                                           
                                 <div class="rfm">
                                     <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                         <tr>
@@ -340,7 +371,13 @@
                     <div class="rfm" align="center">
                         <asp:PlaceHolder ID="PLH_Send" runat="server" >
                             <asp:Button ID="btSend" runat="server" CssClass="bt" Text="確定送出" onmousedown="return isPassValidateCode();" />
-                            <span style="font-size:9pt;color:red">【確定送出後，請至您的Email，開啟MBSC會員認證信，並點擊其中的認證連結，完成註冊程序】</span>
+                            <div >
+                                <BR />
+                                <ul style="font-size:12pt;color:red;text-align:left" >
+                                    <li>確定送出後，請至您的Email，開啟MBSC會員認證信，並點擊其中的認證連結，完成註冊程序</li>
+                                    <li>請填寫正確e-mail 及 電話以免影響您未來的活動報名之權益</li>
+                                </ul>                                
+                            </div>
                         </asp:PlaceHolder>
                         <asp:PlaceHolder ID="PLH_REPASS" runat="server" Visible="false" >
                             <asp:Button ID="bntRePASS" runat="server" CssClass="bt" Text="重設密碼" onmousedown="return isRE_PassValidateCode();" />

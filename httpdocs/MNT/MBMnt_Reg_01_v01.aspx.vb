@@ -42,21 +42,137 @@ Public Class MBMnt_Reg_01_v01
 
                             Me.PLH_APV.Visible = True
 
+                            Dim sMB_MEMSEQ_URL As String = String.Empty
                             Dim MB_MEMBERList As New MB_MEMBERList(dbManage)
                             MB_MEMBERList.loadByMB_EMAIL(mbACCT.getString("MB_ACCT"))
                             If MB_MEMBERList.getCurrentDataSet.Tables(0).Rows.Count = 0 Then
-                                '直接導頁到入會申請單
-                                Dim sURL As String = String.Empty
-                                sURL = com.Azion.EloanUtility.UIUtility.getRootPath &
-                                       "/MNT/MBMnt_Member_01_v01.aspx.aspx"
+                                MB_MEMBERList.clear
+                                Dim iCNT As Integer = 0
+                                If Utility.isValidateData(mbACCT.getAttribute("MB_NAME")) AndAlso Utility.isValidateData(mbACCT.getAttribute("MB_MOBIL")) Then
+                                    MB_MEMBERList.Load_MB_NAME_MB_MOBIL(mbACCT.getAttribute("MB_NAME"), mbACCT.getAttribute("MB_MOBIL"))
+                                    If MB_MEMBERList.getCurrentDataSet.Tables(0).Rows.Count > 0 Then
+                                        'com.Azion.EloanUtility.UIUtility.showJSMsg("【" & Me.MB_NAME.Text.Trim & "】【" & Me.MB_MOBIL.Text.Trim & "】已經是會員了，請再確認看看")
+                                        'com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "【" & Me.MB_NAME.Text.Trim & "】【" & Me.MB_MOBIL.Text.Trim & "】已經是會員了，請再確認看看")
 
-                                LTL_SCRIPT.Text = "<script language='javascript' >" & vbCrLf
-                                LTL_SCRIPT.Text &= "alert('e-Mail驗證成功\n\n請記得填寫入會申請單\n\n【按確定後系統將連結入會申請單】');" & vbCrLf
-                                LTL_SCRIPT.Text &= "window.location.href='MBMnt_Member_01_v01.aspx';" & vbCrLf
-                                LTL_SCRIPT.Text &= "</" & "script>"
+                                        'Return
 
-                                LTL_SCRIPT.Visible = True
+                                        iCNT+=1
+                                    End If
+                                End If
+
+                                If Utility.isValidateData(mbACCT.getAttribute("MB_NAME")) AndAlso Utility.isValidateData(mbACCT.getAttribute("MB_TEL")) Then
+                                    'Dim sMB_TEL As String = String.Empty
+                                    'If Utility.isValidateData(Trim(Me.MB_TEL_Pre.Text)) Then
+                                    '    sMB_TEL = Trim(Me.MB_TEL_Pre.Text) & "-" & Trim(Me.MB_TEL.Text)
+                                    'Else
+                                    '    sMB_TEL = Trim(Me.MB_TEL.Text)
+                                    'End If
+
+                                    MB_MEMBERList.clear()
+                                    MB_MEMBERList.Load_MB_NAME_MB_TEL(mbACCT.getAttribute("MB_NAME"), mbACCT.getAttribute("MB_TEL"))
+                                    If MB_MEMBERList.getCurrentDataSet.Tables(0).Rows.Count > 0 Then
+                                        'com.Azion.EloanUtility.UIUtility.showJSMsg("【" & Me.MB_NAME.Text.Trim & "】【" & sMB_TEL & "】已經是會員了，請再確認看看")
+                                        'com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "【" & Me.MB_NAME.Text.Trim & "】【" & sMB_TEL & "】已經是會員了，請再確認看看")
+
+                                        'Return
+
+                                        iCNT+=1
+                                    End If
+                                End If
+
+                                If Utility.isValidateData(mbACCT.getAttribute("MB_NAME")) AndAlso Utility.isValidateData(mbACCT.getAttribute("MB_ACCT")) Then
+                                    MB_MEMBERList.clear()
+                                    MB_MEMBERList.Load_MB_NAME_MB_EMAIL(mbACCT.getAttribute("MB_NAME"), mbACCT.getAttribute("MB_ACCT"))
+                                    If MB_MEMBERList.getCurrentDataSet.Tables(0).Rows.Count > 0 Then
+                                        'com.Azion.EloanUtility.UIUtility.showJSMsg("【" & Me.MB_NAME.Text.Trim & "】【" & Me.MB_EMAIL.Text.Trim & "】已經是會員了，請再確認看看")
+                                        'com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "【" & Me.MB_NAME.Text.Trim & "】【" & Me.MB_EMAIL.Text.Trim & "】已經是會員了，請再確認看看")
+
+                                        'Return
+
+                                        iCNT+=1
+                                    End If
+                                End If
+
+                                If iCNT = 0 Then
+                                    Dim sProcName As String = String.Empty
+                                    sProcName = LCase(com.Azion.NET.VB.Properties.getSchemaName) & ".MB_GET_MAXID"
+                                    Dim inParaAL As New ArrayList
+                                    Dim outParaAL As New ArrayList
+                                    inParaAL.Add("01")
+                                    inParaAL.Add("1")
+
+                                    outParaAL.Add(7)
+
+                                    Dim HT_Return As Hashtable = com.Azion.NET.VB.DBObject.getProcedureData(dbManage, sProcName, inParaAL, outParaAL)
+                                    Dim iMAXID As Decimal = HT_Return.Item("@IMAXID")
+
+                                    Dim sMB_MEMSEQ As String = String.Empty
+                                    sMB_MEMSEQ = com.Azion.EloanUtility.StrUtility.FillZero(iMAXID, 7)
+                                    Dim MB_MEMBER As New MB_MEMBER(dbManage)
+                                    MB_MEMBER.loadByPK(CDec(sMB_MEMSEQ))
+                                    'MB_MEMSEQ	decimal(7,0)		NO	PRI	0		select,insert,update,references	會員編號
+                                    MB_MEMBER.setAttribute("MB_MEMSEQ",CDec(sMB_MEMSEQ))
+                                    'MB_NAME	varchar(50)	utf8_general_ci	NO	MUL			select,insert,update,references	姓名
+                                    MB_MEMBER.setAttribute("MB_NAME",mbACCT.getAttribute("MB_NAME"))
+                                    'MB_SEX	char(1)	latin1_swedish_ci	YES				select,insert,update,references	性別 1:男 2:女
+                                    MB_MEMBER.setAttribute("MB_SEX",mbACCT.getAttribute("MB_SEX"))
+                                    'MB_MOBIL	varchar(20)	utf8_general_ci	YES	MUL			select,insert,update,references	手機
+                                    MB_MEMBER.setAttribute("MB_MOBIL",mbACCT.getAttribute("MB_MOBIL"))
+                                    'MB_TEL	varchar(40)	utf8_general_ci	YES	MUL			select,insert,update,references	電話
+                                    MB_MEMBER.setAttribute("MB_TEL",mbACCT.getAttribute("MB_TEL"))
+                                    'MB_EMAIL	varchar(40)	utf8_general_ci	YES				select,insert,update,references	e-mail
+                                    MB_MEMBER.setAttribute("MB_EMAIL",mbACCT.getAttribute("MB_ACCT"))
+                                    'CHGUID	varchar(100)	utf8_general_ci	YES				select,insert,update,references	修改員工編號
+                                    MB_MEMBER.setAttribute("CHGUID",mbACCT.getAttribute("MB_ACCT"))
+                                    'CHGDATE	datetime		NO				select,insert,update,references	修改日期
+                                    MB_MEMBER.setAttribute("CHGDATE",Now)
+                                    MB_MEMBER.save
+
+                                    'sMB_MEMSEQ_URL = "OPTYPE=A&MB_MEMSEQ=" & sMB_MEMSEQ
+                                    sMB_MEMSEQ_URL = "MB_MEMSEQ=" & sMB_MEMSEQ
+                                End If
+                            Else
+                                If Utility.isValidateData(mbACCT.getAttribute("MB_MEMSEQ")) Then
+                                    Dim MB_MEMBER As New MB_MEMBER(dbManage)
+                                    If MB_MEMBER.loadByPK(mbACCT.getAttribute("MB_MEMSEQ")) Then
+                                        'MB_EMAIL	varchar(40)	utf8_general_ci	YES				select,insert,update,references	e-mail
+                                        MB_MEMBER.setAttribute("MB_EMAIL",mbACCT.getAttribute("MB_ACCT"))
+                                        'MB_MOBIL	varchar(20)	utf8_general_ci	YES	MUL			select,insert,update,references	手機
+                                        MB_MEMBER.setAttribute("MB_MOBIL",mbACCT.getAttribute("MB_MOBIL"))
+                                        'MB_TEL	varchar(40)	utf8_general_ci	YES	MUL			select,insert,update,references	電話
+                                        MB_MEMBER.setAttribute("MB_TEL",mbACCT.getAttribute("MB_TEL"))
+                                        'MB_SEX	char(1)	latin1_swedish_ci	NO				select,insert,update,references	性別
+                                        MB_MEMBER.setAttribute("MB_SEX",mbACCT.getAttribute("MB_SEX"))
+                                        'MB_NAME	varchar(20)	utf8_general_ci	NO				select,insert,update,references	姓名
+                                        MB_MEMBER.setAttribute("MB_NAME",mbACCT.getAttribute("MB_NAME"))
+                                        'CHGUID	varchar(100)	utf8_general_ci	YES				select,insert,update,references	修改員工編號
+                                        MB_MEMBER.setAttribute("CHGUID",mbACCT.getAttribute("MB_ACCT"))
+                                        'CHGDATE	datetime		NO				select,insert,update,references	修改日期
+                                        MB_MEMBER.setAttribute("CHGDATE",Now)
+                                        MB_MEMBER.save
+
+                                        'sMB_MEMSEQ_URL = "OPTYPE=A&MB_MEMSEQ=" & mbACCT.getAttribute("MB_MEMSEQ")
+                                        sMB_MEMSEQ_URL = "MB_MEMSEQ=" & mbACCT.getAttribute("MB_MEMSEQ")
+                                    End If
+                                End If
                             End If
+
+                            '直接導頁到入會申請單
+                            'Dim sURL As String = String.Empty
+                            'sURL = com.Azion.EloanUtility.UIUtility.getRootPath &
+                            '       "/MNT/MBMnt_Member_01_v01.aspx.aspx"
+
+                            LTL_SCRIPT.Text = "<script language='javascript' >" & vbCrLf
+                            LTL_SCRIPT.Text &= "alert('e-Mail驗證成功\n\n請記得填寫入會申請單\n\n【按確定後系統將連結入會申請單】');" & vbCrLf
+                            If Utility.isValidateData(sMB_MEMSEQ_URL) Then
+                                LTL_SCRIPT.Text &= "window.location.href='MBMnt_Member_01_v01.aspx?" & sMB_MEMSEQ_URL & "';" & vbCrLf
+                            Else
+                                LTL_SCRIPT.Text &= "window.location.href='MBMnt_Member_01_v01.aspx';" & vbCrLf
+                            End If
+                            
+                            LTL_SCRIPT.Text &= "</" & "script>"
+
+                            LTL_SCRIPT.Visible = True
                         Else
                             com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "e-Mail驗證失敗，無法註冊為會員")
                         End If
@@ -109,6 +225,17 @@ Public Class MBMnt_Reg_01_v01
                                 ElseIf MB_MEMBER.getString("MB_SEX") = "2" Then
                                     Me.RBL_MB_SEX.Items.FindByValue("F").Selected = True
                                 End If
+                                Me.MB_MOBIL.Text = MB_MEMBER.getString("MB_MOBIL")
+                                If Utility.isValidateData(MB_MEMBER.getAttribute("MB_TEL")) Then
+                                    Dim sTEL() as String = nothing
+                                    sTEL = Split(MB_MEMBER.getAttribute("MB_TEL"),"-")
+                                    If Not IsNothing(sTEL) AndAlso sTEL.Length>=2 Then
+                                        Me.MB_TEL_Pre.Text = sTEL(0)
+                                        Me.MB_TEL.Text = sTEL(1)
+                                    Elseif Not IsNothing(sTEL) AndAlso sTEL.Length=1 then
+                                        Me.MB_TEL.Text = sTEL(0)
+                                    End If 
+                                End If                                
                             End If
                         End Using
                     End If
@@ -241,7 +368,7 @@ Public Class MBMnt_Reg_01_v01
 
             Dim sMailBody As String = String.Empty
 
-            sMailBody = MBSC.UICtl.UIShareFun.getMailBody(sMB_APVID, Trim(Me.TXT_EMAIL.Text), Trim(Me.TXT_APPNAME.Text))
+            sMailBody = MBSC.UICtl.UIShareFun.getMailBody(sMB_APVID, Trim(Me.TXT_EMAIL.Text), Trim(Me.TXT_APPNAME.Text),Me.m_sMB_MEMSEQ)
 
             If com.Azion.EloanUtility.NetUtility.GMail_Send(sMailTos, Nothing, sMailSub, sMailBody, True, Nothing, False) Then
                 Dim mbACCT As New MB_ACCT(dbManager)
@@ -267,6 +394,29 @@ Public Class MBMnt_Reg_01_v01
 
                 'MB_APVID varchar(7) 驗證用ID
                 mbACCT.setAttribute("MB_APVID", sMB_APVID)
+
+                'MB_MOBIL	varchar(20)	utf8_general_ci	YES				select,insert,update,references	手機
+                If Utility.isValidateData(Me.MB_MOBIL.text) Then
+                    mbACCT.setAttribute("MB_MOBIL", Me.MB_MOBIL.text)
+                Else
+                    mbACCT.setAttribute("MB_MOBIL", Nothing)
+                End If
+
+                'MB_TEL	varchar(40)	utf8_general_ci	YES				select,insert,update,references	電話
+                If Utility.isValidateData(Me.MB_TEL_Pre.text) AndAlso Utility.isValidateData(Me.MB_TEL.text) Then
+                    mbACCT.setAttribute("MB_TEL",Me.MB_TEL_Pre.Text & "-" & Me.MB_TEL.text)
+                ElseIf Not Utility.isValidateData(Me.MB_TEL_Pre.text) AndAlso Utility.isValidateData(Me.MB_TEL.text) Then
+                     mbACCT.setAttribute("MB_TEL", Me.MB_TEL.text)
+                Else
+                     mbACCT.setAttribute("MB_TEL", Nothing)
+                End If
+
+                'MB_MEMSEQ	decimal(7,0)		YES				select,insert,update,references	會員編號
+                If IsNumeric(Me.m_sMB_MEMSEQ) Then
+                    mbACCT.setAttribute("MB_MEMSEQ", CDec(Me.m_sMB_MEMSEQ))
+                Else
+                    mbACCT.setAttribute("MB_MEMSEQ", nothing)
+                End If
 
                 mbACCT.save()
 

@@ -95,6 +95,33 @@ Partial Public Class MBMnt_Reg_01_v01
     Protected WithEvents RBL_MB_SEX As Global.System.Web.UI.WebControls.RadioButtonList
     
     '''<summary>
+    '''MB_MOBIL 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents MB_MOBIL As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''MB_TEL_Pre 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents MB_TEL_Pre As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
+    '''MB_TEL 控制項。
+    '''</summary>
+    '''<remarks>
+    '''自動產生的欄位。
+    '''若要修改，請將欄位宣告從設計工具檔案移到程式碼後置檔案。
+    '''</remarks>
+    Protected WithEvents MB_TEL As Global.System.Web.UI.WebControls.TextBox
+    
+    '''<summary>
     '''TXT_NUMBER 控制項。
     '''</summary>
     '''<remarks>

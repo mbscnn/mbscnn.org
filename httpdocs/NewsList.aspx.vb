@@ -9,7 +9,7 @@ Public Class NewsList
 
     Dim m_sCODEID As String = String.Empty
 
-    Dim m_iPageSize As Integer = 10
+    Dim m_iPageSize As Integer = 20
 
     Dim m_iUPCODE_LV As Integer = 37
 

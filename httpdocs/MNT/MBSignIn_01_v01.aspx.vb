@@ -151,7 +151,7 @@ Public Class MBSignIn_01_v01
 
                     Dim sMailBody As String = String.Empty
 
-                    sMailBody = UIShareFun.getMailBody(sMB_APVID, Trim(Me.txt_UserId.Text), Trim(mbACCT.getString("MB_NAME")))
+                    sMailBody = UIShareFun.getMailBody(sMB_APVID, Trim(Me.txt_UserId.Text), Trim(mbACCT.getString("MB_NAME")),String.Empty)
 
                     If Not com.Azion.EloanUtility.NetUtility.GMail_Send(sMailTos, Nothing, sMailSub, sMailBody, True, Nothing, False) Then
                         com.Azion.EloanUtility.UIUtility.alert("驗證信發送失敗，請確認您的e-Mail網址是否正確或稍後再試")

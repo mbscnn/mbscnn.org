@@ -564,6 +564,8 @@ Public Class MBMnt_Member_01_v01
             '    Return
             'End If
 
+            '1050222
+            '不檢核身分別
             Dim sMB_IDENTIFY As String = String.Empty
             For i As Integer = 0 To Me.MB_IDENTIFY.Items.Count - 1
                 If Me.MB_IDENTIFY.Items(i).Selected Then
@@ -573,8 +575,8 @@ Public Class MBMnt_Member_01_v01
             If Utility.isValidateData(sMB_IDENTIFY) Then
                 sMB_IDENTIFY = Left(sMB_IDENTIFY, sMB_IDENTIFY.Length - 1)
             Else
-                com.Azion.EloanUtility.UIUtility.alert("請選擇身分別!")
-                Return
+                'com.Azion.EloanUtility.UIUtility.alert("請選擇身分別!")
+                'Return
             End If
 
             '1041226

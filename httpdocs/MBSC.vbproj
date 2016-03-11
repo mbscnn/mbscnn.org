@@ -155,6 +155,7 @@
     <Content Include="JS\JSUtil.js" />
     <Content Include="JS\KeyCheck.js" />
     <Content Include="MNT\MBMnt_APV_01_v01.aspx" />
+    <Content Include="MNT\MBMnt_ATO_MEMBER.aspx" />
     <Content Include="MNT\MBMnt_ItemCode_01_v01.aspx" />
     <Content Include="MNT\MBMnt_Class_01_v01.aspx" />
     <Content Include="MNT\MBMnt_MemberIMP_01_v01.aspx" />
@@ -280,6 +281,13 @@
     </Compile>
     <Compile Include="MNT\MBMnt_APV_01_v01.aspx.vb">
       <DependentUpon>MBMnt_APV_01_v01.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="MNT\MBMnt_ATO_MEMBER.aspx.designer.vb">
+      <DependentUpon>MBMnt_ATO_MEMBER.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MNT\MBMnt_ATO_MEMBER.aspx.vb">
+      <DependentUpon>MBMnt_ATO_MEMBER.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="MNT\MBMnt_ItemCode_01_v01.aspx.vb">
