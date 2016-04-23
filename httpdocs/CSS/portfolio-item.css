@@ -23,8 +23,11 @@ body {
 }
   
 .btn-readmore {
-    color: #000000;
-    background-color: rgba(223, 227, 230, 0);
+    /*color: #000000;*/
+    /*background-color: rgba(223, 227, 230, 0);*/
+	color: white;
+	/*background-color:rgba(157, 0, 0, 0);*/
+	background-color:#9D0000;
     border-color: #D0D0D0;
     margin-bottom: 20px;
 }

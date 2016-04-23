@@ -2633,6 +2633,8 @@ Public Class MBMnt_Member_01_v01
         Try
             If IsNumeric(iMB_MEMSEQ) AndAlso Utility.isValidateData(sMB_AREA) Then
                 Return sMB_AREA & "-" & com.Azion.EloanUtility.StrUtility.FillZero(CDec(iMB_MEMSEQ), 7)
+            ElseIf Not Utility.isValidateData(sMB_AREA) AndAlso IsNumeric(iMB_MEMSEQ) Then
+                Return com.Azion.EloanUtility.StrUtility.FillZero(CDec(iMB_MEMSEQ), 7)
             End If
             Return String.Empty
         Catch ex As Exception

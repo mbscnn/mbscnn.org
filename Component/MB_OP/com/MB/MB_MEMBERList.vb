@@ -448,6 +448,102 @@ Public Class MB_MEMBERList
         End Try
     End Function
 
+    ''' <summary>
+    ''' 根據會員名稱，e-Mail，手機，電話取得資料
+    ''' </summary>
+    ''' <param name="sMB_NAME">會員名稱</param>
+    ''' <param name="sMB_EMAIL">e-Mail</param>
+    ''' <param name="sMB_MOBIL">手機</param>
+    ''' <param name="sMB_TEL">手機</param>
+    ''' <returns>integer取得筆數</returns>
+    ''' <remarks>
+    ''' </remarks> 
+    ''' <history>
+    ''' </history>
+    Public Function Load_EXISTS(ByVal sMB_NAME As String, ByVal sMB_EMAIL As String, ByVal sMB_MOBIL As String, ByVal sMB_TEL As String) As Integer
+        Try
+            If Not Utility.isValidateData(sMB_NAME) Then
+                Throw New Exception("無姓名參數")
+            End If
+
+            If Not Utility.isValidateData(sMB_EMAIL) AndAlso Not Utility.isValidateData(sMB_MOBIL) AndAlso Not Utility.isValidateData(sMB_TEL) Then
+                Throw New Exception("無e-Mail或手機或電話參數")
+            End If
+
+            Dim sqlStr As String = String.Empty
+
+            Dim AL_Paras As New ArrayList
+            sqlStr = "SELECT * FROM MB_MEMBER WHERE "
+
+            Dim iWCnd As Integer = 0
+
+            If Utility.isValidateData(sMB_NAME) AndAlso Utility.isValidateData(sMB_EMAIL) Then
+                sqlStr &= " (MB_NAME = " & ProviderFactory.PositionPara & "MB_NAME_1 AND MB_EMAIL = " & ProviderFactory.PositionPara & "MB_EMAIL ) "
+                AL_Paras.Add(ProviderFactory.CreateDataParameter("MB_NAME_1", sMB_NAME))
+                AL_Paras.Add(ProviderFactory.CreateDataParameter("MB_EMAIL", sMB_EMAIL))
+                iWCnd += 1
+            End If
+
+            If Utility.isValidateData(sMB_NAME) AndAlso Utility.isValidateData(sMB_MOBIL) Then
+                If iWCnd > 0 Then
+                    sqlStr &= " OR "
+                End If
+
+                sqlStr &= " (MB_NAME = " & ProviderFactory.PositionPara & "MB_NAME_2 AND MB_MOBIL = " & ProviderFactory.PositionPara & "MB_MOBIL ) "
+                AL_Paras.Add(ProviderFactory.CreateDataParameter("MB_NAME_2", sMB_NAME))
+                AL_Paras.Add(ProviderFactory.CreateDataParameter("MB_MOBIL", sMB_MOBIL))
+
+                iWCnd += 1
+            End If
+
+            If Utility.isValidateData(sMB_NAME) AndAlso Utility.isValidateData(sMB_TEL) Then
+                If iWCnd > 0 Then
+                    sqlStr &= " OR "
+                End If
+
+                sqlStr &= " (MB_NAME = " & ProviderFactory.PositionPara & "MB_NAME_3 AND MB_TEL = " & ProviderFactory.PositionPara & "MB_TEL ) "
+                AL_Paras.Add(ProviderFactory.CreateDataParameter("MB_NAME_3", sMB_NAME))
+                AL_Paras.Add(ProviderFactory.CreateDataParameter("MB_TEL", sMB_TEL))
+
+                iWCnd += 1
+            End If
+
+            Dim paras(AL_Paras.Count - 1) As IDbDataParameter
+            For i As Integer = 0 To UBound(paras)
+                paras(i) = AL_Paras.Item(i)
+            Next
+
+            Return Me.loadBySQL(sqlStr, paras)
+        Catch ex As ProviderException
+            Throw
+        Catch ex As BosException
+            Throw
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
+    Function Load_BATCH() As Integer
+        Try
+            Dim sqlStr As String = String.Empty
+
+            sqlStr = "SELECT A.* " &
+                     "  FROM MB_MEMBER A " &
+                     " WHERE NOT EXISTS " &
+                     "          (SELECT * " &
+                     "             FROM MB_ACCT " &
+                     "            WHERE MB_NAME = A.MB_NAME) "
+
+            Return Me.loadBySQLOnlyDs(sqlStr)
+        Catch ex As ProviderException
+            Throw
+        Catch ex As BosException
+            Throw
+        Catch ex As Exception
+            Throw
+        End Try
+    End Function
+
 #Region "報表查詢"
     Public Function QRY_1(ByVal iSTART As Decimal, ByVal iPageSize As Decimal) As Integer
         Try

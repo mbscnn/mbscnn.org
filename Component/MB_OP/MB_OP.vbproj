@@ -83,6 +83,8 @@
     <Compile Include="com\GA\GA_CASEAPV.vb" />
     <Compile Include="com\GA\GA_CASEAPVList.vb" />
     <Compile Include="com\MB\MB_ACCT.vb" />
+    <Compile Include="com\MB\MB_ACCTList.vb" />
+    <Compile Include="com\MB\MB_ACCT_BATCH.vb" />
     <Compile Include="com\MB\MB_ACCT_DTL.vb" />
     <Compile Include="com\MB\MB_ACCT_DTLList.vb" />
     <Compile Include="com\MB\MB_CLASS.vb" />
@@ -99,6 +101,7 @@
     <Compile Include="com\MB\MB_MEMBATCHList.vb" />
     <Compile Include="com\MB\MB_MEMBER.vb" />
     <Compile Include="com\MB\MB_MEMBERList.vb" />
+    <Compile Include="com\MB\MB_MEMBER_BATCH.vb" />
     <Compile Include="com\MB\MB_MEMBER_TEMP.vb" />
     <Compile Include="com\MB\MB_MEMBER_TEMPList.vb" />
     <Compile Include="com\MB\MB_MEMCLASS.vb" />

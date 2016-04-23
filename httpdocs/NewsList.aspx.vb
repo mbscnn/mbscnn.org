@@ -260,9 +260,10 @@ Public Class NewsList
                     'RP_SIGN.DataBind()
 
                     Dim btnClass As Button = e.Item.FindControl("btnClass")
+                    Dim btnModify As Button = e.Item.FindControl("btnModify")
                     Dim btnCanClass As Button = e.Item.FindControl("btnCanClass")
                     Dim LTL_APLY As Label = e.Item.FindControl("LTL_APLY")
-                    Me.getAPLY_MSG(HID_MB_SEQ.Value, btnClass, btnCanClass, LTL_APLY)
+                    Me.getAPLY_MSG(HID_MB_SEQ.Value, btnClass, btnModify, btnCanClass, LTL_APLY)
 
                     Dim PNL_CLASS As Panel = e.Item.FindControl("PNL_CLASS")
                     PNL_CLASS.Visible = True
@@ -323,7 +324,7 @@ Public Class NewsList
         End Try
     End Sub
 
-    Sub getAPLY_MSG(ByVal iMB_SEQ As Decimal, ByVal btnClass As Button, ByVal btnCanClass As Button, ByVal LTL_APLY As Label)
+    Sub getAPLY_MSG(ByVal iMB_SEQ As Decimal, ByVal btnClass As Button, ByVal btnModify As Button, ByVal btnCanClass As Button, ByVal LTL_APLY As Label)
         Dim MB_CLASSList As New MB_CLASSList(Me.m_DBManager)
         MB_CLASSList.setSQLCondition(" ORDER BY MB_BATCH ")
         MB_CLASSList.LoadByMB_SEQ(iMB_SEQ)
@@ -384,15 +385,18 @@ Public Class NewsList
         If iMB_YES = 0 Then
             LTL_APLY.Text = "已截止報名"
             btnClass.Visible = False
+            btnModify.Visible = False
             btnCanClass.Visible = False
         Else
             Dim sBR As String = String.Empty
             If iVadSign > 0 Then
                 btnClass.Visible = True
+                btnModify.Visible = True
                 btnCanClass.Visible = True
                 sBR = "<BR/>"
             Else
                 btnClass.Visible = False
+                btnModify.Visible = False
                 btnCanClass.Visible = False
             End If
 
@@ -538,9 +542,10 @@ Public Class NewsList
                     'PNL_CLASS.Visible = True
 
                     Dim btnClass As Button = e.Item.FindControl("btnClass")
+                    Dim btnModify As Button = e.Item.FindControl("btnModify")
                     Dim btnCanClass As Button = e.Item.FindControl("btnCanClass")
                     Dim LTL_APLY As Label = e.Item.FindControl("LTL_APLY")
-                    Me.getAPLY_MSG(HID_MB_SEQ.Value, btnClass, btnCanClass, LTL_APLY)
+                    Me.getAPLY_MSG(HID_MB_SEQ.Value, btnClass, btnModify, btnCanClass, LTL_APLY)
                 End If
 
                 'Dim DIV_TITLE As HtmlGenericControl = e.Item.FindControl("DIV_TITLE")

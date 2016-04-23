@@ -15,6 +15,8 @@ Public Class MBMnt_Sign_01_v01
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         Try
+            Page.MaintainScrollPositionOnPostBack = True
+
             Me.initdata()
 
             '維護人員
@@ -407,8 +409,26 @@ Public Class MBMnt_Sign_01_v01
                         txt_MB_MOBIL.Text = .getString("MB_MOBIL")
                         '電話
                         If .getString("MB_TEL").Length >= 2 Then
-                            txt_MB_TEL_ZIP.Text = Left(.getString("MB_TEL"), 2)
-                            txt_MB_TEL.Text = Right(.getString("MB_TEL"), .getString("MB_TEL").Length - 2)
+                            If InStr(.getString("MB_TEL"), "-") > 0 Then
+                                Dim sTMP() As String = Nothing
+                                sTMP = Split(.getString("MB_TEL"), "-")
+                                If Not IsNothing(sTMP) AndAlso sTMP.Length > 0 Then
+                                    Dim iTel As Integer = 0
+                                    For Each sTel As String In sTMP
+                                        If IsNumeric(sTel) Then
+                                            If iTel = 0 Then
+                                                txt_MB_TEL_ZIP.Text = sTel
+                                            ElseIf iTel = 1 Then
+                                                txt_MB_TEL.Text = sTel
+                                            End If
+                                            iTel += 1
+                                        End If
+                                    Next
+                                End If
+                            Else
+                                txt_MB_TEL_ZIP.Text = Left(.getString("MB_TEL"), 2)
+                                txt_MB_TEL.Text = Right(.getString("MB_TEL"), .getString("MB_TEL").Length - 2)
+                            End If
                         End If
                         'e-mail
                         txt_MB_EMAIL.Text = IIf(.getString("MB_EMAIL").Trim <> "", .getString("MB_EMAIL"), txt_MB_EMAIL.Text)
@@ -842,7 +862,9 @@ Public Class MBMnt_Sign_01_v01
                     '檢核電話是否輸入
                     If IsNumeric(txt_Tel_Zip.Text.Trim) And IsNumeric(txt_Tel.Text.Trim) And txt_Tel_Zip.Text.Trim.Length = 2 Then
                         '依電話撈取資料
-                        MB_MEMBERList.loadByMB_TEL(txt_Tel_Zip.Text.Trim & txt_Cel.Text.Trim)
+                        MB_MEMBERList.loadByMB_TEL(txt_Tel_Zip.Text.Trim & "-" & txt_Tel.Text.Trim)
+                    ElseIf Not IsNumeric(txt_Tel_Zip.Text) AndAlso IsNumeric(txt_Tel.Text) then
+                        MB_MEMBERList.loadByMB_TEL(txt_Tel.Text)
                     Else
                         UIUtility.alert("請輸入正確的電話號碼以查詢資料!")
                         Exit Sub
@@ -1126,6 +1148,34 @@ Public Class MBMnt_Sign_01_v01
                     UIUtility.showErrMsg(Me, "請選擇身心狀況")
                     Exit Sub
                 End If
+
+                For i As Integer = 0 To dl_MB_SICK.Items.Count - 1
+                    Dim cb_MB_SICK As CheckBox = dl_MB_SICK.Items(i).FindControl("cb_MB_SICK")
+
+                    If cb_MB_SICK.Checked Then
+                        Dim txt_MB_SICK As TextBox = dl_MB_SICK.Items(i).FindControl("txt_MB_SICK")
+                        Dim sMB_SICK As String = String.Empty
+
+
+                        If cb_MB_SICK.Text = "過敏" Then
+                            sMB_SICK = txt_MB_SICK.Text
+                        ElseIf cb_MB_SICK.Text = "開刀" Then
+                            sMB_SICK = txt_MB_SICK.Text
+                        ElseIf cb_MB_SICK.Text = "其他" Then
+                            sMB_SICK = txt_MB_SICK.Text
+                        End If
+
+                        If Utility.isValidateData(sMB_SICK) Then
+                            Dim iCnt As Decimal = 0
+                            iCnt = System.Text.Encoding.GetEncoding("Big5").GetByteCount(sMB_SICK)
+                            If iCnt > 50 Then
+                                com.Azion.EloanUtility.UIUtility.showJSMsg(Me, "身心狀況【" & cb_MB_SICK.Text & "】說明輸入最多50個字元，目前輸入共【" & iCnt & "】字元")
+                                com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "身心狀況【" & cb_MB_SICK.Text & "】說明輸入最多50個字元，目前輸入共【" & iCnt & "】字元")
+                                Return
+                            End If
+                        End If
+                    End If
+                Next
             End If
 
             '打鼾
@@ -1283,7 +1333,9 @@ Public Class MBMnt_Sign_01_v01
                     .setAttribute("MB_MOBIL", txt_MB_MOBIL.Text)
                     '電話
                     If IsNumeric(txt_MB_TEL_ZIP.Text) And IsNumeric(txt_MB_TEL.Text) Then
-                        .setAttribute("MB_TEL", txt_MB_TEL_ZIP.Text & txt_MB_TEL.Text)
+                        .setAttribute("MB_TEL", txt_MB_TEL_ZIP.Text & "-" & txt_MB_TEL.Text)
+                    ElseIf Not IsNumeric(txt_MB_TEL_ZIP.Text) AndAlso IsNumeric(txt_MB_TEL.Text) Then
+                        .setAttribute("MB_TEL",txt_MB_TEL.Text)
                     End If
                     'E-mail
                     .setAttribute("MB_EMAIL", txt_MB_EMAIL.Text)
@@ -1633,9 +1685,13 @@ Public Class MBMnt_Sign_01_v01
 
                         End Try
 
-                        UIUtility.alert("報名儲存成功!")
+                        'UIUtility.alert("報名儲存成功!")
+
+                        UIShareFun.showJSMsgGoList(Me, "報名儲存成功!")
                     Else
-                        UIUtility.alert("會員資料已修改!")
+                        'UIUtility.alert("會員資料已修改!")
+
+                        UIShareFun.showJSMsgGoList(Me, "會員資料已修改!")
                     End If
                 End If
             End Using
@@ -1992,9 +2048,9 @@ Public Class MBMnt_Sign_01_v01
                 Dim D_MB_SDATE As Date = CDate(DRV("MB_SDATE").ToString())
                 Dim D_MB_EDATE As Date = CDate(DRV("MB_EDATE").ToString())
                 Dim MB_SEDATE As Literal = e.Item.FindControl("MB_SEDATE")
-                MB_SEDATE.Text = D_MB_SDATE.Year - 1911 & "/" & Utility.FillZero(D_MB_SDATE.Month, 2) & "/" & Utility.FillZero(D_MB_SDATE.Day, 2) &
+                MB_SEDATE.Text = D_MB_SDATE.Year & "/" & Utility.FillZero(D_MB_SDATE.Month, 2) & "/" & Utility.FillZero(D_MB_SDATE.Day, 2) &
                                  "至" &
-                                 D_MB_EDATE.Year - 1911 & "/" & Utility.FillZero(D_MB_EDATE.Month, 2) & "/" & Utility.FillZero(D_MB_EDATE.Day, 2)
+                                 D_MB_EDATE.Year & "/" & Utility.FillZero(D_MB_EDATE.Month, 2) & "/" & Utility.FillZero(D_MB_EDATE.Day, 2)
             End If
 
             Dim sMB_MEMSEQ As String = String.Empty

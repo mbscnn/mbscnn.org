@@ -195,9 +195,9 @@
                         是否開課
                     </td>
                     <td width="35%" class="td2_b">
-                       <asp:RadioButtonList ID="rbt_YES" runat="server" RepeatDirection="Horizontal">
-                            <asp:ListItem Text="是" Value="Y"></asp:ListItem>
-                            <asp:ListItem Text="否" Value="N"></asp:ListItem>
+                       <asp:RadioButtonList ID="rbt_YES" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" >
+                            <asp:ListItem Text="是" Value="Y" Style="font-size:14pt"></asp:ListItem>
+                            <asp:ListItem Text="否" Value="N" Style="font-size:14pt"></asp:ListItem>
                         </asp:RadioButtonList>
                     </td>
                     <td width="15%" class="th1c_b">
@@ -275,8 +275,8 @@
                     </td>
                     <td width="85%" class="td2_b" colspan="3">
                         <asp:RadioButtonList ID="MB_BEGIN" runat="server" RepeatDirection="Horizontal" RepeatLayout="Flow" >
-                            <asp:ListItem Text="是" Value="Y"  />
-                            <asp:ListItem Text="否" Value="N"  />
+                            <asp:ListItem Text="是" Value="Y" Style="font-size:14pt"  />
+                            <asp:ListItem Text="否" Value="N" Style="font-size:14pt" />
                         </asp:RadioButtonList>
                     </td>
                 </tr>

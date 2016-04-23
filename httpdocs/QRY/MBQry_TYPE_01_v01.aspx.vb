@@ -1736,7 +1736,7 @@ Public Class MBQry_TYPE_01_v01
                             End Select
                             sMSG &= "<span style='color:red;font-weight:bold'>" & ROW_1(i)("MB_BATCH").ToString & "</SPAN>" & sINFO & sBR
                         Next
-                        Return sMSG
+                        Return sMSG & "<BR/>" & Utility.FMT_MBSC_DATE(MB_CREDATETIME)
                     End If
                 End If
             End If

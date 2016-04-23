@@ -499,5 +499,14 @@ Public Class UIShareFun
     End Sub
 #End Region
 
+    Public Shared Sub showJSMsgGoList(ByRef page As System.Web.UI.Page, ByVal sMsg As String)
+        Dim js As String
+        js = "<Script Language='JAVAScript'>" & vbCrLf
+        js += "alert('" & sMsg & "');"
+        js += "window.location='http://mbscnn.org/';"
+        js += "</" & "Script>" & vbCrLf
+        page.Response.Write(js)
+    End Sub
+
 
 End Class

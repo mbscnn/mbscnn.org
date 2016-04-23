@@ -93,7 +93,10 @@
                     'sNUMBER':$("#TXT_NUMBER").val() ,
                     'sEMAIL':$("#TXT_EMAIL").val(),
                     'sPASSWORD':$("#TXT_PASSWORD").val(),
-                    'sVARPASSWORD':$("#TXT_VARIFY").val()
+                    'sVARPASSWORD': $("#TXT_VARIFY").val(),
+                    'sMB_MOBIL': $("#MB_MOBIL").val(),
+                    'sMB_TEL_Pre': $("#MB_TEL_Pre").val(),
+                    'sMB_TEL': $("#MB_TEL").val()
                 }),
                 contentType: "application/json; charset=utf-8",
                 async: false,

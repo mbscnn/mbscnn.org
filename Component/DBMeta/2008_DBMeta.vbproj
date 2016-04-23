@@ -108,6 +108,7 @@
     <Compile Include="Tables\FLOW\SY_FLOW_MAP_dbMeta.vb" />
     <Compile Include="Tables\FLOW\SY_REL_FLOWMAP_SPANBRANCH_dbMeta.vb" />
     <Compile Include="Tables\FLOW\SY_REL_ROLE_FLOWMAP_dbMeta.vb" />
+    <Compile Include="Tables\MB\MB_ACCT_BATCH_dbMeta.vb" />
     <Compile Include="Tables\MB\MB_ACCT_dbMeta.vb" />
     <Compile Include="Tables\MB\MB_ACCT_DTL_dbMeta.vb" />
     <Compile Include="Tables\MB\mb_class_dbMeta.vb" />
@@ -118,6 +119,7 @@
     <Compile Include="Tables\MB\MB_MAXID_dbMeta.vb" />
     <Compile Include="Tables\MB\MB_MBIMP_dbMeta.vb" />
     <Compile Include="Tables\MB\MB_MEMBATCH_dbMeta.vb" />
+    <Compile Include="Tables\MB\MB_MEMBER_BATCH_dbMeta.vb" />
     <Compile Include="Tables\MB\MB_MEMBER_dbMeta.vb" />
     <Compile Include="Tables\MB\MB_MEMBER_TEMP_dbMeta.vb" />
     <Compile Include="Tables\MB\MB_MEMCLASS_dbMeta.vb" />

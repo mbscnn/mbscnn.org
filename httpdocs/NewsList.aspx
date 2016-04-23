@@ -220,7 +220,8 @@
                                                         <asp:Panel ID="PNL_CLASS" runat="server" Visible="false">
                                                                     <input type="hidden" id="HID_MB_SEQ" runat="server" value='<%#Container.DataItem("MB_SEQ")%>' />
                                                                     <asp:Button ID="btnClass" runat="server" Text="我要報名" CommandName="CLASS" Font-Bold="true" class="btn btn-info " />
-                                                                    <asp:Button ID="btnCanClass" runat="server" Text="取消報名" CommandName="CANCLASS" Font-Bold="true" class="btn btn-info " />
+                                                                    <asp:Button ID="btnModify" runat="server" Text="我要修改報名資料" CommandName="CLASS" Font-Bold="true" class="btn btn-info " />
+                                                                    <asp:Button ID="btnCanClass" runat="server" Text="取消報名" CommandName="CANCLASS" Font-Bold="true" class="btn btn-info " onmousedown="if (confirm('取消報名會取消所有報名資料\n\n若要修改報名梯次\n\n請按【我要修改報名資料】')){this.click();}else{return false}" />
                                                                     <asp:Label ID="LTL_APLY" runat="server" Style="font-size: 16pt; font-weight: bold" />
 <%--                                                                    <asp:Repeater ID="RP_SIGN" runat="server" OnItemDataBound="RP_SIGN_OnItemDataBound" OnItemCommand="RP_SIGN_OnItemCommand">
                                                                         <ItemTemplate>
@@ -269,7 +270,7 @@
                             </div>
 
                                 <div>
-                                    <div id="DIV_MORE" runat="server" visible="false" style="text-align:right" >
+                                    <div id="DIV_MORE" runat="server" visible="false" style="text-align:center" >
                                         <input type="button" ID="btnReadMore" runat="server" value="顯示全文 »" class="btn btn-primary btn-readmore" Font-Bold="true" />
                                     </div>
                             </div>

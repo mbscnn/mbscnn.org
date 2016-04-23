@@ -205,6 +205,18 @@ Public Class MBQry_TYPE_01_03_v01
                 'sMB_CHKFLAG = Me.getMB_CHKFLAG(DBManager, ROW("MB_SEQ"), ROW("MB_BATCH"), ROW("MB_MEMSEQ"), ROW("MB_FWMK"), ROW("MB_SORTNO"), ROW("MB_CHKFLAG"), ROW("MB_CDATE"))
                 'objStringBuilder.Append("<Cell><Data ss:Type=""String"">" & sMB_CHKFLAG & "</Data></Cell>")
 
+                '統編
+                objStringBuilder.Append("<Cell><Data ss:Type=""String"">" & ROW("MB_ID").ToString & "</Data></Cell>")
+
+                '是否回覆出席
+                Dim ROW_MB_RESP() As DataRow = Nothing
+                ROW_MB_RESP = MB_MEMBATCHList.getCurrentDataSet.Tables(0).Select("ISNULL(MB_ELECT,' ')='1' AND ISNULL(MB_RESP,' ')='Y'")
+                If Not IsNothing(ROW_MB_RESP) AndAlso ROW_MB_RESP.Length > 0 Then
+                    objStringBuilder.Append("<Cell><Data ss:Type=""String"">" & "是" & "</Data></Cell>")
+                Else
+                    objStringBuilder.Append("<Cell><Data ss:Type=""String"">" & String.Empty & "</Data></Cell>")
+                End If
+
                 objStringBuilder.Append("</Row>")
             Next
 

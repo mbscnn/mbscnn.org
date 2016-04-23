@@ -255,7 +255,7 @@ Public Class MBMnt_Reg_01_v01
     End Sub
 
     <System.Web.Services.WebMethod()> _
-    Public Shared Function ValidINPUT(ByVal sNUMBER As String, ByVal sEMAIL As String, ByVal sPASSWORD As String, ByVal sVARPASSWORD As String) As String
+    Public Shared Function ValidINPUT(ByVal sNUMBER As String, ByVal sEMAIL As String, ByVal sPASSWORD As String, ByVal sVARPASSWORD As String, BYval sMB_MOBIL As String,Byval sMB_TEL_Pre As String,Byval sMB_TEL As string) As String
         Try
             Dim sNUMBERErr As String = String.Empty
             If HttpContext.Current.Session Is Nothing OrElse HttpContext.Current.Session("ValidateNumber") = Nothing OrElse HttpContext.Current.Session("ValidateNumber") = "" Then
@@ -275,11 +275,53 @@ Public Class MBMnt_Reg_01_v01
                     Dim mbACCT As New MB_ACCT(dbManager)
                     If mbACCT.LoadByPK(Trim(sEMAIL)) Then
                         If mbACCT.getString("MB_APV") = "Y" Then
-                            sEMAILErr = sEMAIL & "已於" & com.Azion.EloanUtility.StrUtility.ToYYYMMDD(mbACCT.getAttribute("MB_CRE_DATE")) & _
-                                        "註冊啟用為會員"
+                            sEMAILErr = sEMAIL & "已於" & com.Azion.EloanUtility.StrUtility.ToYYYMMDD(mbACCT.getAttribute("MB_CRE_DATE")) &
+                                        "註冊啟用為會員，請直接用會員登入"
                         Else
-                            sEMAILErr = sEMAIL & "已於" & com.Azion.EloanUtility.StrUtility.ToYYYMMDD(mbACCT.getAttribute("MB_CRE_DATE")) & _
+                            sEMAILErr = sEMAIL & "已於" & com.Azion.EloanUtility.StrUtility.ToYYYMMDD(mbACCT.getAttribute("MB_CRE_DATE")) &
                                         "註冊為會員，但尚未驗證啟用"
+                        End If
+
+                        If Utility.isValidateData(sMB_MOBIL) OrElse Utility.isValidateData(sMB_TEL) Then
+                            If Utility.isValidateData(sMB_MOBIL) Then
+                                mbACCT.setAttribute("MB_MOBIL", sMB_MOBIL)
+                            End If
+
+                            If Utility.isValidateData(sMB_TEL) Then
+                                mbACCT.setAttribute("MB_TEL", sMB_TEL)
+                            End If
+
+                            mbACCT.save()
+                        End If
+                    Else
+                        If Utility.isValidateData(sMB_MOBIL) Then
+                            Dim MB_ACCTList As New MB_ACCTList(dbManager)
+                            MB_ACCTList.Load_MB_MOBIL(sMB_MOBIL)
+                            If MB_ACCTList.getCurrentDataSet.Tables(0).Rows.Count > 0 Then
+                                For Each ROW As DataRow In MB_ACCTList.getCurrentDataSet.Tables(0).Rows
+                                    sEMAILErr &= ROW("MB_ACCT").ToString & "，"
+                                Next
+                                If Utility.isValidateData(sEMAILErr) Then
+                                    sEMAILErr = Left(sEMAILErr, sEMAILErr.Length - 1)
+                                End If
+                                sEMAILErr &= "已註冊成為會員,請直接用會員登入"
+                            End If
+                        ElseIf Utility.isValidateData(sMB_TEL) Then
+                            If Utility.isValidateData(sMB_TEL_Pre) Then
+                                sMB_TEL = sMB_TEL_Pre & "-" & sMB_TEL
+                            End If
+
+                            Dim MB_ACCTList As New MB_ACCTList(dbManager)
+                            MB_ACCTList.Load_MB_TEL(sMB_TEL)
+                            If MB_ACCTList.getCurrentDataSet.Tables(0).Rows.Count > 0 Then
+                                For Each ROW As DataRow In MB_ACCTList.getCurrentDataSet.Tables(0).Rows
+                                    sEMAILErr &= ROW("MB_ACCT").ToString & "，"
+                                Next
+                                If Utility.isValidateData(sEMAILErr) Then
+                                    sEMAILErr = Left(sEMAILErr, sEMAILErr.Length - 1)
+                                End If
+                                sEMAILErr &= "已註冊成為會員,請直接用會員登入"
+                            End If
                         End If
                     End If
                 Catch ex As Exception
@@ -419,6 +461,56 @@ Public Class MBMnt_Reg_01_v01
                 End If
 
                 mbACCT.save()
+
+                Dim MB_MEMBERList As New MB_MEMBERList(dbManager)
+                MB_MEMBERList.Load_EXISTS(mbACCT.getAttribute("MB_NAME"),mbACCT.getAttribute("MB_ACCT"),mbACCT.getAttribute("MB_MOBIL"),mbACCT.getAttribute("MB_TEL"))
+                If MB_MEMBERList.getCurrentDataSet.Tables(0).Rows.Count>0 Then
+                    For i As Integer = 0 To MB_MEMBERList.size-1
+                        Dim MB_MEMBER As MB_MEMBER = CType(MB_MEMBERList.item(i),MB_MEMBER)
+                        'MB_NAME	varchar(50)	utf8_general_ci	NO	MUL			select,insert,update,references	姓名
+                        MB_MEMBER.setAttribute("MB_NAME",mbACCT.getAttribute("MB_NAME"))
+                        'MB_SEX	char(1)	latin1_swedish_ci	YES				select,insert,update,references	性別 1:男 2:女
+                        MB_MEMBER.setAttribute("MB_SEX",mbACCT.getAttribute("MB_SEX"))
+                        'MB_MOBIL	varchar(20)	utf8_general_ci	YES	MUL			select,insert,update,references	手機
+                        MB_MEMBER.setAttribute("MB_MOBIL",mbACCT.getAttribute("MB_MOBIL"))
+                        'MB_TEL	varchar(40)	utf8_general_ci	YES	MUL			select,insert,update,references	電話
+                        MB_MEMBER.setAttribute("MB_TEL",mbACCT.getAttribute("MB_TEL"))
+                        'MB_EMAIL	varchar(40)	utf8_general_ci	YES				select,insert,update,references	e-mail
+                        MB_MEMBER.setAttribute("MB_EMAIL",mbACCT.getAttribute("MB_ACCT"))
+                        MB_MEMBER.save
+                        MB_MEMBER.save
+                    Next
+                Else
+                    Dim sProcName As String = String.Empty
+                    sProcName = LCase(com.Azion.NET.VB.Properties.getSchemaName) & ".MB_GET_MAXID"
+                    Dim inParaAL As New ArrayList
+                    Dim outParaAL As New ArrayList
+                    inParaAL.Add("01")
+                    inParaAL.Add("1")
+
+                    outParaAL.Add(7)
+
+                    Dim HT_Return As Hashtable = com.Azion.NET.VB.DBObject.getProcedureData(dbManager, sProcName, inParaAL, outParaAL)
+                    Dim iMAXID As Decimal = HT_Return.Item("@IMAXID")
+
+                    Dim sMB_MEMSEQ As String = String.Empty
+                    sMB_MEMSEQ = com.Azion.EloanUtility.StrUtility.FillZero(iMAXID, 7)
+
+                    Dim MB_MEMBER As New MB_MEMBER(dbManager)
+                    MB_MEMBER.loadByPK(CDEC(sMB_MEMSEQ))
+                    MB_MEMBER.setAttribute("MB_MEMSEQ",CDec(sMB_MEMSEQ))
+                    'MB_NAME	varchar(50)	utf8_general_ci	NO	MUL			select,insert,update,references	姓名
+                    MB_MEMBER.setAttribute("MB_NAME",mbACCT.getAttribute("MB_NAME"))
+                    'MB_SEX	char(1)	latin1_swedish_ci	YES				select,insert,update,references	性別 1:男 2:女
+                    MB_MEMBER.setAttribute("MB_SEX",mbACCT.getAttribute("MB_SEX"))
+                    'MB_MOBIL	varchar(20)	utf8_general_ci	YES	MUL			select,insert,update,references	手機
+                    MB_MEMBER.setAttribute("MB_MOBIL",mbACCT.getAttribute("MB_MOBIL"))
+                    'MB_TEL	varchar(40)	utf8_general_ci	YES	MUL			select,insert,update,references	電話
+                    MB_MEMBER.setAttribute("MB_TEL",mbACCT.getAttribute("MB_TEL"))
+                    'MB_EMAIL	varchar(40)	utf8_general_ci	YES				select,insert,update,references	e-mail
+                    MB_MEMBER.setAttribute("MB_EMAIL",mbACCT.getAttribute("MB_ACCT"))
+                    MB_MEMBER.save
+                End If
 
                 Me.PLH_MAILSend.Visible = True
                 Me.PLH_MB_ACCT.Visible = False
