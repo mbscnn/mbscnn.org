@@ -1676,7 +1676,11 @@ Public Class MBQry_TYPE_01_v01
                                 If Not IsNothing(ROW_FULL) AndAlso ROW_FULL.Length > 0 Then
                                     sb.Append(sBATCH).Append("正取").Append("<BR/>")
                                 Else
-                                    sb.Append(sBATCH).Append("備取").Append("<BR/>")
+                                    Dim ROW_SELECT() as DataRow = Nothing
+                                    ROW_SELECT = DT_SEQ.Select("MB_MEMSEQ=" & iMB_MEMSEQ)
+                                    If Not IsNothing(ROW_SELECT) AndAlso ROW_SELECT.Length>0 Then
+                                        sb.Append(sBATCH).Append("備取").Append("<BR/>")
+                                    End If                                    
                                 End If
                             Catch ex As Exception
                                 Throw
