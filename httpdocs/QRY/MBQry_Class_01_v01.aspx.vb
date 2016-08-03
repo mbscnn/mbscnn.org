@@ -56,7 +56,7 @@ Public Class MBQry_Class_01_v01
                 Else
                     Me.TD_1_7.Visible = False
                 End If
-                Me.RP_CLASS_1.DataSource = mbCLASSList.getCurrentDataSet.Tables(0)
+                Me.RP_CLASS_1.DataSource =New DataView(mbCLASSList.getCurrentDataSet.Tables(0),"ISNULL(MB_YES,' ')<>'N'",String.Empty, DataViewRowState.CurrentRows).ToTable
                 Me.RP_CLASS_1.DataBind()
 
                 '預告課程
@@ -79,7 +79,7 @@ Public Class MBQry_Class_01_v01
                     mbCLASSList.LoadAPLY_2()
                 End If
 
-                Me.RP_CLASS_2.DataSource = mbCLASSList.getCurrentDataSet.Tables(0)
+                Me.RP_CLASS_2.DataSource =New DataView( mbCLASSList.getCurrentDataSet.Tables(0),"ISNULL(MB_YES,' ')<>'N'",String.Empty, DataViewRowState.CurrentRows).ToTable
                 Me.RP_CLASS_2.DataBind()
 
                 '進行中課程
@@ -101,7 +101,7 @@ Public Class MBQry_Class_01_v01
                 Else
                     mbCLASSList.LoadAPLY_4()
                 End If
-                Me.RP_CLASS_4.DataSource = mbCLASSList.getCurrentDataSet.Tables(0)
+                Me.RP_CLASS_4.DataSource =New DataView( mbCLASSList.getCurrentDataSet.Tables(0),"ISNULL(MB_YES,' ')<>'N'",String.Empty, DataViewRowState.CurrentRows).ToTable
                 Me.RP_CLASS_4.DataBind()
 
                 '截止報名尚未開課
@@ -128,7 +128,7 @@ Public Class MBQry_Class_01_v01
                 Else
                     mbCLASSList.LoadAPLY_5()
                 End If
-                Me.RP_CLASS_5.DataSource = mbCLASSList.getCurrentDataSet.Tables(0)
+                Me.RP_CLASS_5.DataSource =New DataView( mbCLASSList.getCurrentDataSet.Tables(0),"ISNULL(MB_YES,' ')<>'N'",String.Empty, DataViewRowState.CurrentRows).ToTable
                 Me.RP_CLASS_5.DataBind()
 
                 '關閉課程(已完成之課程)
@@ -143,7 +143,7 @@ Public Class MBQry_Class_01_v01
                 Else
                     mbCLASSList.LoadAPLY_3()
                 End If
-                Me.RP_CLASS_3.DataSource = mbCLASSList.getCurrentDataSet.Tables(0)
+                Me.RP_CLASS_3.DataSource =New DataView( mbCLASSList.getCurrentDataSet.Tables(0),"ISNULL(MB_YES,' ')<>'N'",String.Empty, DataViewRowState.CurrentRows).ToTable
                 Me.RP_CLASS_3.DataBind()
 
                 If Utility.isValidateData(Me.m_sPLACE) Then
@@ -465,7 +465,7 @@ Public Class MBQry_Class_01_v01
             sb.Append("<div style='color:#C80896;font-size:14pt;font-weight:bold'>")
             sb.Append("　祝您").Append("<BR/>")
             sb.Append("　　　學習愉快、收穫滿滿").Append("<BR/>").Append("<BR/>")
-            sb.Append("　　　　　　　　　 MBSC原始正法中心 敬邀合十")
+            sb.Append("　　　　　　　　　 MBSC佛陀原始正法中心 敬邀合十")
             sb.Append("</div>")
 
             Return sb.ToString
@@ -568,7 +568,7 @@ Public Class MBQry_Class_01_v01
             sb.Append("<div style='color:#C80896;font-size:14pt;font-weight:bold'>")
             sb.Append("　祝您").Append("<BR/>")
             sb.Append("　　　學習愉快、收穫滿滿").Append("<BR/>").Append("<BR/>")
-            sb.Append("　　　　　　　　　 MBSC原始正法中心 敬邀合十")
+            sb.Append("　　　　　　　　　 MBSC佛陀原始正法中心 敬邀合十")
             sb.Append("</div>")
 
             Return sb.ToString

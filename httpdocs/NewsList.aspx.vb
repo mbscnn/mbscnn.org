@@ -592,8 +592,11 @@ Public Class NewsList
                 End If
 
                 If Not com.Azion.EloanUtility.ValidateUtility.isValidateData(Session("USERID")) Then
-                    com.Azion.EloanUtility.UIUtility.alert("請先登入或成為會員")
-                    com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "請先登入或成為會員")
+                    '1050715
+                    '大惠師                    
+                    '當學員要報名活動課程報名，點入時會跳出請先登入會員的視窗可以先刪去，直接進入會員填寫的視窗即可
+                    'com.Azion.EloanUtility.UIUtility.alert("請先登入或成為會員")
+                    'com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "請先登入或成為會員")
                     Dim sURL_Sign As String = String.Empty
                     sURL_Sign = com.Azion.EloanUtility.UIUtility.getRootPath & "/MNT/MBSignIn_01_v01.aspx"
                     Server.Transfer(sURL_Sign)
@@ -619,8 +622,11 @@ Public Class NewsList
                 'Response.Redirect(sURL)
 
                 If Not com.Azion.EloanUtility.ValidateUtility.isValidateData(Session("USERID")) Then
-                    com.Azion.EloanUtility.UIUtility.alert("請先登入或成為會員")
-                    com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "請先登入或成為會員")
+                    '1050715
+                    '大惠師                    
+                    '當學員要報名活動課程報名，點入時會跳出請先登入會員的視窗可以先刪去，直接進入會員填寫的視窗即可
+                    'com.Azion.EloanUtility.UIUtility.alert("請先登入或成為會員")
+                    'com.Azion.EloanUtility.UIUtility.showErrMsg(Me, "請先登入或成為會員")
                     Dim sURL_Sign As String = String.Empty
                     sURL_Sign = com.Azion.EloanUtility.UIUtility.getRootPath & "/MNT/MBSignIn_01_v01.aspx"
                     Server.Transfer(sURL_Sign)

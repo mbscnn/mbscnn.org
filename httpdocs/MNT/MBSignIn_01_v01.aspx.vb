@@ -230,7 +230,7 @@ Public Class MBSignIn_01_v01
                 Dim sb As New StringBuilder
                 sb.Append("<P>")
                 sb.Append("親愛的" & MB_ACCT.getString("MB_NAME") & "您好：<BR/>")
-                sb.Append("這封信是由佛陀原始正法中心發送的。<BR/>")
+                sb.Append("這封信是由MBSC佛陀原始正法中心發送的。<BR/>")
                 sb.Append("非常感謝您註冊成為我們的會員。<BR/>")
                 'sb.Append("您的原密碼為<span style='color:red;font-weight:bold;font-size:14pt'>" & MB_ACCT.getString("MB_PSW") & "</span><BR/>")
                 sb.Append("您需點擊下面的連結，啟動重設密碼程序：<BR/>")

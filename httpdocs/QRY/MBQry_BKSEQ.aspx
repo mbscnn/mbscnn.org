@@ -415,9 +415,9 @@
                 <div class="col-xs-12 col-md-12">
                    <span style="color:red;font-weight:bold">查無資料,請</span>
                     <ol type="1">
-                        <li>在佛陀原始正法中心官網上方<asp:Button ID="btnSingin" runat="server" Text="會員登入" CssClass="btn btn-info" />成為新會員</li>
+                        <li>在MBSC佛陀原始正法中心官網上方<asp:Button ID="btnSingin" runat="server" Text="會員登入" CssClass="btn btn-info" />成為新會員</li>
                         <li>回e-mail信箱確認會員信函</li>
-                        <li>會員信函確認完成,到佛陀原始正法中心官網<span style="color:blue;font-weight:bold">點選會員系統</span>填入<span style="color:blue;font-weight:bold">入會申請單</span>取得護法會員編號</li>
+                        <li>會員信函確認完成,到MBSC佛陀原始正法中心官網<span style="color:blue;font-weight:bold">點選會員系統</span>填入<span style="color:blue;font-weight:bold">入會申請單</span>取得護法會員編號</li>
                         <li>若不清楚請來電中心02-23627968查問</li>
                     </ol>
                 </div>

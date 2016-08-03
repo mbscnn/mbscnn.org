@@ -1713,7 +1713,7 @@ Public Class MBMnt_Sign_01_v01
                 sb.Append("感謝您﹗若獲錄取將於開課前14日內寄發錄取通知。<BR/>")
                 sb.Append("若要取消報名，請於").Append(Me.getMB_CDAYS(ROW_CLASS("MB_SDATE"), ROW_CLASS("MB_CDAYS"))).Append("前取消!若超過期限欲取消報名，請聯絡中心<BR/>")
                 sb.Append("<SPAN STYLE='color:red'>此信函為系統所發出，請勿直接回覆。</SPAN><BR/>")
-                sb.Append("&nbsp;&nbsp;&nbsp;MBSC原始正法中心 合十")
+                sb.Append("&nbsp;&nbsp;&nbsp;MBSC佛陀原始正法中心 合十")
                 sb.Append("</P>")
             ElseIf ROW_CLASS("MB_APV").ToString = "3" Then
                 sb.Append("<P>")
@@ -1743,7 +1743,7 @@ Public Class MBMnt_Sign_01_v01
                 sb.Append("<DIV style='color:blue;font-weight:bolde;font-size:14pt'>").Append("請收到本通知於3日內完成匯款後，告知您的 姓名及存款帳號後5碼</DIV>")
                 sb.Append("<BR/>若要取消報名，請於").Append(Me.getMB_CDAYS(ROW_CLASS("MB_SDATE"), ROW_CLASS("MB_CDAYS"))).Append("前取消!若超過期限欲取消報名，請聯絡中心<BR/>")
                 sb.Append("<SPAN STYLE='color:red'>此信函為系統所發出，請勿直接回覆。</SPAN><BR/>")
-                sb.Append("&nbsp;&nbsp;&nbsp;MBSC原始正法中心 合十")
+                sb.Append("&nbsp;&nbsp;&nbsp;MBSC佛陀原始正法中心 合十")
                 sb.Append("</P>")
             Else
                 '錄取通知 (參照下表)  (為原來提醒信一再修一下黃色螢光部分)

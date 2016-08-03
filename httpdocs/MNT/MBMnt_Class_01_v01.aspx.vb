@@ -46,7 +46,7 @@ Public Class MBMnt_Class_01_v01
             iUPCODE = AP_CODEList.item(0).getDecimal("CODEID")
             AP_CODEList.clear()
             AP_CODEList.loadByUpCode(iUPCODE)
-            Me.RP_PREC.DataSource = AP_CODEList.getCurrentDataSet.Tables(0)
+            Me.RP_PREC.DataSource = new DataView(AP_CODEList.getCurrentDataSet.Tables(0),String.Empty,"SORTNO", DataViewRowState.CurrentRows)
             Me.RP_PREC.DataBind()
         End If
     End Sub
